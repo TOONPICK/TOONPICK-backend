@@ -1,7 +1,6 @@
 .grid {
   display: grid;
-  gap: 1rem;
-  padding: 0.5rem;
+  gap: 0.5rem;
 }
 
 .web {
@@ -18,4 +17,5 @@
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s;
   align-items: center;
+  margin-bottom: 0.25rem;
 }
