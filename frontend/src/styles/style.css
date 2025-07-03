@@ -4,7 +4,7 @@ html, body {
   padding: 0;
   box-sizing: border-box;
   font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', Arial, sans-serif;
-  background: #ffffff;
+  background: #fff;
   color: #222;
   min-height: 100vh;
 }
@@ -30,18 +30,20 @@ input, button, textarea, select {
 
 /* 반응형 컨테이너 */
 .container {
-  width: 100%;
   max-width: 1200px;
+  min-width: 1200px;
   margin: 0 auto;
   padding: 0 16px;
 }
 
 .web .container {
   max-width: 1200px;
+  min-width: 1200px;
   padding: 0 16px;
 }
 
 .app .container {
   max-width: 100%;
+  min-width: 0;
   padding: 0 8px;
 } 

@@ -1,5 +1,5 @@
-body {
-  background-color: var(--body-background-color);
+body, html {
+  background-color: #fff;
   color: var(--body-text-color);
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -13,17 +13,20 @@ body {
 .main, .container {
   width: 100%;
   max-width: 1200px;
+  min-width: 1200px;
   margin: 0 auto;
   padding: 0 16px;
 }
 
 .web .main, .web .container {
   max-width: 1200px;
+  min-width: 1200px;
   padding: 0 16px;
 }
 
 .app .main, .app .container {
   max-width: 100%;
+  min-width: 0;
   padding: 0 4px;
 }
 
