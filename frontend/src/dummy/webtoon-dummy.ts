@@ -4,7 +4,7 @@ import { Webtoon, Platform, SerializationStatus, Genre, Author } from '@models/w
 export const dummyWebtoon: Webtoon = {
   id: 1,
   title: '더미 웹툰',
-  thumbnailUrl: '/images/dummy-thumbnail.png',
+  thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
   platform: Platform.NAVER,
   isAdult: false,
   status: SerializationStatus.ONGOING,
@@ -31,6 +31,11 @@ export const dummyWebtoonList: Webtoon[] = [
     ...dummyWebtoon,
     id: 2,
     title: '더미 웹툰2',
+    thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
+    authors: [
+      { id: 1, role: 'Writer', name: '홍길동' },
+      { id: 2, role: 'Artist', name: '김작가' }
+    ],
     platform: Platform.KAKAO,
     publishDay: 'TUESDAY',
     genres: [{ id: 3, name: '로맨스' }],
@@ -40,6 +45,11 @@ export const dummyWebtoonList: Webtoon[] = [
     ...dummyWebtoon,
     id: 3,
     title: '모험의 시작',
+    thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
+    authors: [
+      { id: 1, role: 'Writer', name: '홍길동' },
+      { id: 2, role: 'Artist', name: '김작가' }
+    ],
     platform: Platform.LEZHIN,
     publishDay: 'WEDNESDAY',
     genres: [{ id: 4, name: '모험' }],
@@ -49,6 +59,11 @@ export const dummyWebtoonList: Webtoon[] = [
     ...dummyWebtoon,
     id: 4,
     title: '스릴러 나이트',
+    thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
+    authors: [
+      { id: 1, role: 'Writer', name: '홍길동' },
+      { id: 2, role: 'Artist', name: '김작가' }
+    ],
     platform: Platform.BOMTOON,
     publishDay: 'THURSDAY',
     genres: [{ id: 5, name: '스릴러' }],
@@ -58,6 +73,11 @@ export const dummyWebtoonList: Webtoon[] = [
     ...dummyWebtoon,
     id: 5,
     title: '코믹 대소동',
+    thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
+    authors: [
+      { id: 1, role: 'Writer', name: '홍길동' },
+      { id: 2, role: 'Artist', name: '김작가' }
+    ],
     platform: Platform.KAKAOPAGE,
     publishDay: 'FRIDAY',
     genres: [{ id: 6, name: '코미디' }],
@@ -67,6 +87,11 @@ export const dummyWebtoonList: Webtoon[] = [
     ...dummyWebtoon,
     id: 6,
     title: '로맨틱 판타지',
+    thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
+    authors: [
+      { id: 1, role: 'Writer', name: '홍길동' },
+      { id: 2, role: 'Artist', name: '김작가' }
+    ],
     platform: Platform.NAVER,
     publishDay: 'SATURDAY',
     genres: [{ id: 3, name: '로맨스' }, { id: 1, name: '판타지' }],
@@ -76,6 +101,11 @@ export const dummyWebtoonList: Webtoon[] = [
     ...dummyWebtoon,
     id: 7,
     title: '액션 히어로',
+    thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
+    authors: [
+      { id: 1, role: 'Writer', name: '홍길동' },
+      { id: 2, role: 'Artist', name: '김작가' }
+    ],
     platform: Platform.KAKAO,
     publishDay: 'SUNDAY',
     genres: [{ id: 2, name: '액션' }],
@@ -85,6 +115,11 @@ export const dummyWebtoonList: Webtoon[] = [
     ...dummyWebtoon,
     id: 8,
     title: '드라마틱 라이프',
+    thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
+    authors: [
+      { id: 1, role: 'Writer', name: '홍길동' },
+      { id: 2, role: 'Artist', name: '김작가' }
+    ],
     platform: Platform.LEZHIN,
     publishDay: 'MONDAY',
     genres: [{ id: 7, name: '드라마' }],
@@ -94,6 +129,11 @@ export const dummyWebtoonList: Webtoon[] = [
     ...dummyWebtoon,
     id: 9,
     title: '미스터리 사건부',
+    thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
+    authors: [
+      { id: 1, role: 'Writer', name: '홍길동' },
+      { id: 2, role: 'Artist', name: '김작가' }
+    ],
     platform: Platform.BOMTOON,
     publishDay: 'TUESDAY',
     genres: [{ id: 8, name: '미스터리' }],
@@ -103,6 +143,11 @@ export const dummyWebtoonList: Webtoon[] = [
     ...dummyWebtoon,
     id: 10,
     title: 'SF 어드벤처',
+    thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
+    authors: [
+      { id: 1, role: 'Writer', name: '홍길동' },
+      { id: 2, role: 'Artist', name: '김작가' }
+    ],
     platform: Platform.KAKAOPAGE,
     publishDay: 'WEDNESDAY',
     genres: [{ id: 9, name: 'SF' }],
@@ -112,6 +157,11 @@ export const dummyWebtoonList: Webtoon[] = [
     ...dummyWebtoon,
     id: 11,
     title: '힐링 타임',
+    thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
+    authors: [
+      { id: 1, role: 'Writer', name: '홍길동' },
+      { id: 2, role: 'Artist', name: '김작가' }
+    ],
     platform: Platform.NAVER,
     publishDay: 'THURSDAY',
     genres: [{ id: 10, name: '힐링' }],
