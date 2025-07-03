@@ -34,7 +34,7 @@ const WebtoonCard: React.FC<WebtoonCardProps> = ({ webtoon, showTags = true }) =
         <img src={webtoon.thumbnailUrl} alt={webtoon.title} className={styles.thumbnailImage} />
         {showTags && (
           <div className={styles.tagsContainer}>
-            <PlatformIcon platform={webtoon.platform} size="small" />
+            <PlatformIcon platform={webtoon.platform} size={24} />
           </div>
         )}
       </div>
