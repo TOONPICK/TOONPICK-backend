@@ -213,7 +213,9 @@ const OngoingWebtoonsPage: React.FC = () => {
         </div>
       </div>
 
-      <SortOptions sortBy={sortBy} setSortBy={setSortBy} />
+      <div className={styles.sortOptionsWrapper}>
+        <SortOptions sortBy={sortBy} setSortBy={setSortBy} />
+      </div>
 
       {error ? (
         <div className={styles.error}>
@@ -227,7 +229,7 @@ const OngoingWebtoonsPage: React.FC = () => {
             lastWebtoonRef={lastWebtoonRef}
           />
           {isLoading && <Spinner />}
-          {isLastPage && <p className={styles.endMessage}>모든 웹툰을 불러왔습니다.</p>}
+          {isLastPage &&<div className={styles.endMessage}>모든 웹툰을 불러왔습니다.</div>}
         </>
       )}
     </div>

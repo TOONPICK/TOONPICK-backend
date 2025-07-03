@@ -1,7 +1,10 @@
 .ongoingWebtoonsPage {
-  padding: 2rem;
-  max-width: 1200px;
+  padding: 1rem;
+  max-width: 1400px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .header {
@@ -72,6 +75,12 @@
   text-align: center;
   padding: 2rem;
   color: #666;
+}
+
+.sortOptionsWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
 }
 
 @media (max-width: 768px) {
