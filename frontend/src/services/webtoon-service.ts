@@ -1,8 +1,11 @@
 import { api , Response, PagedResponse } from '@api';
 import { Webtoon, Platform, SerializationStatus } from '@models/webtoon';
 import { DayOfWeek, AgeRating } from '@models/enum';
+import { dummyWebtoon, dummyWebtoonList } from '../dummy/webtoon-dummy';
 
 const PAGE_SIZE = 60;
+
+const isDev = process.env.NODE_ENV === 'development';
 
 // WebtoonService 클래스
 class WebtoonService {
@@ -19,6 +22,9 @@ class WebtoonService {
 
   // 웹툰 간단 정보 조회
   public async getWebtoonById(id: number): Promise<Response<Webtoon>> {
+    if (isDev) {
+      return { success: true, data: dummyWebtoon };
+    }
     try {
       const response = await api.get<Webtoon>(`/api/v1/webtoons/${id}`);
       return { success: true, data: response.data };
@@ -29,6 +35,9 @@ class WebtoonService {
 
   // 웹툰 상제 정보 조회
   public async getWebtoonDetails(id: number): Promise<Response<Webtoon>> {
+    if (isDev) {
+      return { success: true, data: dummyWebtoon };
+    }
     try {
       const response = await api.get<Webtoon>(`/api/v1/webtoons/${id}`);
       return { success: true, data: response.data };
@@ -52,6 +61,16 @@ class WebtoonService {
       ageRatings?: AgeRating[];
     }
   ): Promise<PagedResponse<Webtoon[]>> {
+    if (isDev) {
+      return {
+        success: true,
+        data: dummyWebtoonList,
+        total: dummyWebtoonList.length,
+        page: options.page || 0,
+        size: options.size || PAGE_SIZE,
+        last: true,
+      };
+    }
     try {
       const response = await api.post<PagedResponse<Webtoon[]>>('/api/v1/webtoons/filter', 
         {
@@ -89,6 +108,9 @@ class WebtoonService {
 
   // 인기 웹툰 조회
   public async getPopularWebtoons(size: number = 10): Promise<Response<Webtoon[]>> {
+    if (isDev) {
+      return { success: true, data: dummyWebtoonList.slice(0, size) };
+    }
     try {
       const response = await api.get<Webtoon[]>(`/api/v1/webtoons/popular`, { params: { size } });
       return { success: true, data: response.data };
@@ -99,6 +121,9 @@ class WebtoonService {
 
   // 최신 웹툰 조회
   public async getRecentWebtoons(size: number = 10): Promise<Response<Webtoon[]>> {
+    if (isDev) {
+      return { success: true, data: dummyWebtoonList.slice(0, size) };
+    }
     try {
       const response = await api.get<Webtoon[]>(`/api/v1/webtoons/recent`, { params: { size } });
       return { success: true, data: response.data };

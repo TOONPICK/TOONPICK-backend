@@ -1,7 +1,9 @@
 import { api, Response } from '@api';
 import { MemberProfile } from '@models/member';
 import { Webtoon } from '@models/webtoon';
+import { dummyMemberProfile } from '../dummy/member-dummy';
 
+const isDev = process.env.NODE_ENV === 'development';
 
 class MemberService {
   private static instance: MemberService;
@@ -17,6 +19,9 @@ class MemberService {
 
   // 사용자 프로필 정보 가져오기
   public async getMemberProfile(): Promise<Response<MemberProfile>> {
+    if (isDev) {
+      return { success: true, data: dummyMemberProfile };
+    }
     try {
       const response = await api.get<MemberProfile>('/api/secure/member/profile');
       return { success: true, data: response.data };

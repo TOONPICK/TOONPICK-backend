@@ -4,10 +4,17 @@ import TokenManager from '@services/token-manager';
 import TokenRefresher from '@services/token-refresher';
 import Logger from '@utils/logger';
 import Cookies from 'js-cookie';
+import { dummyMemberProfile } from '../dummy/member-dummy';
+
+const isDev = process.env.NODE_ENV === 'development';
 
 export const AuthService = {
   // 로그인
   login: async (username: string, password: string, loginCallback?: () => void): Promise<Response> => {
+    if (isDev) {
+      loginCallback?.();
+      return { success: true, data: dummyMemberProfile };
+    }
     try {
       const response = await api.post<{ accessToken: string }>('/login', { username, password });
       const accessToken = TokenManager.extractAccessTokenFromHeader(response.headers);
@@ -28,6 +35,9 @@ export const AuthService = {
 
   // 회원가입
   signup: async (username: string, email: string ,password: string): Promise<Response> => {
+    if (isDev) {
+      return { success: true, data: dummyMemberProfile };
+    }
     try {
       const joinPayload = {
         username,
@@ -45,6 +55,10 @@ export const AuthService = {
 
   // 로그아웃
   logout: async (logoutCallback?: () => void): Promise<Response> => {
+    if (isDev) {
+      logoutCallback?.();
+      return { success: true };
+    }
     try {
       TokenManager.clearAccessToken();
       await api.post('/logout');
@@ -58,26 +72,30 @@ export const AuthService = {
 
   // 로그인 여부 확인
   isLoggedIn: (): boolean => {
+    if (isDev) return true;
     const accessToken = TokenManager.getAccessToken();
     return !!accessToken && !TokenManager.isAccessTokenExpired(accessToken);
   },
 
   // 소셜 로그인
   socialLogin: (provider: string): void => {
-      const redirectUri = window.location.origin + Routes.LOGIN_CALLBACK;
-  
-      // redirect_uri를 쿠키에 저장 (유효기간: 5분)
-      Cookies.set('redirect_uri', redirectUri, { path: '/', expires: 1 / 288 });
-  
-      // OAuth2 로그인 요청 (redirect_uri는 URL에서 제거)
-      const loginUrl = `${process.env.REACT_APP_API_URL || 'http://localhost:8080'}/oauth2/authorization/${provider}`;
-      window.location.href = loginUrl;
-  },
-  
+    if (isDev) return;
+    const redirectUri = window.location.origin + Routes.LOGIN_CALLBACK;
 
+    // redirect_uri를 쿠키에 저장 (유효기간: 5분)
+    Cookies.set('redirect_uri', redirectUri, { path: '/', expires: 1 / 288 });
+
+    // OAuth2 로그인 요청 (redirect_uri는 URL에서 제거)
+    const loginUrl = `${process.env.REACT_APP_API_URL || 'http://localhost:8080'}/oauth2/authorization/${provider}`;
+    window.location.href = loginUrl;
+  },
 
   // 소셜 로그인 콜백 처리
   handleSocialLoginCallback: async (loginCallback?: () => void): Promise<Response> => {
+    if (isDev) {
+      loginCallback?.();
+      return { success: true, data: dummyMemberProfile };
+    }
     try {
       const accessToken = await TokenRefresher.refreshAccessToken();
       if (accessToken) {
