@@ -2,11 +2,11 @@ import React from 'react';
 import { Routes } from '@constants/routes';
 import styles from './style.module.css';
 
-interface MenuProps {
+interface TopMenuProps {
   navigate: (path: string) => void;
 }
 
-const Menu: React.FC<MenuProps> = ({ navigate }) => {
+const TopMenu: React.FC<TopMenuProps> = ({ navigate }) => {
   return (
     <nav className={styles.menuBar}>
       <ul className={styles.menuList}>
@@ -18,4 +18,4 @@ const Menu: React.FC<MenuProps> = ({ navigate }) => {
   );
 };
 
-export default Menu; 
+export default TopMenu; 
