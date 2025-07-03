@@ -13,6 +13,42 @@
   margin: 0 auto;
 }
 
+@media (max-width: 900px) {
+  .headerTitle {
+    max-width: 100%;
+    min-width: 0;
+    padding: 8px;
+  }
+  .menuBar {
+    margin-left: 8px;
+    margin-top: 6px;
+  }
+}
+
+@media (max-width: 600px) {
+  .headerTitle {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 6px 4px;
+  }
+  .menuBar {
+    display: none; /* 모바일에서는 햄버거 메뉴로 대체 가능 */
+  }
+  .rightSection {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  .profilePicture {
+    width: 32px;
+    height: 32px;
+    margin-left: 4px;
+  }
+  .loginButton {
+    font-size: 16px;
+    padding: 4px 8px;
+  }
+}
+
 .headerTitle h1 {
   cursor: pointer;
 }

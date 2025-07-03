@@ -10,6 +10,7 @@
   align-items: center;
   background-color: var(--card-background-color);
   text-decoration: none;
+  min-height: 320px;
 }
 
 .webtoonCard:hover {
@@ -94,16 +95,32 @@
   border-radius: 4px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .webtoonCard {
     width: 100%;
+    min-height: 220px;
   }
-
   .webtoonTitle {
     font-size: 14px;
   }
-
   .webtoonMeta {
     font-size: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  .webtoonCard {
+    width: 100%;
+    min-height: 160px;
+    padding: 0;
+  }
+  .webtoonTitle {
+    font-size: 13px;
+  }
+  .webtoonMeta {
+    font-size: 11px;
+  }
+  .webtoonInfo {
+    padding: 8px;
   }
 }
