@@ -105,14 +105,10 @@ const SignInPage: React.FC = () => {
           {isLoading ? '로딩 중...' : '로그인'}
         </button>
 
-        <div className={styles.divider}>
-          <span>또는</span>
-        </div>
-
         <div className={styles.socialLogin}>
-          <SocialLoginButton provider="google" onClick={() => handleSocialLogin('google')} type="button" />
-          <SocialLoginButton provider="kakao" onClick={() => handleSocialLogin('kakao')} type="button" />
-          <SocialLoginButton provider="naver" onClick={() => handleSocialLogin('naver')} type="button" />
+          <SocialLoginButton provider="google" onClick={() => handleSocialLogin('google')} type="icon" />
+          <SocialLoginButton provider="kakao" onClick={() => handleSocialLogin('kakao')} type="icon" />
+          <SocialLoginButton provider="naver" onClick={() => handleSocialLogin('naver')} type="icon" />
         </div>
 
         <div className={styles.links}>
