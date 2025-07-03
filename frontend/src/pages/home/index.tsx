@@ -4,7 +4,8 @@ import { Webtoon } from '@models/webtoon';
 import WebtoonGrid from '@components/webtoon-grid';
 import Carousel from '@components/carousel';
 import WebtoonService from '@services/webtoon-service';
-
+import CarouselAdService from '@services/carousel-ad-service';
+import { CarouselAd } from '@models/carousel-ad';
 
 export interface HomePageState {
   popularWebtoons: Webtoon[];
@@ -21,28 +22,16 @@ const HomePage: React.FC = () => {
     error: null
   });
 
-  // 캐러셀 아이템 상태 분리
-  const [carouselItems, setCarouselItems] = useState([
-    {
-      imageUrl: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
-      link: "/webtoon/solo-leveling",
-    },
-    {
-      imageUrl: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80",
-      link: "/webtoon/true-beauty",
-    },
-    {
-      imageUrl: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=800&q=80",
-      link: "/webtoon/my-id-is-gangnam-beauty",
-    },
-  ]);
+  // 캐러셀 광고 상태
+  const [carouselAds, setCarouselAds] = useState<CarouselAd[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [popularRes, recentRes] = await Promise.all([
+        const [popularRes, recentRes, ads] = await Promise.all([
           WebtoonService.getPopularWebtoons(10),
-          WebtoonService.getRecentWebtoons(10)
+          WebtoonService.getRecentWebtoons(10),
+          CarouselAdService.getHomeAds()
         ]);
 
         setState({
@@ -51,6 +40,7 @@ const HomePage: React.FC = () => {
           isLoading: false,
           error: null
         });
+        setCarouselAds(ads);
       } catch (error) {
         setState(prev => ({
           ...prev,
@@ -70,9 +60,9 @@ const HomePage: React.FC = () => {
   return (
     <div className={styles.homePage}>
 
-      {/* 인기 웹툰 섹션 */}
+      {/* 캐러셀 광고 섹션 */}
       <section className={styles.section}>
-        <Carousel items={carouselItems} />
+        <Carousel items={carouselAds} />
       </section>
 
 
