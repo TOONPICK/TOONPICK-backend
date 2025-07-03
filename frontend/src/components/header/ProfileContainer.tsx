@@ -2,6 +2,7 @@ import React from 'react';
 import ProfileWidget from '@components/profile-widget';
 import ProfileIcon from '@components/profile-icon';
 import styles from './style.module.css';
+import { Routes as RoutePaths } from '@constants/routes';
 
 interface ProfileContainerProps {
   state: any;
@@ -38,7 +39,7 @@ const ProfileContainer: React.FC<ProfileContainerProps> = ({
           />
         </>
       ) : (
-        <button onClick={() => navigate('/login')} className={styles.loginButton}>Login</button>
+        <button onClick={() => navigate(RoutePaths.LOGIN)} className={styles.loginButton}>Login</button>
       )}
     </div>
   );

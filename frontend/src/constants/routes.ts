@@ -1,8 +1,8 @@
 export const Routes = {
     HOME: '/',
-    LOGIN: '/auth/login',
-    SIGNUP: '/auth/signup',
-    LOGIN_CALLBACK: '/auth/login-callback',
+    LOGIN: '/login',
+    SIGNUP: '/signup',
+    LOGIN_CALLBACK: '/login-callback',
     WEBTOON_NEW: '/webtoon/new',
     WEBTOON_ONGOING: '/webtoon/ongoing',
     WEBTOON_COMPLETED: '/webtoon/completed',
