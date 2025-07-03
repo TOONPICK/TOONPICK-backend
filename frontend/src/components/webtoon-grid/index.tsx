@@ -3,6 +3,8 @@ import { Webtoon } from '@models/webtoon';
 import WebtoonCard from '@components/webtoon-card';
 import styles from './style.module.css';
 
+const isApp = process.env.REACT_APP_PLATFORM === 'app';
+
 interface WebtoonGridProps {
   webtoons: Webtoon[];
   lastWebtoonRef?: React.RefObject<HTMLDivElement>;
@@ -15,7 +17,7 @@ const WebtoonGrid: React.FC<WebtoonGridProps> = ({ webtoons, lastWebtoonRef, row
   const displayWebtoons = webtoons.slice(0, maxItems);
 
   return (
-    <div className={styles.grid}>
+    <div className={`${styles.grid} ${isApp ? styles.app : styles.web}`}>
       {displayWebtoons.map((webtoon, index) => (
         <div
           className={styles.gridItem}

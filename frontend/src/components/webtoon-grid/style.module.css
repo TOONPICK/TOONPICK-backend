@@ -1,8 +1,15 @@
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 1rem;
   padding: 0.5rem;
+}
+
+.web {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.app {
+  grid-template-columns: 1fr;
 }
 
 .gridItem {
@@ -11,19 +18,4 @@
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s;
   align-items: center;
-}
-
-@media (max-width: 900px) {
-  .grid {
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 0.7rem;
-  }
-}
-
-@media (max-width: 600px) {
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
-    padding: 0.2rem;
-  }
 }

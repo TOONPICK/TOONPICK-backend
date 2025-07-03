@@ -4,6 +4,8 @@ import { Webtoon } from '@models/webtoon';
 import styles from './style.module.css';
 import PlatformIcon from '@components/platform-icon';
 
+const isApp = process.env.REACT_APP_PLATFORM === 'app';
+
 interface WebtoonCardProps {
   webtoon: Webtoon;
   showTags?: boolean;
@@ -32,7 +34,8 @@ const WebtoonCard: React.FC<WebtoonCardProps> = ({ webtoon, showTags = true, siz
   
 
   return (
-    <Link to={`/webtoon/${webtoon.id}`} className={styles.webtoonCard} style={{ width: `${width}px`, height: `${height}px` }}>
+    <Link to={`/webtoon/${webtoon.id}`} className={`${styles.webtoonCard} ${isApp ? styles.app : styles.web}`}
+      style={{ width: `${width}px`, height: `${height}px` }}>
       
       <div className={styles.thumbnailContainer}>
         <img src={webtoon.thumbnailUrl} alt={webtoon.title} className={styles.thumbnailImage} />

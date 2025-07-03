@@ -13,6 +13,18 @@
   min-height: 320px;
 }
 
+.web {
+  width: 210px;
+  min-height: 320px;
+}
+
+.app {
+  width: 100%;
+  min-height: 120px;
+  border-radius: 0;
+  margin: 0;
+}
+
 .webtoonCard:hover {
   transform: scale(1.03);
   text-decoration: none;
@@ -63,6 +75,17 @@
   -webkit-box-orient: vertical;
 }
 
+.web {
+  /* 데스크탑/웹 폰트 */
+  font-size: 16px;
+}
+
+.app {
+  /* 앱 환경 폰트/간격 축소 */
+  font-size: 13px;
+  padding: 0 4px;
+}
+
 .webtoonMeta {
   display: flex;
   justify-content: space-between;
@@ -93,34 +116,4 @@
   background-color: rgba(0, 0, 0, 0.5);
   padding: 4px;
   border-radius: 4px;
-}
-
-@media (max-width: 900px) {
-  .webtoonCard {
-    width: 100%;
-    min-height: 220px;
-  }
-  .webtoonTitle {
-    font-size: 14px;
-  }
-  .webtoonMeta {
-    font-size: 12px;
-  }
-}
-
-@media (max-width: 600px) {
-  .webtoonCard {
-    width: 100%;
-    min-height: 160px;
-    padding: 0;
-  }
-  .webtoonTitle {
-    font-size: 13px;
-  }
-  .webtoonMeta {
-    font-size: 11px;
-  }
-  .webtoonInfo {
-    padding: 8px;
-  }
 }
