@@ -11,33 +11,6 @@
   margin-bottom: 2rem;
 }
 
-.sortOptions {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid #dee2e6;
-}
-
-.sortButton {
-  background: none;
-  border: none;
-  padding: 0.5rem 1rem;
-  font-size: 0.9rem;
-  color: #666;
-  cursor: pointer;
-  transition: color 0.2s;
-}
-
-.sortButton:hover {
-  color: #333;
-}
-
-.sortButton.active {
-  color: #007bff;
-  font-weight: 500;
-}
-
 .filters {
   display: flex;
   flex-direction: column;

@@ -6,6 +6,7 @@ import WebtoonGrid from '@components/webtoon-grid';
 import Spinner from '@components/spinner';
 import { Webtoon, Platform } from '@models/webtoon';
 import { DayOfWeek } from '@models/enum';
+import SortOptions from '@components/sort-options/SortOptions';
 
 const OngoingWebtoonsPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -68,13 +69,6 @@ const OngoingWebtoonsPage: React.FC = () => {
     [Platform.LEZHIN]: '레진',
     [Platform.BOMTOON]: '봄툰',
   };
-
-  const SORT_OPTIONS = [
-    { value: 'POPULARITY', label: '인기순' },
-    { value: 'RATING', label: '별점순' },
-    { value: 'LATEST', label: '최신순' },
-    { value: 'UPDATE', label: '업데이트순' }
-  ];
 
   // URL 파라미터 업데이트 함수
   const updateUrlParams = () => {
@@ -183,7 +177,6 @@ const OngoingWebtoonsPage: React.FC = () => {
 
   return (
     <div className={styles.ongoingWebtoonsPage}>
-
       <div className={styles.filters}>
         <div className={styles.filterGroup}>
           <div className={styles.platformButtons}>
@@ -218,19 +211,9 @@ const OngoingWebtoonsPage: React.FC = () => {
             ))}
           </div>
         </div>
-
-        <div className={styles.sortOptions}>
-          {SORT_OPTIONS.map((option) => (
-            <button
-              key={option.value}
-              className={`${styles.sortButton} ${sortBy === option.value ? styles.active : ''}`}
-              onClick={() => setSortBy(option.value as typeof sortBy)}
-            >
-              {option.label}
-            </button>
-          ))}
-        </div>
       </div>
+
+      <SortOptions sortBy={sortBy} setSortBy={setSortBy} />
 
       {error ? (
         <div className={styles.error}>
