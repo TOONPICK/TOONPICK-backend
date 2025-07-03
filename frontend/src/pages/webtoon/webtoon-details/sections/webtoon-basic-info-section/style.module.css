@@ -1,41 +1,46 @@
 .section {
   margin-bottom: 2rem;
-  padding: 1.5rem;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem 0 1.5rem 0;
 }
 
 .sectionTitle {
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 1.5rem;
-  color: #333;
-  border-bottom: 2px solid #f0f0f0;
-  padding-bottom: 0.5rem;
+  color: #222;
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
 .contentContainer {
   display: flex;
-  gap: 2rem;
+  gap: 2.5rem;
+  align-items: flex-start;
 }
 
 .leftSection {
-  flex: 0 0 300px;
+  flex: 0 0 33%;
+  max-width: 33%;
+  min-width: 200px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 }
 
 .rightSection {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.2rem;
 }
 
 .thumbnailContainer {
   position: relative;
-  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  aspect-ratio: 3/4;
+  border: 1px solid #eee;
+  max-width: 320px;
 }
 
 .thumbnail {
@@ -49,10 +54,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
-  padding: 0.5rem;
-  background-color: #f8f9fa;
-  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  padding: 0;
+  background: none;
 }
 
 .statusTags {
@@ -67,33 +71,32 @@
 }
 
 .statusTag, .adultTag {
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: bold;
-  color: white;
+  padding: 4px 10px;
+  border: 1px solid #eee;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #222;
+  background: none;
+  border-radius: 0;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .statusTag.ongoing {
-  background-color: #4caf50;
-  box-shadow: 0 2px 4px rgba(76, 175, 80, 0.2);
+  border-color: #4caf50;
+  color: #4caf50;
 }
-
 .statusTag.completed {
-  background-color: #2196f3;
-  box-shadow: 0 2px 4px rgba(33, 150, 243, 0.2);
+  border-color: #2196f3;
+  color: #2196f3;
 }
-
 .statusTag.hiatus {
-  background-color: #ff9800;
-  box-shadow: 0 2px 4px rgba(255, 152, 0, 0.2);
+  border-color: #ff9800;
+  color: #ff9800;
 }
-
 .adultTag {
-  background-color: #f44336;
-  box-shadow: 0 2px 4px rgba(244, 67, 54, 0.2);
+  border-color: #f44336;
+  color: #f44336;
 }
 
 .actionButtons {
@@ -106,20 +109,18 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 20px;
-  font-weight: bold;
+  padding: 7px 18px;
+  border: 1px solid #eee;
+  border-radius: 0;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
-  background-color: #f5f5f5;
-  color: #333;
+  background: none;
+  color: #222;
+  transition: color 0.2s, border 0.2s;
 }
-
 .bookmarkButton.bookmarked {
-  background-color: #ffeb3b;
-  color: #333;
-  box-shadow: 0 2px 4px rgba(255, 235, 59, 0.2);
+  border-color: #ffd600;
+  color: #bfa100;
 }
 
 .moreButtonContainer {
@@ -132,30 +133,30 @@
   justify-content: center;
   width: 36px;
   height: 36px;
-  border: none;
+  border: 1px solid #eee;
   background: none;
   cursor: pointer;
-  transition: all 0.2s ease;
   color: #666;
+  border-radius: 0;
+  transition: color 0.2s, border 0.2s;
 }
-
 .moreButton:hover {
-  color: #333;
-  background-color: #f0f0f0;
-  border-radius: 50%;
+  color: #222;
+  border-color: #bbb;
 }
 
 .moreMenu {
   position: absolute;
   top: 100%;
   right: 0;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  min-width: 220px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 0;
+  min-width: 180px;
   z-index: 10;
   margin-top: 0.5rem;
-  padding: 0.5rem;
+  padding: 0.5rem 0;
+  box-shadow: none;
 }
 
 .menuItem {
@@ -163,41 +164,41 @@
   align-items: center;
   gap: 0.75rem;
   width: 100%;
-  padding: 10px 16px;
+  padding: 8px 16px;
   border: none;
   background: none;
   text-align: left;
   cursor: pointer;
-  transition: all 0.2s ease;
-  color: #333;
-  border-radius: 4px;
-  font-size: 0.9rem;
+  color: #222;
+  font-size: 0.95rem;
+  border-radius: 0;
+  transition: color 0.2s, background 0.2s;
 }
-
 .menuItem:hover {
-  background-color: #f5f5f5;
+  color: #111;
+  background: #f7f7f7;
 }
-
 .menuItem svg {
   font-size: 1.1rem;
-  color: #666;
+  color: #888;
 }
 
 .title {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #333;
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: #222;
   margin: 0;
 }
 
 .authors {
-  color: #666;
+  color: #888;
   font-size: 1rem;
+  font-weight: 400;
 }
 
 .genresContainer, .descriptionContainer {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: flex-start;
   gap: 1rem;
 }
@@ -210,17 +211,16 @@
   max-height: 2.5rem;
   overflow: hidden;
 }
-
 .genreTags.expanded {
   max-height: none;
 }
-
 .genreTag {
-  padding: 4px 12px;
-  background-color: #f0f0f0;
-  border-radius: 20px;
+  padding: 3px 10px;
+  border: 1px solid #eee;
   font-size: 0.9rem;
-  color: #555;
+  color: #666;
+  background: none;
+  border-radius: 0;
 }
 
 .descriptionText {
@@ -232,7 +232,6 @@
   overflow: hidden;
   transition: max-height 0.3s ease;
 }
-
 .descriptionText.expanded {
   max-height: none;
 }
@@ -243,74 +242,64 @@
   justify-content: center;
   width: 32px;
   height: 32px;
-  border: none;
+  border: 1px solid #eee;
   background: none;
   cursor: pointer;
-  transition: all 0.2s ease;
   color: #666;
-  flex-shrink: 0;
+  border-radius: 0;
+  transition: color 0.2s, border 0.2s;
 }
-
 .expandButton:hover {
-  color: #333;
-  background-color: #f0f0f0;
-  border-radius: 50%;
+  color: #222;
+  border-color: #bbb;
 }
 
 .readButton {
   width: 100%;
   padding: 14px;
-  background-color: #3f51b5;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
+  background: none;
+  color: #222;
+  border: 1.5px solid #3f51b5;
+  border-radius: 0;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.2s ease;
   font-size: 1.1rem;
   margin-top: 1rem;
+  transition: color 0.2s, border 0.2s, background 0.2s;
 }
-
 .readButton:hover {
-  background-color: #303f9f;
-  box-shadow: 0 4px 8px rgba(63, 81, 181, 0.2);
+  background: #3f51b5;
+  color: #fff;
+  border-color: #3f51b5;
 }
 
 .platform, .publishDay {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .label {
-  font-weight: bold;
-  color: #666;
+  font-weight: 600;
+  color: #888;
   margin-right: 0.5rem;
 }
 
 .value {
-  color: #333;
+  color: #222;
 }
 
-/* 반응형 스타일 */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .contentContainer {
     flex-direction: column;
+    gap: 1.2rem;
   }
-  
   .leftSection {
-    flex: 0 0 auto;
-    max-width: 250px;
+    max-width: 100%;
+    width: 100%;
+    min-width: 0;
     margin: 0 auto 1.5rem;
   }
-  
-  .title {
-    font-size: 1.5rem;
-  }
-  
-  .platform, .authors, .publishDay, .genres, .description {
-    text-align: center;
-  }
-  
-  .genreTags {
-    justify-content: center;
+  .thumbnailContainer {
+    max-width: 220px;
+    margin: 0 auto;
   }
 } 
