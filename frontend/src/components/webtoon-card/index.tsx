@@ -9,10 +9,9 @@ const isApp = process.env.REACT_APP_PLATFORM === 'app';
 interface WebtoonCardProps {
   webtoon: Webtoon;
   showTags?: boolean;
-  size?: number;
 }
 
-const WebtoonCard: React.FC<WebtoonCardProps> = ({ webtoon, showTags = true, size = 210 }) => {
+const WebtoonCard: React.FC<WebtoonCardProps> = ({ webtoon, showTags = true }) => {
   const getAuthors = (authors: { name: string }[] | undefined): string => {
     return authors?.map(author => author.name).join(', ') || '작가 없음';
   };
@@ -29,14 +28,8 @@ const WebtoonCard: React.FC<WebtoonCardProps> = ({ webtoon, showTags = true, siz
   const averageRating = formatAverageRating(webtoon.averageRating);
   const truncatedTitle = truncateTitle(webtoon.title);
 
-  const width = size;
-  const height = size * 1.6;
-  
-
   return (
-    <Link to={`/webtoon/${webtoon.id}`} className={`${styles.webtoonCard} ${isApp ? styles.app : styles.web}`}
-      style={{ width: `${width}px`, height: `${height}px` }}>
-      
+    <Link to={`/webtoon/${webtoon.id}`} className={`${styles.webtoonCard} ${isApp ? styles.app : styles.web}`}>
       <div className={styles.thumbnailContainer}>
         <img src={webtoon.thumbnailUrl} alt={webtoon.title} className={styles.thumbnailImage} />
         {showTags && (
@@ -45,7 +38,6 @@ const WebtoonCard: React.FC<WebtoonCardProps> = ({ webtoon, showTags = true, siz
           </div>
         )}
       </div>
-
       <div className={styles.webtoonInfo}>
         <span className={styles.webtoonTitle}>{truncatedTitle}</span>
         <div className={styles.webtoonMeta}>

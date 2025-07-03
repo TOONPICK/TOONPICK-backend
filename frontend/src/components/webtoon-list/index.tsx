@@ -34,7 +34,6 @@ const WebtoonList: React.FC<WebtoonListProps> = ({ webtoons, size = 220, showTag
               key={webtoon.id}
               webtoon={webtoon}
               showTags={showTags}
-              size={size}
             />
           ))
         ) : (
