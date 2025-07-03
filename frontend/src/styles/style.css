@@ -1,0 +1,47 @@
+/* 글로벌 리셋 및 반응형 기본 스타일 */
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', Arial, sans-serif;
+  background: #fafbfc;
+  color: #222;
+  min-height: 100vh;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+/* 반응형 컨테이너 */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* 모바일 우선 기본 */
+@media (max-width: 600px) {
+  html, body {
+    font-size: 15px;
+  }
+  .container {
+    padding: 0 8px;
+  }
+} 
