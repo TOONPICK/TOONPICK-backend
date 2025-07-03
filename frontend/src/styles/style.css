@@ -4,7 +4,7 @@ html, body {
   padding: 0;
   box-sizing: border-box;
   font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', Arial, sans-serif;
-  background: #fafbfc;
+  background: #ffffff;
   color: #222;
   min-height: 100vh;
 }
@@ -36,12 +36,12 @@ input, button, textarea, select {
   padding: 0 16px;
 }
 
-/* 모바일 우선 기본 */
-@media (max-width: 600px) {
-  html, body {
-    font-size: 15px;
-  }
-  .container {
-    padding: 0 8px;
-  }
+.web .container {
+  max-width: 1200px;
+  padding: 0 16px;
+}
+
+.app .container {
+  max-width: 100%;
+  padding: 0 8px;
 } 

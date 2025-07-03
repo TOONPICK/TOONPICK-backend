@@ -17,17 +17,14 @@ body {
   padding: 0 16px;
 }
 
-@media (max-width: 900px) {
-  .main, .container {
-    max-width: 100%;
-    padding: 0 8px;
-  }
+.web .main, .web .container {
+  max-width: 1200px;
+  padding: 0 16px;
 }
 
-@media (max-width: 600px) {
-  .main, .container {
-    padding: 0 4px;
-  }
+.app .main, .app .container {
+  max-width: 100%;
+  padding: 0 4px;
 }
 
 a {
