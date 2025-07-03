@@ -17,11 +17,12 @@
 .filters {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
   margin-bottom: 2rem;
-  background: #f8f9fa;
+  background: transparent;
   padding: 1.5rem;
   border-radius: 8px;
+  align-items: flex-start;
 }
 
 .filterGroup {
@@ -43,26 +44,26 @@
   gap: 0.5rem;
 }
 
-.filterButton {
-  padding: 0.5rem 1rem;
-  border: 1px solid #dee2e6;
-  border-radius: 4px;
-  background: white;
+.filterOption {
   cursor: pointer;
-  transition: all 0.2s;
   font-size: 0.9rem;
   color: #666;
+  background: none;
+  border: none;
+  padding: 0;
+  user-select: none;
+  font-weight: normal;
+  transition: font-weight 0.2s;
+  margin-right: 1.2rem;
 }
 
-.filterButton:hover {
-  background: #e9ecef;
-  border-color: #ced4da;
+.filterOption:last-child {
+  margin-right: 0;
 }
 
-.filterButton.active {
-  background: #007bff;
-  color: white;
-  border-color: #007bff;
+.active {
+  font-weight: bold;
+  color: #000;
 }
 
 .error {
@@ -92,7 +93,7 @@
     padding: 1rem;
   }
 
-  .filterButton {
+  .filterOption {
     padding: 0.4rem 0.8rem;
     font-size: 0.8rem;
   }

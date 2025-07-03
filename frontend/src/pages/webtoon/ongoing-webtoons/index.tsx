@@ -7,6 +7,7 @@ import Spinner from '@components/spinner';
 import { Webtoon, Platform } from '@models/webtoon';
 import { DayOfWeek } from '@models/enum';
 import SortOptions from '@components/sort-options/SortOptions';
+import FilterOptions from './FilterOptions';
 
 const OngoingWebtoonsPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -14,7 +15,7 @@ const OngoingWebtoonsPage: React.FC = () => {
   
   const [webtoons, setWebtoons] = useState<Webtoon[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const [isLastPage, setIsLastPage] = useState(false);
+  const [isLastPage, setIsLastPage] = useState(false);  
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   
@@ -110,6 +111,13 @@ const OngoingWebtoonsPage: React.FC = () => {
     setSelectedDay(day === selectedDay ? null : day);
   };
 
+  const handleFilterPlatformsChange = (platforms: Platform[]) => {
+    setSelectedPlatforms(platforms);
+  };
+  const handleFilterDayChange = (day: DayOfWeek | null) => {
+    setSelectedDay(day);
+  };
+
   const fetchOngoingWebtoons = async (page: number) => {
     setIsLoading(true);
     console.log("데이터 가져오기!")
@@ -177,41 +185,13 @@ const OngoingWebtoonsPage: React.FC = () => {
 
   return (
     <div className={styles.ongoingWebtoonsPage}>
-      <div className={styles.filters}>
-        <div className={styles.filterGroup}>
-          <div className={styles.platformButtons}>
-            <button
-              className={`${styles.filterButton} ${selectedPlatforms.length === Object.values(Platform).length ? styles.active : ''}`}
-              onClick={handleSelectAllPlatforms}
-            >
-              전체
-            </button>
-            {Object.values(Platform).map((platform) => (
-              <button
-                key={platform}
-                className={`${styles.filterButton} ${selectedPlatforms.includes(platform) ? styles.active : ''}`}
-                onClick={() => handlePlatformChange(platform)}
-              >
-                {PLATFORM_LABELS[platform]}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className={styles.filterGroup}>
-          <div className={styles.dayButtons}>
-            {DAYS.map((day) => (
-              <button
-                key={day}
-                className={`${styles.filterButton} ${selectedDay === day ? styles.active : ''}`}
-                onClick={() => handleDayChange(day)}
-              >
-                {DAY_LABELS[day]}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
+      <FilterOptions
+        PLATFORM_LABELS={PLATFORM_LABELS}
+        DAYS={DAYS}
+        DAY_LABELS={DAY_LABELS}
+        onChangeSelectedPlatforms={handleFilterPlatformsChange}
+        onChangeSelectedDay={handleFilterDayChange}
+      />
 
       <div className={styles.sortOptionsWrapper}>
         <SortOptions sortBy={sortBy} setSortBy={setSortBy} />
