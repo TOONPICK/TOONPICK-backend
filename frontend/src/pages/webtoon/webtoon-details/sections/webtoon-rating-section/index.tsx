@@ -5,6 +5,7 @@ import { useAuth } from '@contexts/auth-context';
 import { FiThumbsUp, FiFlag, FiStar, FiMessageCircle, FiClock } from 'react-icons/fi';
 import webtoonReviewService from '@services/webtoon-review-service';
 import styles from './style.module.css';
+import AverageRatingWithDistribution from '@components/average-rating-with-distribution';
 
 interface WebtoonRatingSectionProps {
   webtoon: Webtoon;
@@ -204,54 +205,12 @@ const WebtoonRatingSection: React.FC<WebtoonRatingSectionProps> = ({ webtoon }) 
             </div>
             <div className={styles.myRatingText}>{userRating > 0 ? '별점이 등록되었습니다.' : '아직 평가하지 않았어요'}</div>
           </div>
-          {/* 평균 별점 카드 */}
-          <div className={styles.averageRatingCard}>
-            <div className={styles.ratingLabel}>평균 별점</div>
-            <div className={styles.ratingScore}>
-              <span className={styles.ratingNumber}>{averageRating.toFixed(1)}</span>
-              <div className={styles.ratingStars}>
-                {[1, 2, 3, 4, 5].map(star => (
-                  <FiStar 
-                    key={star} 
-                    className={`${styles.star} ${star <= Math.round(averageRating) ? styles.filled : ''}`}
-                  />
-                ))}
-              </div>
-            </div>
-            <div className={styles.ratingStats}>
-              <span className={styles.ratingCount}>{totalReviews}개의 별점</span>
-            </div>
-          </div>
-          {/* 별점 분포 카드 */}
-          <div className={styles.ratingDistributionCard}>
-            <div className={styles.ratingLabel}>별점 분포</div>
-            <div className={styles.ratingBarChart}>
-              {[1,2,3,4,5].map(rating => {
-                const count = ratingDistribution[rating] || 0;
-                const max = Math.max(...[1,2,3,4,5].map(r => ratingDistribution[r] || 0), 1);
-                return (
-                  <div key={rating} className={styles.barCol}>
-                    <div
-                      className={styles.bar}
-                      style={{
-                        height: `${(count / max) * 100}%`,
-                        background: rating === 5 ? '#6c63ff' : '#b3aaff',
-                        opacity: 1,
-                        border: '1px solid #333',
-                        minHeight: count > 0 ? '8px' : '2px',
-                        transition: 'height 0.5s cubic-bezier(0.4,0,0.2,1)'
-                      }}
-                    />
-                    <span className={styles.barLabel}>{rating.toFixed(1)}</span>
-                    <span style={{fontSize:10, color:'#888'}}>{count > 0 ? count : ''}</span>
-                  </div>
-                );
-              })}
-            </div>
-            {totalReviews === 0 && (
-              <div className={styles.noDistributionMsg}>아직 별점 데이터가 없습니다.</div>
-            )}
-          </div>
+          {/* 평균 별점 + 분포 카드 */}
+          <AverageRatingWithDistribution
+            average={averageRating}
+            total={totalReviews}
+            distribution={ratingDistribution}
+          />
         </div>
       </div>
 
