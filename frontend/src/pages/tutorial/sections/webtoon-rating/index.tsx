@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useInView } from 'react-intersection-observer';
-import SearchAndFilter from './components/SearchAndFilter';
+// import SearchAndFilter from './components/SearchAndFilter';
 import WebtoonRatingList from './components/WebtoonRatingList';
 import styles from './style.module.css';
 
@@ -19,13 +19,13 @@ interface WebtoonRatingFormProps {
 
 const WebtoonRatingPage: React.FC<WebtoonRatingFormProps> = ({ onComplete }) => {
   const [webtoons, setWebtoons] = useState<Webtoon[]>([]);
-  const [filteredWebtoons, setFilteredWebtoons] = useState<Webtoon[]>([]);
+  // const [filteredWebtoons, setFilteredWebtoons] = useState<Webtoon[]>([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
-  const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([]);
+  // const [searchQuery, setSearchQuery] = useState('');
+  // const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+  // const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([]);
 
   const { ref, inView } = useInView({
     threshold: 0,
@@ -67,28 +67,29 @@ const WebtoonRatingPage: React.FC<WebtoonRatingFormProps> = ({ onComplete }) => 
     }
   }, [inView, loading, hasMore]);
 
-  useEffect(() => {
-    const filtered = webtoons.filter(webtoon => {
-      const matchesSearch = webtoon.title.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesGenres = selectedGenres.length === 0 || 
-        webtoon.genres.some(genre => selectedGenres.includes(genre));
-      const matchesPlatforms = selectedPlatforms.length === 0 || 
-        selectedPlatforms.includes(webtoon.platform);
-      return matchesSearch && matchesGenres && matchesPlatforms;
-    });
-    setFilteredWebtoons(filtered);
-  }, [webtoons, searchQuery, selectedGenres, selectedPlatforms]);
+  // 검색/필터링 제거
+  // useEffect(() => {
+  //   const filtered = webtoons.filter(webtoon => {
+  //     const matchesSearch = webtoon.title.toLowerCase().includes(searchQuery.toLowerCase());
+  //     const matchesGenres = selectedGenres.length === 0 || 
+  //       webtoon.genres.some(genre => selectedGenres.includes(genre));
+  //     const matchesPlatforms = selectedPlatforms.length === 0 || 
+  //       selectedPlatforms.includes(webtoon.platform);
+  //     return matchesSearch && matchesGenres && matchesPlatforms;
+  //   });
+  //   setFilteredWebtoons(filtered);
+  // }, [webtoons, searchQuery, selectedGenres, selectedPlatforms]);
 
-  const handleSearch = (query: string) => {
-    setSearchQuery(query);
-    setPage(1);
-  };
+  // const handleSearch = (query: string) => {
+  //   setSearchQuery(query);
+  //   setPage(1);
+  // };
 
-  const handleFilterChange = (filters: { genres: string[]; platforms: string[] }) => {
-    setSelectedGenres(filters.genres);
-    setSelectedPlatforms(filters.platforms);
-    setPage(1);
-  };
+  // const handleFilterChange = (filters: { genres: string[]; platforms: string[] }) => {
+  //   setSelectedGenres(filters.genres);
+  //   setSelectedPlatforms(filters.platforms);
+  //   setPage(1);
+  // };
 
   const handleComplete = () => {
     onComplete();
@@ -97,25 +98,21 @@ const WebtoonRatingPage: React.FC<WebtoonRatingFormProps> = ({ onComplete }) => 
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <h1 className={styles.title}>웹툰 평가</h1>
-        
-        <div className={styles.fixedSection}>
+        {/* 검색/필터 UI 제거 */}
+        {/* <div className={styles.fixedSection}>
           <SearchAndFilter
             onSearch={handleSearch}
             onFilterChange={handleFilterChange}
           />
-        </div>
-
+        </div> */}
         <div className={styles.scrollableSection}>
           <WebtoonRatingList
-            webtoons={filteredWebtoons}
+            webtoons={webtoons}
             onRatingComplete={onComplete}
           />
-
           {loading && <div className={styles.loading}>로딩 중...</div>}
           {!loading && hasMore && <div ref={ref} className={styles.loadMoreTrigger} />}
         </div>
-
         <button 
           className={styles.completeButton}
           onClick={handleComplete}
