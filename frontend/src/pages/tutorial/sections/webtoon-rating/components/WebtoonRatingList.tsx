@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './WebtoonRatingList.module.css';
 import StarRating from 'src/components/star-rating';
 import { Platform, SerializationStatus } from 'src/models/webtoon';
@@ -15,7 +15,10 @@ interface Webtoon {
 
 interface WebtoonRatingListProps {
   webtoons: Webtoon[];
-  onRatingComplete: () => void;
+  onNext: () => void;
+  onSkip: () => void;
+  onRate: (webtoonId: number, rating: number) => void;
+  loading: boolean;
 }
 
 // Helper for platform label
@@ -42,41 +45,42 @@ const statusLabel = (status: SerializationStatus) => {
   }
 };
 
-const WebtoonRatingList: React.FC<WebtoonRatingListProps> = ({ webtoons, onRatingComplete }) => {
-  const [current, setCurrent] = useState(0);
-  const [ratings, setRatings] = useState<Record<number, number>>({});
+const WebtoonRatingList: React.FC<WebtoonRatingListProps> = ({ webtoons, onNext, onSkip, onRate, loading }) => {
+  const webtoon = webtoons[0];
+  const [rating, setRating] = useState<number>(0);
+  const [error, setError] = useState<string | null>(null);
 
-  const total = webtoons.length;
-  const webtoon = webtoons[current];
-  const progress = ((current + 1) / total) * 100;
-
-  const handleRatingChange = (rating: number) => {
-    setRatings(prev => ({
-      ...prev,
-      [webtoon.id]: rating
-    }));
-  };
-
-  const handleNext = () => {
-    if (current < total - 1) {
-      setCurrent(current + 1);
-    } else {
-      onRatingComplete();
-    }
-  };
+  useEffect(() => {
+    setRating(0);
+    setError(null);
+  }, [webtoon?.id]);
 
   if (!webtoon) return null;
 
-  const rating = ratings[webtoon.id] || 0;
+  const handleRate = (value: number) => {
+    setRating(value);
+    setError(null);
+  };
+
+  const handleNext = async () => {
+    if (!rating) {
+      setError('별점을 선택해주세요!');
+      return;
+    }
+    setError(null);
+    await onRate(webtoon.id, rating);
+    setRating(0);
+    onNext();
+  };
+
+  const handleSkip = () => {
+    setRating(0);
+    setError(null);
+    onSkip();
+  };
 
   return (
     <div className={styles.carouselContainer}>
-      <div className={styles.progressBarWrap}>
-        <div className={styles.progressBarBg}>
-          <div className={styles.progressBar} style={{ width: `${progress}%` }} />
-        </div>
-        <div className={styles.progressText}>{current + 1} / {total} 웹툰 평가</div>
-      </div>
       <div className={styles.card}>
         <div className={styles.thumbnailWrap}>
           <img src={webtoon.thumbnail} alt={webtoon.title} className={styles.thumbnail} />
@@ -93,22 +97,21 @@ const WebtoonRatingList: React.FC<WebtoonRatingListProps> = ({ webtoons, onRatin
               <span key={typeof genre === 'string' ? genre : genre.id} className={styles.genreTag}>{typeof genre === 'string' ? genre : genre.name}</span>
             ))}
           </div>
-          <div className={styles.desc}>{(webtoon as any).description ?? ''}</div>
         </div>
         <div className={styles.ratingWrap}>
           <span className={styles.ratingLabel}>평점</span>
           <StarRating
             rating={rating}
             maxRating={5}
-            interactive={true}
-            onChange={handleRatingChange}
+            interactive={!loading}
+            onChange={handleRate}
             starSize={36}
           />
         </div>
+        {error && <div style={{ color: 'red', marginTop: 8 }}>{error}</div>}
         <div className={styles.buttonRow}>
-          <button className={styles.nextButton} onClick={handleNext}>
-            {current < total - 1 ? '다음' : '평가 완료'}
-          </button>
+          <button className={styles.skipButton} onClick={handleSkip} disabled={loading}>건너뛰기</button>
+          <button className={styles.nextButton} onClick={handleNext} disabled={loading}>{'다음'}</button>
         </div>
       </div>
     </div>
