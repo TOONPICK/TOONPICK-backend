@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, var(--primary-gradient), var(--secondary-gradient));
+  background: #fff;
   z-index: 1000;
   display: flex;
   justify-content: center;
@@ -15,77 +15,54 @@
 .content {
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-radius: var(--border-radius-lg);
-  padding: var(--spacing-xl);
-  box-shadow: var(--card-shadow);
+  background-color: #fff;
+  padding: 32px;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: var(--primary-color) transparent;
-}
-
-.content::-webkit-scrollbar {
-  width: 6px;
-}
-
-.content::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.content::-webkit-scrollbar-thumb {
-  background-color: var(--primary-color);
-  border-radius: 3px;
 }
 
 .step {
   width: 100%;
-  height: 100%;
+  max-width: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--spacing-xl);
-  animation: fadeIn 0.5s ease-out;
+  gap: 32px;
+  animation: fadeIn 0.3s ease-out;
 }
 
 .title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: var(--spacing-xl);
+  font-size: 24px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 32px;
   text-align: center;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .nextButton {
   position: absolute;
-  bottom: var(--spacing-xl);
-  right: var(--spacing-xl);
-  padding: var(--spacing-md) var(--spacing-lg);
-  background-color: var(--primary-color);
+  bottom: 32px;
+  right: 32px;
+  padding: 12px 24px;
+  background-color: #1a1a1a;
   color: white;
   border: none;
-  border-radius: var(--border-radius-md);
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.2s;
 }
 
 .nextButton:hover {
-  background-color: var(--primary-color-dark);
+  background-color: #333;
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -95,14 +72,11 @@
 
 @media (max-width: 768px) {
   .content {
-    max-width: 100%;
-    max-height: 100%;
-    border-radius: 0;
-    padding: var(--spacing-lg);
+    padding: 20px;
   }
 
   .title {
-    font-size: 2rem;
+    font-size: 20px;
   }
 
   .nextButton {
@@ -112,6 +86,6 @@
     left: 0;
     right: 0;
     border-radius: 0;
-    padding: var(--spacing-lg);
+    padding: 16px;
   }
 } 

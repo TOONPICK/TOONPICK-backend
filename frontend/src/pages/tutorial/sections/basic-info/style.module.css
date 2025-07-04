@@ -3,100 +3,92 @@
   max-width: 500px;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xl);
-  padding: var(--spacing-lg);
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--card-shadow);
+  gap: 32px;
+  padding: 24px;
+  background-color: #f8f9fa;
+  border: 1px solid #e5e5e5;
 }
 
 .inputGroup {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
+  gap: 16px;
 }
 
 .label {
-  font-size: 1.2rem;
-  color: var(--text-color);
+  font-size: 16px;
+  color: #1a1a1a;
   font-weight: 600;
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: 8px;
 }
 
 .genderButtons {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: var(--spacing-md);
+  gap: 12px;
 }
 
 .genderButton {
-  padding: var(--spacing-md);
-  border: 2px solid var(--border-color);
-  border-radius: var(--border-radius-md);
-  background-color: transparent;
-  color: var(--text-color);
-  font-size: 1rem;
+  padding: 12px;
+  border: 1px solid #e5e5e5;
+  background-color: #fff;
+  color: #1a1a1a;
+  font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .genderButton:hover {
-  background-color: var(--hover-color);
-  transform: translateY(-2px);
+  background-color: #f8f9fa;
 }
 
 .genderButton.selected {
-  background-color: var(--primary-color);
+  background-color: #1a1a1a;
   color: white;
-  border-color: var(--primary-color);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-color: #1a1a1a;
 }
 
 .yearInputContainer {
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
+  gap: 12px;
 }
 
 .input {
   flex: 1;
-  padding: var(--spacing-md);
-  border: 2px solid var(--border-color);
-  border-radius: var(--border-radius-md);
-  background-color: transparent;
-  color: var(--text-color);
-  font-size: 1rem;
-  transition: all 0.3s ease;
+  padding: 12px;
+  border: 1px solid #e5e5e5;
+  background-color: #fff;
+  color: #1a1a1a;
+  font-size: 14px;
+  transition: border-color 0.2s ease;
 }
 
 .input:focus {
   outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.1);
+  border-color: #1a1a1a;
 }
 
 .orText {
-  color: var(--text-secondary-color);
-  font-size: 0.9rem;
+  color: #666;
+  font-size: 14px;
 }
 
 .select {
   flex: 1;
-  padding: var(--spacing-md);
-  border: 2px solid var(--border-color);
-  border-radius: var(--border-radius-md);
-  background-color: transparent;
-  color: var(--text-color);
-  font-size: 1rem;
+  padding: 12px;
+  border: 1px solid #e5e5e5;
+  background-color: #fff;
+  color: #1a1a1a;
+  font-size: 14px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: border-color 0.2s ease;
 }
 
 .select:focus {
   outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.1);
+  border-color: #1a1a1a;
 }
 
 .genreGrid {
@@ -155,28 +147,23 @@
 }
 
 .submitButton {
-  flex: 1;
-  padding: var(--spacing-md) var(--spacing-lg);
-  background-color: var(--primary-color);
+  width: 100%;
+  padding: 12px 24px;
+  background-color: #1a1a1a;
   color: white;
   border: none;
-  border-radius: var(--border-radius-md);
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color 0.2s ease;
 }
 
-.submitButton:hover {
-  background-color: var(--primary-color-dark);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.submitButton:hover:not(.disabled) {
+  background-color: #333;
 }
 
 .submitButton.disabled {
-  background-color: var(--border-color);
+  background-color: #999;
   cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
 }
 
 .skipButton {
@@ -197,7 +184,7 @@
 
 @media (max-width: 768px) {
   .form {
-    padding: var(--spacing-md);
+    padding: 20px;
   }
 
   .genderButtons {
@@ -209,7 +196,7 @@
   }
 
   .orText {
-    margin: var(--spacing-sm) 0;
+    margin: 8px 0;
   }
 
   .buttonContainer {
