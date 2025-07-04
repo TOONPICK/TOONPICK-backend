@@ -1,78 +1,77 @@
 .section {
   background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
+  border: 1px solid #e5e5e5;
 }
 
 /* 평점 요약 섹션 */
 .ratingOverview {
-  padding: 24px;
-  border-bottom: 1px solid #f0f0f0;
+  padding: 20px;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .ratingHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .sectionTitle {
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 18px;
+  font-weight: 600;
   color: #1a1a1a;
   margin: 0;
 }
 
 .ratingStats {
   display: flex;
-  align-items: center;
+  justify-content: space-between;
   gap: 8px;
 }
 
 .ratingCount {
-  font-size: 14px;
+  font-size: 12px;
   color: #666;
   background: #f8f9fa;
-  padding: 4px 12px;
-  border-radius: 16px;
+  padding: 4px 8px;
+  border: 1px solid #e5e5e5;
 }
 
 .ratingContent {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 24px;
+  gap: 20px;
 }
 
 /* 평균 평점 카드 */
 .averageRatingCard {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 16px;
-  padding: 24px;
-  color: white;
+  background: #f8f9fa;
+  border: 1px solid #e5e5e5;
+  padding: 20px;
 }
 
 .ratingScore {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .ratingNumber {
-  font-size: 48px;
-  font-weight: 800;
+  font-size: 32px;
+  font-weight: 700;
   display: block;
   margin-bottom: 8px;
+  color: #1a1a1a;
 }
 
 .ratingStars {
   display: flex;
   justify-content: center;
-  gap: 4px;
+  gap: 2px;
 }
 
 .star {
-  font-size: 20px;
-  color: rgba(255, 255, 255, 0.3);
+  font-size: 16px;
+  color: #ddd;
   transition: color 0.2s ease;
 }
 
@@ -80,74 +79,35 @@
   color: #ffd700;
 }
 
-.ratingDistribution {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
 
-.ratingBar {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 12px;
-}
-
-.ratingLabel {
-  min-width: 24px;
-  text-align: center;
-  font-weight: 600;
-}
-
-.barContainer {
-  flex: 1;
-  height: 8px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.barFill {
-  height: 100%;
-  background: #ffd700;
-  border-radius: 4px;
-  transition: width 0.3s ease;
-}
 
 /* 사용자 평가 카드 */
 .userRatingCard {
   background: #f8f9fa;
-  border-radius: 16px;
-  padding: 24px;
-  border: 2px solid transparent;
-  transition: all 0.2s ease;
-}
-
-.userRatingCard:hover {
-  border-color: #667eea;
+  border: 1px solid #e5e5e5;
+  padding: 20px;
 }
 
 .userRatingHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .userRatingTitle {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: #1a1a1a;
   margin: 0;
 }
 
 .editBadge {
-  background: #667eea;
+  background: #1a1a1a;
   color: white;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 600;
-  padding: 4px 8px;
-  border-radius: 12px;
+  padding: 2px 6px;
 }
 
 .ratingInput {
@@ -155,28 +115,26 @@
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .starRating {
   display: flex;
-  gap: 8px;
+  gap: 6px;
 }
 
 .starButton {
   background: none;
   border: none;
-  font-size: 32px;
+  font-size: 24px;
   color: #ddd;
   cursor: pointer;
-  padding: 4px;
-  border-radius: 50%;
-  transition: all 0.2s ease;
+  padding: 2px;
+  transition: color 0.2s ease;
 }
 
 .starButton:hover {
   color: #ffd700;
-  transform: scale(1.1);
 }
 
 .starButton.selected {
@@ -184,134 +142,126 @@
 }
 
 .ratingText {
-  font-size: 14px;
+  font-size: 12px;
   color: #666;
   text-align: center;
 }
 
 .commentSection {
-  margin-top: 16px;
+  margin-top: 12px;
 }
 
 .addCommentButton {
   display: flex;
   align-items: center;
-  gap: 8px;
-  background: #667eea;
+  gap: 6px;
+  background: #1a1a1a;
   color: white;
   border: none;
-  padding: 12px 20px;
-  border-radius: 24px;
-  font-size: 14px;
+  padding: 8px 16px;
+  font-size: 12px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease;
   width: 100%;
   justify-content: center;
 }
 
 .addCommentButton:hover {
-  background: #5a6fd8;
-  transform: translateY(-1px);
+  background: #333;
 }
 
 .commentForm {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
 }
 
 .commentTextarea {
   width: 100%;
-  padding: 16px;
-  border: 2px solid #e9ecef;
-  border-radius: 12px;
-  font-size: 14px;
+  padding: 12px;
+  border: 1px solid #e5e5e5;
+  font-size: 12px;
   resize: vertical;
-  min-height: 100px;
+  min-height: 80px;
   transition: border-color 0.2s ease;
   font-family: inherit;
 }
 
 .commentTextarea:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: #1a1a1a;
 }
 
 .commentActions {
   display: flex;
-  gap: 12px;
+  gap: 8px;
   justify-content: flex-end;
 }
 
 .cancelButton {
   background: #f8f9fa;
   color: #666;
-  border: 2px solid #e9ecef;
-  padding: 10px 20px;
-  border-radius: 24px;
-  font-size: 14px;
+  border: 1px solid #e5e5e5;
+  padding: 6px 12px;
+  font-size: 12px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .cancelButton:hover {
-  background: #e9ecef;
+  background: #e5e5e5;
   color: #333;
 }
 
 .submitButton {
-  background: #28a745;
+  background: #1a1a1a;
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 24px;
-  font-size: 14px;
+  padding: 6px 12px;
+  font-size: 12px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease;
 }
 
 .submitButton:hover:not(:disabled) {
-  background: #218838;
-  transform: translateY(-1px);
+  background: #333;
 }
 
 .submitButton:disabled {
-  background: #6c757d;
+  background: #999;
   cursor: not-allowed;
-  transform: none;
 }
 
 .loginPrompt {
   background: #f8f9fa;
-  border-radius: 16px;
-  padding: 32px;
+  border: 1px solid #e5e5e5;
+  padding: 20px;
   text-align: center;
-  border: 2px dashed #dee2e6;
 }
 
 .loginPrompt p {
-  font-size: 16px;
+  font-size: 14px;
   color: #666;
   margin: 0;
 }
 
 /* 리뷰 목록 섹션 */
 .reviewsSection {
-  padding: 24px;
+  padding: 20px;
 }
 
 .reviewsHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .reviewsTitle {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: #1a1a1a;
   margin: 0;
@@ -319,50 +269,48 @@
 
 .sortOptions {
   display: flex;
-  gap: 8px;
+  gap: 6px;
 }
 
 .sortButton {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   background: #f8f9fa;
   color: #666;
-  border: 2px solid transparent;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 14px;
+  border: 1px solid #e5e5e5;
+  padding: 6px 12px;
+  font-size: 12px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .sortButton:hover {
-  background: #e9ecef;
+  background: #e5e5e5;
   color: #333;
 }
 
 .sortButton.active {
-  background: #667eea;
+  background: #1a1a1a;
   color: white;
-  border-color: #667eea;
+  border-color: #1a1a1a;
 }
 
 .loadingState {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
-  padding: 48px 24px;
+  gap: 12px;
+  padding: 32px 20px;
   color: #666;
 }
 
 .loadingSpinner {
-  width: 32px;
-  height: 32px;
-  border: 3px solid #f3f3f3;
-  border-top: 3px solid #667eea;
-  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #1a1a1a;
   animation: spin 1s linear infinite;
 }
 
@@ -374,70 +322,65 @@
 .reviewsList {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
 }
 
 .reviewCard {
   background: #f8f9fa;
-  border-radius: 16px;
-  padding: 20px;
-  border: 1px solid #e9ecef;
-  transition: all 0.2s ease;
+  border: 1px solid #e5e5e5;
+  padding: 16px;
+  transition: border-color 0.2s ease;
 }
 
 .reviewCard:hover {
-  border-color: #667eea;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.1);
+  border-color: #1a1a1a;
 }
 
 .reviewHeader {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .reviewerInfo {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
 }
 
 .reviewerAvatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
+  width: 36px;
+  height: 36px;
   object-fit: cover;
-  border: 2px solid #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e5e5;
 }
 
 .reviewerDetails {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
 }
 
 .reviewerName {
   font-weight: 600;
   color: #1a1a1a;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .reviewMeta {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
 }
 
 .reviewRating {
   display: flex;
-  gap: 2px;
+  gap: 1px;
 }
 
 .reviewStar {
-  font-size: 14px;
+  font-size: 12px;
   color: #ddd;
 }
 
@@ -446,33 +389,32 @@
 }
 
 .reviewDate {
-  font-size: 12px;
+  font-size: 10px;
   color: #999;
 }
 
 .reviewActions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .likeButton {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   background: none;
   border: none;
   color: #666;
-  padding: 8px 12px;
-  border-radius: 20px;
+  padding: 4px 8px;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .likeButton:hover {
-  background: #e9ecef;
-  color: #667eea;
+  background: #e5e5e5;
+  color: #1a1a1a;
 }
 
 .likeCount {
@@ -487,14 +429,13 @@
   background: none;
   border: none;
   color: #666;
-  padding: 8px;
-  border-radius: 50%;
+  padding: 4px;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .moreButton:hover {
-  background: #e9ecef;
+  background: #e5e5e5;
   color: #333;
 }
 
@@ -503,26 +444,25 @@
   top: 100%;
   right: 0;
   background: white;
-  border: 1px solid #e9ecef;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   z-index: 10;
-  min-width: 120px;
+  min-width: 100px;
   overflow: hidden;
 }
 
 .menuItem {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   background: none;
   border: none;
   width: 100%;
-  padding: 12px 16px;
+  padding: 8px 12px;
   text-align: left;
   cursor: pointer;
   color: #666;
-  font-size: 14px;
+  font-size: 12px;
   transition: background-color 0.2s ease;
 }
 
@@ -533,8 +473,8 @@
 
 .reviewComment {
   color: #333;
-  line-height: 1.6;
-  font-size: 14px;
+  line-height: 1.5;
+  font-size: 12px;
   white-space: pre-wrap;
 }
 
@@ -542,26 +482,26 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
-  padding: 48px 24px;
+  gap: 12px;
+  padding: 32px 20px;
   text-align: center;
   color: #666;
 }
 
 .emptyIcon {
-  font-size: 48px;
-  margin-bottom: 8px;
+  font-size: 32px;
+  margin-bottom: 4px;
 }
 
 .emptyState p {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 600;
   color: #333;
   margin: 0;
 }
 
 .emptyState span {
-  font-size: 14px;
+  font-size: 12px;
   color: #999;
 }
 
@@ -575,13 +515,13 @@
   .ratingHeader {
     flex-direction: column;
     align-items: flex-start;
-    gap: 12px;
+    gap: 8px;
   }
   
   .reviewsHeader {
     flex-direction: column;
     align-items: flex-start;
-    gap: 16px;
+    gap: 12px;
   }
   
   .sortOptions {
@@ -596,7 +536,7 @@
   
   .reviewHeader {
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
   }
   
   .reviewActions {
@@ -604,10 +544,36 @@
   }
   
   .ratingNumber {
-    font-size: 36px;
+    font-size: 28px;
   }
   
   .starButton {
-    font-size: 28px;
+    font-size: 20px;
   }
+}
+
+.ratingStats {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+}
+
+.statLabel {
+  font-size: 10px;
+  color: #666;
+  font-weight: 500;
+}
+
+.statValue {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
 }

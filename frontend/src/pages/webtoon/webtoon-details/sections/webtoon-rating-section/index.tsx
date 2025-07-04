@@ -175,23 +175,27 @@ const WebtoonRatingSection: React.FC<WebtoonRatingSectionProps> = ({ webtoon }) 
                 ))}
               </div>
             </div>
-            <div className={styles.ratingDistribution}>
-              {[5, 4, 3, 2, 1].map(rating => {
-                const count = ratingDistribution[rating] || 0;
-                const percentage = totalReviews > 0 ? (count / totalReviews) * 100 : 0;
-                return (
-                  <div key={rating} className={styles.ratingBar}>
-                    <span className={styles.ratingLabel}>{rating}점</span>
-                    <div className={styles.barContainer}>
-                      <div 
-                        className={styles.barFill} 
-                        style={{ width: `${percentage}%` }}
-                      />
-                    </div>
-                    <span className={styles.ratingCount}>{count}</span>
-                  </div>
-                );
-              })}
+            <div className={styles.ratingStats}>
+              <div className={styles.statItem}>
+                <span className={styles.statLabel}>5점</span>
+                <span className={styles.statValue}>{ratingDistribution[5] || 0}</span>
+              </div>
+              <div className={styles.statItem}>
+                <span className={styles.statLabel}>4점</span>
+                <span className={styles.statValue}>{ratingDistribution[4] || 0}</span>
+              </div>
+              <div className={styles.statItem}>
+                <span className={styles.statLabel}>3점</span>
+                <span className={styles.statValue}>{ratingDistribution[3] || 0}</span>
+              </div>
+              <div className={styles.statItem}>
+                <span className={styles.statLabel}>2점</span>
+                <span className={styles.statValue}>{ratingDistribution[2] || 0}</span>
+              </div>
+              <div className={styles.statItem}>
+                <span className={styles.statLabel}>1점</span>
+                <span className={styles.statValue}>{ratingDistribution[1] || 0}</span>
+              </div>
             </div>
           </div>
 
