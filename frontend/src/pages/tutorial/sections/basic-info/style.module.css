@@ -1,206 +1,103 @@
 .form {
   width: 100%;
-  max-width: 500px;
+  max-width: 420px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 32px;
-  padding: 24px;
-  background-color: #f8f9fa;
+  padding: 32px 28px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.07), 0 1.5px 4px 0 rgba(0,0,0,0.04);
   border: 1px solid #e5e5e5;
 }
 
 .inputGroup {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
 }
 
 .label {
-  font-size: 16px;
-  color: #1a1a1a;
+  font-size: 1.08rem;
+  color: #222;
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 2px;
 }
 
-.genderButtons {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-}
-
-.genderButton {
-  padding: 12px;
-  border: 1px solid #e5e5e5;
-  background-color: #fff;
-  color: #1a1a1a;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.genderButton:hover {
-  background-color: #f8f9fa;
-}
-
-.genderButton.selected {
-  background-color: #1a1a1a;
-  color: white;
-  border-color: #1a1a1a;
-}
-
-.yearInputContainer {
+.genderButtons, .ageGroupButtons, .ageDigitButtons {
   display: flex;
-  align-items: center;
   gap: 12px;
+  flex-wrap: wrap;
 }
 
-.input {
-  flex: 1;
-  padding: 12px;
-  border: 1px solid #e5e5e5;
-  background-color: #fff;
-  color: #1a1a1a;
-  font-size: 14px;
-  transition: border-color 0.2s ease;
-}
-
-.input:focus {
-  outline: none;
-  border-color: #1a1a1a;
-}
-
-.orText {
-  color: #666;
-  font-size: 14px;
-}
-
-.select {
-  flex: 1;
-  padding: 12px;
-  border: 1px solid #e5e5e5;
-  background-color: #fff;
-  color: #1a1a1a;
-  font-size: 14px;
-  cursor: pointer;
-  transition: border-color 0.2s ease;
-}
-
-.select:focus {
-  outline: none;
-  border-color: #1a1a1a;
-}
-
-.genreGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: var(--spacing-md);
-  width: 100%;
-}
-
-.genreButton {
-  padding: var(--spacing-md);
-  border: 2px solid var(--border-color);
-  border-radius: var(--border-radius-md);
-  background-color: transparent;
-  color: var(--text-color);
+.genderButton, .ageGroupButton, .ageDigitButton {
+  min-width: 72px;
+  padding: 12px 0;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 12px;
+  background: #fafbfc;
+  color: #222;
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background 0.18s, color 0.18s, border 0.18s, box-shadow 0.18s;
+  outline: none;
+  box-shadow: none;
 }
 
-.genreButton:hover {
-  background-color: var(--hover-color);
-  transform: translateY(-2px);
+.genderButton.selected, .ageGroupButton.selected, .ageDigitButton.selected {
+  background: #222;
+  color: #fff;
+  border-color: #222;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08);
 }
 
-.genreButton.selected {
-  background-color: var(--primary-color);
-  color: white;
-  border-color: var(--primary-color);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.genderButton:hover:not(.selected), .ageGroupButton:hover:not(.selected), .ageDigitButton:hover:not(.selected) {
+  background: #f0f0f0;
+  border-color: #bdbdbd;
 }
 
-.instructionContainer {
-  text-align: center;
-  margin-top: var(--spacing-md);
-}
-
-.instruction {
-  color: var(--text-secondary-color);
-  font-size: 0.9rem;
-  margin-bottom: var(--spacing-sm);
-}
-
-.warning {
-  color: var(--error-color);
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-.buttonContainer {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--spacing-md);
-  margin-top: var(--spacing-xl);
+.genderButton:active, .ageGroupButton:active, .ageDigitButton:active {
+  background: #e0e0e0;
+  color: #222;
 }
 
 .submitButton {
   width: 100%;
-  padding: 12px 24px;
-  background-color: #1a1a1a;
-  color: white;
+  padding: 14px 0;
+  background: #222;
+  color: #fff;
   border: none;
+  border-radius: 12px;
   font-weight: 600;
+  font-size: 1.08rem;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background 0.18s;
+  margin-top: 10px;
 }
 
 .submitButton:hover:not(.disabled) {
-  background-color: #333;
+  background: #111;
 }
 
 .submitButton.disabled {
-  background-color: #999;
+  background: #bbb;
+  color: #fff;
   cursor: not-allowed;
 }
 
-.skipButton {
-  padding: var(--spacing-md) var(--spacing-lg);
-  background-color: transparent;
-  color: var(--text-secondary-color);
-  border: 2px solid var(--border-color);
-  border-radius: var(--border-radius-md);
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.skipButton:hover {
-  background-color: var(--hover-color);
-  transform: translateY(-2px);
-}
-
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .form {
-    padding: 20px;
+    padding: 18px 6vw;
+    border-radius: 0;
+    box-shadow: none;
   }
-
-  .genderButtons {
-    grid-template-columns: 1fr;
-  }
-
-  .yearInputContainer {
-    flex-direction: column;
-  }
-
-  .orText {
-    margin: 8px 0;
-  }
-
-  .buttonContainer {
-    flex-direction: column;
+  .genderButton, .ageGroupButton, .ageDigitButton {
+    min-width: 0;
+    flex: 1 1 30%;
+    font-size: 0.98rem;
+    padding: 10px 0;
   }
 }
 

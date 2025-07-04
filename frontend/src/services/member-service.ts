@@ -31,6 +31,22 @@ class MemberService {
     }
   }
 
+  // 사용자 기본 정보(성별, 연령대, 나이) 업데이트
+  public async updateBasicInfo({ gender, ageGroup, ageDigit }:{ gender: string; ageGroup: string; ageDigit: number }): Promise<Response<MemberProfile>> {
+    if (isDev) {
+      // dev에서는 dummyProfile에 반영해서 반환
+      const updatedProfile = { ...dummyMemberProfile, gender, ageGroup, ageDigit };
+      return { success: true, data: updatedProfile };
+    }
+    try {
+      const response = await api.post<MemberProfile>('/api/secure/member/basic-info', { gender, ageGroup, ageDigit });
+      return { success: true, data: response.data };
+    } catch (error) {
+      console.error('Error updating basic info:', error);
+      return { success: false, message: error instanceof Error ? error.message : 'Unknown error' };
+    }
+  }
+
   // 사용자 프로필 이미지 업데이트
   public async updateProfileImage(file: File): Promise<Response<string>> {
     try {

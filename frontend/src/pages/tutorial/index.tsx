@@ -16,12 +16,20 @@ const TutorialPage: React.FC = () => {
   const navigate = useNavigate();
   const { updateProfile } = useAuth();
   const [currentStep, setCurrentStep] = useState<number>(1);
-  const [basicInfo, setBasicInfo] = useState<{ gender: string; birthYear: number } | null>(null);
+  const [basicInfo, setBasicInfo] = useState<{ gender: string; ageGroup: string; ageDigit: number } | null>(null);
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
 
-  const handleBasicInfoComplete = (data: { gender: string; birthYear: number }) => {
+  const handleBasicInfoComplete = async (data: { gender: string; ageGroup: string; ageDigit: number }) => {
     setBasicInfo(data);
-    setCurrentStep(2);
+    try {
+      const response = await MemberService.updateBasicInfo(data);
+      if (response.success && response.data) {
+        updateProfile(response.data);
+      }
+      setCurrentStep(2);
+    } catch (error) {
+      setCurrentStep(2); 
+    }
   };
 
   const handleGenrePreferenceComplete = (genres: string[]) => {
