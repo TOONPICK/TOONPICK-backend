@@ -26,7 +26,7 @@ const AppContent: React.FC = () => {
   return (
     <>
       <Header />
-      <main style={{ maxWidth: '1200px', width: '100%', minHeight: '1000px', margin: '0 auto', padding: '20px' }}>
+      <main>
         <Routes>
           <Route path={RoutePaths.HOME} element={<HomePage />} />
           <Route path={RoutePaths.TUTORIAL} element={<TutorialPage />} />

@@ -1,4 +1,3 @@
-/* 글로벌 리셋 및 반응형 기본 스타일 */
 html, body {
   margin: 0;
   padding: 0;
@@ -28,7 +27,6 @@ input, button, textarea, select {
   font: inherit;
 }
 
-/* 반응형 컨테이너 */
 .container {
   max-width: 1200px;
   min-width: 1200px;
