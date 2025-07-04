@@ -1,0 +1,56 @@
+.genresContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.genreTags {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  max-height: 2.5rem;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.genreTags.expanded {
+  max-height: none;
+}
+
+.genreTag {
+  padding: 3px 10px;
+  border: 1px solid #eee;
+  font-size: 0.9rem;
+  color: #666;
+  background: none;
+  border-radius: 0;
+}
+
+.expandButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #eee;
+  background: none;
+  cursor: pointer;
+  color: #666;
+  border-radius: 0;
+  transition: color 0.2s, border 0.2s, transform 0.2s;
+}
+
+.expandButton:hover {
+  color: #222;
+  border-color: #bbb;
+}
+
+.expandButton svg {
+  transition: transform 0.2s ease;
+}
+
+.expandButton svg.rotated {
+  transform: rotate(180deg);
+} 
