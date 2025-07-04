@@ -14,6 +14,7 @@ export interface MemberProfile {
   points: number;
   bookmarkedWebtoons: number;
   watchedWebtoons: number;
+  tutorial: boolean;
   badges: {
     id: number;
     name: string;

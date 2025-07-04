@@ -13,6 +13,7 @@ export const dummyMemberProfile: MemberProfile = {
   points: 0,
   bookmarkedWebtoons: 0,
   watchedWebtoons: 0,
+  tutorial: false,
   badges: [],
   preferences: {
     genrePreferences: [],

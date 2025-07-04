@@ -97,6 +97,21 @@ class MemberService {
       return { success: false, message: error instanceof Error ? error.message : 'Unknown error' };
     }
   }
+
+  // 튜토리얼 완료 처리
+  public async completeTutorial(): Promise<Response<MemberProfile>> {
+    if (isDev) {
+      const updatedProfile = { ...dummyMemberProfile, tutorial: true };
+      return { success: true, data: updatedProfile };
+    }
+    try {
+      const response = await api.post<MemberProfile>('/api/secure/member/tutorial/complete');
+      return { success: true, data: response.data };
+    } catch (error) {
+      console.error('Error completing tutorial:', error);
+      return { success: false, message: error instanceof Error ? error.message : 'Unknown error' };
+    }
+  }
 }
 
 export default MemberService.getInstance();

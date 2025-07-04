@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@contexts/auth-context';
+import MemberService from '@services/member-service';
 import styles from './style.module.css';
 import { Routes } from '@constants/routes';
 import BasicInfoForm from './sections/basic-info'
@@ -12,6 +14,7 @@ interface WebtoonRatingFormProps {
 
 const TutorialPage: React.FC = () => {
   const navigate = useNavigate();
+  const { updateProfile } = useAuth();
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [basicInfo, setBasicInfo] = useState<{ gender: string; birthYear: number } | null>(null);
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
@@ -26,8 +29,18 @@ const TutorialPage: React.FC = () => {
     setCurrentStep(3);
   };
 
-  const handleWebtoonRatingComplete = () => {
-    navigate(Routes.HOME);
+  const handleWebtoonRatingComplete = async () => {
+    try {
+      // 튜토리얼 완료 처리
+      const response = await MemberService.completeTutorial();
+      if (response.success && response.data) {
+        updateProfile(response.data);
+      }
+      navigate(Routes.HOME);
+    } catch (error) {
+      console.error('튜토리얼 완료 처리 중 오류:', error);
+      navigate(Routes.HOME);
+    }
   };
 
   return (
