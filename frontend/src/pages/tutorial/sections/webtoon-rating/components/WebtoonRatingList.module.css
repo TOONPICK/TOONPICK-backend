@@ -1,157 +1,153 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg);
+  gap: 24px;
   width: 100%;
   max-width: 1000px;
   margin: 0 auto;
-  padding: var(--spacing-lg);
+  padding: 24px;
   overflow-y: auto;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .container::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: none;
 }
 
 .webtoonCard {
   display: flex;
   justify-content: space-between;
-  background: var(--card-gradient);
-  border-radius: var(--border-radius-lg);
-  padding: var(--spacing-lg);
-  box-shadow: var(--card-shadow);
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  padding: 24px;
+  transition: border-color 0.2s ease;
 }
 
 .webtoonCard:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--card-hover-shadow);
+  border-color: #1a1a1a;
 }
 
 .webtoonInfo {
   display: flex;
-  gap: var(--spacing-lg);
-  margin-bottom: var(--spacing-lg);
+  gap: 24px;
+  margin-bottom: 24px;
 }
 
 .thumbnail {
   width: 120px;
   height: 160px;
   object-fit: cover;
-  border-radius: var(--border-radius-md);
-  box-shadow: var(--card-shadow);
+  border: 1px solid #e5e5e5;
 }
 
 .details {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm);
+  gap: 8px;
 }
 
 .title {
-  font-size: 1.5rem;
+  font-size: 18px;
   font-weight: 600;
-  color: var(--text-primary);
+  color: #1a1a1a;
   margin: 0;
 }
 
 .author {
-  font-size: 1rem;
-  color: var(--text-secondary);
+  font-size: 14px;
+  color: #666;
   margin: 0;
 }
 
 .genres {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing-xs);
+  gap: 6px;
 }
 
 .genreTag {
-  background: var(--secondary-gradient);
-  color: var(--text-primary);
-  padding: var(--spacing-xs) var(--spacing-sm);
-  border-radius: var(--border-radius-sm);
-  font-size: 0.875rem;
+  background: #f8f9fa;
+  color: #1a1a1a;
+  padding: 4px 8px;
+  border: 1px solid #e5e5e5;
+  font-size: 12px;
 }
 
 .ratingSection {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
+  gap: 16px;
   width: 200px;
 }
 
 .statusButtons {
   display: flex;
-  gap: var(--spacing-sm);
+  gap: 8px;
 }
 
 .statusButton {
   flex: 1;
-  padding: var(--spacing-sm) var(--spacing-md);
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-sm);
-  background: transparent;
-  color: var(--text-primary);
+  padding: 8px 12px;
+  border: 1px solid #e5e5e5;
+  background: #fff;
+  color: #1a1a1a;
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: all 0.2s ease;
+  font-size: 12px;
 }
 
 .statusButton:hover {
-  background: var(--hover-color);
+  background: #f8f9fa;
 }
 
 .statusButton.selected {
-  background: var(--primary-gradient);
+  background: #1a1a1a;
   color: white;
-  border-color: transparent;
+  border-color: #1a1a1a;
 }
 
 .ratingInput {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: 8px;
 }
 
 .ratingInput label {
-  color: var(--text-primary);
+  color: #1a1a1a;
   font-weight: 500;
+  font-size: 12px;
 }
 
 .ratingNumber {
   width: 60px;
-  padding: var(--spacing-sm);
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-sm);
-  background: var(--input-background);
-  color: var(--text-primary);
+  padding: 8px;
+  border: 1px solid #e5e5e5;
+  background: #fff;
+  color: #1a1a1a;
   text-align: center;
+  font-size: 12px;
 }
 
 .ratingNumber:focus {
   outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 2px var(--primary-color-light);
+  border-color: #1a1a1a;
 }
 
 .nextButton {
   align-self: center;
-  padding: var(--spacing-md) var(--spacing-xl);
-  background: var(--primary-gradient);
+  padding: 12px 32px;
+  background: #1a1a1a;
   color: white;
   border: none;
-  border-radius: var(--border-radius-md);
   font-weight: 600;
   cursor: pointer;
-  transition: transform var(--transition-fast);
+  transition: background-color 0.2s ease;
 }
 
 .nextButton:hover {
-  transform: translateY(-2px);
+  background: #333;
 }
 
 @media (max-width: 768px) {
