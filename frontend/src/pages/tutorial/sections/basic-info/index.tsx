@@ -36,14 +36,17 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ onComplete }) => {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <div className={styles.inputGroup}>
+      <div className={styles.title}>내 정보 입력</div>
+      <div className={styles.description}>더 나은 추천을 위해 정보를 입력해 주세요.</div>
+
+      <div className={styles.row}>
         <label className={styles.label}>성별</label>
-        <div className={styles.genderButtons}>
+        <div className={styles.inlineButtons}>
           {GENDERS.map((g) => (
             <button
               key={g.value}
               type="button"
-              className={`${styles.genderButton} ${gender === g.value ? styles.selected : ''}`}
+              className={`${styles.inlineButton} ${gender === g.value ? styles.selected : ''}`}
               onClick={() => setGender(g.value)}
             >
               {g.label}
@@ -52,14 +55,14 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ onComplete }) => {
         </div>
       </div>
 
-      <div className={styles.inputGroup}>
+      <div className={styles.row}>
         <label className={styles.label}>연령대</label>
-        <div className={styles.ageGroupButtons}>
+        <div className={styles.inlineButtons}>
           {AGE_GROUPS.map((ag) => (
             <button
               key={ag.value}
               type="button"
-              className={`${styles.ageGroupButton} ${ageGroup === ag.value ? styles.selected : ''}`}
+              className={`${styles.inlineButton} ${ageGroup === ag.value ? styles.selected : ''}`}
               onClick={() => { setAgeGroup(ag.value); setAgeDigit(null); }}
             >
               {ag.label}
@@ -68,23 +71,20 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ onComplete }) => {
         </div>
       </div>
 
-      {ageGroup && (
-        <div className={styles.inputGroup}>
-          <label className={styles.label}>나이 (끝자리)</label>
-          <div className={styles.ageDigitButtons}>
-            {[...Array(10)].map((_, i) => (
-              <button
-                key={i}
-                type="button"
-                className={`${styles.ageDigitButton} ${ageDigit === i ? styles.selected : ''}`}
-                onClick={() => setAgeDigit(i)}
-              >
-                {i}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
+      <div className={styles.row}>
+        <label className={styles.label}>나이 (끝자리)</label>
+        <select
+          className={styles.ageDigitSelect}
+          value={ageDigit !== null ? ageDigit : ''}
+          onChange={e => setAgeDigit(Number(e.target.value))}
+          disabled={!ageGroup}
+        >
+          <option value="">선택</option>
+          {[...Array(10)].map((_, i) => (
+            <option key={i} value={i}>{i}</option>
+          ))}
+        </select>
+      </div>
 
       <button
         type="submit"

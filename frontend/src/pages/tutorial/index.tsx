@@ -56,21 +56,18 @@ const TutorialPage: React.FC = () => {
       <div className={styles.content}>
         {currentStep === 1 && (
           <div className={styles.step}>
-            <h2 className={styles.title}>기본 정보 수집</h2>
             <BasicInfoForm onComplete={handleBasicInfoComplete} />
           </div>
         )}
         
         {currentStep === 2 && (
           <div className={styles.step}>
-            <h2 className={styles.title}>웹툰 성향 선택</h2>
             <GenrePreferenceForm onComplete={handleGenrePreferenceComplete} onSkip={() => setCurrentStep(3)} />
           </div>
         )}
         
         {currentStep === 3 && (
           <div className={styles.step}>
-            <h2 className={styles.title}>웹툰 평가</h2>
             <WebtoonRatingForm onComplete={handleWebtoonRatingComplete} />
           </div>
         )}
