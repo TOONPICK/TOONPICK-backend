@@ -62,10 +62,33 @@ const WebtoonRatingSection: React.FC<WebtoonRatingSectionProps> = ({ webtoon }) 
     }
   };
 
-  const handleRatingChange = (rating: number) => {
+  const handleRatingChange = async (rating: number) => {
     setUserRating(rating);
-    if (!userReview) {
-      setShowCommentForm(true);
+    // 별점만 바꿔도 서버에 바로 반영
+    setIsSubmitting(true);
+    try {
+      const reviewData: ReviewRequest = {
+        webtoonId: webtoon.id,
+        rating,
+        comment: userComment || ''
+      };
+      let response;
+      if (userReview) {
+        response = await webtoonReviewService.updateWebtoonReview(userReview.id, reviewData);
+      } else {
+        response = await webtoonReviewService.createWebtoonReview(webtoon.id, reviewData);
+      }
+      if (response.success && response.data) {
+        setUserReview(response.data);
+        setUserRating(response.data.rating);
+        setUserComment(response.data.comment);
+        await loadReviews();
+        await loadUserReview();
+      }
+    } catch (error) {
+      alert('별점 등록에 실패했습니다.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -78,32 +101,28 @@ const WebtoonRatingSection: React.FC<WebtoonRatingSectionProps> = ({ webtoon }) 
       alert('평점을 선택해주세요.');
       return;
     }
-    
     setIsSubmitting(true);
-    
     try {
       const reviewData: ReviewRequest = {
         webtoonId: webtoon.id,
         rating: userRating,
         comment: userComment
       };
-
       let response;
       if (userReview) {
         response = await webtoonReviewService.updateWebtoonReview(userReview.id, reviewData);
       } else {
         response = await webtoonReviewService.createWebtoonReview(webtoon.id, reviewData);
       }
-
       if (response.success && response.data) {
         setUserReview(response.data);
-        setShowCommentForm(false);
-        loadReviews(); // 리뷰 목록 새로고침
-        alert(userReview ? '평가가 수정되었습니다.' : '평가가 등록되었습니다.');
+        setUserComment(response.data.comment);
+        await loadReviews();
+        await loadUserReview();
+        alert(userReview && userReview.comment ? '코멘트가 수정되었습니다.' : '코멘트가 등록되었습니다.');
       }
     } catch (error) {
-      console.error('평가 제출 실패:', error);
-      alert('평가 제출에 실패했습니다.');
+      alert('코멘트 등록에 실패했습니다.');
     } finally {
       setIsSubmitting(false);
     }
@@ -146,6 +165,10 @@ const WebtoonRatingSection: React.FC<WebtoonRatingSectionProps> = ({ webtoon }) 
     return acc;
   }, {} as Record<number, number>);
 
+  // 진단용 콘솔
+  console.log('reviews:', reviews);
+  console.log('ratingDistribution:', ratingDistribution);
+
   const totalReviews = reviews.length;
   const averageRating = totalReviews > 0 
     ? reviews.reduce((sum, review) => sum + review.rating, 0) / totalReviews 
@@ -161,9 +184,29 @@ const WebtoonRatingSection: React.FC<WebtoonRatingSectionProps> = ({ webtoon }) 
             <span className={styles.ratingCount}>{totalReviews}개의 리뷰</span>
           </div>
         </div>
-
-        <div className={styles.ratingContent}>
+        <div className={styles.ratingContent3col}>
+          {/* 내 별점 카드 */}
+          <div className={styles.myRatingCard}>
+            <div className={styles.ratingLabel}>내 별점</div>
+            <div className={styles.myRatingScore}>{userRating > 0 ? userRating.toFixed(1) : '-'}</div>
+            <div className={styles.myRatingStars}>
+              {[1,2,3,4,5].map(star => (
+                <button
+                  key={star}
+                  className={`${styles.starButton} ${star <= userRating ? styles.selected : ''}`}
+                  onClick={() => handleRatingChange(star)}
+                  type="button"
+                  aria-label={`${star}점`}
+                >
+                  <FiStar />
+                </button>
+              ))}
+            </div>
+            <div className={styles.myRatingText}>{userRating > 0 ? '별점이 등록되었습니다.' : '아직 평가하지 않았어요'}</div>
+          </div>
+          {/* 평균 별점 카드 */}
           <div className={styles.averageRatingCard}>
+            <div className={styles.ratingLabel}>평균 별점</div>
             <div className={styles.ratingScore}>
               <span className={styles.ratingNumber}>{averageRating.toFixed(1)}</span>
               <div className={styles.ratingStars}>
@@ -176,108 +219,39 @@ const WebtoonRatingSection: React.FC<WebtoonRatingSectionProps> = ({ webtoon }) 
               </div>
             </div>
             <div className={styles.ratingStats}>
-              <div className={styles.statItem}>
-                <span className={styles.statLabel}>5점</span>
-                <span className={styles.statValue}>{ratingDistribution[5] || 0}</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statLabel}>4점</span>
-                <span className={styles.statValue}>{ratingDistribution[4] || 0}</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statLabel}>3점</span>
-                <span className={styles.statValue}>{ratingDistribution[3] || 0}</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statLabel}>2점</span>
-                <span className={styles.statValue}>{ratingDistribution[2] || 0}</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statLabel}>1점</span>
-                <span className={styles.statValue}>{ratingDistribution[1] || 0}</span>
-              </div>
+              <span className={styles.ratingCount}>{totalReviews}개의 별점</span>
             </div>
           </div>
-
-          {/* 사용자 평가 섹션 */}
-          {state ? (
-            <div className={styles.userRatingCard}>
-              <div className={styles.userRatingHeader}>
-                <h3 className={styles.userRatingTitle}>
-                  {userReview ? '내 평가 수정' : '평가하기'}
-                </h3>
-                {userReview && (
-                  <span className={styles.editBadge}>수정</span>
-                )}
-              </div>
-              
-              <div className={styles.ratingInput}>
-                <div className={styles.starRating}>
-                  {[1, 2, 3, 4, 5].map(star => (
-                    <button
-                      key={star}
-                      className={`${styles.starButton} ${star <= userRating ? styles.selected : ''}`}
-                      onClick={() => handleRatingChange(star)}
-                      type="button"
-                    >
-                      <FiStar />
-                    </button>
-                  ))}
-                </div>
-                <span className={styles.ratingText}>
-                  {userRating > 0 ? `${userRating}점을 선택했습니다` : '평점을 선택해주세요'}
-                </span>
-              </div>
-
-              {userRating > 0 && (
-                <div className={styles.commentSection}>
-                  {!showCommentForm && !userReview ? (
-                    <button 
-                      className={styles.addCommentButton}
-                      onClick={() => setShowCommentForm(true)}
-                    >
-                      <FiMessageCircle />
-                      코멘트 추가하기
-                    </button>
-                  ) : (
-                    <div className={styles.commentForm}>
-                      <textarea
-                        className={styles.commentTextarea}
-                        value={userComment}
-                        onChange={handleCommentChange}
-                        placeholder="이 웹툰에 대한 의견을 자유롭게 남겨주세요."
-                        rows={4}
-                      />
-                      <div className={styles.commentActions}>
-                        <button
-                          className={styles.cancelButton}
-                          onClick={() => {
-                            setShowCommentForm(false);
-                            if (!userReview) {
-                              setUserComment('');
-                            }
-                          }}
-                        >
-                          취소
-                        </button>
-                        <button
-                          className={styles.submitButton}
-                          onClick={handleSubmitReview}
-                          disabled={isSubmitting}
-                        >
-                          {isSubmitting ? '처리중...' : (userReview ? '수정하기' : '등록하기')}
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )}
+          {/* 별점 분포 카드 */}
+          <div className={styles.ratingDistributionCard}>
+            <div className={styles.ratingLabel}>별점 분포</div>
+            <div className={styles.ratingBarChart}>
+              {[1,2,3,4,5].map(rating => {
+                const count = ratingDistribution[rating] || 0;
+                const max = Math.max(...[1,2,3,4,5].map(r => ratingDistribution[r] || 0), 1);
+                return (
+                  <div key={rating} className={styles.barCol}>
+                    <div
+                      className={styles.bar}
+                      style={{
+                        height: `${(count / max) * 100}%`,
+                        background: rating === 5 ? '#6c63ff' : '#b3aaff',
+                        opacity: 1,
+                        border: '1px solid #333',
+                        minHeight: count > 0 ? '8px' : '2px',
+                        transition: 'height 0.5s cubic-bezier(0.4,0,0.2,1)'
+                      }}
+                    />
+                    <span className={styles.barLabel}>{rating.toFixed(1)}</span>
+                    <span style={{fontSize:10, color:'#888'}}>{count > 0 ? count : ''}</span>
+                  </div>
+                );
+              })}
             </div>
-          ) : (
-            <div className={styles.loginPrompt}>
-              <p>평가를 남기려면 로그인이 필요합니다</p>
-            </div>
-          )}
+            {totalReviews === 0 && (
+              <div className={styles.noDistributionMsg}>아직 별점 데이터가 없습니다.</div>
+            )}
+          </div>
         </div>
       </div>
 
