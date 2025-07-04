@@ -90,6 +90,10 @@ const WebtoonRatingPage: React.FC<WebtoonRatingFormProps> = ({ onComplete }) => 
     setPage(1);
   };
 
+  const handleComplete = () => {
+    onComplete();
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.content}>
@@ -111,6 +115,13 @@ const WebtoonRatingPage: React.FC<WebtoonRatingFormProps> = ({ onComplete }) => 
           {loading && <div className={styles.loading}>로딩 중...</div>}
           {!loading && hasMore && <div ref={ref} className={styles.loadMoreTrigger} />}
         </div>
+
+        <button 
+          className={styles.completeButton}
+          onClick={handleComplete}
+        >
+          평가 완료
+        </button>
       </div>
     </div>
   );

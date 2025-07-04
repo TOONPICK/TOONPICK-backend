@@ -46,8 +46,6 @@ const WebtoonRatingList: React.FC<WebtoonRatingListProps> = ({ webtoons, onRatin
     if (nextIndex < webtoons.length) {
       setDisplayedWebtoons(prev => [...prev, ...webtoons.slice(currentIndex, nextIndex)]);
       setCurrentIndex(nextIndex);
-    } else {
-      onRatingComplete();
     }
   };
 

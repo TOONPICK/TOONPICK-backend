@@ -98,8 +98,8 @@
   width: 100%;
 }
 
-.nextButton {
-  position: absolute;
+.completeButton {
+  position: fixed;
   bottom: 32px;
   right: 32px;
   padding: 12px 24px;
@@ -109,9 +109,10 @@
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.2s;
+  z-index: 10;
 }
 
-.nextButton:hover {
+.completeButton:hover {
   background-color: #333;
 }
 
@@ -139,7 +140,7 @@
     padding-bottom: 12px;
   }
 
-  .nextButton {
+  .completeButton {
     width: 100%;
     position: fixed;
     bottom: 0;
