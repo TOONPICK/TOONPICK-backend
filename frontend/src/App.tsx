@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from '@components/header';
 
-import { AuthProvider, useAuth } from '@contexts/auth-context';
+import { AuthProvider } from '@contexts/auth-context';
 import { ModalProvider } from '@contexts/modal-context';
 
 import HomePage from '@pages/home';
@@ -22,27 +22,9 @@ import TutorialPage from '@pages/tutorial';
 
 import { Routes as RoutePaths } from '@constants/routes';
 
-// 튜토리얼 리다이렉트 처리를 위한 컴포넌트
-const TutorialRedirectHandler: React.FC = () => {
-  const { state, clearTutorialRedirect } = useAuth();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    console.log('TutorialRedirectHandler - shouldRedirectToTutorial:', state.shouldRedirectToTutorial); // 디버깅용
-    if (state.shouldRedirectToTutorial) {
-      console.log('Redirecting to tutorial...'); // 디버깅용
-      navigate(RoutePaths.TUTORIAL);
-      clearTutorialRedirect();
-    }
-  }, [state.shouldRedirectToTutorial, navigate, clearTutorialRedirect]);
-
-  return null;
-};
-
 const AppContent: React.FC = () => {
   return (
     <>
-      <TutorialRedirectHandler />
       <Header />
       <main style={{ maxWidth: '1200px', width: '100%', minHeight: '1000px', margin: '0 auto', padding: '20px' }}>
         <Routes>

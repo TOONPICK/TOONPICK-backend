@@ -9,7 +9,6 @@ interface AuthState {
   isAuthenticated: boolean; // 로그인 여부
   memberProfile: MemberProfile | null; // 회원 프로필 정보
   error: string | null; // 에러 메시지
-  shouldRedirectToTutorial: boolean; // 튜토리얼 리다이렉트 필요 여부
 }
 
 // 인증 액션 타입 정의
@@ -19,15 +18,13 @@ type AuthAction =
   | { type: 'LOGOUT' } // 로그아웃
   | { type: 'SET_MEMBER_PROFILE'; payload: MemberProfile } // 회원 프로필 설정
   | { type: 'SOCIAL_LOGIN_SUCCESS'; payload: MemberProfile } // 소셜 로그인 성공 액션 추가
-  | { type: 'UPDATE_PROFILE'; payload: MemberProfile } // 프로필 업데이트
-  | { type: 'CLEAR_TUTORIAL_REDIRECT' }; // 튜토리얼 리다이렉트 플래그 클리어
+  | { type: 'UPDATE_PROFILE'; payload: MemberProfile }; // 프로필 업데이트
 
 // 초기 상태 정의
 const initialState: AuthState = {
   isAuthenticated: false,
   memberProfile: null,
   error: null,
-  shouldRedirectToTutorial: false,
 };
 
 // 인증 컨텍스트 타입 정의
@@ -39,7 +36,6 @@ interface AuthContextType {
   socialLoginSuccess: () => Promise<MemberProfile>; // 소셜 로그인 성공 함수 추가
   updateProfile: (profile: MemberProfile) => void; // 프로필 업데이트 함수
   memberProfile: MemberProfile | null; // 회원 프로필 정보
-  clearTutorialRedirect: () => void; // 튜토리얼 리다이렉트 플래그 클리어
 }
 
 // 인증 컨텍스트 생성
@@ -53,7 +49,6 @@ const defaultAuthContext: AuthContextType = {
   },
   updateProfile: () => {},
   memberProfile: null,
-  clearTutorialRedirect: () => {},
 };
 
 // 인증 제공자 프로퍼티 타입 정의
@@ -65,48 +60,33 @@ interface AuthProviderProps {
 const authReducer = (state: AuthState, action: AuthAction): AuthState => {
   switch (action.type) {
     case 'LOGIN_SUCCESS':
-      const shouldRedirect = action.payload ? !action.payload.tutorial : false;
-      console.log('LOGIN_SUCCESS - tutorial:', action.payload?.tutorial, 'shouldRedirect:', shouldRedirect); // 디버깅용
       return { 
         ...state, 
         isAuthenticated: true, 
         memberProfile: action.payload, 
-        error: null,
-        shouldRedirectToTutorial: shouldRedirect
+        error: null
       };
     case 'LOGIN_FAILURE':
-      return { ...state, isAuthenticated: false, memberProfile: null, error: action.payload, shouldRedirectToTutorial: false };
+      return { ...state, isAuthenticated: false, memberProfile: null, error: action.payload };
     case 'LOGOUT':
-      return { ...state, isAuthenticated: false, memberProfile: null, error: null, shouldRedirectToTutorial: false };
+      return { ...state, isAuthenticated: false, memberProfile: null, error: null };
     case 'SET_MEMBER_PROFILE':
-      const setRedirect = !action.payload.tutorial;
-      console.log('SET_MEMBER_PROFILE - tutorial:', action.payload.tutorial, 'shouldRedirect:', setRedirect); // 디버깅용
       return { 
         ...state, 
-        memberProfile: action.payload,
-        shouldRedirectToTutorial: setRedirect
+        memberProfile: action.payload
       };
     case 'SOCIAL_LOGIN_SUCCESS':
-      const socialRedirect = !action.payload.tutorial;
-      console.log('SOCIAL_LOGIN_SUCCESS - tutorial:', action.payload.tutorial, 'shouldRedirect:', socialRedirect); // 디버깅용
       return { 
         ...state, 
         isAuthenticated: true, 
         memberProfile: action.payload, 
-        error: null,
-        shouldRedirectToTutorial: socialRedirect
+        error: null
       };
     case 'UPDATE_PROFILE':
-      const updateRedirect = !action.payload.tutorial;
-      console.log('UPDATE_PROFILE - tutorial:', action.payload.tutorial, 'shouldRedirect:', updateRedirect); // 디버깅용
       return { 
         ...state, 
-        memberProfile: action.payload,
-        shouldRedirectToTutorial: updateRedirect
+        memberProfile: action.payload
       };
-    case 'CLEAR_TUTORIAL_REDIRECT':
-      console.log('CLEAR_TUTORIAL_REDIRECT'); // 디버깅용
-      return { ...state, shouldRedirectToTutorial: false };
     default:
       return state; // 기본 상태 반환
   }
@@ -128,9 +108,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const fetchMemberProfile = async () => {
         try {
           const profile = await MemberService.getMemberProfile(); // 회원 프로필 가져오기
-          console.log('Fetched profile:', profile.data); // 디버깅용
           if (profile.data) {
-            console.log('Tutorial status:', profile.data.tutorial); // 디버깅용
             dispatch({ type: 'LOGIN_SUCCESS', payload: profile.data }); // 로그인 성공
           } else {
             dispatch({ type: 'LOGIN_FAILURE', payload: 'Failed to fetch member profile' }); // 프로필 가져오기 실패
@@ -142,13 +120,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       fetchMemberProfile(); // 프로필 가져오기 함수 호출
     } else if (isDev) {
       // 개발 환경에서 토큰이 없으면 자동으로 로그인 상태 시뮬레이션
-      console.log('Development mode: Simulating logged in state');
       const fetchMemberProfile = async () => {
         try {
           const profile = await MemberService.getMemberProfile(); // 회원 프로필 가져오기
-          console.log('Fetched profile (dev):', profile.data); // 디버깅용
           if (profile.data) {
-            console.log('Tutorial status (dev):', profile.data.tutorial); // 디버깅용
             dispatch({ type: 'LOGIN_SUCCESS', payload: profile.data }); // 로그인 성공
           } else {
             dispatch({ type: 'LOGIN_FAILURE', payload: 'Failed to fetch member profile' }); // 프로필 가져오기 실패
@@ -210,10 +185,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     dispatch({ type: 'UPDATE_PROFILE', payload: profile });
   };
 
-  const clearTutorialRedirect = () => {
-    dispatch({ type: 'CLEAR_TUTORIAL_REDIRECT' });
-  };
-
   // 컨텍스트 제공
   return (
     <AuthContext.Provider
@@ -225,7 +196,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         socialLoginSuccess,
         updateProfile,
         memberProfile: state.memberProfile,
-        clearTutorialRedirect,
       }}
     >
       {children}
