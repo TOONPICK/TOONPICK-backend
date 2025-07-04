@@ -18,8 +18,12 @@ const SocialLoginCallbackPage: React.FC = () => {
         const accessToken = await TokenRefresher.refreshAccessToken();
 
         if (accessToken) {
-          await socialLoginSuccess();
-          navigate(Routes.HOME);
+          const profile = await socialLoginSuccess();
+          if (profile && !profile.tutorial) {
+            navigate(Routes.TUTORIAL);
+          } else {
+            navigate(Routes.HOME);
+          }
         } else {
           throw new Error('Access Token이 없습니다.');
         }
