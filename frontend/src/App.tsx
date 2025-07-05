@@ -13,6 +13,7 @@ import ErrorPage from '@pages/error';
 import TutorialPage from '@pages/tutorial';
 import ProfilePage from '@pages/user/profile';
 import ProfileEditPage from '@pages/user/profile-edit';
+import PasswordChangePage from '@pages/user/password-change';
 import AdultVerificationPage from '@pages/user/adult-verification';
 import NotificationSettingsPage from '@pages/user/notification-settings';
 import BookmarkedWebtoonsPage from '@pages/user/bookmarked-webtoons';
@@ -42,6 +43,7 @@ const AppContent: React.FC = () => {
           <Route path={AppRoutes.TUTORIAL} element={<TutorialPage />} />
           <Route path={AppRoutes.PROFILE} element={<ProfilePage />} />
           <Route path={AppRoutes.PROFILE_EDIT} element={<ProfileEditPage />} />
+          <Route path={AppRoutes.PASSWORD_CHANGE} element={<PasswordChangePage />} />
           <Route path={AppRoutes.ADULT_VERIFICATION} element={<AdultVerificationPage />} />
           <Route path={AppRoutes.NOTIFICATION_SETTINGS} element={<NotificationSettingsPage />} />
           <Route path={AppRoutes.BOOKMARKED_WEBTOONS} element={<BookmarkedWebtoonsPage />} />

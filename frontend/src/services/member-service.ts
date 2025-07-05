@@ -93,7 +93,15 @@ class MemberService {
   }
 
   // 사용자 기본 정보(성별, 연령대, 나이) 업데이트
-  public async updateBasicInfo({ gender, ageGroup, ageDigit }:{ gender: string; ageGroup: string; ageDigit: number }): Promise<Response<MemberProfile>> {
+  public async updateBasicInfo({ 
+    gender, 
+    ageGroup, 
+    ageDigit 
+  }: { 
+    gender: 'male' | 'female' | 'other' | 'prefer_not_to_say'; 
+    ageGroup: string; 
+    ageDigit: number 
+  }): Promise<Response<MemberProfile>> {
     if (isDev) {
       // dev에서는 dummyProfile에 반영해서 반환
       const updatedProfile = { ...dummyMemberProfile, gender, ageGroup, ageDigit };

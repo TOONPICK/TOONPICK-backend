@@ -8,21 +8,27 @@ import BasicInfoForm from './sections/basic-info'
 import GenrePreferenceForm from './sections/genre-preference';
 import WebtoonRatingForm from './sections/webtoon-rating';
 
-interface WebtoonRatingFormProps {
-  onComplete: () => void;
-}
-
 const TutorialPage: React.FC = () => {
   const navigate = useNavigate();
   const { updateProfile } = useAuth();
   const [currentStep, setCurrentStep] = useState<number>(1);
-  const [basicInfo, setBasicInfo] = useState<{ gender: string; ageGroup: string; ageDigit: number } | null>(null);
-  const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+  const [basicInfo, setBasicInfo] = useState<{ 
+    gender: string; 
+    ageGroup: string; 
+    ageDigit: number 
+  } | null>(null);
 
-  const handleBasicInfoComplete = async (data: { gender: string; ageGroup: string; ageDigit: number }) => {
+  const handleBasicInfoComplete = async (data: { 
+    gender: string; 
+    ageGroup: string; 
+    ageDigit: number 
+  }) => {
     setBasicInfo(data);
     try {
-      const response = await MemberService.updateBasicInfo(data);
+      const response = await MemberService.updateBasicInfo({
+        ...data,
+        gender: data.gender as 'male' | 'female' | 'other' | 'prefer_not_to_say'
+      });
       if (response.success && response.data) {
         updateProfile(response.data);
       }
@@ -33,7 +39,6 @@ const TutorialPage: React.FC = () => {
   };
 
   const handleGenrePreferenceComplete = (genres: string[]) => {
-    setSelectedGenres(genres);
     setCurrentStep(3);
   };
 

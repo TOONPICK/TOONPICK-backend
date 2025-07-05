@@ -2,13 +2,18 @@ import React, { useState } from 'react';
 import styles from './style.module.css';
 
 interface BasicInfoFormProps {
-  onComplete: (data: { gender: string; ageGroup: string; ageDigit: number }) => void;
+  onComplete: (data: { 
+    gender: string; 
+    ageGroup: string; 
+    ageDigit: number 
+  }) => void;
 }
 
 const GENDERS = [
-  { value: 'male', label: '남자' },
-  { value: 'female', label: '여자' },
-  { value: 'private', label: '비공개' },
+  { value: 'male' as const, label: '남자' },
+  { value: 'female' as const, label: '여자' },
+  { value: 'other' as const, label: '기타' },
+  { value: 'prefer_not_to_say' as const, label: '선택하지 않음' },
 ];
 
 const AGE_GROUPS = [
@@ -21,7 +26,7 @@ const AGE_GROUPS = [
 ];
 
 const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ onComplete }) => {
-  const [gender, setGender] = useState<string>('');
+  const [gender, setGender] = useState<'male' | 'female' | 'other' | 'prefer_not_to_say' | ''>('');
   const [ageGroup, setAgeGroup] = useState<string>('');
   const [ageDigit, setAgeDigit] = useState<number | null>(null);
 
@@ -30,7 +35,11 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ onComplete }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (isValid) {
-      onComplete({ gender, ageGroup, ageDigit: ageDigit! });
+      onComplete({ 
+        gender, 
+        ageGroup, 
+        ageDigit: ageDigit! 
+      });
     }
   };
 

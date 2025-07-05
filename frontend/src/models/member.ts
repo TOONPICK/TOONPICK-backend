@@ -15,6 +15,28 @@ export interface MemberProfile {
   bookmarkedWebtoons: number;
   watchedWebtoons: number;
   tutorial: boolean;
+  bio?: string;
+  birthDate?: string;
+  gender?: 'male' | 'female' | 'other' | 'prefer_not_to_say';
+  location?: string;
+  website?: string;
+  socialLinks?: {
+    twitter?: string;
+    instagram?: string;
+    youtube?: string;
+  };
+  privacySettings?: {
+    profileVisibility: 'public' | 'friends' | 'private';
+    showReadingHistory: boolean;
+    showReviews: boolean;
+    showCollections: boolean;
+    allowMessages: boolean;
+  };
+  notificationPreferences?: {
+    email: boolean;
+    push: boolean;
+    sms: boolean;
+  };
   badges: {
     id: number;
     name: string;
