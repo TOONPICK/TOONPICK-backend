@@ -113,6 +113,7 @@
 .reviewFooter {
   display: flex;
   justify-content: flex-end;
+  gap: 8px;
 }
 
 .likes {
@@ -122,6 +123,38 @@
   display: flex;
   align-items: center;
   gap: 4px;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: rgba(229, 62, 62, 0.1);
+}
+
+.rating {
+  font-size: 14px;
+  color: #f6ad55;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: rgba(246, 173, 85, 0.1);
+}
+
+.emptyState {
+  text-align: center;
+  padding: 40px;
+  color: #718096;
+}
+
+.emptyIcon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.emptyState p {
+  font-size: 16px;
+  margin: 0;
 }
 
 @media (max-width: 768px) {

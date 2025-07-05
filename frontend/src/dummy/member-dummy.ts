@@ -1,38 +1,76 @@
 import { MemberProfile } from '@models/member';
+import { dummyWebtoonList } from './webtoon-dummy';
+import { dummyReviewList } from './review-dummy';
 
 export const dummyMemberProfile: MemberProfile = {
   username: 1,
   email: 'dummy@toonpick.com',
-  nickname: '더미유저',
-  profileImage: '/images/profile/dummy.png',
-  level: 1,
-  ratedWebtoons: 0,
-  reviewedWebtoons: 0,
-  collections: 0,
-  readWebtoons: 0,
-  points: 0,
-  bookmarkedWebtoons: 0,
-  watchedWebtoons: 0,
-  tutorial: false,
-  badges: [],
+  nickname: '웹툰러버',
+  profileImage: '/images/profile/default_profile_image.svg',
+  level: 15,
+  ratedWebtoons: 42,
+  reviewedWebtoons: 28,
+  collections: 5,
+  readWebtoons: 156,
+  points: 2840,
+  bookmarkedWebtoons: 23,
+  watchedWebtoons: 89,
+  tutorial: true,
+  badges: [
+    {
+      id: 1,
+      name: '독서왕',
+      icon: '/images/badges/reading-king.svg'
+    },
+    {
+      id: 2,
+      name: '리뷰마스터',
+      icon: '/images/badges/review-master.svg'
+    },
+    {
+      id: 3,
+      name: '컬렉터',
+      icon: '/images/badges/collector.svg'
+    },
+    {
+      id: 4,
+      name: '첫 리뷰',
+      icon: '/images/badges/first-review.svg'
+    },
+    {
+      id: 5,
+      name: '100일 연속',
+      icon: '/images/badges/100-days.svg'
+    }
+  ],
   preferences: {
-    genrePreferences: [],
-    emotionalTags: [],
-    aiTags: [],
+    genrePreferences: [
+      { name: '액션', value: 85 },
+      { name: '로맨스', value: 72 },
+      { name: '판타지', value: 68 },
+      { name: '일상', value: 45 },
+      { name: '스릴러', value: 38 },
+      { name: '코미디', value: 65 }
+    ],
+    emotionalTags: ['긴장감', '설렘', '감동', '재미', '몰입감'],
+    aiTags: ['강력한주인공', '복수극', '로맨틱코미디', '판타지세계관', '일상물']
   },
-  favoriteWebtoons: [],
-  masterpieceWebtoons: [],
-  readingHistory: [],
-  reviews: [],
-  topReviews: [],
+  favoriteWebtoons: dummyWebtoonList.slice(0, 5),
+  masterpieceWebtoons: dummyWebtoonList.slice(0, 3),
+  readingHistory: dummyWebtoonList.slice(0, 8).map((webtoon: any, index: number) => ({
+    webtoon,
+    lastReadAt: new Date(Date.now() - index * 24 * 60 * 60 * 1000).toISOString()
+  })),
+  reviews: dummyReviewList.slice(0, 10),
+  topReviews: dummyReviewList.slice(0, 3),
   connectedAccounts: {
-    google: false,
+    google: true,
     naver: false,
-    kakao: false,
+    kakao: true,
   },
   adultSettings: {
-    goreFilter: false,
+    goreFilter: true,
     adultContentFilter: false,
-    violenceFilter: false,
+    violenceFilter: true,
   },
 }; 

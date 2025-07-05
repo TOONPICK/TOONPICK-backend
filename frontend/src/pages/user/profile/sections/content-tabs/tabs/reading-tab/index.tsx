@@ -11,6 +11,18 @@ const ReadingTab: React.FC<ReadingTabProps> = ({ memberProfile }) => {
   const readingHistory = memberProfile.readingHistory || [];
   const masterpieceWebtoons = memberProfile.masterpieceWebtoons || [];
 
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffTime = Math.abs(now.getTime() - date.getTime());
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    if (diffDays === 1) return '어제';
+    if (diffDays < 7) return `${diffDays}일 전`;
+    if (diffDays < 30) return `${Math.floor(diffDays / 7)}주 전`;
+    return `${Math.floor(diffDays / 30)}개월 전`;
+  };
+
   return (
     <div className={styles.readingTab}>
       <div className={styles.section}>
@@ -21,19 +33,26 @@ const ReadingTab: React.FC<ReadingTabProps> = ({ memberProfile }) => {
           </a>
         </div>
         <div className={styles.webtoonGrid}>
-          {readingHistory.slice(0, 6).map((history: any) => (
-            <div key={history.webtoon.id} className={styles.webtoonCard}>
-              <img
-                src={history.webtoon.thumbnailUrl}
-                alt={history.webtoon.title}
-                className={styles.thumbnail}
-              />
-              <div className={styles.webtoonInfo}>
-                <h4 className={styles.webtoonTitle}>{history.webtoon.title}</h4>
-                <p className={styles.lastReadAt}>{history.lastReadAt}</p>
+          {readingHistory.length > 0 ? (
+            readingHistory.slice(0, 6).map((history) => (
+              <div key={history.webtoon.id} className={styles.webtoonCard}>
+                <img
+                  src={history.webtoon.thumbnailUrl}
+                  alt={history.webtoon.title}
+                  className={styles.thumbnail}
+                />
+                <div className={styles.webtoonInfo}>
+                  <h4 className={styles.webtoonTitle}>{history.webtoon.title}</h4>
+                  <p className={styles.lastReadAt}>{formatDate(history.lastReadAt)}</p>
+                </div>
               </div>
+            ))
+          ) : (
+            <div className={styles.emptyState}>
+              <span className={styles.emptyIcon}>📚</span>
+              <p>아직 읽은 웹툰이 없습니다</p>
             </div>
-          ))}
+          )}
         </div>
       </div>
 
@@ -45,20 +64,27 @@ const ReadingTab: React.FC<ReadingTabProps> = ({ memberProfile }) => {
           </a>
         </div>
         <div className={styles.webtoonGrid}>
-          {masterpieceWebtoons.slice(0, 6).map((webtoon: any) => (
-            <div key={webtoon.id} className={styles.webtoonCard}>
-              <div className={styles.masterpieceBadge}>⭐</div>
-              <img
-                src={webtoon.thumbnailUrl}
-                alt={webtoon.title}
-                className={styles.thumbnail}
-              />
-              <div className={styles.webtoonInfo}>
-                <h4 className={styles.webtoonTitle}>{webtoon.title}</h4>
-                <p className={styles.rating}>★ {webtoon.rating}</p>
+          {masterpieceWebtoons.length > 0 ? (
+            masterpieceWebtoons.slice(0, 6).map((webtoon) => (
+              <div key={webtoon.id} className={styles.webtoonCard}>
+                <div className={styles.masterpieceBadge}>⭐</div>
+                <img
+                  src={webtoon.thumbnailUrl}
+                  alt={webtoon.title}
+                  className={styles.thumbnail}
+                />
+                <div className={styles.webtoonInfo}>
+                  <h4 className={styles.webtoonTitle}>{webtoon.title}</h4>
+                  <p className={styles.rating}>★ {webtoon.averageRating.toFixed(1)}</p>
+                </div>
               </div>
+            ))
+          ) : (
+            <div className={styles.emptyState}>
+              <span className={styles.emptyIcon}>⭐</span>
+              <p>아직 명작으로 선정한 웹툰이 없습니다</p>
             </div>
-          ))}
+          )}
         </div>
       </div>
     </div>

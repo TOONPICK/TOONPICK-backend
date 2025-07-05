@@ -9,6 +9,14 @@ interface ProfileHeaderProps {
 const ProfileHeader: React.FC<ProfileHeaderProps> = ({ memberProfile }) => {
   if (!memberProfile) return null;
 
+  const getLevelTitle = (level: number) => {
+    if (level >= 20) return '웹툰 마스터';
+    if (level >= 15) return '웹툰 전문가';
+    if (level >= 10) return '웹툰 애호가';
+    if (level >= 5) return '웹툰 입문자';
+    return '웹툰 초보자';
+  };
+
   return (
     <div className={styles.profileHeader}>
       <div className={styles.backgroundGradient} />
@@ -27,7 +35,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ memberProfile }) => {
           <div className={styles.profileInfo}>
             <h1 className={styles.username}>{memberProfile.nickname}</h1>
             <p className={styles.userBio}>
-              웹툰을 사랑하는 독서가 • {memberProfile.readWebtoons}개 작품 감상
+              {getLevelTitle(memberProfile.level)} • {memberProfile.readWebtoons}개 작품 감상 • {memberProfile.points}포인트
             </p>
             <div className={styles.badgePreview}>
               {memberProfile.badges && memberProfile.badges.slice(0, 3).map((badge) => (

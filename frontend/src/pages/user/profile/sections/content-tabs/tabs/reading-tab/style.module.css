@@ -117,4 +117,22 @@
   .webtoonTitle {
     font-size: 13px;
   }
+
+  .emptyState {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px;
+    color: #718096;
+  }
+
+  .emptyIcon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .emptyState p {
+    font-size: 16px;
+    margin: 0;
+  }
 } 
