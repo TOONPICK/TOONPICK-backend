@@ -1,9 +1,9 @@
 .container {
   max-width: 800px;
   margin: 0 auto;
-  padding: var(--spacing-xl);
+  padding: 32px;
   min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: var(--body-background);
 }
 
 .successContainer {
@@ -13,20 +13,20 @@
   justify-content: center;
   min-height: 100vh;
   text-align: center;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: var(--body-background);
 }
 
 .successIcon {
   width: 80px;
   height: 80px;
-  background: linear-gradient(135deg, #48bb78, #38a169);
+  background: var(--success-gradient);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: var(--text-inverse);
   font-size: 32px;
-  margin-bottom: var(--spacing-xl);
+  margin-bottom: 32px;
   animation: pulse 2s infinite;
 }
 
@@ -39,28 +39,28 @@
 .successTitle {
   font-size: 32px;
   font-weight: 700;
-  color: #2d3748;
-  margin: 0 0 var(--spacing-md) 0;
+  color: var(--text-primary);
+  margin: 0 0 16px 0;
 }
 
 .successDescription {
-  color: #718096;
+  color: var(--text-secondary);
   font-size: 16px;
   line-height: 1.6;
-  margin: 0 0 var(--spacing-xl) 0;
+  margin: 0 0 32px 0;
 }
 
 .progressBar {
   width: 200px;
   height: 4px;
-  background: #e2e8f0;
+  background: var(--border-color);
   border-radius: 2px;
   overflow: hidden;
 }
 
 .progressFill {
   height: 100%;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: var(--primary-gradient);
   animation: progress 3s linear;
 }
 
@@ -72,37 +72,37 @@
 .header {
   display: flex;
   align-items: center;
-  margin-bottom: var(--spacing-xl);
+  margin-bottom: 32px;
 }
 
 .backButton {
-  background: white;
-  border: 1px solid #e2e8f0;
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 12px 20px;
   font-size: 14px;
   font-weight: 500;
-  color: #4a5568;
+  color: var(--text-secondary);
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .backButton:hover {
-  background: #f7fafc;
+  background: var(--hover-bg);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-md);
 }
 
 .title {
-  margin-left: var(--spacing-md);
+  margin-left: 16px;
   font-size: 28px;
   font-weight: 700;
-  color: #2d3748;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: var(--text-primary);
+  background: var(--primary-gradient);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -111,124 +111,124 @@
 .content {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xl);
+  gap: 32px;
 }
 
 .infoCard {
-  background: white;
+  background: var(--card-background);
   border-radius: 20px;
-  padding: var(--spacing-xl);
+  padding: 32px;
   text-align: center;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  border: 1px solid #e2e8f0;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
 }
 
 .infoIcon {
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: var(--primary-gradient);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto var(--spacing-lg);
-  color: white;
+  margin: 0 auto 24px;
+  color: var(--text-inverse);
   font-size: 24px;
 }
 
 .infoTitle {
   font-size: 20px;
   font-weight: 600;
-  color: #2d3748;
-  margin: 0 0 var(--spacing-md) 0;
+  color: var(--text-primary);
+  margin: 0 0 16px 0;
 }
 
 .infoDescription {
-  color: #718096;
+  color: var(--text-secondary);
   line-height: 1.6;
   margin: 0;
 }
 
 .methodSelection {
-  background: white;
+  background: var(--card-background);
   border-radius: 20px;
-  padding: var(--spacing-xl);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  border: 1px solid #e2e8f0;
+  padding: 32px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
 }
 
 .sectionTitle {
   font-size: 20px;
   font-weight: 600;
-  color: #2d3748;
-  margin: 0 0 var(--spacing-lg) 0;
+  color: var(--text-primary);
+  margin: 0 0 24px 0;
   text-align: center;
 }
 
 .methodCards {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-lg);
+  gap: 24px;
 }
 
 .methodCard {
-  background: #f7fafc;
-  border: 2px solid #e2e8f0;
+  background: var(--card-background-secondary);
+  border: 2px solid var(--border-color);
   border-radius: 16px;
-  padding: var(--spacing-xl);
+  padding: 32px;
   cursor: pointer;
   transition: all 0.2s ease;
   text-align: center;
 }
 
 .methodCard:hover {
-  border-color: #667eea;
+  border-color: var(--primary-color);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-lg);
 }
 
 .methodCard.selected {
-  border-color: #667eea;
+  border-color: var(--primary-color);
   background: rgba(102, 126, 234, 0.05);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-lg);
 }
 
 .methodIcon {
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: var(--primary-gradient);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto var(--spacing-md);
-  color: white;
+  margin: 0 auto 16px;
+  color: var(--text-inverse);
   font-size: 20px;
 }
 
 .methodTitle {
   font-size: 16px;
   font-weight: 600;
-  color: #2d3748;
-  margin: 0 0 var(--spacing-sm) 0;
+  color: var(--text-primary);
+  margin: 0 0 12px 0;
 }
 
 .methodDescription {
-  color: #718096;
+  color: var(--text-secondary);
   font-size: 12px;
-  margin: 0 0 var(--spacing-md) 0;
+  margin: 0 0 16px 0;
 }
 
 .methodFeatures {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xs);
+  gap: 8px;
   text-align: left;
 }
 
 .methodFeatures span {
   font-size: 11px;
-  color: #718096;
+  color: var(--text-secondary);
 }
 
 .methodHeader {
@@ -239,106 +239,106 @@
 .backToMethods {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  background: white;
-  border: 1px solid #e2e8f0;
+  gap: 12px;
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
-  color: #718096;
+  color: var(--text-secondary);
   font-size: 14px;
   cursor: pointer;
-  padding: var(--spacing-sm);
+  padding: 12px;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
 }
 
 .backToMethods:hover {
-  background: #f7fafc;
-  color: #4a5568;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: var(--hover-bg);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-md);
 }
 
 .phoneVerification,
 .idCardVerification {
-  background: white;
+  background: var(--card-background);
   border-radius: 20px;
-  padding: var(--spacing-xl);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  border: 1px solid #e2e8f0;
+  padding: 32px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
 }
 
 .verificationHeader {
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
-  margin-bottom: var(--spacing-xl);
+  gap: 16px;
+  margin-bottom: 32px;
 }
 
 .verificationIcon {
   width: 32px;
   height: 32px;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: var(--primary-gradient);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: var(--text-inverse);
   font-size: 16px;
 }
 
 .verificationTitle {
   font-size: 20px;
   font-weight: 600;
-  color: #2d3748;
+  color: var(--text-primary);
   margin: 0;
 }
 
 .inputGroup {
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: 24px;
 }
 
 .label {
   display: block;
   font-size: 14px;
   font-weight: 600;
-  color: #2d3748;
-  margin-bottom: var(--spacing-sm);
+  color: var(--text-primary);
+  margin-bottom: 12px;
 }
 
 .phoneInput,
 .codeInput {
   display: flex;
-  gap: var(--spacing-md);
+  gap: 16px;
   align-items: center;
 }
 
 .input {
   flex: 1;
-  padding: var(--spacing-md);
-  border: 1px solid #e2e8f0;
+  padding: 16px;
+  border: 1px solid var(--border-color);
   border-radius: 12px;
-  background: #f7fafc;
-  color: #2d3748;
+  background: var(--input-background);
+  color: var(--text-primary);
   font-size: 14px;
   transition: all 0.2s ease;
 }
 
 .input:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: var(--primary-color);
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-  background: white;
+  background: var(--card-background);
 }
 
 .input.error {
-  border-color: #e53e3e;
+  border-color: var(--error-color);
   box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
 }
 
 .sendButton,
 .verifyButton {
-  padding: var(--spacing-md) var(--spacing-lg);
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: white;
+  padding: 16px 24px;
+  background: var(--primary-gradient);
+  color: var(--text-inverse);
   border: none;
   border-radius: 12px;
   font-size: 14px;
@@ -351,7 +351,7 @@
 .sendButton:hover:not(:disabled),
 .verifyButton:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  box-shadow: var(--shadow-primary);
 }
 
 .sendButton:disabled,
@@ -362,35 +362,35 @@
 }
 
 .sendButton.sent {
-  background: linear-gradient(135deg, #48bb78, #38a169);
+  background: var(--success-gradient);
 }
 
 .eyeButton {
   background: none;
   border: none;
-  color: #718096;
+  color: var(--text-secondary);
   cursor: pointer;
-  padding: var(--spacing-sm);
+  padding: 12px;
   border-radius: 50%;
   transition: all 0.2s ease;
 }
 
 .eyeButton:hover {
-  background: #f7fafc;
-  color: #4a5568;
+  background: var(--hover-bg);
+  color: var(--text-primary);
 }
 
 .errorMessage {
   display: flex;
   align-items: center;
-  gap: var(--spacing-xs);
+  gap: 8px;
   font-size: 12px;
-  color: #e53e3e;
-  margin-top: var(--spacing-xs);
+  color: var(--error-color);
+  margin-top: 8px;
 }
 
 .uploadSection {
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: 24px;
 }
 
 .uploadArea {
@@ -398,35 +398,35 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-xl);
-  border: 2px dashed #e2e8f0;
+  padding: 32px;
+  border: 2px dashed var(--border-color);
   border-radius: 16px;
   cursor: pointer;
   transition: all 0.2s ease;
-  background: #f7fafc;
+  background: var(--card-background-secondary);
 }
 
 .uploadArea:hover {
-  border-color: #667eea;
+  border-color: var(--primary-color);
   background: rgba(102, 126, 234, 0.05);
 }
 
 .uploadIcon {
   font-size: 32px;
-  color: #718096;
-  margin-bottom: var(--spacing-md);
+  color: var(--text-secondary);
+  margin-bottom: 16px;
 }
 
 .uploadText {
   font-size: 16px;
   font-weight: 600;
-  color: #2d3748;
-  margin-bottom: var(--spacing-sm);
+  color: var(--text-primary);
+  margin-bottom: 12px;
 }
 
 .uploadSubtext {
   font-size: 12px;
-  color: #718096;
+  color: var(--text-secondary);
   text-align: center;
 }
 
@@ -441,14 +441,14 @@
 .imagePreview {
   position: relative;
   display: inline-block;
-  margin-bottom: var(--spacing-md);
+  margin-bottom: 16px;
 }
 
 .imagePreview img {
   max-width: 300px;
   max-height: 200px;
   border-radius: 12px;
-  border: 2px solid #e2e8f0;
+  border: 2px solid var(--border-color);
 }
 
 .removeButton {
@@ -457,8 +457,8 @@
   right: -8px;
   width: 24px;
   height: 24px;
-  background: #e53e3e;
-  color: white;
+  background: var(--error-color);
+  color: var(--text-inverse);
   border: none;
   border-radius: 50%;
   cursor: pointer;
@@ -475,22 +475,22 @@
 
 .previewText {
   font-size: 12px;
-  color: #718096;
+  color: var(--text-secondary);
 }
 
 .idCardInfo {
-  background: #f7fafc;
+  background: var(--card-background-secondary);
   border-radius: 12px;
-  padding: var(--spacing-lg);
-  margin-bottom: var(--spacing-lg);
-  border: 1px solid #e2e8f0;
+  padding: 24px;
+  margin-bottom: 24px;
+  border: 1px solid var(--border-color);
 }
 
 .idCardInfo .infoTitle {
   font-size: 16px;
   font-weight: 600;
-  color: #2d3748;
-  margin: 0 0 var(--spacing-md) 0;
+  color: var(--text-primary);
+  margin: 0 0 16px 0;
 }
 
 .infoList {
@@ -499,20 +499,20 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm);
+  gap: 12px;
 }
 
 .infoList li {
   font-size: 12px;
-  color: #718096;
+  color: var(--text-secondary);
   line-height: 1.4;
 }
 
 .submitButton {
   width: 100%;
-  padding: var(--spacing-md) var(--spacing-lg);
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: white;
+  padding: 16px 24px;
+  background: var(--primary-gradient);
+  color: var(--text-inverse);
   border: none;
   border-radius: 12px;
   font-size: 16px;
@@ -523,7 +523,7 @@
 
 .submitButton:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+  box-shadow: var(--shadow-primary);
 }
 
 .submitButton:disabled {
@@ -535,31 +535,31 @@
 .submitError {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-md);
+  gap: 12px;
+  padding: 16px;
   background: rgba(229, 62, 62, 0.1);
-  border: 1px solid #e53e3e;
+  border: 1px solid var(--error-color);
   border-radius: 12px;
-  color: #e53e3e;
+  color: var(--error-color);
   font-size: 14px;
 }
 
 .securityNotice {
-  background: white;
+  background: var(--card-background);
   border-radius: 20px;
-  padding: var(--spacing-xl);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  border: 1px solid #e2e8f0;
+  padding: 32px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
 }
 
 .noticeTitle {
   font-size: 16px;
   font-weight: 600;
-  color: #2d3748;
-  margin: 0 0 var(--spacing-md) 0;
+  color: var(--text-primary);
+  margin: 0 0 16px 0;
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: 12px;
 }
 
 .noticeTitle::before {
@@ -573,18 +573,18 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm);
+  gap: 12px;
 }
 
 .noticeList li {
   font-size: 12px;
-  color: #718096;
+  color: var(--text-secondary);
   line-height: 1.4;
 }
 
 @media (max-width: 768px) {
   .container {
-    padding: var(--spacing-lg);
+    padding: 24px;
   }
 
   .title {

@@ -1,6 +1,6 @@
 .collectionsPage {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: var(--body-background);
   padding: 24px;
 }
 
@@ -24,30 +24,30 @@
 }
 
 .statCard {
-  background: white;
+  background: var(--card-background);
   border-radius: 16px;
   padding: 24px;
   text-align: center;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-md);
   transition: transform 0.2s ease;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border-color);
 }
 
 .statCard:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--shadow-lg);
 }
 
 .statNumber {
   font-size: 36px;
   font-weight: 700;
-  color: #667eea;
+  color: var(--primary-color);
   margin-bottom: 8px;
 }
 
 .statLabel {
   font-size: 14px;
-  color: #718096;
+  color: var(--text-secondary);
   font-weight: 500;
 }
 
@@ -58,28 +58,28 @@
 }
 
 .backButton {
-  background: white;
-  border: 1px solid #e2e8f0;
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 12px 20px;
   font-size: 14px;
   font-weight: 500;
-  color: #4a5568;
+  color: var(--text-secondary);
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
 }
 
 .backButton:hover {
-  background: #f7fafc;
+  background: var(--hover-bg);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-md);
 }
 
 .title {
   font-size: 32px;
   font-weight: 700;
-  color: #2d3748;
+  color: var(--text-primary);
   margin: 0;
 }
 
@@ -90,8 +90,8 @@
 }
 
 .selectButton {
-  background: linear-gradient(135deg, #4facfe, #00f2fe);
-  color: white;
+  background: var(--secondary-gradient);
+  color: var(--text-inverse);
   border: none;
   border-radius: 12px;
   padding: 12px 20px;
@@ -99,17 +99,17 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 12px rgba(79, 172, 254, 0.3);
+  box-shadow: var(--shadow-secondary);
 }
 
 .selectButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(79, 172, 254, 0.4);
+  box-shadow: var(--shadow-secondary-hover);
 }
 
 .selectAllButton {
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: white;
+  background: var(--primary-gradient);
+  color: var(--text-inverse);
   border: none;
   border-radius: 8px;
   padding: 10px 16px;
@@ -121,12 +121,12 @@
 
 .selectAllButton:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  box-shadow: var(--shadow-primary);
 }
 
 .editButton {
-  background: linear-gradient(135deg, #4facfe, #00f2fe);
-  color: white;
+  background: var(--secondary-gradient);
+  color: var(--text-inverse);
   border: none;
   border-radius: 8px;
   padding: 10px 16px;
@@ -138,7 +138,7 @@
 
 .editButton:hover:not(:disabled) {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(79, 172, 254, 0.3);
+  box-shadow: var(--shadow-secondary);
 }
 
 .editButton:disabled {
@@ -147,8 +147,8 @@
 }
 
 .deleteButton {
-  background: linear-gradient(135deg, #ff6b6b, #ee5a52);
-  color: white;
+  background: var(--error-gradient);
+  color: var(--text-inverse);
   border: none;
   border-radius: 8px;
   padding: 10px 16px;
@@ -160,7 +160,7 @@
 
 .deleteButton:hover:not(:disabled) {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+  box-shadow: var(--shadow-error);
 }
 
 .deleteButton:disabled {
@@ -169,8 +169,8 @@
 }
 
 .cancelButton {
-  background: #718096;
-  color: white;
+  background: var(--text-secondary);
+  color: var(--text-inverse);
   border: none;
   border-radius: 8px;
   padding: 10px 16px;
@@ -181,13 +181,13 @@
 }
 
 .cancelButton:hover {
-  background: #4a5568;
+  background: var(--text-primary);
   transform: translateY(-1px);
 }
 
 .createButton {
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: white;
+  background: var(--primary-gradient);
+  color: var(--text-inverse);
   border: none;
   border-radius: 12px;
   padding: 12px 24px;
@@ -195,19 +195,19 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  box-shadow: var(--shadow-primary);
 }
 
 .createButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+  box-shadow: var(--shadow-primary-hover);
 }
 
 .content {
-  background: white;
+  background: var(--card-background);
   border-radius: 20px;
   padding: 32px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-md);
 }
 
 .sectionHeader {
@@ -218,13 +218,13 @@
 .sectionTitle {
   font-size: 28px;
   font-weight: 700;
-  color: #2d3748;
+  color: var(--text-primary);
   margin: 0 0 12px 0;
 }
 
 .sectionDescription {
   font-size: 16px;
-  color: #718096;
+  color: var(--text-secondary);
   margin: 0;
   line-height: 1.6;
 }
@@ -236,22 +236,22 @@
 }
 
 .collectionCard {
-  background: #f7fafc;
+  background: var(--card-background-secondary);
   border-radius: 16px;
   overflow: hidden;
   transition: all 0.3s ease;
   cursor: pointer;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border-color);
   position: relative;
 }
 
 .collectionCard:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--shadow-lg);
 }
 
 .collectionCard.selected {
-  border-color: #667eea;
+  border-color: var(--primary-color);
   box-shadow: 0 8px 32px rgba(102, 126, 234, 0.2);
   transform: translateY(-4px);
 }
@@ -266,21 +266,21 @@
 .checkbox {
   width: 24px;
   height: 24px;
-  border: 2px solid #e2e8f0;
+  border: 2px solid var(--border-color);
   border-radius: 6px;
-  background: white;
+  background: var(--card-background);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 14px;
   font-weight: bold;
-  color: white;
+  color: var(--text-inverse);
   transition: all 0.2s ease;
 }
 
 .checkbox.checked {
-  background: #667eea;
-  border-color: #667eea;
+  background: var(--primary-color);
+  border-color: var(--primary-color);
 }
 
 .collectionCard::before {
@@ -316,8 +316,8 @@
   position: absolute;
   top: 12px;
   right: 12px;
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
+  background: var(--overlay-background-dark);
+  color: var(--text-inverse);
   padding: 4px 8px;
   border-radius: 8px;
   font-size: 12px;
@@ -331,13 +331,13 @@
 .collectionName {
   font-size: 18px;
   font-weight: 600;
-  color: #2d3748;
+  color: var(--text-primary);
   margin: 0 0 8px 0;
 }
 
 .collectionDescription {
   font-size: 14px;
-  color: #718096;
+  color: var(--text-secondary);
   margin: 0 0 12px 0;
   line-height: 1.5;
 }
@@ -350,7 +350,7 @@
 
 .createdAt {
   font-size: 12px;
-  color: #a0aec0;
+  color: var(--text-tertiary);
 }
 
 .publicBadge {
@@ -361,19 +361,19 @@
 }
 
 .publicBadge.public {
-  background: #48bb78;
-  color: white;
+  background: var(--success-color);
+  color: var(--text-inverse);
 }
 
 .publicBadge.private {
-  background: #718096;
-  color: white;
+  background: var(--text-secondary);
+  color: var(--text-inverse);
 }
 
 .emptyState {
   text-align: center;
   padding: 80px 20px;
-  color: #718096;
+  color: var(--text-secondary);
 }
 
 .emptyIcon {
@@ -385,7 +385,7 @@
 .emptyState h2 {
   font-size: 24px;
   font-weight: 600;
-  color: #2d3748;
+  color: var(--text-primary);
   margin: 0 0 12px 0;
 }
 
@@ -395,14 +395,14 @@
 }
 
 .error {
-  background: white;
+  background: var(--card-background);
   border-radius: 16px;
   padding: 32px;
   text-align: center;
-  color: #e53e3e;
+  color: var(--error-color);
   font-size: 18px;
   font-weight: 500;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-md);
 }
 
 @media (max-width: 768px) {

@@ -1,6 +1,6 @@
 .collectionEditPage {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--primary-gradient);
   padding: 20px 0;
 }
 
@@ -15,17 +15,17 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 32px;
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--card-background-transparent);
   backdrop-filter: blur(10px);
   border-radius: 16px;
   padding: 20px 24px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-card);
 }
 
 .backButton {
   background: none;
   border: none;
-  color: var(--text-color);
+  color: var(--text-primary);
   font-size: 16px;
   cursor: pointer;
   padding: 8px 16px;
@@ -37,14 +37,14 @@
 }
 
 .backButton:hover {
-  background: rgba(0, 0, 0, 0.05);
+  background: var(--overlay-background);
   transform: translateX(-2px);
 }
 
 .title {
   font-size: 28px;
   font-weight: 700;
-  color: var(--text-color);
+  color: var(--text-primary);
   margin: 0;
   text-align: center;
   flex: 1;
@@ -56,8 +56,8 @@
 }
 
 .saveButton {
-  background: linear-gradient(135deg, #48bb78, #38a169);
-  color: white;
+  background: var(--success-gradient);
+  color: var(--text-inverse);
   border: none;
   padding: 12px 24px;
   border-radius: 8px;
@@ -69,7 +69,7 @@
 
 .saveButton:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
+  box-shadow: var(--shadow-success);
 }
 
 .saveButton:disabled {
@@ -89,23 +89,23 @@
 }
 
 .error {
-  background: white;
+  background: var(--card-background);
   border-radius: 16px;
   padding: 32px;
   text-align: center;
   color: var(--error-color);
   font-size: 18px;
   font-weight: 500;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-md);
   margin: 20px;
 }
 
 .content {
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--card-background-transparent);
   backdrop-filter: blur(10px);
   border-radius: 16px;
   padding: 32px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-card);
 }
 
 .form {
@@ -115,7 +115,7 @@
 }
 
 .formSection {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid var(--border-color-transparent);
   padding-bottom: 24px;
 }
 
@@ -127,7 +127,7 @@
 .sectionTitle {
   font-size: 20px;
   font-weight: 600;
-  color: var(--text-color);
+  color: var(--text-primary);
   margin: 0 0 20px 0;
 }
 
@@ -143,18 +143,18 @@
   display: block;
   font-size: 14px;
   font-weight: 600;
-  color: var(--text-color);
+  color: var(--text-primary);
   margin-bottom: 8px;
 }
 
 .input, .textarea {
   width: 100%;
   padding: 12px 16px;
-  border: 2px solid rgba(0, 0, 0, 0.1);
+  border: 2px solid var(--border-color-transparent);
   border-radius: 8px;
   font-size: 16px;
   transition: all 0.3s ease;
-  background: white;
+  background: var(--card-background);
 }
 
 .input:focus, .textarea:focus {
@@ -171,7 +171,7 @@
 .characterCount {
   text-align: right;
   font-size: 12px;
-  color: var(--text-secondary-color);
+  color: var(--text-secondary);
   margin-top: 4px;
 }
 
@@ -184,7 +184,7 @@
 .tagInput {
   flex: 1;
   padding: 10px 12px;
-  border: 2px solid rgba(0, 0, 0, 0.1);
+  border: 2px solid var(--border-color-transparent);
   border-radius: 6px;
   font-size: 14px;
   transition: all 0.3s ease;
@@ -197,8 +197,8 @@
 }
 
 .addTagButton {
-  background: linear-gradient(135deg, var(--primary-color), #667eea);
-  color: white;
+  background: var(--primary-gradient);
+  color: var(--text-inverse);
   border: none;
   padding: 10px 16px;
   border-radius: 6px;
@@ -211,7 +211,7 @@
 
 .addTagButton:hover:not(:disabled) {
   transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+  box-shadow: var(--shadow-primary);
 }
 
 .addTagButton:disabled {
@@ -227,8 +227,8 @@
 }
 
 .tag {
-  background: linear-gradient(135deg, var(--primary-color), #667eea);
-  color: white;
+  background: var(--primary-gradient);
+  color: var(--text-inverse);
   padding: 6px 12px;
   border-radius: 20px;
   font-size: 12px;
@@ -241,7 +241,7 @@
 .removeTagButton {
   background: none;
   border: none;
-  color: white;
+  color: var(--text-inverse);
   font-size: 16px;
   cursor: pointer;
   padding: 0;
@@ -260,7 +260,7 @@
 
 .tagInfo {
   font-size: 12px;
-  color: var(--text-secondary-color);
+  color: var(--text-secondary);
 }
 
 .checkboxLabel {
@@ -281,12 +281,12 @@
 .checkboxText {
   font-size: 16px;
   font-weight: 500;
-  color: var(--text-color);
+  color: var(--text-primary);
 }
 
 .helpText {
   font-size: 14px;
-  color: var(--text-secondary-color);
+  color: var(--text-secondary);
   margin: 8px 0 0 32px;
   line-height: 1.5;
 }

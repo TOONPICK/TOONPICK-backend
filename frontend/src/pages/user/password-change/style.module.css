@@ -1,45 +1,45 @@
 .container {
   max-width: 600px;
   margin: 0 auto;
-  padding: var(--spacing-xl);
+  padding: 32px;
   min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: var(--body-background);
 }
 
 .header {
   display: flex;
   align-items: center;
-  margin-bottom: var(--spacing-xl);
+  margin-bottom: 32px;
 }
 
 .backButton {
-  background: white;
-  border: 1px solid #e2e8f0;
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 12px 20px;
   font-size: 14px;
   font-weight: 500;
-  color: #4a5568;
+  color: var(--text-secondary);
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .backButton:hover {
-  background: #f7fafc;
+  background: var(--hover-bg);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-md);
 }
 
 .title {
-  margin-left: var(--spacing-md);
+  margin-left: 16px;
   font-size: 28px;
   font-weight: 700;
-  color: #2d3748;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: var(--text-primary);
+  background: var(--primary-gradient);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -48,64 +48,64 @@
 .content {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xl);
+  gap: 32px;
 }
 
 .infoCard {
-  background: white;
+  background: var(--card-background);
   border-radius: 20px;
-  padding: var(--spacing-xl);
+  padding: 32px;
   text-align: center;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  border: 1px solid #e2e8f0;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
 }
 
 .infoIcon {
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: var(--primary-gradient);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto var(--spacing-lg);
-  color: white;
+  margin: 0 auto 24px;
+  color: var(--text-inverse);
   font-size: 24px;
 }
 
 .infoTitle {
   font-size: 20px;
   font-weight: 600;
-  color: #2d3748;
-  margin: 0 0 var(--spacing-md) 0;
+  color: var(--text-primary);
+  margin: 0 0 16px 0;
 }
 
 .infoDescription {
-  color: #718096;
+  color: var(--text-secondary);
   line-height: 1.6;
   margin: 0;
 }
 
 .form {
-  background: white;
+  background: var(--card-background);
   border-radius: 20px;
-  padding: var(--spacing-xl);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  border: 1px solid #e2e8f0;
+  padding: 32px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
 }
 
 .formGroup {
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: 24px;
 }
 
 .label {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: 12px;
   font-size: 14px;
   font-weight: 600;
-  color: #2d3748;
-  margin-bottom: var(--spacing-sm);
+  color: var(--text-primary);
+  margin-bottom: 12px;
 }
 
 .passwordInput {
@@ -116,59 +116,59 @@
 
 .input {
   width: 100%;
-  padding: var(--spacing-md);
+  padding: 16px;
   padding-right: 50px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border-color);
   border-radius: 12px;
-  background: #f7fafc;
-  color: #2d3748;
+  background: var(--input-background);
+  color: var(--text-primary);
   font-size: 14px;
   transition: all 0.2s ease;
 }
 
 .input:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: var(--primary-color);
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-  background: white;
+  background: var(--card-background);
 }
 
 .input.error {
-  border-color: #e53e3e;
+  border-color: var(--error-color);
   box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
 }
 
 .eyeButton {
   position: absolute;
-  right: var(--spacing-sm);
+  right: 12px;
   background: none;
   border: none;
-  color: #718096;
+  color: var(--text-secondary);
   cursor: pointer;
-  padding: var(--spacing-xs);
+  padding: 8px;
   border-radius: 50%;
   transition: all 0.2s ease;
 }
 
 .eyeButton:hover {
-  background-color: #f7fafc;
-  color: #4a5568;
+  background-color: var(--hover-bg);
+  color: var(--text-primary);
 }
 
 .errorMessage {
   display: flex;
   align-items: center;
-  gap: var(--spacing-xs);
+  gap: 8px;
   font-size: 12px;
-  color: #e53e3e;
-  margin-top: var(--spacing-xs);
+  color: var(--error-color);
+  margin-top: 8px;
 }
 
 .passwordStrength {
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
-  margin-top: var(--spacing-sm);
+  gap: 16px;
+  margin-top: 12px;
 }
 
 .strengthBar {
@@ -180,7 +180,7 @@
 .strengthSegment {
   flex: 1;
   height: 4px;
-  background-color: #e2e8f0;
+  background-color: var(--border-color);
   border-radius: 2px;
   transition: all 0.2s ease;
 }
@@ -194,45 +194,44 @@
   font-weight: 600;
   min-width: 60px;
   text-align: right;
-  color: #718096;
+  color: var(--text-secondary);
 }
 
 .passwordMatch {
   display: flex;
   align-items: center;
-  gap: var(--spacing-xs);
+  gap: 8px;
   font-size: 12px;
-  color: #48bb78;
-  margin-top: var(--spacing-xs);
+  color: var(--success-color);
+  margin-top: 8px;
 }
 
 .passwordMatch.error {
-  color: #e53e3e;
+  color: var(--error-color);
 }
 
 .submitError {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-md);
+  gap: 12px;
+  padding: 16px;
   background: rgba(229, 62, 62, 0.1);
-  border: 1px solid #e53e3e;
+  border: 1px solid var(--error-color);
   border-radius: 12px;
-  color: #e53e3e;
+  color: var(--error-color);
   font-size: 14px;
 }
 
 .buttonGroup {
   display: flex;
-  gap: var(--spacing-md);
-  margin-top: var(--spacing-xl);
+  gap: 16px;
+  margin-top: 32px;
 }
 
 .cancelButton,
 .submitButton {
   flex: 1;
-  padding: var(--spacing-md) var(--spacing-lg);
-  border: none;
+  padding: 16px 24px;
   border-radius: 12px;
   font-size: 16px;
   font-weight: 600;
@@ -241,23 +240,25 @@
 }
 
 .cancelButton {
-  background: #718096;
-  color: white;
+  background: var(--text-secondary);
+  color: var(--text-inverse);
+  border: none;
 }
 
 .cancelButton:hover {
-  background: #4a5568;
+  background: var(--text-primary);
   transform: translateY(-2px);
 }
 
 .submitButton {
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: white;
+  background: var(--primary-gradient);
+  color: var(--text-inverse);
+  border: none;
 }
 
 .submitButton:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  box-shadow: var(--shadow-primary);
 }
 
 .submitButton:disabled {
@@ -267,21 +268,20 @@
 }
 
 .securityTips {
-  background: #f7fafc;
-  border-radius: 12px;
-  padding: var(--spacing-lg);
-  margin-top: var(--spacing-lg);
-  border: 1px solid #e2e8f0;
+  background: var(--card-background-secondary);
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid var(--border-color);
 }
 
 .tipsTitle {
   font-size: 16px;
   font-weight: 600;
-  color: #2d3748;
-  margin: 0 0 var(--spacing-md) 0;
+  color: var(--text-primary);
+  margin: 0 0 16px 0;
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: 12px;
 }
 
 .tipsTitle::before {
@@ -295,28 +295,29 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm);
+  gap: 8px;
 }
 
 .tipsList li {
   font-size: 12px;
-  color: #718096;
+  color: var(--text-secondary);
   line-height: 1.4;
-  position: relative;
-  padding-left: var(--spacing-md);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
 }
 
 .tipsList li::before {
   content: "•";
-  position: absolute;
-  left: 0;
-  color: #667eea;
+  color: var(--primary-color);
   font-weight: bold;
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
 @media (max-width: 768px) {
   .container {
-    padding: var(--spacing-lg);
+    padding: 24px;
   }
 
   .title {
@@ -325,7 +326,7 @@
 
   .infoCard,
   .form {
-    padding: var(--spacing-lg);
+    padding: 24px;
   }
 
   .buttonGroup {
@@ -335,7 +336,7 @@
   .passwordStrength {
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--spacing-sm);
+    gap: 12px;
   }
 
   .strengthLabel {

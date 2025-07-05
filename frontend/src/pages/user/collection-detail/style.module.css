@@ -1,6 +1,6 @@
 .collectionDetailPage {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--primary-gradient);
   padding: 20px 0;
 }
 
@@ -15,17 +15,17 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 32px;
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--card-background-transparent);
   backdrop-filter: blur(10px);
   border-radius: 16px;
   padding: 20px 24px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-card);
 }
 
 .backButton {
   background: none;
   border: none;
-  color: var(--text-color);
+  color: var(--text-primary);
   font-size: 16px;
   cursor: pointer;
   padding: 8px 16px;
@@ -37,7 +37,7 @@
 }
 
 .backButton:hover {
-  background: rgba(0, 0, 0, 0.05);
+  background: var(--overlay-background);
   transform: translateX(-2px);
 }
 
@@ -47,8 +47,8 @@
 }
 
 .addButton {
-  background: linear-gradient(135deg, var(--primary-color), #667eea);
-  color: white;
+  background: var(--primary-gradient);
+  color: var(--text-inverse);
   border: none;
   padding: 10px 20px;
   border-radius: 8px;
@@ -60,12 +60,12 @@
 
 .addButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  box-shadow: var(--shadow-primary);
 }
 
 .editButton {
-  background: linear-gradient(135deg, #4facfe, #00f2fe);
-  color: white;
+  background: var(--secondary-gradient);
+  color: var(--text-inverse);
   border: none;
   padding: 10px 20px;
   border-radius: 8px;
@@ -77,12 +77,12 @@
 
 .editButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(79, 172, 254, 0.3);
+  box-shadow: var(--shadow-secondary);
 }
 
 .deleteButton {
-  background: linear-gradient(135deg, #ff6b6b, #ee5a52);
-  color: white;
+  background: var(--error-gradient);
+  color: var(--text-inverse);
   border: none;
   padding: 10px 20px;
   border-radius: 8px;
@@ -94,16 +94,16 @@
 
 .deleteButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+  box-shadow: var(--shadow-error);
 }
 
 .collectionInfo {
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--card-background-transparent);
   backdrop-filter: blur(10px);
   border-radius: 16px;
   padding: 32px;
   margin-bottom: 32px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-card);
 }
 
 .collectionHeader {
@@ -122,7 +122,7 @@
   height: 120px;
   object-fit: cover;
   border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-md);
 }
 
 .publicBadge {
@@ -133,7 +133,7 @@
   border-radius: 6px;
   font-size: 12px;
   font-weight: 600;
-  color: white;
+  color: var(--text-inverse);
 }
 
 .publicBadge.public {
@@ -151,13 +151,13 @@
 .collectionName {
   font-size: 32px;
   font-weight: 700;
-  color: var(--text-color);
+  color: var(--text-primary);
   margin: 0 0 16px 0;
 }
 
 .collectionDescription {
   font-size: 16px;
-  color: var(--text-secondary-color);
+  color: var(--text-secondary);
   line-height: 1.6;
   margin: 0 0 24px 0;
 }
@@ -176,13 +176,13 @@
 
 .metaLabel {
   font-size: 14px;
-  color: var(--text-secondary-color);
+  color: var(--text-secondary);
   font-weight: 500;
 }
 
 .metaValue {
   font-size: 16px;
-  color: var(--text-color);
+  color: var(--text-primary);
   font-weight: 600;
 }
 
@@ -193,8 +193,8 @@
 }
 
 .tag {
-  background: linear-gradient(135deg, var(--primary-color), #667eea);
-  color: white;
+  background: var(--primary-gradient);
+  color: var(--text-inverse);
   padding: 6px 12px;
   border-radius: 20px;
   font-size: 12px;
@@ -202,11 +202,11 @@
 }
 
 .content {
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--card-background-transparent);
   backdrop-filter: blur(10px);
   border-radius: 16px;
   padding: 32px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-card);
 }
 
 .sectionHeader {
@@ -216,12 +216,12 @@
 .sectionTitle {
   font-size: 24px;
   font-weight: 600;
-  color: var(--text-color);
+  color: var(--text-primary);
   margin-bottom: 8px;
 }
 
 .sectionDescription {
-  color: var(--text-secondary-color);
+  color: var(--text-secondary);
   font-size: 16px;
   margin: 0;
 }
@@ -240,13 +240,13 @@
 .emptyState h2 {
   font-size: 24px;
   font-weight: 600;
-  color: var(--text-color);
+  color: var(--text-primary);
   margin: 0 0 12px 0;
 }
 
 .emptyState p {
   font-size: 16px;
-  color: var(--text-secondary-color);
+  color: var(--text-secondary);
   margin: 0 0 32px 0;
 }
 
@@ -255,7 +255,7 @@
   padding: 40px 20px;
   color: var(--error-color);
   font-size: 16px;
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--card-background-transparent);
   backdrop-filter: blur(10px);
   border-radius: 16px;
   margin: 20px;
