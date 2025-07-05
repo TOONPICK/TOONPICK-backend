@@ -1,123 +1,135 @@
 .section {
-  background-color: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  background: var(--color-surface);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-border);
   position: relative;
+  transition: all 0.3s ease;
+}
+
+.section:hover {
+  box-shadow: var(--shadow-large);
+  transform: translateY(-2px);
 }
 
 .sectionTitle {
   font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 16px;
-  color: #333;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--color-text-primary);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
 }
 
 .sectionTitle::before {
   content: '';
   display: block;
   width: 4px;
-  height: 20px;
-  background-color: #007bff;
+  height: 24px;
+  background: var(--gradient-primary);
   border-radius: 2px;
 }
 
 .statsGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
 .statCard {
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  padding: 12px;
+  background: var(--color-surface-secondary);
+  border-radius: 12px;
+  padding: 16px;
   text-align: center;
   position: relative;
-  transition: all 0.3s;
-  border: 1px solid #e9ecef;
+  transition: all 0.3s ease;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-small);
 }
 
 .statCard:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-medium);
+  background: var(--color-surface);
 }
 
 .statCard.disabled {
   opacity: 0.5;
-  background-color: #f1f3f5;
+  background: var(--color-surface-secondary);
 }
 
 .statCard h3 {
   font-size: 14px;
-  color: #666;
-  margin-bottom: 6px;
+  color: var(--color-text-tertiary);
+  margin-bottom: 8px;
+  font-weight: 600;
 }
 
 .statValue {
-  font-size: 20px;
-  font-weight: 600;
-  color: #333;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-primary);
 }
 
 .chartContainer {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .chartContainer h3 {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
-  margin-bottom: 12px;
-  color: #333;
+  margin-bottom: 16px;
+  color: var(--color-text-primary);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
 }
 
 .chartContainer h3::before {
   content: '';
   display: block;
   width: 3px;
-  height: 16px;
-  background-color: #007bff;
+  height: 18px;
+  background: var(--gradient-primary);
   border-radius: 2px;
 }
 
 .chartGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  gap: 20px;
 }
 
 .chart {
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 12px;
+  background: var(--color-surface);
+  border-radius: 12px;
+  padding: 16px;
   position: relative;
-  transition: all 0.3s;
-  border: 1px solid #e9ecef;
-  height: 240px;
+  transition: all 0.3s ease;
+  border: 1px solid var(--color-border);
+  height: 280px;
+  box-shadow: var(--shadow-small);
 }
 
 .chart:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-medium);
+  transform: translateY(-2px);
 }
 
 .chart.disabled {
   opacity: 0.5;
-  background-color: #f8f9fa;
+  background: var(--color-surface-secondary);
 }
 
 .chart h4 {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
-  margin-bottom: 12px;
-  color: #333;
+  margin-bottom: 16px;
+  color: var(--color-text-primary);
   text-align: center;
 }
 
@@ -126,56 +138,58 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgba(255, 255, 255, 0.95);
-  padding: 12px 20px;
-  border-radius: 6px;
+  background: var(--color-surface);
+  padding: 16px 24px;
+  border-radius: 8px;
   font-size: 14px;
-  color: #666;
+  color: var(--color-text-tertiary);
   z-index: 10;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  border: 1px solid #e9ecef;
+  box-shadow: var(--shadow-medium);
+  border: 1px solid var(--color-border);
 }
 
 .predictionContainer {
-  margin-top: 20px;
+  margin-top: 24px;
 }
 
 .predictionGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  gap: 16px;
 }
 
 .predictionCard {
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 12px;
+  background: var(--color-surface);
+  border-radius: 12px;
+  padding: 16px;
   text-align: center;
   position: relative;
-  transition: all 0.3s;
-  border: 1px solid #e9ecef;
+  transition: all 0.3s ease;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-small);
 }
 
 .predictionCard:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-medium);
 }
 
 .predictionCard.disabled {
   opacity: 0.5;
-  background-color: #f8f9fa;
+  background: var(--color-surface-secondary);
 }
 
 .predictionCard h4 {
   font-size: 14px;
-  color: #666;
-  margin-bottom: 6px;
+  color: var(--color-text-tertiary);
+  margin-bottom: 8px;
+  font-weight: 600;
 }
 
 .predictionValue {
-  font-size: 20px;
-  font-weight: 600;
-  color: #333;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-primary);
 }
 
 @media (max-width: 1024px) {
@@ -193,11 +207,19 @@
   }
   
   .section {
-    padding: 16px;
+    padding: 20px;
   }
   
   .chart {
-    height: 200px;
+    height: 240px;
+  }
+  
+  .sectionTitle {
+    font-size: 18px;
+  }
+  
+  .chartContainer h3 {
+    font-size: 16px;
   }
 }
 
@@ -207,25 +229,27 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(4px);
   z-index: 10;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 12px;
+  border-radius: 16px;
 }
 
 .overlayContent {
-  background-color: white;
+  background: var(--color-surface);
   padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: var(--shadow-large);
   text-align: center;
+  border: 1px solid var(--color-border);
 }
 
 .overlayContent p {
   font-size: 1.2rem;
-  color: #666;
+  color: var(--color-text-secondary);
   margin: 0;
+  font-weight: 500;
 }

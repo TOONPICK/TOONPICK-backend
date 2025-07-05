@@ -1,12 +1,25 @@
 .section {
-  background: #fff;
-  border: 1px solid #e5e5e5;
+  background: var(--color-surface);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-border);
+  transition: all 0.3s ease;
+}
+
+.section:hover {
+  box-shadow: var(--shadow-large);
+  transform: translateY(-2px);
 }
 
 /* 평점 요약 섹션 */
 .ratingOverview {
   padding: 20px;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface-secondary);
+  border-radius: 12px;
+  margin-bottom: 20px;
 }
 
 .ratingHeader {
@@ -17,10 +30,21 @@
 }
 
 .sectionTitle {
-  font-size: 18px;
-  font-weight: 600;
-  color: #1a1a1a;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text-primary);
   margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sectionTitle::before {
+  content: '';
+  width: 4px;
+  height: 24px;
+  background: var(--gradient-primary);
+  border-radius: 2px;
 }
 
 .ratingStats {
@@ -30,11 +54,13 @@
 }
 
 .ratingCount {
-  font-size: 12px;
-  color: #666;
-  background: #f8f9fa;
-  padding: 4px 8px;
-  border: 1px solid #e5e5e5;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  background: var(--color-surface);
+  padding: 6px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  font-weight: 500;
 }
 
 .ratingContent {
@@ -45,9 +71,11 @@
 
 /* 평균 평점 카드 */
 .averageRatingCard {
-  background: #f8f9fa;
-  border: 1px solid #e5e5e5;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   padding: 20px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-small);
 }
 
 .ratingScore {
@@ -60,7 +88,7 @@
   font-weight: 700;
   display: block;
   margin-bottom: 8px;
-  color: #1a1a1a;
+  color: var(--color-primary);
 }
 
 .ratingStars {
@@ -71,7 +99,7 @@
 
 .star {
   font-size: 16px;
-  color: #ddd;
+  color: var(--color-border);
   transition: color 0.2s ease;
 }
 
@@ -79,13 +107,13 @@
   color: #ffd700;
 }
 
-
-
 /* 사용자 평가 카드 */
 .userRatingCard {
-  background: #f8f9fa;
-  border: 1px solid #e5e5e5;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   padding: 20px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-small);
 }
 
 .userRatingHeader {
@@ -98,16 +126,17 @@
 .userRatingTitle {
   font-size: 16px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--color-text-primary);
   margin: 0;
 }
 
 .editBadge {
-  background: #1a1a1a;
+  background: var(--color-primary);
   color: white;
   font-size: 10px;
   font-weight: 600;
   padding: 2px 6px;
+  border-radius: 4px;
 }
 
 .ratingInput {
@@ -127,7 +156,7 @@
   background: none;
   border: none;
   font-size: 24px;
-  color: #ddd;
+  color: var(--color-border);
   cursor: pointer;
   padding: 2px;
   transition: color 0.2s ease;
@@ -143,7 +172,7 @@
 
 .ratingText {
   font-size: 12px;
-  color: #666;
+  color: var(--color-text-tertiary);
   text-align: center;
 }
 
@@ -155,39 +184,42 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  background: #1a1a1a;
+  background: var(--color-primary);
   color: white;
   border: none;
   padding: 8px 16px;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
   width: 100%;
   justify-content: center;
+  border-radius: 8px;
 }
 
 .addCommentButton:hover {
-  background: #333;
+  background: var(--color-primary-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-small);
 }
 
 .commentInputSection {
   margin-top: 32px;
-  background: #f8f9fa;
-  border: 1px solid #e5e5e5;
+  background: var(--color-surface-secondary);
+  border: 1px solid var(--color-border);
   padding: 24px 20px;
-  border-radius: 8px;
+  border-radius: 12px;
 }
 
 .commentSectionTitle {
   font-size: 16px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--color-text-primary);
   margin-bottom: 12px;
 }
 
 .commentPrompt {
-  color: #888;
+  color: var(--color-text-tertiary);
   font-size: 14px;
   text-align: center;
   padding: 16px 0;
@@ -202,18 +234,21 @@
 .commentTextarea {
   width: 100%;
   padding: 12px;
-  border: 1px solid #e5e5e5;
+  border: 1px solid var(--color-border);
   font-size: 13px;
   resize: vertical;
   min-height: 80px;
   transition: border-color 0.2s ease;
   font-family: inherit;
-  border-radius: 4px;
+  border-radius: 8px;
+  background: var(--color-surface);
+  color: var(--color-text-primary);
 }
 
 .commentTextarea:focus {
   outline: none;
-  border-color: #6c63ff;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
 }
 
 .commentActions {
@@ -223,51 +258,55 @@
 }
 
 .cancelButton {
-  background: #f8f9fa;
-  color: #666;
-  border: 1px solid #e5e5e5;
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
   padding: 6px 12px;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
+  border-radius: 6px;
 }
 
 .cancelButton:hover {
-  background: #e5e5e5;
-  color: #333;
+  background: var(--color-surface-secondary);
+  color: var(--color-text-primary);
 }
 
 .submitButton {
-  background: #1a1a1a;
+  background: var(--color-primary);
   color: white;
   border: none;
   padding: 6px 12px;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
+  border-radius: 6px;
 }
 
 .submitButton:hover:not(:disabled) {
-  background: #333;
+  background: var(--color-primary-dark);
+  transform: translateY(-1px);
 }
 
 .submitButton:disabled {
-  background: #999;
+  background: var(--color-text-tertiary);
   cursor: not-allowed;
 }
 
 .loginPrompt {
-  background: #f8f9fa;
-  border: 1px solid #e5e5e5;
+  background: var(--color-surface-secondary);
+  border: 1px solid var(--color-border);
   padding: 20px;
   text-align: center;
+  border-radius: 12px;
 }
 
 .loginPrompt p {
   font-size: 14px;
-  color: #666;
+  color: var(--color-text-secondary);
   margin: 0;
 }
 
@@ -286,7 +325,7 @@
 .reviewsTitle {
   font-size: 16px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--color-text-primary);
   margin: 0;
 }
 
@@ -299,25 +338,26 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  background: #f8f9fa;
-  color: #666;
-  border: 1px solid #e5e5e5;
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
   padding: 6px 12px;
   font-size: 12px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
+  border-radius: 6px;
 }
 
 .sortButton:hover {
-  background: #e5e5e5;
-  color: #333;
+  background: var(--color-surface-secondary);
+  color: var(--color-text-primary);
 }
 
 .sortButton.active {
-  background: #1a1a1a;
+  background: var(--color-primary);
   color: white;
-  border-color: #1a1a1a;
+  border-color: var(--color-primary);
 }
 
 .loadingState {
@@ -326,14 +366,15 @@
   align-items: center;
   gap: 12px;
   padding: 32px 20px;
-  color: #666;
+  color: var(--color-text-tertiary);
 }
 
 .loadingSpinner {
   width: 24px;
   height: 24px;
-  border: 2px solid #f3f3f3;
-  border-top: 2px solid #1a1a1a;
+  border: 2px solid var(--color-border);
+  border-top: 2px solid var(--color-primary);
+  border-radius: 50%;
   animation: spin 1s linear infinite;
 }
 
@@ -349,14 +390,16 @@
 }
 
 .reviewCard {
-  background: #f8f9fa;
-  border: 1px solid #e5e5e5;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   padding: 16px;
-  transition: border-color 0.2s ease;
+  transition: all 0.2s ease;
+  border-radius: 12px;
 }
 
 .reviewCard:hover {
-  border-color: #1a1a1a;
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-small);
 }
 
 .reviewHeader {
@@ -376,7 +419,8 @@
   width: 36px;
   height: 36px;
   object-fit: cover;
-  border: 1px solid #e5e5e5;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
 }
 
 .reviewerDetails {
@@ -387,7 +431,7 @@
 
 .reviewerName {
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--color-text-primary);
   font-size: 12px;
 }
 
@@ -404,7 +448,7 @@
 
 .reviewStar {
   font-size: 12px;
-  color: #ddd;
+  color: var(--color-border);
 }
 
 .reviewStar.filled {
@@ -413,7 +457,7 @@
 
 .reviewDate {
   font-size: 10px;
-  color: #999;
+  color: var(--color-text-tertiary);
 }
 
 .reviewActions {
@@ -428,16 +472,17 @@
   gap: 4px;
   background: none;
   border: none;
-  color: #666;
+  color: var(--color-text-tertiary);
   padding: 4px 8px;
   cursor: pointer;
   transition: all 0.2s ease;
   font-size: 12px;
+  border-radius: 4px;
 }
 
 .likeButton:hover {
-  background: #e5e5e5;
-  color: #1a1a1a;
+  background: var(--color-surface-secondary);
+  color: var(--color-text-primary);
 }
 
 .likeCount {
@@ -451,27 +496,29 @@
 .moreButton {
   background: none;
   border: none;
-  color: #666;
+  color: var(--color-text-tertiary);
   padding: 4px;
   cursor: pointer;
   transition: all 0.2s ease;
+  border-radius: 4px;
 }
 
 .moreButton:hover {
-  background: #e5e5e5;
-  color: #333;
+  background: var(--color-surface-secondary);
+  color: var(--color-text-primary);
 }
 
 .moreMenu {
   position: absolute;
   top: 100%;
   right: 0;
-  background: white;
-  border: 1px solid #e5e5e5;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-medium);
   z-index: 10;
   min-width: 100px;
   overflow: hidden;
+  border-radius: 8px;
 }
 
 .menuItem {
@@ -484,18 +531,18 @@
   padding: 8px 12px;
   text-align: left;
   cursor: pointer;
-  color: #666;
+  color: var(--color-text-secondary);
   font-size: 12px;
   transition: background-color 0.2s ease;
 }
 
 .menuItem:hover {
-  background: #f8f9fa;
-  color: #333;
+  background: var(--color-surface-secondary);
+  color: var(--color-text-primary);
 }
 
 .reviewComment {
-  color: #333;
+  color: var(--color-text-primary);
   line-height: 1.5;
   font-size: 12px;
   white-space: pre-wrap;
@@ -508,24 +555,25 @@
   gap: 12px;
   padding: 32px 20px;
   text-align: center;
-  color: #666;
+  color: var(--color-text-tertiary);
 }
 
 .emptyIcon {
   font-size: 32px;
   margin-bottom: 4px;
+  color: var(--color-text-tertiary);
 }
 
 .emptyState p {
   font-size: 14px;
   font-weight: 600;
-  color: #333;
+  color: var(--color-text-primary);
   margin: 0;
 }
 
 .emptyState span {
   font-size: 12px;
-  color: #999;
+  color: var(--color-text-tertiary);
 }
 
 /* 반응형 디자인 */
@@ -591,14 +639,14 @@
 
 .statLabel {
   font-size: 10px;
-  color: #666;
+  color: var(--color-text-tertiary);
   font-weight: 500;
 }
 
 .statValue {
   font-size: 14px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--color-text-primary);
 }
 
 .ratingContent3col {
@@ -609,18 +657,26 @@
 }
 
 .myRatingCard, .averageRatingCard, .ratingDistributionCard {
-  background: #f8f9fa;
-  border: 1px solid #e5e5e5;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 180px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-small);
+  transition: all 0.2s ease;
+}
+
+.myRatingCard:hover, .averageRatingCard:hover, .ratingDistributionCard:hover {
+  box-shadow: var(--shadow-medium);
+  transform: translateY(-2px);
 }
 
 .ratingLabel {
   font-size: 14px;
-  color: #888;
+  color: var(--color-text-tertiary);
   font-weight: 600;
   margin-bottom: 8px;
 }
@@ -628,7 +684,7 @@
 .myRatingScore {
   font-size: 32px;
   font-weight: 700;
-  color: #6c63ff;
+  color: var(--color-primary);
   margin-bottom: 8px;
 }
 
@@ -640,7 +696,7 @@
 
 .myRatingText {
   font-size: 13px;
-  color: #888;
+  color: var(--color-text-tertiary);
   margin-top: 8px;
   text-align: center;
 }
@@ -662,14 +718,14 @@
 .ratingBarLabel {
   width: 28px;
   font-size: 12px;
-  color: #888;
+  color: var(--color-text-tertiary);
   text-align: right;
 }
 
 .ratingBarTrack {
   flex: 1;
   height: 12px;
-  background: #ececec;
+  background: var(--color-surface-secondary);
   border-radius: 6px;
   overflow: hidden;
   margin: 0 6px;
@@ -677,7 +733,7 @@
 
 .ratingBarFill {
   height: 100%;
-  background: #6c63ff;
+  background: var(--color-primary);
   border-radius: 6px;
   transition: width 0.3s;
 }
@@ -685,7 +741,7 @@
 .ratingBarValue {
   width: 24px;
   font-size: 12px;
-  color: #888;
+  color: var(--color-text-tertiary);
   text-align: left;
 }
 
@@ -724,14 +780,15 @@
 .bar {
   width: 24px;
   border-radius: 6px 6px 0 0;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  box-shadow: var(--shadow-small);
   margin-bottom: 6px;
   transition: height 0.5s cubic-bezier(0.4,0,0.2,1);
+  background: var(--color-primary);
 }
 
 .barLabel {
   font-size: 12px;
-  color: #888;
+  color: var(--color-text-tertiary);
   margin-top: 2px;
   text-align: center;
 }
