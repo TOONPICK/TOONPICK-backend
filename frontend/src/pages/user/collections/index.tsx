@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@contexts/auth-context';
 import { Routes } from '@constants/routes';
 import memberService from '@services/member-service';
+import collectionService from '@services/collection-service';
 import { Collection } from '@models/collection';
 import Spinner from '@components/spinner';
 import styles from './style.module.css';
@@ -13,6 +14,11 @@ const CollectionsPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [collections, setCollections] = useState<Collection[]>([]);
+  
+  // 선택 모드 관련 상태
+  const [isSelectionMode, setIsSelectionMode] = useState(false);
+  const [selectedCollections, setSelectedCollections] = useState<number[]>([]);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     if (!state.isAuthenticated) {
@@ -42,12 +48,86 @@ const CollectionsPage: React.FC = () => {
   }, [state.isAuthenticated, navigate]);
 
   const handleCreateCollection = () => {
-    // TODO: 컬렉션 생성 모달 또는 페이지로 이동
-    alert('컬렉션 생성 기능은 준비 중입니다.');
+    navigate('/user/collections/create');
   };
 
   const handleCollectionClick = (collectionId: number) => {
-    navigate(`/user/collections/${collectionId}`);
+    if (isSelectionMode) {
+      // 선택 모드에서는 선택 토글
+      setSelectedCollections(prev => 
+        prev.includes(collectionId) 
+          ? prev.filter(id => id !== collectionId)
+          : [...prev, collectionId]
+      );
+    } else {
+      // 일반 모드에서는 상세 페이지로 이동
+      navigate(`/user/collections/${collectionId}`);
+    }
+  };
+
+  const toggleSelectionMode = () => {
+    setIsSelectionMode(!isSelectionMode);
+    setSelectedCollections([]);
+  };
+
+  const handleSelectAll = () => {
+    if (selectedCollections.length === collections.length) {
+      setSelectedCollections([]);
+    } else {
+      setSelectedCollections(collections.map(c => c.id));
+    }
+  };
+
+  const handleEditSelected = () => {
+    if (selectedCollections.length === 1) {
+      // 단일 선택 시 편집 페이지로 이동
+      navigate(`/user/collections/${selectedCollections[0]}/edit`);
+    } else {
+      alert('편집하려면 하나의 컬렉션만 선택해주세요.');
+    }
+  };
+
+  const handleDeleteSelected = async () => {
+    if (selectedCollections.length === 0) {
+      alert('삭제할 컬렉션을 선택해주세요.');
+      return;
+    }
+
+    const confirmMessage = selectedCollections.length === 1 
+      ? '선택한 컬렉션을 삭제하시겠습니까?' 
+      : `선택한 ${selectedCollections.length}개의 컬렉션을 삭제하시겠습니까?`;
+
+    if (!window.confirm(confirmMessage)) {
+      return;
+    }
+
+    try {
+      setIsDeleting(true);
+      const deletePromises = selectedCollections.map(id => 
+        collectionService.deleteCollection(id)
+      );
+      
+      const results = await Promise.all(deletePromises);
+      const failedDeletes = results.filter(result => !result.success);
+      
+      if (failedDeletes.length > 0) {
+        setError(`${failedDeletes.length}개의 컬렉션 삭제에 실패했습니다.`);
+      } else {
+        // 성공적으로 삭제된 컬렉션들을 목록에서 제거
+        setCollections(prev => prev.filter(c => !selectedCollections.includes(c.id)));
+        setSelectedCollections([]);
+        setIsSelectionMode(false);
+      }
+    } catch (error) {
+      setError('컬렉션 삭제 중 오류가 발생했습니다.');
+      console.error('Error deleting collections:', error);
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
+  const isCollectionSelected = (collectionId: number) => {
+    return selectedCollections.includes(collectionId);
   };
 
   if (error) return <div className={styles.error}>{error}</div>;
@@ -61,9 +141,47 @@ const CollectionsPage: React.FC = () => {
             ← 뒤로가기
           </button>
           <h1 className={styles.title}>내 컬렉션</h1>
-          <button onClick={handleCreateCollection} className={styles.createButton}>
-            + 새 컬렉션
-          </button>
+          <div className={styles.headerActions}>
+            {isSelectionMode ? (
+              <>
+                <button 
+                  onClick={handleSelectAll} 
+                  className={styles.selectAllButton}
+                >
+                  {selectedCollections.length === collections.length ? '전체 해제' : '전체 선택'}
+                </button>
+                <button 
+                  onClick={handleEditSelected} 
+                  className={styles.editButton}
+                  disabled={selectedCollections.length !== 1}
+                >
+                  편집
+                </button>
+                <button 
+                  onClick={handleDeleteSelected} 
+                  className={styles.deleteButton}
+                  disabled={selectedCollections.length === 0 || isDeleting}
+                >
+                  {isDeleting ? '삭제 중...' : '삭제'}
+                </button>
+                <button 
+                  onClick={toggleSelectionMode} 
+                  className={styles.cancelButton}
+                >
+                  취소
+                </button>
+              </>
+            ) : (
+              <>
+                <button onClick={toggleSelectionMode} className={styles.selectButton}>
+                  선택
+                </button>
+                <button onClick={handleCreateCollection} className={styles.createButton}>
+                  + 새 컬렉션
+                </button>
+              </>
+            )}
+          </div>
         </div>
         
         <div className={styles.statsSection}>
@@ -94,16 +212,30 @@ const CollectionsPage: React.FC = () => {
               <div className={styles.sectionHeader}>
                 <h2 className={styles.sectionTitle}>내가 만든 컬렉션들</h2>
                 <p className={styles.sectionDescription}>
-                  관심 있는 웹툰들을 주제별로 모아놓은 컬렉션입니다
+                  {isSelectionMode 
+                    ? `${selectedCollections.length}개 선택됨`
+                    : '관심 있는 웹툰들을 주제별로 모아놓은 컬렉션입니다'
+                  }
                 </p>
               </div>
               <div className={styles.collectionsGrid}>
                 {collections.map((collection) => (
                   <div 
                     key={collection.id} 
-                    className={styles.collectionCard}
+                    className={`${styles.collectionCard} ${
+                      isCollectionSelected(collection.id) ? styles.selected : ''
+                    }`}
                     onClick={() => handleCollectionClick(collection.id)}
                   >
+                    {isSelectionMode && (
+                      <div className={styles.selectionOverlay}>
+                        <div className={`${styles.checkbox} ${
+                          isCollectionSelected(collection.id) ? styles.checked : ''
+                        }`}>
+                          {isCollectionSelected(collection.id) && '✓'}
+                        </div>
+                      </div>
+                    )}
                     <div className={styles.collectionThumbnail}>
                       <img src={collection.thumbnail} alt={collection.name} />
                       <div className={styles.webtoonCount}>
@@ -116,6 +248,11 @@ const CollectionsPage: React.FC = () => {
                       <div className={styles.collectionMeta}>
                         <span className={styles.createdAt}>
                           {new Date(collection.createdAt).toLocaleDateString('ko-KR')}
+                        </span>
+                        <span className={`${styles.publicBadge} ${
+                          collection.isPublic ? styles.public : styles.private
+                        }`}>
+                          {collection.isPublic ? '공개' : '비공개'}
                         </span>
                       </div>
                     </div>
