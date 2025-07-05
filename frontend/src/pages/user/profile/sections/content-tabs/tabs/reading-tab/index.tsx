@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { MemberProfile } from '@models/member';
 import { Routes } from '@constants/routes';
 import styles from './style.module.css';
@@ -8,6 +9,7 @@ interface ReadingTabProps {
 }
 
 const ReadingTab: React.FC<ReadingTabProps> = ({ memberProfile }) => {
+  const navigate = useNavigate();
   const readingHistory = memberProfile.readingHistory || [];
   const masterpieceWebtoons = memberProfile.masterpieceWebtoons || [];
 
@@ -23,14 +25,22 @@ const ReadingTab: React.FC<ReadingTabProps> = ({ memberProfile }) => {
     return `${Math.floor(diffDays / 30)}개월 전`;
   };
 
+  const handleViewAllReading = () => {
+    navigate(Routes.READING_HISTORY);
+  };
+
+  const handleViewAllMasterpiece = () => {
+    navigate(Routes.MASTERPIECE_WEBTOONS);
+  };
+
   return (
     <div className={styles.readingTab}>
       <div className={styles.section}>
         <div className={styles.sectionHeader}>
           <h3 className={styles.sectionTitle}>최근 읽은 웹툰</h3>
-          <a href={Routes.READING_HISTORY} className={styles.viewAllLink}>
+          <button onClick={handleViewAllReading} className={styles.viewAllLink}>
             전체보기 →
-          </a>
+          </button>
         </div>
         <div className={styles.webtoonGrid}>
           {readingHistory.length > 0 ? (
@@ -59,9 +69,9 @@ const ReadingTab: React.FC<ReadingTabProps> = ({ memberProfile }) => {
       <div className={styles.section}>
         <div className={styles.sectionHeader}>
           <h3 className={styles.sectionTitle}>내 명작 웹툰</h3>
-          <a href={Routes.MASTERPIECE_WEBTOONS} className={styles.viewAllLink}>
+          <button onClick={handleViewAllMasterpiece} className={styles.viewAllLink}>
             전체보기 →
-          </a>
+          </button>
         </div>
         <div className={styles.webtoonGrid}>
           {masterpieceWebtoons.length > 0 ? (

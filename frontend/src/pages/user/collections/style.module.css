@@ -1,0 +1,221 @@
+.collectionsPage {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 24px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.backButton {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #4a5568;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.backButton:hover {
+  background: #f7fafc;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #2d3748;
+  margin: 0;
+}
+
+.createButton {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.createButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+}
+
+.content {
+  background: white;
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.collectionsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.collectionCard {
+  background: #f7fafc;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid #e2e8f0;
+}
+
+.collectionCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+.collectionThumbnail {
+  position: relative;
+  height: 160px;
+  overflow: hidden;
+}
+
+.collectionThumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.webtoonCount {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.collectionInfo {
+  padding: 20px;
+}
+
+.collectionName {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0 0 8px 0;
+}
+
+.collectionDescription {
+  font-size: 14px;
+  color: #718096;
+  margin: 0 0 12px 0;
+  line-height: 1.5;
+}
+
+.collectionMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.createdAt {
+  font-size: 12px;
+  color: #a0aec0;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 80px 20px;
+  color: #718096;
+}
+
+.emptyIcon {
+  font-size: 64px;
+  margin-bottom: 24px;
+  display: block;
+}
+
+.emptyState h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0 0 12px 0;
+}
+
+.emptyState p {
+  font-size: 16px;
+  margin: 0 0 32px 0;
+}
+
+.error {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  text-align: center;
+  color: #e53e3e;
+  font-size: 18px;
+  font-weight: 500;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+@media (max-width: 768px) {
+  .collectionsPage {
+    padding: 16px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .headerLeft {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .content {
+    padding: 24px;
+  }
+
+  .collectionsGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .emptyState {
+    padding: 60px 20px;
+  }
+
+  .emptyIcon {
+    font-size: 48px;
+  }
+} 

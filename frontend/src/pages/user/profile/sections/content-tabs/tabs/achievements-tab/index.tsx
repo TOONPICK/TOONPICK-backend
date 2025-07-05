@@ -1,5 +1,7 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { MemberProfile } from '@models/member';
+import { Routes } from '@constants/routes';
 import styles from './style.module.css';
 
 interface AchievementsTabProps {
@@ -7,6 +9,7 @@ interface AchievementsTabProps {
 }
 
 const AchievementsTab: React.FC<AchievementsTabProps> = ({ memberProfile }) => {
+  const navigate = useNavigate();
   const badges = memberProfile.badges || [];
 
   const achievementCategories = [
@@ -31,6 +34,10 @@ const AchievementsTab: React.FC<AchievementsTabProps> = ({ memberProfile }) => {
       badges: badges.filter(badge => !badge.name.includes('독서') && !badge.name.includes('리뷰') && !badge.name.includes('컬렉션'))
     }
   ];
+
+  const handleViewAllAchievements = () => {
+    navigate(Routes.ACHIEVEMENTS);
+  };
 
   return (
     <div className={styles.achievementsTab}>
@@ -79,7 +86,12 @@ const AchievementsTab: React.FC<AchievementsTabProps> = ({ memberProfile }) => {
       </div>
 
       <div className={styles.progressSection}>
-        <h3 className={styles.sectionTitle}>다음 목표</h3>
+        <div className={styles.sectionHeader}>
+          <h3 className={styles.sectionTitle}>다음 목표</h3>
+          <button onClick={handleViewAllAchievements} className={styles.viewAllButton}>
+            전체 업적 보기 →
+          </button>
+        </div>
         <div className={styles.progressCard}>
           <div className={styles.progressInfo}>
             <h4>리뷰 마스터</h4>

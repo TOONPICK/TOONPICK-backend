@@ -16,5 +16,10 @@ export const Routes = {
     ADULT_VERIFICATION: '/user/adult-verification',
     TUTORIAL: '/tutorial',
     PASSWORD_CHANGE: '/user/password-change',
+    BOOKMARKED_WEBTOONS: '/user/bookmarked-webtoons',
+    FAVORITE_WEBTOONS: '/user/favorite-webtoons',
+    COLLECTIONS: '/user/collections',
+    ACHIEVEMENTS: '/user/achievements',
+    PREFERENCES: '/user/preferences',
     ERROR: '*',
 } as const;

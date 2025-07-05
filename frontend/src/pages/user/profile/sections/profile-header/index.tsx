@@ -1,5 +1,7 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { MemberProfile } from '@models/member';
+import { Routes } from '@constants/routes';
 import styles from './style.module.css';
 
 interface ProfileHeaderProps {
@@ -7,6 +9,8 @@ interface ProfileHeaderProps {
 }
 
 const ProfileHeader: React.FC<ProfileHeaderProps> = ({ memberProfile }) => {
+  const navigate = useNavigate();
+
   if (!memberProfile) return null;
 
   const getLevelTitle = (level: number) => {
@@ -15,6 +19,16 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ memberProfile }) => {
     if (level >= 10) return '웹툰 애호가';
     if (level >= 5) return '웹툰 입문자';
     return '웹툰 초보자';
+  };
+
+  const handleEditProfile = () => {
+    navigate(Routes.USER_PROFILE_EDIT);
+  };
+
+  const handleShareProfile = () => {
+    // 프로필 공유 기능 (나중에 구현)
+    navigator.clipboard.writeText(window.location.href);
+    alert('프로필 링크가 클립보드에 복사되었습니다!');
   };
 
   return (
@@ -52,10 +66,10 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ memberProfile }) => {
           </div>
         </div>
         <div className={styles.actionButtons}>
-          <button className={styles.editButton}>
+          <button className={styles.editButton} onClick={handleEditProfile}>
             <span>프로필 편집</span>
           </button>
-          <button className={styles.shareButton}>
+          <button className={styles.shareButton} onClick={handleShareProfile}>
             <span>공유</span>
           </button>
         </div>

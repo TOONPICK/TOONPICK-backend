@@ -22,15 +22,22 @@ const QuickActions: React.FC = () => {
       title: '북마크',
       description: '저장해둔 웹툰들을 확인해보세요',
       icon: '🔖',
-      link: '/user/bookmarked-webtoons',
+      link: Routes.BOOKMARKED_WEBTOONS,
       color: '#4facfe'
+    },
+    {
+      title: '컬렉션',
+      description: '내가 만든 웹툰 컬렉션들',
+      icon: '📁',
+      link: Routes.COLLECTIONS,
+      color: '#43e97b'
     },
     {
       title: '설정',
       description: '알림 및 계정 설정',
       icon: '⚙️',
       link: Routes.NOTIFICATION_SETTINGS,
-      color: '#43e97b'
+      color: '#ff6b6b'
     }
   ];
 

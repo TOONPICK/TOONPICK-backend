@@ -143,11 +143,34 @@
   gap: 16px;
 }
 
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .sectionTitle {
   font-size: 20px;
   font-weight: 600;
   color: #2d3748;
   margin: 0;
+}
+
+.viewAllButton {
+  color: #667eea;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.viewAllButton:hover {
+  color: #764ba2;
+  text-decoration: none;
 }
 
 .progressCard {
