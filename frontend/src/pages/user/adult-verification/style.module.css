@@ -3,7 +3,7 @@
   margin: 0 auto;
   padding: var(--spacing-xl);
   min-height: 100vh;
-  background: var(--body-background-color);
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
 .successContainer {
@@ -13,12 +13,13 @@
   justify-content: center;
   min-height: 100vh;
   text-align: center;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
 .successIcon {
   width: 80px;
   height: 80px;
-  background: var(--success-gradient);
+  background: linear-gradient(135deg, #48bb78, #38a169);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -38,12 +39,12 @@
 .successTitle {
   font-size: 32px;
   font-weight: 700;
-  color: var(--text-color);
+  color: #2d3748;
   margin: 0 0 var(--spacing-md) 0;
 }
 
 .successDescription {
-  color: var(--text-secondary-color);
+  color: #718096;
   font-size: 16px;
   line-height: 1.6;
   margin: 0 0 var(--spacing-xl) 0;
@@ -52,14 +53,14 @@
 .progressBar {
   width: 200px;
   height: 4px;
-  background: var(--border-color);
+  background: #e2e8f0;
   border-radius: 2px;
   overflow: hidden;
 }
 
 .progressFill {
   height: 100%;
-  background: var(--primary-gradient);
+  background: linear-gradient(135deg, #667eea, #764ba2);
   animation: progress 3s linear;
 }
 
@@ -75,30 +76,33 @@
 }
 
 .backButton {
-  background: none;
-  border: none;
-  color: var(--text-color);
-  font-size: 24px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #4a5568;
   cursor: pointer;
-  padding: var(--spacing-sm);
-  border-radius: 50%;
-  transition: all var(--transition-fast);
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .backButton:hover {
-  background-color: var(--hover-color);
-  transform: translateX(-2px);
+  background: #f7fafc;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .title {
   margin-left: var(--spacing-md);
   font-size: 28px;
   font-weight: 700;
-  color: var(--text-color);
-  background: var(--primary-gradient);
+  color: #2d3748;
+  background: linear-gradient(135deg, #667eea, #764ba2);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -111,18 +115,18 @@
 }
 
 .infoCard {
-  background: var(--card-gradient);
-  border-radius: var(--border-radius-lg);
+  background: white;
+  border-radius: 20px;
   padding: var(--spacing-xl);
   text-align: center;
-  box-shadow: var(--card-shadow);
-  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
 }
 
 .infoIcon {
   width: 60px;
   height: 60px;
-  background: var(--primary-gradient);
+  background: linear-gradient(135deg, #667eea, #764ba2);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -135,28 +139,28 @@
 .infoTitle {
   font-size: 20px;
   font-weight: 600;
-  color: var(--text-color);
+  color: #2d3748;
   margin: 0 0 var(--spacing-md) 0;
 }
 
 .infoDescription {
-  color: var(--text-secondary-color);
+  color: #718096;
   line-height: 1.6;
   margin: 0;
 }
 
 .methodSelection {
-  background: var(--card-gradient);
-  border-radius: var(--border-radius-lg);
+  background: white;
+  border-radius: 20px;
   padding: var(--spacing-xl);
-  box-shadow: var(--card-shadow);
-  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
 }
 
 .sectionTitle {
   font-size: 20px;
   font-weight: 600;
-  color: var(--text-color);
+  color: #2d3748;
   margin: 0 0 var(--spacing-lg) 0;
   text-align: center;
 }
@@ -168,31 +172,31 @@
 }
 
 .methodCard {
-  background: var(--background-color);
-  border: 2px solid var(--border-color);
-  border-radius: var(--border-radius-lg);
+  background: #f7fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
   padding: var(--spacing-xl);
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: all 0.2s ease;
   text-align: center;
 }
 
 .methodCard:hover {
-  border-color: var(--primary-color);
+  border-color: #667eea;
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
 .methodCard.selected {
-  border-color: var(--primary-color);
-  background: rgba(var(--primary-color-rgb), 0.05);
+  border-color: #667eea;
+  background: rgba(102, 126, 234, 0.05);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
 .methodIcon {
   width: 48px;
   height: 48px;
-  background: var(--primary-gradient);
+  background: linear-gradient(135deg, #667eea, #764ba2);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -205,12 +209,12 @@
 .methodTitle {
   font-size: 16px;
   font-weight: 600;
-  color: var(--text-color);
+  color: #2d3748;
   margin: 0 0 var(--spacing-sm) 0;
 }
 
 .methodDescription {
-  color: var(--text-secondary-color);
+  color: #718096;
   font-size: 12px;
   margin: 0 0 var(--spacing-md) 0;
 }
@@ -224,7 +228,7 @@
 
 .methodFeatures span {
   font-size: 11px;
-  color: var(--text-secondary-color);
+  color: #718096;
 }
 
 .methodHeader {
@@ -236,28 +240,30 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
-  background: none;
-  border: none;
-  color: var(--text-secondary-color);
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  color: #718096;
   font-size: 14px;
   cursor: pointer;
   padding: var(--spacing-sm);
-  border-radius: var(--border-radius-sm);
-  transition: all var(--transition-fast);
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .backToMethods:hover {
-  background: var(--hover-color);
-  color: var(--text-color);
+  background: #f7fafc;
+  color: #4a5568;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .phoneVerification,
 .idCardVerification {
-  background: var(--card-gradient);
-  border-radius: var(--border-radius-lg);
+  background: white;
+  border-radius: 20px;
   padding: var(--spacing-xl);
-  box-shadow: var(--card-shadow);
-  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
 }
 
 .verificationHeader {
@@ -270,7 +276,7 @@
 .verificationIcon {
   width: 32px;
   height: 32px;
-  background: var(--primary-gradient);
+  background: linear-gradient(135deg, #667eea, #764ba2);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -282,7 +288,7 @@
 .verificationTitle {
   font-size: 20px;
   font-weight: 600;
-  color: var(--text-color);
+  color: #2d3748;
   margin: 0;
 }
 
@@ -294,7 +300,7 @@
   display: block;
   font-size: 14px;
   font-weight: 600;
-  color: var(--text-color);
+  color: #2d3748;
   margin-bottom: var(--spacing-sm);
 }
 
@@ -308,43 +314,44 @@
 .input {
   flex: 1;
   padding: var(--spacing-md);
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-md);
-  background: var(--background-color);
-  color: var(--text-color);
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #f7fafc;
+  color: #2d3748;
   font-size: 14px;
-  transition: all var(--transition-fast);
+  transition: all 0.2s ease;
 }
 
 .input:focus {
   outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.1);
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  background: white;
 }
 
 .input.error {
-  border-color: var(--error-color);
-  box-shadow: 0 0 0 3px rgba(var(--error-color-rgb), 0.1);
+  border-color: #e53e3e;
+  box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
 }
 
 .sendButton,
 .verifyButton {
   padding: var(--spacing-md) var(--spacing-lg);
-  background: var(--primary-gradient);
+  background: linear-gradient(135deg, #667eea, #764ba2);
   color: white;
   border: none;
-  border-radius: var(--border-radius-md);
+  border-radius: 12px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: all 0.2s ease;
   white-space: nowrap;
 }
 
 .sendButton:hover:not(:disabled),
 .verifyButton:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
 }
 
 .sendButton:disabled,
@@ -355,22 +362,22 @@
 }
 
 .sendButton.sent {
-  background: var(--success-gradient);
+  background: linear-gradient(135deg, #48bb78, #38a169);
 }
 
 .eyeButton {
   background: none;
   border: none;
-  color: var(--text-secondary-color);
+  color: #718096;
   cursor: pointer;
   padding: var(--spacing-sm);
   border-radius: 50%;
-  transition: all var(--transition-fast);
+  transition: all 0.2s ease;
 }
 
 .eyeButton:hover {
-  background: var(--hover-color);
-  color: var(--text-color);
+  background: #f7fafc;
+  color: #4a5568;
 }
 
 .errorMessage {
@@ -378,7 +385,7 @@
   align-items: center;
   gap: var(--spacing-xs);
   font-size: 12px;
-  color: var(--error-color);
+  color: #e53e3e;
   margin-top: var(--spacing-xs);
 }
 
@@ -392,34 +399,34 @@
   align-items: center;
   justify-content: center;
   padding: var(--spacing-xl);
-  border: 2px dashed var(--border-color);
-  border-radius: var(--border-radius-lg);
+  border: 2px dashed #e2e8f0;
+  border-radius: 16px;
   cursor: pointer;
-  transition: all var(--transition-fast);
-  background: var(--background-color);
+  transition: all 0.2s ease;
+  background: #f7fafc;
 }
 
 .uploadArea:hover {
-  border-color: var(--primary-color);
-  background: rgba(var(--primary-color-rgb), 0.05);
+  border-color: #667eea;
+  background: rgba(102, 126, 234, 0.05);
 }
 
 .uploadIcon {
   font-size: 32px;
-  color: var(--text-secondary-color);
+  color: #718096;
   margin-bottom: var(--spacing-md);
 }
 
 .uploadText {
   font-size: 16px;
   font-weight: 600;
-  color: var(--text-color);
+  color: #2d3748;
   margin-bottom: var(--spacing-sm);
 }
 
 .uploadSubtext {
   font-size: 12px;
-  color: var(--text-secondary-color);
+  color: #718096;
   text-align: center;
 }
 
@@ -440,8 +447,8 @@
 .imagePreview img {
   max-width: 300px;
   max-height: 200px;
-  border-radius: var(--border-radius-md);
-  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
 }
 
 .removeButton {
@@ -450,7 +457,7 @@
   right: -8px;
   width: 24px;
   height: 24px;
-  background: var(--error-color);
+  background: #e53e3e;
   color: white;
   border: none;
   border-radius: 50%;
@@ -459,7 +466,7 @@
   align-items: center;
   justify-content: center;
   font-size: 12px;
-  transition: all var(--transition-fast);
+  transition: all 0.2s ease;
 }
 
 .removeButton:hover {
@@ -468,20 +475,21 @@
 
 .previewText {
   font-size: 12px;
-  color: var(--text-secondary-color);
+  color: #718096;
 }
 
 .idCardInfo {
-  background: var(--background-color);
-  border-radius: var(--border-radius-md);
+  background: #f7fafc;
+  border-radius: 12px;
   padding: var(--spacing-lg);
   margin-bottom: var(--spacing-lg);
+  border: 1px solid #e2e8f0;
 }
 
 .idCardInfo .infoTitle {
   font-size: 16px;
   font-weight: 600;
-  color: var(--text-color);
+  color: #2d3748;
   margin: 0 0 var(--spacing-md) 0;
 }
 
@@ -496,26 +504,26 @@
 
 .infoList li {
   font-size: 12px;
-  color: var(--text-secondary-color);
+  color: #718096;
   line-height: 1.4;
 }
 
 .submitButton {
   width: 100%;
   padding: var(--spacing-md) var(--spacing-lg);
-  background: var(--primary-gradient);
+  background: linear-gradient(135deg, #667eea, #764ba2);
   color: white;
   border: none;
-  border-radius: var(--border-radius-md);
+  border-radius: 12px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: all 0.2s ease;
 }
 
 .submitButton:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
 }
 
 .submitButton:disabled {
@@ -529,25 +537,25 @@
   align-items: center;
   gap: var(--spacing-sm);
   padding: var(--spacing-md);
-  background: rgba(var(--error-color-rgb), 0.1);
-  border: 1px solid var(--error-color);
-  border-radius: var(--border-radius-md);
-  color: var(--error-color);
+  background: rgba(229, 62, 62, 0.1);
+  border: 1px solid #e53e3e;
+  border-radius: 12px;
+  color: #e53e3e;
   font-size: 14px;
 }
 
 .securityNotice {
-  background: var(--card-gradient);
-  border-radius: var(--border-radius-lg);
+  background: white;
+  border-radius: 20px;
   padding: var(--spacing-xl);
-  box-shadow: var(--card-shadow);
-  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
 }
 
 .noticeTitle {
   font-size: 16px;
   font-weight: 600;
-  color: var(--text-color);
+  color: #2d3748;
   margin: 0 0 var(--spacing-md) 0;
   display: flex;
   align-items: center;
@@ -570,7 +578,7 @@
 
 .noticeList li {
   font-size: 12px;
-  color: var(--text-secondary-color);
+  color: #718096;
   line-height: 1.4;
 }
 
