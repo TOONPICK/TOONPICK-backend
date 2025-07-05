@@ -8,6 +8,7 @@ import WebtoonGrid from '@components/webtoon-grid';
 import WebtoonSearchModal from '@components/webtoon-search-modal';
 import Spinner from '@components/spinner';
 import styles from './style.module.css';
+import WebtoonCard from '@components/webtoon-card';
 
 const CollectionDetailPage: React.FC = () => {
   const { state } = useAuth();
@@ -128,10 +129,6 @@ const CollectionDetailPage: React.FC = () => {
     }
   };
 
-  const handleWebtoonClick = (webtoonId: number) => {
-    navigate(`/webtoon/${webtoonId}`);
-  };
-
   if (error) return <div className={styles.error}>{error}</div>;
   if (isLoading) return <Spinner />;
   if (!collection) return <div className={styles.error}>컬렉션을 찾을 수 없습니다.</div>;
@@ -211,13 +208,31 @@ const CollectionDetailPage: React.FC = () => {
                   이 컬렉션에 포함된 웹툰들입니다
                 </p>
               </div>
-              <div className={styles.webtoonGridContainer}>
-                <WebtoonGrid 
-                  webtoons={collection.webtoons}
-                  onWebtoonClick={handleWebtoonClick}
-                  showRemoveButton={true}
-                  onRemoveWebtoon={handleRemoveWebtoon}
-                />
+              <div className={styles.webtoonsSection}>
+                <h2>웹툰 목록 ({collection.webtoonCount}개)</h2>
+                {collection.webtoons.length === 0 ? (
+                  <div className={styles.emptyState}>
+                    <p>아직 추가된 웹툰이 없습니다.</p>
+                    <button onClick={handleAddWebtoon} className={styles.addFirstButton}>
+                      첫 번째 웹툰 추가하기
+                    </button>
+                  </div>
+                ) : (
+                  <div className={styles.webtoonsGrid}>
+                    {collection.webtoons.map((webtoon) => (
+                      <div key={webtoon.id} className={styles.webtoonItem}>
+                        <WebtoonCard webtoon={webtoon} />
+                        <button
+                          onClick={() => handleRemoveWebtoon(webtoon.id)}
+                          className={styles.removeWebtoonButton}
+                          title="컬렉션에서 제거"
+                        >
+                          ×
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             </>
           ) : (

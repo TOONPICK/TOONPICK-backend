@@ -113,6 +113,19 @@
   color: #ffa726;
 }
 
+.nonClickable {
+  cursor: default;
+}
+
+.nonClickable:hover {
+  transform: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.nonClickable:hover .thumbnailImage {
+  transform: none;
+}
+
 /* App vs Web styles */
 .app {
   border-radius: 8px;

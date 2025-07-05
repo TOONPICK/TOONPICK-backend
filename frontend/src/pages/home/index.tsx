@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './style.module.css';
 import { Webtoon } from '@models/webtoon';  
 import WebtoonGrid from '@components/webtoon-grid';
@@ -15,6 +16,7 @@ export interface HomePageState {
 }
 
 const HomePage: React.FC = () => {
+  const navigate = useNavigate();
   const [state, setState] = useState<HomePageState>({
     popularWebtoons: [],
     recentWebtoons: [],
@@ -52,8 +54,7 @@ const HomePage: React.FC = () => {
 
     fetchData();
   }, []);
-  
- 
+
   if (state.isLoading) return <div>로딩중...</div>;
   if (state.error) return <div>{state.error}</div>;
 
@@ -69,13 +70,19 @@ const HomePage: React.FC = () => {
       {/* 인기 웹툰 섹션 */}
       <section className={styles.section}>
         <h2>인기 웹툰</h2>
-         <WebtoonGrid webtoons={state.popularWebtoons || []} rowLimit={1} /> 
+         <WebtoonGrid 
+           webtoons={state.popularWebtoons || []} 
+           rowLimit={2}
+         /> 
       </section>
 
       {/* 최신 웹툰 섹션 */}
       <section className={styles.section}>
         <h2>최신 웹툰</h2>
-         <WebtoonGrid webtoons={state.recentWebtoons || []} rowLimit={2} /> 
+         <WebtoonGrid 
+           webtoons={state.recentWebtoons || []} 
+           rowLimit={2}
+         /> 
       </section>
     </div>
   );

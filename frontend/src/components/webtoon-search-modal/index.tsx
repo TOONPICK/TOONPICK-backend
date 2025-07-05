@@ -135,10 +135,8 @@ const WebtoonSearchModal: React.FC<WebtoonSearchModalProps> = ({
                 <p>추가하려는 웹툰을 클릭하세요</p>
               </div>
               <div className={styles.webtoonGridContainer}>
-                <WebtoonGrid 
+                <WebtoonGrid
                   webtoons={searchResults}
-                  onWebtoonClick={handleAddWebtoon}
-                  showRemoveButton={false}
                 />
               </div>
             </>

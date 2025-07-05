@@ -86,7 +86,9 @@ const BookmarkedWebtoonsPage: React.FC = () => {
                   나중에 읽고 싶어서 저장해둔 웹툰들입니다
                 </p>
               </div>
-              <WebtoonGrid webtoons={bookmarkedWebtoons} />
+              <WebtoonGrid 
+                webtoons={bookmarkedWebtoons} 
+              />
             </>
           ) : (
             <div className={styles.emptyState}>

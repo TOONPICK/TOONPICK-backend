@@ -89,7 +89,9 @@ const MasterpieceWebtoonsPage: React.FC = () => {
                   특별히 인상 깊었던 웹툰들을 명작으로 선정했습니다
                 </p>
               </div>
-              <WebtoonGrid webtoons={masterpieceWebtoons} />
+              <WebtoonGrid 
+                webtoons={masterpieceWebtoons} 
+              />
             </>
           ) : (
             <div className={styles.emptyState}>

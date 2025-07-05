@@ -3,24 +3,19 @@ import { Link } from 'react-router-dom';
 import { Webtoon } from '@models/webtoon';
 import styles from './style.module.css';
 import PlatformIcon from '@components/platform-icon';
-import { Routes as RoutePaths } from '@constants/routes';
 
 const isApp = process.env.REACT_APP_PLATFORM === 'app';
 
 interface WebtoonCardProps {
   webtoon: Webtoon;
   showTags?: boolean;
-  onClick?: (webtoonId: number) => void;
-  showRemoveButton?: boolean;
-  onRemove?: (webtoonId: number) => void | Promise<void>;
+  isClickable?: boolean;
 }
 
 const WebtoonCard: React.FC<WebtoonCardProps> = ({ 
   webtoon, 
   showTags = true,
-  onClick,
-  showRemoveButton = false,
-  onRemove
+  isClickable = true
 }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
@@ -37,34 +32,6 @@ const WebtoonCard: React.FC<WebtoonCardProps> = ({
     return title.length > 30 ? `${title.substring(0, 30)}...` : title;
   };
 
-  const handleCardClick = (e: React.MouseEvent) => {
-    console.log('🔗 WebtoonCard clicked:', {
-      webtoonId: webtoon.id,
-      webtoonTitle: webtoon.title,
-      hasOnClick: !!onClick,
-      eventTarget: e.target,
-      eventCurrentTarget: e.currentTarget
-    });
-
-    // onClick이 제공된 경우에만 기본 링크 동작을 방지
-    if (onClick) {
-      console.log('🚫 Preventing default link behavior due to onClick handler');
-      e.preventDefault();
-      onClick(webtoon.id);
-    } else {
-      console.log('✅ Allowing default link behavior');
-    }
-  };
-
-  const handleRemoveClick = async (e: React.MouseEvent) => {
-    console.log('🗑️ Remove button clicked for webtoon:', webtoon.id);
-    e.preventDefault();
-    e.stopPropagation();
-    if (onRemove) {
-      await onRemove(webtoon.id);
-    }
-  };
-
   const handleImageLoad = () => {
     setImageLoaded(true);
   };
@@ -78,58 +45,52 @@ const WebtoonCard: React.FC<WebtoonCardProps> = ({
   const averageRating = formatAverageRating(webtoon.averageRating);
   const truncatedTitle = truncateTitle(webtoon.title);
 
-  const linkPath = RoutePaths.WEBTOON_DETAIL(webtoon.id.toString());
-  console.log('🔗 WebtoonCard render:', {
-    webtoonId: webtoon.id,
-    linkPath,
-    hasOnClick: !!onClick,
-    showRemoveButton
-  });
+  const cardContent = (
+    <>
+      <div className={`${styles.thumbnailContainer} ${imageError ? styles.error : ''}`}>
+        {!imageError && (
+          <img 
+            src={webtoon.thumbnailUrl} 
+            alt={webtoon.title} 
+            className={styles.thumbnailImage}
+            onLoad={handleImageLoad}
+            onError={handleImageError}
+            style={{ opacity: imageLoaded ? 1 : 0 }}
+          />
+        )}
+        {imageError && (
+          <div className={styles.errorPlaceholder}>
+            이미지 없음
+          </div>
+        )}
+        {showTags && (
+          <div className={styles.tagsContainer}>
+            <PlatformIcon platform={webtoon.platform} size={24} />
+          </div>
+        )}
+      </div>
+      
+      <div className={styles.webtoonInfo}>
+        <span className={styles.webtoonTitle}>{truncatedTitle}</span>
+        <div className={styles.webtoonMeta}>
+          <span className={styles.webtoonAuthor}>{authors}</span>
+          <span className={styles.webtoonRating}>{averageRating}</span>
+        </div>
+      </div>
+    </>
+  );
 
   return (
     <div className={`${styles.webtoonCard} ${isApp ? styles.app : styles.web}`}>
-      {showRemoveButton && (
-        <button 
-          onClick={handleRemoveClick}
-          className={styles.removeButton}
-          title="컬렉션에서 제거"
-        >
-          ×
-        </button>
+      {isClickable ? (
+        <Link to={`/webtoon/${webtoon.id}`}>
+          {cardContent}
+        </Link>
+      ) : (
+        <div className={styles.nonClickable}>
+          {cardContent}
+        </div>
       )}
-      
-      <Link to={linkPath} onClick={handleCardClick}>
-        <div className={`${styles.thumbnailContainer} ${imageError ? styles.error : ''}`}>
-          {!imageError && (
-            <img 
-              src={webtoon.thumbnailUrl} 
-              alt={webtoon.title} 
-              className={styles.thumbnailImage}
-              onLoad={handleImageLoad}
-              onError={handleImageError}
-              style={{ opacity: imageLoaded ? 1 : 0 }}
-            />
-          )}
-          {imageError && (
-            <div className={styles.errorPlaceholder}>
-              이미지 없음
-            </div>
-          )}
-          {showTags && (
-            <div className={styles.tagsContainer}>
-              <PlatformIcon platform={webtoon.platform} size={24} />
-            </div>
-          )}
-        </div>
-        
-        <div className={styles.webtoonInfo}>
-          <span className={styles.webtoonTitle}>{truncatedTitle}</span>
-          <div className={styles.webtoonMeta}>
-            <span className={styles.webtoonAuthor}>{authors}</span>
-            <span className={styles.webtoonRating}>{averageRating}</span>
-          </div>
-        </div>
-      </Link>
     </div>
   );
 };

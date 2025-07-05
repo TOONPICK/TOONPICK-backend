@@ -120,7 +120,6 @@ const OngoingWebtoonsPage: React.FC = () => {
 
   const fetchOngoingWebtoons = async (page: number) => {
     setIsLoading(true);
-    console.log("데이터 가져오기!")
     try {
       const response = await WebtoonService.getWebtoons({
         page,
@@ -183,29 +182,45 @@ const OngoingWebtoonsPage: React.FC = () => {
     }
   }, [currentPage, isLastPage]);
 
+  const handleWebtoonClick = (webtoonId: number) => {
+    navigate(`/webtoon/${webtoonId}`);
+  };
+
   return (
-    <div className={styles.ongoingWebtoonsPage}>
-      <div className={styles.container}>
-        <div className={styles.header}>
-          <h1 className={styles.pageTitle}>진행 중인 웹툰</h1>
-        </div>
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <h1 className={styles.title}>연재 웹툰</h1>
+        <p className={styles.subtitle}>현재 연재 중인 웹툰들을 확인해보세요</p>
+      </div>
 
-        <FilterOptions
-          PLATFORM_LABELS={PLATFORM_LABELS}
-          DAYS={DAYS}
-          DAY_LABELS={DAY_LABELS}
-          onChangeSelectedPlatforms={handleFilterPlatformsChange}
-          onChangeSelectedDay={handleFilterDayChange}
-        />
+      <FilterOptions 
+        PLATFORM_LABELS={PLATFORM_LABELS}
+        DAYS={DAYS}
+        DAY_LABELS={DAY_LABELS}
+        onChangeSelectedPlatforms={handleFilterPlatformsChange}
+        onChangeSelectedDay={handleFilterDayChange}
+      />
 
-        <div className={styles.sortOptionsWrapper}>
-          <SortOptions sortBy={sortBy} setSortBy={setSortBy} />
-        </div>
+      <div className={styles.sortOptionsWrapper}>
+        <SortOptions sortBy={sortBy} setSortBy={setSortBy} />
+      </div>
 
-        {error ? (
-          <div className={styles.error}>
-            <p>{error}</p>
-            <button onClick={() => fetchOngoingWebtoons(currentPage)}>재시도</button>
+      <div className={styles.content}>
+        {isLoading ? (
+          <div className={styles.loadingContainer}>
+            <div className={styles.spinner}></div>
+            <p>웹툰을 불러오는 중...</p>
+          </div>
+        ) : error ? (
+          <div className={styles.errorContainer}>
+            <p>웹툰을 불러오는데 실패했습니다.</p>
+            <button onClick={() => fetchOngoingWebtoons(currentPage)} className={styles.retryButton}>
+              다시 시도
+            </button>
+          </div>
+        ) : webtoons.length === 0 ? (
+          <div className={styles.emptyContainer}>
+            <p>조건에 맞는 웹툰이 없습니다.</p>
           </div>
         ) : (
           <>
