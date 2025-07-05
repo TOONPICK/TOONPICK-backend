@@ -27,47 +27,45 @@ import AchievementsPage from '@pages/user/achievements';
 import OngoingWebtoonsPage from '@pages/webtoon/ongoing-webtoons';
 import WebtoonDetailsPage from '@pages/webtoon/webtoon-details';
 
-import { Routes as AppRoutes } from '@constants/routes';
-
-const AppContent: React.FC = () => {
-  return (
-    <>
-      <Header />
-      <main>
-        <Routes>
-          <Route path={AppRoutes.HOME} element={<HomePage />} />
-          <Route path={AppRoutes.LOGIN} element={<LoginPage />} />
-          <Route path={AppRoutes.SIGNUP} element={<SignupPage />} />
-          <Route path={AppRoutes.SOCIAL_LOGIN_CALLBACK} element={<SocialLoginCallbackPage />} />
-          <Route path={AppRoutes.ERROR} element={<ErrorPage />} />
-          <Route path={AppRoutes.TUTORIAL} element={<TutorialPage />} />
-          <Route path={AppRoutes.PROFILE} element={<ProfilePage />} />
-          <Route path={AppRoutes.PROFILE_EDIT} element={<ProfileEditPage />} />
-          <Route path={AppRoutes.PASSWORD_CHANGE} element={<PasswordChangePage />} />
-          <Route path={AppRoutes.ADULT_VERIFICATION} element={<AdultVerificationPage />} />
-          <Route path={AppRoutes.NOTIFICATION_SETTINGS} element={<NotificationSettingsPage />} />
-          <Route path={AppRoutes.BOOKMARKED_WEBTOONS} element={<BookmarkedWebtoonsPage />} />
-          <Route path={AppRoutes.MASTERPIECE_WEBTOONS} element={<MasterpieceWebtoonsPage />} />
-          <Route path={AppRoutes.READING_HISTORY} element={<ReadingHistoryPage />} />
-          <Route path={AppRoutes.COLLECTIONS} element={<CollectionsPage />} />
-          <Route path={AppRoutes.COLLECTION_CREATE} element={<CollectionCreatePage />} />
-          <Route path="/user/collections/:collectionId" element={<CollectionDetailPage />} />
-          <Route path="/user/collections/:collectionId/edit" element={<CollectionEditPage />} />
-          <Route path={AppRoutes.ACHIEVEMENTS} element={<AchievementsPage />} />
-          <Route path={AppRoutes.ONGOING_WEBTOONS} element={<OngoingWebtoonsPage />} />
-          <Route path="/webtoon/:webtoonId" element={<WebtoonDetailsPage />} />
-        </Routes>
-      </main>
-    </>
-  );
-};
+import { Routes as RoutePaths } from '@constants/routes';
 
 const App: React.FC = () => {
   return (
     <AuthProvider>
       <ModalProvider>
         <Router>
-          <AppContent />
+          <Header />
+          <main style={{ maxWidth: '1200px', width: '100%', minHeight: '1000px', margin: '0 auto', padding: '20px' }}>
+            <Routes>
+              <Route path={RoutePaths.HOME} element={<HomePage />} />
+              <Route path={RoutePaths.TUTORIAL} element={<TutorialPage />} />
+
+              {/* 웹툰 관련 페이지 */}
+              <Route path={RoutePaths.WEBTOON_ONGOING} element={<OngoingWebtoonsPage />} />
+              <Route path={RoutePaths.WEBTOON_DETAIL(':id')} element={<WebtoonDetailsPage />} />
+
+              {/* Auth 관련 페이지 */}
+              <Route path={RoutePaths.LOGIN} element={<LoginPage />} />
+              <Route path={RoutePaths.SIGNUP} element={<SignupPage />} />
+              <Route path={RoutePaths.SOCIAL_LOGIN_CALLBACK} element={<SocialLoginCallbackPage />} />
+
+              {/* 유저 관련 페이지 */}
+              <Route path={RoutePaths.USER_PROFILE} element={<ProfilePage />} />
+              <Route path={RoutePaths.USER_PROFILE_EDIT} element={<ProfileEditPage />} />
+              <Route path={RoutePaths.PASSWORD_CHANGE} element={<PasswordChangePage />} />
+              <Route path={RoutePaths.ADULT_VERIFICATION} element={<AdultVerificationPage />} />
+              <Route path={RoutePaths.NOTIFICATION_SETTINGS} element={<NotificationSettingsPage />} />
+              <Route path={RoutePaths.BOOKMARKED_WEBTOONS} element={<BookmarkedWebtoonsPage />} />
+              <Route path={RoutePaths.MASTERPIECE_WEBTOONS} element={<MasterpieceWebtoonsPage />} />
+              <Route path={RoutePaths.READING_HISTORY} element={<ReadingHistoryPage />} />
+              <Route path={RoutePaths.COLLECTIONS} element={<CollectionsPage />} />
+              <Route path={RoutePaths.COLLECTION_CREATE} element={<CollectionCreatePage />} />
+              <Route path="/user/collections/:collectionId" element={<CollectionDetailPage />} />
+              <Route path="/user/collections/:collectionId/edit" element={<CollectionEditPage />} />
+              <Route path={RoutePaths.ACHIEVEMENTS} element={<AchievementsPage />} />
+              <Route path={RoutePaths.ERROR} element={<ErrorPage />} />
+            </Routes>
+          </main>
         </Router>
       </ModalProvider>
     </AuthProvider>
