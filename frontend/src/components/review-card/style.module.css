@@ -1,0 +1,136 @@
+/* ReviewCard styles, adapted from webtoon-rating-section/style.module.css */
+.reviewCard {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.reviewHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.reviewerInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.reviewerAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #f3f3f3;
+}
+.reviewerDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.reviewerName {
+  font-weight: 600;
+  font-size: 1rem;
+}
+.reviewMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #aaa;
+  font-size: 0.95rem;
+}
+.reviewRating {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.reviewStar {
+  color: #e0d7ff;
+  font-size: 1.1rem;
+}
+.reviewStar.filled {
+  color: #6c63ff;
+}
+.reviewDate {
+  font-size: 0.92rem;
+}
+.reviewActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.likeButton {
+  background: none;
+  border: none;
+  color: #888;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 2px 8px;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
+}
+.likeButton:hover {
+  background: #f3f3f3;
+  color: #6c63ff;
+}
+.likeCount {
+  font-size: 0.95rem;
+}
+.moreButtonContainer {
+  position: relative;
+}
+.moreButton {
+  background: none;
+  border: none;
+  color: #bbb;
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 2px 6px;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
+}
+.moreButton:hover {
+  background: #f3f3f3;
+  color: #ff5c5c;
+}
+.moreMenu {
+  position: absolute;
+  top: 28px;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  z-index: 10;
+  min-width: 110px;
+}
+.menuItem {
+  width: 100%;
+  background: none;
+  border: none;
+  color: #ff5c5c;
+  padding: 10px 16px;
+  text-align: left;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.menuItem:hover {
+  background: #fff0f0;
+}
+.reviewComment {
+  margin-top: 8px;
+  font-size: 1.05rem;
+  color: #444;
+  line-height: 1.6;
+  word-break: break-all;
+} 

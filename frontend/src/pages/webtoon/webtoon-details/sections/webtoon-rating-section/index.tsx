@@ -6,6 +6,7 @@ import { FiThumbsUp, FiFlag, FiStar, FiMessageCircle, FiClock } from 'react-icon
 import webtoonReviewService from '@services/webtoon-review-service';
 import styles from './style.module.css';
 import AverageRatingWithDistribution from '@components/average-rating-with-distribution';
+import ReviewList from '@components/review-list';
 
 interface WebtoonRatingSectionProps {
   webtoon: Webtoon;
@@ -215,103 +216,17 @@ const WebtoonRatingSection: React.FC<WebtoonRatingSectionProps> = ({ webtoon }) 
       </div>
 
       {/* 리뷰 목록 섹션 */}
-      <div className={styles.reviewsSection}>
-        <div className={styles.reviewsHeader}>
-          <h3 className={styles.reviewsTitle}>사용자 리뷰</h3>
-          <div className={styles.sortOptions}>
-            <button 
-              className={`${styles.sortButton} ${sortBy === 'latest' ? styles.active : ''}`}
-              onClick={() => setSortBy('latest')}
-            >
-              <FiClock />
-              최신순
-            </button>
-            <button 
-              className={`${styles.sortButton} ${sortBy === 'popular' ? styles.active : ''}`}
-              onClick={() => setSortBy('popular')}
-            >
-              <FiThumbsUp />
-              인기순
-            </button>
-          </div>
-        </div>
-        
-        {isLoading ? (
-          <div className={styles.loadingState}>
-            <div className={styles.loadingSpinner} />
-            <p>리뷰를 불러오는 중...</p>
-          </div>
-        ) : reviews.length > 0 ? (
-          <div className={styles.reviewsList}>
-            {reviews.map(review => (
-              <div key={review.id} className={styles.reviewCard}>
-                <div className={styles.reviewHeader}>
-                  <div className={styles.reviewerInfo}>
-                    <img 
-                      src={review.profilePicture} 
-                      alt={review.userName} 
-                      className={styles.reviewerAvatar}
-                    />
-                    <div className={styles.reviewerDetails}>
-                      <div className={styles.reviewerName}>{review.userName}</div>
-                      <div className={styles.reviewMeta}>
-                        <div className={styles.reviewRating}>
-                          {[1, 2, 3, 4, 5].map(star => (
-                            <FiStar 
-                              key={star} 
-                              className={`${styles.reviewStar} ${star <= review.rating ? styles.filled : ''}`}
-                            />
-                          ))}
-                        </div>
-                        <span className={styles.reviewDate}>{formatDate(review.createdAt)}</span>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className={styles.reviewActions}>
-                    <button 
-                      className={styles.likeButton}
-                      onClick={() => handleLikeToggle(review.id)}
-                    >
-                      <FiThumbsUp />
-                      <span className={styles.likeCount}>{review.likes}</span>
-                    </button>
-                    <div className={styles.moreButtonContainer}>
-                      <button 
-                        className={styles.moreButton}
-                        onClick={() => setShowMoreMenu(review.id)}
-                      >
-                        <FiFlag />
-                      </button>
-                      {showMoreMenu === review.id && (
-                        <div className={styles.moreMenu}>
-                          <button 
-                            className={styles.menuItem}
-                            onClick={() => handleReport(review.id)}
-                          >
-                            <FiFlag />
-                            신고하기
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-                
-                {review.comment && (
-                  <div className={styles.reviewComment}>{review.comment}</div>
-                )}
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className={styles.emptyState}>
-            <div className={styles.emptyIcon}>💬</div>
-            <p>아직 리뷰가 없습니다</p>
-            <span>첫 번째 리뷰를 남겨보세요!</span>
-          </div>
-        )}
-      </div>
+      <ReviewList
+        reviews={reviews}
+        isLoading={isLoading}
+        sortBy={sortBy}
+        onSortChange={setSortBy}
+        onLikeToggle={handleLikeToggle}
+        showMoreMenu={showMoreMenu}
+        setShowMoreMenu={setShowMoreMenu}
+        handleReport={handleReport}
+        formatDate={formatDate}
+      />
     </section>
   );
 };
