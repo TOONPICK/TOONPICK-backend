@@ -1,10 +1,10 @@
 .profileHeader {
   position: relative;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--primary-gradient);
   border-radius: 20px;
   margin-bottom: 24px;
   overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-card);
 }
 
 .backgroundGradient {
@@ -41,27 +41,27 @@
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  border: 4px solid var(--glass-background);
+  box-shadow: var(--shadow-avatar);
 }
 
 .levelIndicator {
   position: absolute;
   bottom: 8px;
   right: 8px;
-  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+  background: var(--level-gradient);
   border-radius: 50%;
   width: 32px;
   height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid white;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border: 2px solid var(--text-inverse);
+  box-shadow: var(--shadow-level);
 }
 
 .levelNumber {
-  color: white;
+  color: var(--text-inverse);
   font-weight: 700;
   font-size: 14px;
 }
@@ -75,7 +75,7 @@
 .username {
   font-size: 32px;
   font-weight: 700;
-  color: white;
+  color: var(--text-inverse);
   margin: 0;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
@@ -97,7 +97,7 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--glass-background);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -111,8 +111,8 @@
 }
 
 .badgeMore {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
+  background: var(--glass-background);
+  color: var(--text-inverse);
   font-size: 12px;
   font-weight: 600;
   padding: 4px 8px;
@@ -138,24 +138,24 @@
 }
 
 .editButton {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: var(--glass-background);
+  color: var(--text-inverse);
+  border: 1px solid var(--glass-background);
 }
 
 .editButton:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: var(--glass-background);
   transform: translateY(-2px);
 }
 
 .shareButton {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--glass-background-light);
+  color: var(--text-inverse);
+  border: 1px solid var(--glass-background-light);
 }
 
 .shareButton:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--glass-background);
   transform: translateY(-2px);
 }
 

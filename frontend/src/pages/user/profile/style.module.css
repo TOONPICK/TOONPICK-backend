@@ -18,7 +18,7 @@
 
 .profilePage {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: var(--body-background);
   padding: 24px;
 }
 
@@ -33,31 +33,31 @@
 .mainContent {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xl);
+  gap: 32px;
 }
 
 .gridLayout {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-lg);
+  gap: 24px;
 }
 
 .leftColumn,
 .rightColumn {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg);
+  gap: 24px;
 }
 
 .error {
-  background: white;
+  background: var(--card-background);
   border-radius: 16px;
   padding: 32px;
   text-align: center;
-  color: #e53e3e;
+  color: var(--error-color);
   font-size: 18px;
   font-weight: 500;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-md);
 }
 
 @media (max-width: 1024px) {
@@ -81,15 +81,15 @@
   }
 
   .mainContent {
-    gap: var(--spacing-lg);
+    gap: 24px;
   }
 
   .gridLayout {
-    gap: var(--spacing-md);
+    gap: 16px;
   }
 
   .leftColumn,
   .rightColumn {
-    gap: var(--spacing-md);
+    gap: 16px;
   }
 }

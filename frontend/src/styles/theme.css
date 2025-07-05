@@ -13,6 +13,7 @@
   --success-gradient: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
   --warning-gradient: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
   --error-gradient: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+  --level-gradient: linear-gradient(135deg, #ff6b6b, #ee5a24);
   
   /* 배경 */
   --body-background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
@@ -25,6 +26,8 @@
   --card-background-transparent: rgba(255, 255, 255, 0.95);
   --overlay-background: rgba(0, 0, 0, 0.05);
   --overlay-background-dark: rgba(0, 0, 0, 0.7);
+  --glass-background: rgba(255, 255, 255, 0.2);
+  --glass-background-light: rgba(255, 255, 255, 0.1);
   
   /* 텍스트 색상 */
   --text-primary: #2d3748;
@@ -60,10 +63,13 @@
   --shadow-error: 0 4px 12px rgba(255, 107, 107, 0.3);
   --shadow-success: 0 4px 12px rgba(72, 187, 120, 0.3);
   --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --shadow-avatar: 0 8px 24px rgba(0, 0, 0, 0.2);
+  --shadow-level: 0 4px 12px rgba(0, 0, 0, 0.2);
   
   /* 호버 효과 */
   --hover-bg: #f7fafc;
   --hover-border: #667eea;
+  --hover-overlay: rgba(102, 126, 234, 0.05);
   
   /* 기존 호환성을 위한 변수들 */
   --header-background-color: var(--header-background);
@@ -122,6 +128,7 @@
   --success-gradient: linear-gradient(135deg, #66bb6a 0%, #4caf50 100%);
   --warning-gradient: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
   --error-gradient: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+  --level-gradient: linear-gradient(135deg, #ff6b6b, #ee5a24);
   
   /* 배경 */
   --body-background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
@@ -134,6 +141,8 @@
   --card-background-transparent: rgba(45, 45, 45, 0.95);
   --overlay-background: rgba(255, 255, 255, 0.05);
   --overlay-background-dark: rgba(0, 0, 0, 0.7);
+  --glass-background: rgba(255, 255, 255, 0.1);
+  --glass-background-light: rgba(255, 255, 255, 0.05);
   
   /* 텍스트 색상 */
   --text-primary: #ffffff;
@@ -169,10 +178,13 @@
   --shadow-error: 0 4px 12px rgba(244, 67, 54, 0.3);
   --shadow-success: 0 4px 12px rgba(102, 187, 106, 0.3);
   --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --shadow-avatar: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-level: 0 4px 12px rgba(0, 0, 0, 0.4);
   
   /* 호버 효과 */
   --hover-bg: rgba(255, 255, 255, 0.05);
   --hover-border: #8b93ff;
+  --hover-overlay: rgba(139, 147, 255, 0.05);
   
   /* 기존 호환성을 위한 변수들 */
   --header-background-color: var(--header-background);

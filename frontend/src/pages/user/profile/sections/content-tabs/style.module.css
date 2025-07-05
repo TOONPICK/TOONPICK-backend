@@ -1,14 +1,14 @@
 .contentTabs {
-  background: white;
+  background: var(--card-background);
   border-radius: 20px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-md);
   overflow: hidden;
 }
 
 .tabNavigation {
   display: flex;
-  background: #f7fafc;
-  border-bottom: 1px solid #e2e8f0;
+  background: var(--card-background-secondary);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .tabButton {
@@ -22,19 +22,19 @@
   align-items: center;
   gap: 8px;
   transition: all 0.3s ease;
-  color: #718096;
+  color: var(--text-secondary);
   font-weight: 500;
   position: relative;
 }
 
 .tabButton:hover {
-  background: rgba(102, 126, 234, 0.05);
-  color: #667eea;
+  background: var(--hover-overlay);
+  color: var(--primary-color);
 }
 
 .tabButton.active {
-  background: white;
-  color: #667eea;
+  background: var(--card-background);
+  color: var(--primary-color);
   font-weight: 600;
 }
 
@@ -45,7 +45,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: var(--primary-gradient);
 }
 
 .tabIcon {

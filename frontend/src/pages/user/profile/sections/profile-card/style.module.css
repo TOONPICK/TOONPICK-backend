@@ -1,23 +1,23 @@
 .profileCard {
-  background: var(--card-gradient);
-  border-radius: var(--border-radius-lg);
-  padding: var(--spacing-xl);
-  box-shadow: var(--card-shadow);
+  background: var(--card-background);
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: var(--shadow-md);
   backdrop-filter: blur(10px);
-  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .profileCard:hover {
   transform: translateY(-4px);
-  box-shadow: var(--card-hover-shadow);
+  box-shadow: var(--shadow-lg);
 }
 
 .profileHeader {
   display: flex;
   align-items: center;
-  gap: var(--spacing-lg);
-  margin-bottom: var(--spacing-xl);
-  padding-bottom: var(--spacing-lg);
+  gap: 24px;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
   border-bottom: 1px solid var(--border-color);
 }
 
@@ -27,19 +27,19 @@
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid var(--primary-color);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
 }
 
 .profileInfo {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xs);
+  gap: 8px;
 }
 
 .username {
   font-size: 28px;
   font-weight: 700;
-  color: var(--text-color);
+  color: var(--text-primary);
   margin: 0;
   background: var(--primary-gradient);
   -webkit-background-clip: text;
@@ -49,20 +49,20 @@
 
 .levelBadge {
   background: var(--primary-gradient);
-  color: white;
-  padding: var(--spacing-xs) var(--spacing-md);
-  border-radius: var(--border-radius-sm);
+  color: var(--text-inverse);
+  padding: 8px 16px;
+  border-radius: 8px;
   font-size: 14px;
   font-weight: 600;
   display: inline-block;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
 }
 
 .achievements {
   display: flex;
   justify-content: space-around;
-  margin-bottom: var(--spacing-xl);
-  padding: var(--spacing-lg) 0;
+  margin-bottom: 32px;
+  padding: 24px 0;
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
 }
@@ -71,13 +71,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--spacing-xs);
+  gap: 8px;
 }
 
 .achievementNumber {
   font-size: 24px;
   font-weight: 700;
-  color: var(--text-color);
+  color: var(--text-primary);
   background: var(--primary-gradient);
   -webkit-background-clip: text;
   background-clip: text;
@@ -86,24 +86,24 @@
 
 .achievementLabel {
   font-size: 14px;
-  color: var(--text-secondary-color);
+  color: var(--text-secondary);
 }
 
 .badges {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing-sm);
+  gap: 12px;
 }
 
 .badge {
   display: flex;
   align-items: center;
-  gap: var(--spacing-xs);
-  background: var(--card-gradient);
-  padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: var(--border-radius-sm);
-  box-shadow: var(--card-shadow);
-  transition: transform var(--transition-fast);
+  gap: 8px;
+  background: var(--card-background);
+  padding: 12px 16px;
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease;
 }
 
 .badge:hover {
@@ -118,12 +118,12 @@
 .badge span {
   font-size: 14px;
   font-weight: 500;
-  color: var(--text-color);
+  color: var(--text-primary);
 }
 
 @media (max-width: 768px) {
   .profileCard {
-    padding: var(--spacing-lg);
+    padding: 24px;
   }
 
   .profileImage {
@@ -136,7 +136,7 @@
   }
 
   .achievements {
-    padding: var(--spacing-md) 0;
+    padding: 16px 0;
   }
 
   .achievementNumber {

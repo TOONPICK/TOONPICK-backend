@@ -1,14 +1,14 @@
 .readingHistorySection {
-  background-color: var(--background-color);
+  background-color: var(--card-background);
   border-radius: 12px;
   padding: 24px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
 }
 
 .sectionTitle {
   font-size: 20px;
   font-weight: 600;
-  color: var(--text-color);
+  color: var(--text-primary);
   margin: 0 0 24px 0;
 }
 
@@ -21,7 +21,7 @@
 .recentHistory h3 {
   font-size: 16px;
   font-weight: 600;
-  color: var(--text-color);
+  color: var(--text-primary);
   margin: 0 0 16px 0;
 }
 
@@ -35,7 +35,7 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  background-color: var(--background-secondary-color);
+  background-color: var(--card-background-secondary);
   border-radius: 8px;
   padding: 12px;
 }
@@ -56,12 +56,12 @@
 .webtoonTitle {
   font-size: 14px;
   font-weight: 500;
-  color: var(--text-color);
+  color: var(--text-primary);
 }
 
 .lastReadAt {
   font-size: 12px;
-  color: var(--text-secondary-color);
+  color: var(--text-secondary);
 }
 
 @media (max-width: 768px) {
