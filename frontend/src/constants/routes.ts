@@ -19,6 +19,7 @@ export const Routes = {
     BOOKMARKED_WEBTOONS: '/user/bookmarked-webtoons',
     FAVORITE_WEBTOONS: '/user/favorite-webtoons',
     COLLECTIONS: '/user/collections',
+    COLLECTION_DETAIL: (id: string) => `/user/collections/${id}`,
     ACHIEVEMENTS: '/user/achievements',
     PREFERENCES: '/user/preferences',
     ERROR: '*',

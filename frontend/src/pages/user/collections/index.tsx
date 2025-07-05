@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@contexts/auth-context';
 import { Routes } from '@constants/routes';
 import memberService from '@services/member-service';
-import { Collection } from '@dummy';
+import { Collection } from '@models/collection';
 import Spinner from '@components/spinner';
 import styles from './style.module.css';
 
@@ -47,8 +47,7 @@ const CollectionsPage: React.FC = () => {
   };
 
   const handleCollectionClick = (collectionId: number) => {
-    // TODO: 컬렉션 상세 페이지로 이동
-    alert(`컬렉션 ${collectionId} 상세 페이지로 이동합니다.`);
+    navigate(`/user/collections/${collectionId}`);
   };
 
   if (error) return <div className={styles.error}>{error}</div>;

@@ -4,4 +4,7 @@ export * from './webtoon-dummy';
 export * from './carousel-ad-dummy';
 export * from './review-dummy';
 export * from './bookmark-dummy';
-export * from './collection-dummy'; 
+export * from './collection-dummy';
+
+// Collection 타입도 export
+export type { Collection } from '@models/collection'; 

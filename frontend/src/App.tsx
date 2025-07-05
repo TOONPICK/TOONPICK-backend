@@ -21,6 +21,7 @@ import AdultVerificationPage from '@pages/user/adult-verification';
 import TutorialPage from '@pages/tutorial';
 import BookmarkedWebtoonsPage from '@pages/user/bookmarked-webtoons';
 import CollectionsPage from '@pages/user/collections';
+import CollectionDetailPage from '@pages/user/collection-detail';
 import AchievementsPage from '@pages/user/achievements';
 
 import { Routes as RoutePaths } from '@constants/routes';
@@ -53,6 +54,7 @@ const AppContent: React.FC = () => {
           <Route path={RoutePaths.ADULT_VERIFICATION} element={<AdultVerificationPage/>} />
           <Route path={RoutePaths.BOOKMARKED_WEBTOONS} element={<BookmarkedWebtoonsPage />} />
           <Route path={RoutePaths.COLLECTIONS} element={<CollectionsPage />} />
+          <Route path={RoutePaths.COLLECTION_DETAIL(':collectionId')} element={<CollectionDetailPage />} />
           <Route path={RoutePaths.ACHIEVEMENTS} element={<AchievementsPage />} />
 
         </Routes>
