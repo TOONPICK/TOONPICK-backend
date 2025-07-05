@@ -9,12 +9,34 @@ interface WebtoonGridProps {
   webtoons: Webtoon[];
   lastWebtoonRef?: React.RefObject<HTMLDivElement>;
   rowLimit?: number;
+  onWebtoonClick?: (webtoonId: number) => void;
+  showRemoveButton?: boolean;
+  onRemoveWebtoon?: (webtoonId: number) => void | Promise<void>;
 }
 
-const WebtoonGrid: React.FC<WebtoonGridProps> = ({ webtoons, lastWebtoonRef, rowLimit }) => {
+const WebtoonGrid: React.FC<WebtoonGridProps> = ({ 
+  webtoons, 
+  lastWebtoonRef, 
+  rowLimit,
+  onWebtoonClick,
+  showRemoveButton = false,
+  onRemoveWebtoon
+}) => {
   const itemsPerRow = 5;
   const maxItems = rowLimit ? rowLimit * itemsPerRow : webtoons.length;
   const displayWebtoons = webtoons.slice(0, maxItems);
+
+  const handleWebtoonClick = (webtoonId: number) => {
+    if (onWebtoonClick) {
+      onWebtoonClick(webtoonId);
+    }
+  };
+
+  const handleRemoveWebtoon = async (webtoonId: number) => {
+    if (onRemoveWebtoon) {
+      await onRemoveWebtoon(webtoonId);
+    }
+  };
 
   return (
     <div className={`${styles.grid} ${isApp ? styles.app : styles.web}`}>
@@ -24,7 +46,12 @@ const WebtoonGrid: React.FC<WebtoonGridProps> = ({ webtoons, lastWebtoonRef, row
           key={webtoon.id || index}
           ref={index === displayWebtoons.length - 1 ? lastWebtoonRef : null} 
         >
-          <WebtoonCard webtoon={webtoon} />
+          <WebtoonCard 
+            webtoon={webtoon}
+            onClick={handleWebtoonClick}
+            showRemoveButton={showRemoveButton}
+            onRemove={handleRemoveWebtoon}
+          />
         </div>
       ))}
     </div>

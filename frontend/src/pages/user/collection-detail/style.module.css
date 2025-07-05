@@ -129,12 +129,19 @@
   position: absolute;
   top: 8px;
   right: 8px;
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
   padding: 4px 8px;
   border-radius: 6px;
   font-size: 12px;
   font-weight: 600;
+  color: white;
+}
+
+.publicBadge.public {
+  background: rgba(72, 187, 120, 0.9);
+}
+
+.publicBadge.private {
+  background: rgba(113, 128, 150, 0.9);
 }
 
 .collectionDetails {
@@ -252,6 +259,10 @@
   backdrop-filter: blur(10px);
   border-radius: 16px;
   margin: 20px;
+}
+
+.webtoonGridContainer {
+  margin-top: 24px;
 }
 
 @media (max-width: 768px) {

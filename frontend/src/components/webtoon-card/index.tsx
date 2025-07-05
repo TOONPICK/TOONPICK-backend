@@ -9,9 +9,18 @@ const isApp = process.env.REACT_APP_PLATFORM === 'app';
 interface WebtoonCardProps {
   webtoon: Webtoon;
   showTags?: boolean;
+  onClick?: (webtoonId: number) => void;
+  showRemoveButton?: boolean;
+  onRemove?: (webtoonId: number) => void | Promise<void>;
 }
 
-const WebtoonCard: React.FC<WebtoonCardProps> = ({ webtoon, showTags = true }) => {
+const WebtoonCard: React.FC<WebtoonCardProps> = ({ 
+  webtoon, 
+  showTags = true,
+  onClick,
+  showRemoveButton = false,
+  onRemove
+}) => {
   const getAuthors = (authors: { name: string }[] | undefined): string => {
     return authors?.map(author => author.name).join(', ') || '작가 없음';
   };
@@ -24,28 +33,54 @@ const WebtoonCard: React.FC<WebtoonCardProps> = ({ webtoon, showTags = true }) =
     return title.length > 30 ? `${title.substring(0, 30)}...` : title;
   };
 
+  const handleCardClick = (e: React.MouseEvent) => {
+    if (onClick) {
+      e.preventDefault();
+      onClick(webtoon.id);
+    }
+  };
+
+  const handleRemoveClick = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (onRemove) {
+      await onRemove(webtoon.id);
+    }
+  };
+
   const authors = getAuthors(webtoon.authors);
   const averageRating = formatAverageRating(webtoon.averageRating);
   const truncatedTitle = truncateTitle(webtoon.title);
 
   return (
-    <Link to={`/webtoon/${webtoon.id}`} className={`${styles.webtoonCard} ${isApp ? styles.app : styles.web}`}>
-      <div className={styles.thumbnailContainer}>
-        <img src={webtoon.thumbnailUrl} alt={webtoon.title} className={styles.thumbnailImage} />
-        {showTags && (
-          <div className={styles.tagsContainer}>
-            <PlatformIcon platform={webtoon.platform} size={24} />
-          </div>
-        )}
-      </div>
-      <div className={styles.webtoonInfo}>
-        <span className={styles.webtoonTitle}>{truncatedTitle}</span>
-        <div className={styles.webtoonMeta}>
-          <span className={styles.webtoonAuthor}>{authors}</span>
-          <span className={styles.webtoonRating}>⭐ {averageRating}</span>
+    <div className={`${styles.webtoonCard} ${isApp ? styles.app : styles.web}`}>
+      {showRemoveButton && (
+        <button 
+          onClick={handleRemoveClick}
+          className={styles.removeButton}
+          title="컬렉션에서 제거"
+        >
+          ×
+        </button>
+      )}
+      <Link to={`/webtoon/${webtoon.id}`} onClick={handleCardClick}>
+        <div className={styles.thumbnailContainer}>
+          <img src={webtoon.thumbnailUrl} alt={webtoon.title} className={styles.thumbnailImage} />
+          {showTags && (
+            <div className={styles.tagsContainer}>
+              <PlatformIcon platform={webtoon.platform} size={24} />
+            </div>
+          )}
         </div>
-      </div>
-    </Link>
+        <div className={styles.webtoonInfo}>
+          <span className={styles.webtoonTitle}>{truncatedTitle}</span>
+          <div className={styles.webtoonMeta}>
+            <span className={styles.webtoonAuthor}>{authors}</span>
+            <span className={styles.webtoonRating}>⭐ {averageRating}</span>
+          </div>
+        </div>
+      </Link>
+    </div>
   );
 };
 

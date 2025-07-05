@@ -132,6 +132,41 @@ class WebtoonService {
     }
   }
 
+  // 웹툰 검색
+  public async searchWebtoons(query: string, size: number = 20): Promise<Response<Webtoon[]>> {
+    if (isDev) {
+      // 개발 환경에서는 더미 데이터에서 검색 시뮬레이션
+      const searchResults = dummyWebtoonList.filter((webtoon: Webtoon) => 
+        webtoon.title.toLowerCase().includes(query.toLowerCase()) ||
+        webtoon.authors?.some(author => 
+          author.name.toLowerCase().includes(query.toLowerCase())
+        ) ||
+        webtoon.description?.toLowerCase().includes(query.toLowerCase())
+      );
+      
+      return { 
+        success: true, 
+        data: searchResults.slice(0, size),
+        message: `${searchResults.length}개의 웹툰을 찾았습니다.`
+      };
+    }
+    try {
+      const response = await api.get<Webtoon[]>(`/api/v1/webtoons/search`, { 
+        params: { 
+          q: query,
+          size 
+        } 
+      });
+      return { 
+        success: true, 
+        data: response.data,
+        message: `${response.data.length}개의 웹툰을 찾았습니다.`
+      };
+    } catch (error) {
+      return this.handleError(error);
+    }
+  }
+
   // 오류 처리
   private handleError(error: any): { success: false; message: string } {
     console.error('API Error:', error);
