@@ -4,7 +4,8 @@ import TokenManager from '@services/token-manager';
 import TokenRefresher from '@services/token-refresher';
 import Logger from '@utils/logger';
 import Cookies from 'js-cookie';
-import { dummyMemberProfile } from '../dummy/member-dummy';
+import { dummyMemberProfile } from '@dummy';
+import { MemberProfile } from '@models/member';
 
 const isDev = process.env.NODE_ENV === 'development';
 

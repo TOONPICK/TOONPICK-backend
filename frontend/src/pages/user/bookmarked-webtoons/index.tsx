@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@contexts/auth-context';
 import { Routes } from '@constants/routes';
+import { Webtoon, SerializationStatus } from '@models/webtoon';
 import memberService from '@services/member-service';
-import { Webtoon } from '@models/webtoon';
 import WebtoonGrid from '@components/webtoon-grid';
 import Spinner from '@components/spinner';
 import styles from './style.module.css';
@@ -24,9 +24,13 @@ const BookmarkedWebtoonsPage: React.FC = () => {
     const fetchBookmarkedWebtoons = async () => {
       try {
         setIsLoading(true);
-        // TODO: 북마크 웹툰 API 연동
-        // 임시로 더미 데이터 사용
-        setBookmarkedWebtoons([]);
+        const response = await memberService.getBookmarkedWebtoons();
+        
+        if (response.success && response.data) {
+          setBookmarkedWebtoons(response.data);
+        } else {
+          setError(response.message || '북마크 웹툰을 불러오는데 실패했습니다.');
+        }
       } catch (error) {
         setError('북마크 웹툰을 불러오는데 실패했습니다.');
         console.error('Error fetching bookmarked webtoons:', error);
@@ -51,9 +55,39 @@ const BookmarkedWebtoonsPage: React.FC = () => {
           <h1 className={styles.title}>북마크한 웹툰</h1>
         </div>
         
+        <div className={styles.statsSection}>
+          <div className={styles.statCard}>
+            <div className={styles.statNumber}>{bookmarkedWebtoons.length}</div>
+            <div className={styles.statLabel}>북마크한 웹툰</div>
+          </div>
+          <div className={styles.statCard}>
+            <div className={styles.statNumber}>
+              {bookmarkedWebtoons.length > 0 
+                ? (bookmarkedWebtoons.reduce((sum, webtoon) => sum + webtoon.averageRating, 0) / bookmarkedWebtoons.length).toFixed(1)
+                : '0.0'
+              }
+            </div>
+            <div className={styles.statLabel}>평균 평점</div>
+          </div>
+          <div className={styles.statCard}>
+            <div className={styles.statNumber}>
+              {bookmarkedWebtoons.filter(webtoon => webtoon.status === SerializationStatus.ONGOING).length}
+            </div>
+            <div className={styles.statLabel}>연재 중</div>
+          </div>
+        </div>
+
         <div className={styles.content}>
           {bookmarkedWebtoons.length > 0 ? (
-            <WebtoonGrid webtoons={bookmarkedWebtoons} />
+            <>
+              <div className={styles.sectionHeader}>
+                <h2 className={styles.sectionTitle}>내가 북마크한 웹툰들</h2>
+                <p className={styles.sectionDescription}>
+                  나중에 읽고 싶어서 저장해둔 웹툰들입니다
+                </p>
+              </div>
+              <WebtoonGrid webtoons={bookmarkedWebtoons} />
+            </>
           ) : (
             <div className={styles.emptyState}>
               <span className={styles.emptyIcon}>🔖</span>

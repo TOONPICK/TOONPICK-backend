@@ -1,6 +1,4 @@
 import { MemberProfile } from '@models/member';
-import { dummyWebtoonList } from './webtoon-dummy';
-import { dummyReviewList } from './review-dummy';
 
 export const dummyMemberProfile: MemberProfile = {
   username: 1,
@@ -55,14 +53,11 @@ export const dummyMemberProfile: MemberProfile = {
     emotionalTags: ['긴장감', '설렘', '감동', '재미', '몰입감'],
     aiTags: ['강력한주인공', '복수극', '로맨틱코미디', '판타지세계관', '일상물']
   },
-  favoriteWebtoons: dummyWebtoonList.slice(0, 5),
-  masterpieceWebtoons: dummyWebtoonList.slice(0, 3),
-  readingHistory: dummyWebtoonList.slice(0, 8).map((webtoon: any, index: number) => ({
-    webtoon,
-    lastReadAt: new Date(Date.now() - index * 24 * 60 * 60 * 1000).toISOString()
-  })),
-  reviews: dummyReviewList.slice(0, 10),
-  topReviews: dummyReviewList.slice(0, 3),
+  favoriteWebtoons: [],
+  masterpieceWebtoons: [],
+  readingHistory: [],
+  reviews: [],
+  topReviews: [],
   connectedAccounts: {
     google: true,
     naver: false,

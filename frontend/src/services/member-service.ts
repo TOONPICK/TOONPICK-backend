@@ -1,7 +1,14 @@
 import { api, Response } from '@api';
 import { MemberProfile } from '@models/member';
 import { Webtoon } from '@models/webtoon';
-import { dummyMemberProfile } from '../dummy/member-dummy';
+import { 
+  dummyMemberProfile, 
+  dummyBookmarkedWebtoons, 
+  dummyCollections, 
+  Collection,
+  dummyWebtoonList,
+  dummyReviewList
+} from '@dummy';
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -20,13 +27,67 @@ class MemberService {
   // 사용자 프로필 정보 가져오기
   public async getMemberProfile(): Promise<Response<MemberProfile>> {
     if (isDev) {
-      return { success: true, data: dummyMemberProfile };
+      // 더미 데이터 조합
+      const enrichedProfile = {
+        ...dummyMemberProfile,
+        favoriteWebtoons: dummyWebtoonList.slice(0, 5),
+        masterpieceWebtoons: dummyWebtoonList.slice(0, 3),
+        readingHistory: dummyWebtoonList.slice(0, 8).map((webtoon: any, index: number) => ({
+          webtoon,
+          lastReadAt: new Date(Date.now() - index * 24 * 60 * 60 * 1000).toISOString()
+        })),
+        reviews: dummyReviewList.slice(0, 10),
+        topReviews: dummyReviewList.slice(0, 3),
+      };
+      return { success: true, data: enrichedProfile };
     }
     try {
       const response = await api.get<MemberProfile>('/api/secure/member/profile');
       return { success: true, data: response.data };
     } catch (error) {
       console.error('Error fetching member profile:', error);
+      return { success: false, message: error instanceof Error ? error.message : 'Unknown error' };
+    }
+  }
+
+  // 북마크한 웹툰 목록 가져오기
+  public async getBookmarkedWebtoons(): Promise<Response<Webtoon[]>> {
+    if (isDev) {
+      return { success: true, data: dummyBookmarkedWebtoons };
+    }
+    try {
+      const response = await api.get<Webtoon[]>('/api/secure/member/bookmarks');
+      return { success: true, data: response.data };
+    } catch (error) {
+      console.error('Error fetching bookmarked webtoons:', error);
+      return { success: false, message: error instanceof Error ? error.message : 'Unknown error' };
+    }
+  }
+
+  // 컬렉션 목록 가져오기
+  public async getCollections(): Promise<Response<Collection[]>> {
+    if (isDev) {
+      return { success: true, data: dummyCollections };
+    }
+    try {
+      const response = await api.get<Collection[]>('/api/secure/member/collections');
+      return { success: true, data: response.data };
+    } catch (error) {
+      console.error('Error fetching collections:', error);
+      return { success: false, message: error instanceof Error ? error.message : 'Unknown error' };
+    }
+  }
+
+  // 명작 웹툰 목록 가져오기
+  public async getMasterpieceWebtoons(): Promise<Response<Webtoon[]>> {
+    if (isDev) {
+      return { success: true, data: dummyMemberProfile.masterpieceWebtoons || [] };
+    }
+    try {
+      const response = await api.get<Webtoon[]>('/api/secure/member/masterpieces');
+      return { success: true, data: response.data };
+    } catch (error) {
+      console.error('Error fetching masterpiece webtoons:', error);
       return { success: false, message: error instanceof Error ? error.message : 'Unknown error' };
     }
   }
@@ -68,7 +129,6 @@ class MemberService {
       };
     }
   }
-
 
   // 관심 웹툰 추가
   public async addFavoriteWebtoon(webtoonId: number): Promise<Response> {

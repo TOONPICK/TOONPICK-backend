@@ -1,6 +1,6 @@
 import { api, Response, PagedResponse } from '@api';
 import { Review, ReviewRequest } from '@models/review';
-import { dummyReview, dummyReviewList } from '../dummy/review-dummy';
+import { dummyReview, dummyReviewList } from '@dummy';
 
 const PAGE_SIZE = 10;
 const isDev = process.env.NODE_ENV === 'development';

@@ -1,5 +1,5 @@
 import { CarouselAd } from '../models/carousel-ad';
-import { dummyCarouselAds } from '../dummy/carousel-ad-dummy';
+import { dummyCarouselAds } from '@dummy';
 import { api } from '@api';
 
 const isDev = process.env.NODE_ENV === 'development';

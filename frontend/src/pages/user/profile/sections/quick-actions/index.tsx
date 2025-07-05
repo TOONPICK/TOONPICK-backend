@@ -1,8 +1,11 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Routes } from '@constants/routes';
 import styles from './style.module.css';
 
 const QuickActions: React.FC = () => {
+  const navigate = useNavigate();
+
   const actions = [
     {
       title: '읽은 웹툰',
@@ -41,12 +44,20 @@ const QuickActions: React.FC = () => {
     }
   ];
 
+  const handleActionClick = (link: string) => {
+    navigate(link);
+  };
+
   return (
     <div className={styles.quickActions}>
       <h2 className={styles.sectionTitle}>빠른 메뉴</h2>
       <div className={styles.actionsGrid}>
         {actions.map((action, index) => (
-          <a key={index} href={action.link} className={styles.actionCard}>
+          <button 
+            key={index} 
+            onClick={() => handleActionClick(action.link)} 
+            className={styles.actionCard}
+          >
             <div className={styles.actionIcon} style={{ backgroundColor: action.color }}>
               <span>{action.icon}</span>
             </div>
@@ -57,7 +68,7 @@ const QuickActions: React.FC = () => {
             <div className={styles.actionArrow}>
               <span>→</span>
             </div>
-          </a>
+          </button>
         ))}
       </div>
     </div>

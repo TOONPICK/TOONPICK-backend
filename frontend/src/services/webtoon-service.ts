@@ -1,7 +1,7 @@
 import { api , Response, PagedResponse } from '@api';
 import { Webtoon, Platform, SerializationStatus } from '@models/webtoon';
 import { DayOfWeek, AgeRating } from '@models/enum';
-import { dummyWebtoon, dummyWebtoonList } from '../dummy/webtoon-dummy';
+import { dummyWebtoon, dummyWebtoonList } from '@dummy';
 
 const PAGE_SIZE = 60;
 
