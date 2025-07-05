@@ -185,33 +185,45 @@ const OngoingWebtoonsPage: React.FC = () => {
 
   return (
     <div className={styles.ongoingWebtoonsPage}>
-      <FilterOptions
-        PLATFORM_LABELS={PLATFORM_LABELS}
-        DAYS={DAYS}
-        DAY_LABELS={DAY_LABELS}
-        onChangeSelectedPlatforms={handleFilterPlatformsChange}
-        onChangeSelectedDay={handleFilterDayChange}
-      />
-
-      <div className={styles.sortOptionsWrapper}>
-        <SortOptions sortBy={sortBy} setSortBy={setSortBy} />
-      </div>
-
-      {error ? (
-        <div className={styles.error}>
-          <p>{error}</p>
-          <button onClick={() => fetchOngoingWebtoons(currentPage)}>재시도</button>
+      <div className={styles.container}>
+        <div className={styles.header}>
+          <h1 className={styles.pageTitle}>진행 중인 웹툰</h1>
         </div>
-      ) : (
-        <>
-          <WebtoonGrid
-            webtoons={webtoons}
-            lastWebtoonRef={lastWebtoonRef}
-          />
-          {isLoading && <Spinner />}
-          {isLastPage &&<div className={styles.endMessage}>모든 웹툰을 불러왔습니다.</div>}
-        </>
-      )}
+
+        <FilterOptions
+          PLATFORM_LABELS={PLATFORM_LABELS}
+          DAYS={DAYS}
+          DAY_LABELS={DAY_LABELS}
+          onChangeSelectedPlatforms={handleFilterPlatformsChange}
+          onChangeSelectedDay={handleFilterDayChange}
+        />
+
+        <div className={styles.sortOptionsWrapper}>
+          <SortOptions sortBy={sortBy} setSortBy={setSortBy} />
+        </div>
+
+        {error ? (
+          <div className={styles.error}>
+            <p>{error}</p>
+            <button onClick={() => fetchOngoingWebtoons(currentPage)}>재시도</button>
+          </div>
+        ) : (
+          <>
+            <WebtoonGrid
+              webtoons={webtoons}
+              lastWebtoonRef={lastWebtoonRef}
+            />
+            {isLoading && (
+              <div className={styles.loadingContainer}>
+                <Spinner />
+              </div>
+            )}
+            {isLastPage && webtoons.length > 0 && (
+              <div className={styles.endMessage}>모든 웹툰을 불러왔습니다.</div>
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 };

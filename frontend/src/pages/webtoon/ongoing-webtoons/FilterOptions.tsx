@@ -51,33 +51,34 @@ function FilterOptions<PlatformType = string, DayType = string>({
     <div className={styles.filters}>
       <div className={styles.filterGroup}>
         <div className={styles.platformButtons}>
-          <span
+          <button
             className={`${styles.filterOption} ${selectedPlatforms.length === Object.keys(PLATFORM_LABELS).length ? styles.active : ''}`}
             onClick={handleSelectAllPlatforms}
           >
             전체
-          </span>
+          </button>
           {Object.keys(PLATFORM_LABELS).map((platform) => (
-            <span
+            <button
               key={platform}
               className={`${styles.filterOption} ${selectedPlatforms.includes(platform as PlatformType) ? styles.active : ''}`}
               onClick={() => handlePlatformChange(platform as PlatformType)}
             >
               {PLATFORM_LABELS[platform]}
-            </span>
+            </button>
           ))}
         </div>
       </div>
+      
       <div className={styles.filterGroup}>
         <div className={styles.dayButtons}>
           {DAYS.map((day) => (
-            <span
+            <button
               key={day as string}
               className={`${styles.filterOption} ${selectedDay === day ? styles.active : ''}`}
               onClick={() => handleDayChange(day)}
             >
               {DAY_LABELS[day as string]}
-            </span>
+            </button>
           ))}
         </div>
       </div>
