@@ -1,6 +1,6 @@
 import React from 'react';
 import { SerializationStatus } from '@models/webtoon';
-import styles from '../style.module.css';
+import styles from './style.module.css';
 
 interface StatusTagsProps {
   status: SerializationStatus;
