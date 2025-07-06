@@ -25,6 +25,7 @@ import CollectionDetailPage from '@pages/user/collection-detail';
 import CollectionEditPage from '@pages/user/collection-edit';
 import AchievementsPage from '@pages/user/achievements';
 import OngoingWebtoonsPage from '@pages/webtoon/ongoing-webtoons';
+import ExplorePage from '@pages/webtoon/explore';
 import WebtoonDetailsPage from '@pages/webtoon/webtoon-details';
 
 import { Routes as RoutePaths } from '@constants/routes';
@@ -42,6 +43,7 @@ const App: React.FC = () => {
 
               {/* 웹툰 관련 페이지 */}
               <Route path={RoutePaths.WEBTOON_ONGOING} element={<OngoingWebtoonsPage />} />
+              <Route path={RoutePaths.WEBTOON_EXPLORE} element={<ExplorePage />} />
               <Route path={RoutePaths.WEBTOON_DETAIL(':id')} element={<WebtoonDetailsPage />} />
 
               {/* Auth 관련 페이지 */}

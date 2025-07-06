@@ -27,6 +27,7 @@ export const Routes = {
     ERROR: '/error',
     SOCIAL_LOGIN_CALLBACK: '/auth/social-login-callback',
     ONGOING_WEBTOONS: '/webtoon/ongoing',
+    WEBTOON_EXPLORE: '/webtoon/explore',
     WEBTOON_DETAILS: '/webtoon/:webtoonId',
     PROFILE: '/user/profile',
     PROFILE_EDIT: '/user/profile/edit',

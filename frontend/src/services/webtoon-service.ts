@@ -53,6 +53,7 @@ class WebtoonService {
       size?: number;
       sortBy?: string;
       sortDir?: 'asc' | 'desc';
+      search?: string;
       platforms?: Platform[];
       genres?: string[];
       authors?: string[];
@@ -62,18 +63,90 @@ class WebtoonService {
     }
   ): Promise<PagedResponse<Webtoon[]>> {
     if (isDev) {
+      // 개발 환경에서는 더미 데이터에서 필터링 시뮬레이션
+      let filteredData = [...dummyWebtoonList];
+      
+      // 검색 필터링
+      if (options.search) {
+        const searchLower = options.search.toLowerCase();
+        filteredData = filteredData.filter((webtoon: Webtoon) => 
+          webtoon.title.toLowerCase().includes(searchLower) ||
+          webtoon.authors?.some(author => 
+            author.name.toLowerCase().includes(searchLower)
+          ) ||
+          webtoon.description?.toLowerCase().includes(searchLower) ||
+          webtoon.genres?.some(genre => 
+            genre.name.toLowerCase().includes(searchLower)
+          )
+        );
+      }
+      
+      // 플랫폼 필터링
+      if (options.platforms && options.platforms.length > 0) {
+        filteredData = filteredData.filter((webtoon: Webtoon) => 
+          options.platforms!.includes(webtoon.platform)
+        );
+      }
+      
+      // 장르 필터링 (성인 태그 제외)
+      if (options.genres && options.genres.length > 0) {
+        const nonAdultGenres = options.genres.filter(genre => genre !== '성인');
+        if (nonAdultGenres.length > 0) {
+          filteredData = filteredData.filter((webtoon: Webtoon) => 
+            webtoon.genres?.some(genre => 
+              nonAdultGenres.includes(genre.name)
+            )
+          );
+        }
+      }
+      
+      // 연재 상태 필터링
+      if (options.serializationStatuses && options.serializationStatuses.length > 0) {
+        filteredData = filteredData.filter((webtoon: Webtoon) => 
+          options.serializationStatuses!.includes(webtoon.status)
+        );
+      }
+      
+      // 요일 필터링
+      if (options.publishDays && options.publishDays.length > 0) {
+        filteredData = filteredData.filter((webtoon: Webtoon) => 
+          options.publishDays!.includes(webtoon.publishDay as DayOfWeek)
+        );
+      }
+      
+      // 성인 태그 필터링 (장르에 포함)
+      if (options.genres && options.genres.includes('성인')) {
+        const hasAdultGenre = options.genres.includes('성인');
+        const otherGenres = options.genres.filter(genre => genre !== '성인');
+        
+        filteredData = filteredData.filter((webtoon: Webtoon) => {
+          const matchesAdultFilter = hasAdultGenre ? webtoon.isAdult : true;
+          const matchesOtherGenres = otherGenres.length === 0 || 
+            webtoon.genres?.some(genre => otherGenres.includes(genre.name));
+          return matchesAdultFilter && matchesOtherGenres;
+        });
+      }
+      
+      // 페이지네이션
+      const page = options.page || 0;
+      const size = options.size || PAGE_SIZE;
+      const startIndex = page * size;
+      const endIndex = startIndex + size;
+      const paginatedData = filteredData.slice(startIndex, endIndex);
+      
       return {
         success: true,
-        data: dummyWebtoonList,
-        total: dummyWebtoonList.length,
-        page: options.page || 0,
-        size: options.size || PAGE_SIZE,
-        last: true,
+        data: paginatedData,
+        total: filteredData.length,
+        page: page,
+        size: size,
+        last: endIndex >= filteredData.length,
       };
     }
     try {
       const response = await api.post<PagedResponse<Webtoon[]>>('/api/v1/webtoons/filter', 
         {
+          search: options.search,
           platforms: options.platforms,
           genres: options.genres,
           authors: options.authors,
