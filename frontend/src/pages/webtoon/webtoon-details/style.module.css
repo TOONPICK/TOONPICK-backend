@@ -107,6 +107,10 @@
   margin-top: 16px;
 }
 
+.webtoonTabs {
+  margin-top: 24px;
+}
+
 .header {
   background: var(--color-surface);
   border-radius: 16px;

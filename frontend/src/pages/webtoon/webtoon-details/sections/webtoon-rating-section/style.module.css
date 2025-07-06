@@ -1,19 +1,16 @@
 .section {
-  background: var(--color-surface);
-  border-radius: 16px;
-  padding: 24px;
-  margin-bottom: 24px;
-  box-shadow: var(--shadow-card);
-  border: 1px solid var(--color-border);
-  transition: all 0.3s ease;
+  background: none;
+  border-radius: 0;
+  padding: 0;
+  margin-bottom: 0;
+  border: none;
+  transition: none;
 }
 
 .section:hover {
-  box-shadow: var(--shadow-large);
-  transform: translateY(-2px);
+  transform: none;
 }
 
-/* 평점 요약 섹션 */
 .ratingOverview {
   padding: 20px;
   border-bottom: 1px solid var(--color-border);

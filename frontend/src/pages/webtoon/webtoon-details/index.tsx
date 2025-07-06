@@ -11,6 +11,7 @@ import GenreTags from '@components/genre-tags';
 import Description from '@components/description';
 import ActionButtons from '@components/action-buttons';
 import StatusTags from '@components/status-tags';
+import Tabs from '@components/tabs';
 import styles from './style.module.css';
 
 const WebtoonDetailPage: React.FC = () => {
@@ -82,6 +83,24 @@ const WebtoonDetailPage: React.FC = () => {
     console.log('Report webtoon');
   };
 
+  const tabs = [
+    {
+      id: 'rating',
+      label: '평가',
+      content: <WebtoonRatingSection webtoon={webtoon} />
+    },
+    {
+      id: 'analysis',
+      label: '분석',
+      content: <WebtoonAnalysisSection webtoon={webtoon} />
+    },
+    {
+      id: 'recommendation',
+      label: '추천',
+      content: <WebtoonRecommendationSection webtoon={webtoon} />
+    }
+  ];
+
   return (
     <div className={styles.container}>
       {/* 웹툰 기본 정보 섹션 */}
@@ -115,9 +134,8 @@ const WebtoonDetailPage: React.FC = () => {
         </div>
       </section>
 
-      <WebtoonRatingSection webtoon={webtoon} />
-      <WebtoonAnalysisSection webtoon={webtoon} />
-      <WebtoonRecommendationSection webtoon={webtoon} />
+      {/* 탭 섹션 */}
+      <Tabs tabs={tabs} defaultActiveTab="rating" className={styles.webtoonTabs} />
     </div>
   );
 };
