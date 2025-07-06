@@ -572,8 +572,66 @@ input:checked + .slider:before {
 }
 
 .securityButton:hover {
+  background: var(--primary-gradient);
   transform: translateY(-2px);
+  box-shadow: var(--shadow-primary-hover);
+}
+
+.notificationLink {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  background: var(--card-background-secondary);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  transition: all 0.2s ease;
+}
+
+.notificationLink:hover {
+  background: var(--hover-bg);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.notificationInfo {
+  flex: 1;
+}
+
+.notificationLabel {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.notificationDescription {
+  display: block;
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.notificationButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: var(--primary-gradient);
+  border: none;
+  border-radius: 8px;
+  color: var(--text-inverse);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
   box-shadow: var(--shadow-primary);
+}
+
+.notificationButton:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-primary-hover);
 }
 
 @media (max-width: 768px) {
@@ -593,7 +651,6 @@ input:checked + .slider:before {
 
   .saveButton {
     align-self: stretch;
-    justify-content: center;
   }
 
   .tabNavigation {
@@ -609,7 +666,7 @@ input:checked + .slider:before {
   }
 
   .formRow {
-    grid-template-columns: 1fr;
+    flex-direction: column;
   }
 
   .profileImageWrapper {
@@ -618,13 +675,12 @@ input:checked + .slider:before {
   }
 
   .imageUploadButton {
-    width: 32px;
-    height: 32px;
+    padding: 8px;
+    font-size: 14px;
   }
 
   .privacyItem,
-  .notificationItem,
-  .accountItem {
+  .securityItem {
     flex-direction: column;
     align-items: flex-start;
     gap: 16px;
@@ -632,5 +688,16 @@ input:checked + .slider:before {
 
   .switch {
     align-self: flex-end;
+  }
+
+  .notificationLink {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .notificationButton {
+    align-self: stretch;
+    justify-content: center;
   }
 } 
