@@ -18,6 +18,22 @@ export enum SerializationStatus {
   UNKNOWN = 'UNKNOWN',
 }
 
+export enum PaidType {
+  FREE = 'FREE',   
+  PAID = 'PAID',  
+  WAIT_FREE = 'WAIT_FREE',
+  DAILY_FREE = 'DAILY_FREE'
+}
+
+export interface SeasonInfo {
+  id: number | null;
+  name: string | null;
+  startDate: string | null;
+  endDate: string | null;
+  episodeCount: number | null;
+  isActive: boolean | null; 
+}
+
 export interface Webtoon {
   id: number;
   title: string;
@@ -29,10 +45,15 @@ export interface Webtoon {
   authors: Author[];
   description: string;
   genres: Genre[];
-  totalRatings: number;
-  averageRating: number;
+  totalRatings: number | null;
+  averageRating: number | null;
   similarWebtoons: SimilarWebtoon[] | null;
   analysisData?: WebtoonAnalysisData | null;
+  ageRating: AgeRating | null;
+  paidType: PaidType | null;
+  totalEpisodes: number | null;
+  freeEpisodes: number | null;
+  seasons: SeasonInfo[] | null;
 }
 
 export interface Author {

@@ -56,8 +56,6 @@ const WebtoonDetailPage: React.FC = () => {
     return <div className={styles.error}>웹툰을 찾을 수 없습니다.</div>;
   }
 
-
-
   const handleBookmarkToggle = (isBookmarked: boolean) => {
     // TODO: 북마크 토글 API 호출
     console.log('Bookmark toggled:', isBookmarked);
@@ -110,7 +108,9 @@ const WebtoonDetailPage: React.FC = () => {
             <Thumbnail src={webtoon.thumbnailUrl} alt={webtoon.title} />
           </div>
           <div className={styles.rightSection}>
-            <div className={styles.topRow}>
+            <div className={styles.topMetaRow}>
+              <span className={styles.ageRating}>{webtoon.ageRating || (webtoon.isAdult ? '19' : 'ALL')}</span>
+              <span className={styles.platform}>{webtoon.platform}</span>
               <StatusTags status={webtoon.status} isAdult={webtoon.isAdult} />
               <ActionButtons
                 onBookmarkToggle={handleBookmarkToggle}
@@ -124,7 +124,22 @@ const WebtoonDetailPage: React.FC = () => {
             <div className={styles.authorSection}>
               <AuthorText authors={webtoon.authors} />
             </div>
-            <div className={styles.genreSection}>
+            <div className={styles.infoRow}>
+              <span className={styles.status}>{webtoon.status === SerializationStatus.HIATUS ? '휴재' : webtoon.status === SerializationStatus.ONGOING ? '연재' : webtoon.status}</span>
+              <span className={styles.paidType}>{webtoon.paidType || '-'}</span>
+              <span className={styles.totalEpisodes}>총 {webtoon.totalEpisodes ?? '-'}화</span>
+              <span className={styles.freeEpisodes}>{webtoon.freeEpisodes ? `${webtoon.freeEpisodes}화 무료` : ''}</span>
+            </div>
+            {webtoon.seasons && webtoon.seasons.length > 0 && (
+              <div className={styles.seasonInfo}>
+                {webtoon.seasons.map((season, idx) => (
+                  <div key={idx} className={styles.seasonRow}>
+                    시즌 {season.name || idx + 1} : {season.startDate || '-'} ~ {season.endDate ? season.endDate : '연재중'}
+                  </div>
+                ))}
+              </div>
+            )}
+            <div className={styles.tagsSection}>
               <GenreTags genres={webtoon.genres} />
             </div>
             <div className={styles.descriptionSection}>
@@ -133,8 +148,7 @@ const WebtoonDetailPage: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* 탭 섹션 */}
+      {/* 탭 섹션은 그대로 */}
       <Tabs tabs={tabs} defaultActiveTab="rating" className={styles.webtoonTabs} />
     </div>
   );

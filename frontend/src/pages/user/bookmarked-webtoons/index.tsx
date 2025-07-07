@@ -62,8 +62,10 @@ const BookmarkedWebtoonsPage: React.FC = () => {
           </div>
           <div className={styles.statCard}>
             <div className={styles.statNumber}>
-              {bookmarkedWebtoons.length > 0 
-                ? (bookmarkedWebtoons.reduce((sum, webtoon) => sum + webtoon.averageRating, 0) / bookmarkedWebtoons.length).toFixed(1)
+              {bookmarkedWebtoons.length > 0
+                ? (
+                    bookmarkedWebtoons.reduce((sum, webtoon) => sum + (webtoon.averageRating ?? 0), 0) / bookmarkedWebtoons.length
+                  ).toFixed(1)
                 : '0.0'
               }
             </div>

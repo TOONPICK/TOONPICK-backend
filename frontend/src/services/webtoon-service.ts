@@ -240,6 +240,67 @@ class WebtoonService {
     }
   }
 
+  // 유사 웹툰 추천
+  public async getSimilarWebtoons(webtoonId: number): Promise<Response<Webtoon[]>> {
+    if (isDev) {
+      // 더미 데이터에서 일부 랜덤 웹툰 반환
+      return { success: true, data: dummyWebtoonList.slice(0, 4) };
+    }
+    try {
+      const response = await api.get<Webtoon[]>(`/api/v1/webtoons/${webtoonId}/similar`);
+      return { success: true, data: response.data };
+    } catch (error) {
+      return this.handleError(error);
+    }
+  }
+
+  // 유저 기반 유사 웹툰 추천
+  public async getUserSimilarWebtoons(webtoonId: number): Promise<Response<Webtoon[]>> {
+    if (isDev) {
+      // 더미 데이터에서 일부 랜덤 웹툰 반환
+      return { success: true, data: dummyWebtoonList.slice(0, 4) };
+    }
+    try {
+      const response = await api.get<Webtoon[]>(`/api/v1/webtoons/${webtoonId}/user-similar`);
+      return { success: true, data: response.data };
+    } catch (error) {
+      return this.handleError(error);
+    }
+  }
+
+  // 같은 작가의 웹툰 추천
+  public async getSameAuthorWebtoons(webtoonId: number): Promise<Response<Webtoon[]>> {
+    if (isDev) {
+      // 더미 데이터에서 같은 작가의 웹툰 반환 (id 1번 작가 기준)
+      const main = dummyWebtoonList.find(w => w.id === webtoonId);
+      if (!main) return { success: true, data: [] };
+      const authorNames = main.authors.map(a => a.name);
+      const sameAuthor = dummyWebtoonList.filter(w => w.id !== webtoonId && w.authors.some(a => authorNames.includes(a.name)));
+      return { success: true, data: sameAuthor.slice(0, 4) };
+    }
+    try {
+      const response = await api.get<Webtoon[]>(`/api/v1/webtoons/${webtoonId}/same-author`);
+      return { success: true, data: response.data };
+    } catch (error) {
+      return this.handleError(error);
+    }
+  }
+
+  // 랜덤 추천 웹툰
+  public async getRandomWebtoons(size: number = 4): Promise<Response<Webtoon[]>> {
+    if (isDev) {
+      // 더미 데이터에서 랜덤 추출
+      const shuffled = [...dummyWebtoonList].sort(() => Math.random() - 0.5);
+      return { success: true, data: shuffled.slice(0, size) };
+    }
+    try {
+      const response = await api.get<Webtoon[]>(`/api/v1/webtoons/random`, { params: { size } });
+      return { success: true, data: response.data };
+    } catch (error) {
+      return this.handleError(error);
+    }
+  }
+
   // 오류 처리
   private handleError(error: any): { success: false; message: string } {
     console.error('API Error:', error);

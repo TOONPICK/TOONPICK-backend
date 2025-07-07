@@ -62,8 +62,10 @@ const MasterpieceWebtoonsPage: React.FC = () => {
           </div>
           <div className={styles.statCard}>
             <div className={styles.statNumber}>
-              {masterpieceWebtoons.length > 0 
-                ? (masterpieceWebtoons.reduce((sum, webtoon) => sum + webtoon.averageRating, 0) / masterpieceWebtoons.length).toFixed(1)
+              {masterpieceWebtoons.length > 0
+                ? (
+                    masterpieceWebtoons.reduce((sum, webtoon) => sum + (webtoon.averageRating ?? 0), 0) / masterpieceWebtoons.length
+                  ).toFixed(1)
                 : '0.0'
               }
             </div>

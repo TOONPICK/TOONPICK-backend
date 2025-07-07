@@ -85,7 +85,9 @@ const ReadingTab: React.FC<ReadingTabProps> = ({ memberProfile }) => {
                 />
                 <div className={styles.webtoonInfo}>
                   <h4 className={styles.webtoonTitle}>{webtoon.title}</h4>
-                  <p className={styles.rating}>★ {webtoon.averageRating.toFixed(1)}</p>
+                  <p className={styles.rating}>
+                    ★ {webtoon.averageRating != null ? webtoon.averageRating.toFixed(1) : '-'}
+                  </p>
                 </div>
               </div>
             ))

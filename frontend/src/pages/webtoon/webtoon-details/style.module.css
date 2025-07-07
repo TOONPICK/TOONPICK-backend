@@ -41,417 +41,179 @@
 }
 
 .container {
-  max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
-  background: var(--color-background);
+  padding: 32px 16px;
   min-height: 100vh;
 }
 
 .basicInfoSection {
-  background: var(--color-surface);
-  border-radius: 16px;
-  padding: 24px;
-  margin-bottom: 24px;
-  border: 1px solid var(--color-border);
+  background: #fff;
+  padding: 36px 32px;
+  margin-bottom: 32px;
+  border: none;
+  flex-direction: row;
+  align-items: flex-start;
 }
 
 .contentContainer {
   display: flex;
   align-items: flex-start;
-  gap: 24px;
+  gap: 40px;
 }
 
 .leftSection {
   flex-shrink: 0;
-  width: 200px;
-  height: 280px;
-  border-radius: 12px;
+  width: 350px;
+  height: 500px;
   overflow: hidden;
-  border: 2px solid var(--color-border);
+  border: none;
 }
 
 .rightSection {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
+  padding: 24px 28px;
 }
 
-.topRow {
+.topMetaRow {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 16px;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+  color: #888;
+  font-weight: 500;
 }
 
+.ageRating {
+  background: #222;
+  color: #fff;
+  border-radius: 8px;
+  padding: 2px 10px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
 
+.platform {
+  color: #4a90e2;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.moreMenu {
+  margin-left: auto;
+  font-size: 20px;
+  color: #bbb;
+  cursor: pointer;
+}
 
 .title {
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--color-text-primary);
-  margin: 0;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #222;
+  margin: 0 0 4px 0;
   line-height: 1.2;
 }
 
 .authorSection {
-  margin-top: 8px;
+  margin-top: 0;
+  font-size: 1rem;
+  color: #666;
 }
 
-.genreSection {
+.infoRow {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  background: #f3f5f8;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #3a3a3a;
+  margin: 8px 0 0 0;
+}
+
+.status {
+  color: #4a90e2;
+  font-weight: 700;
+}
+
+.paidType {
+  color: #e67e22;
+}
+
+.totalEpisodes {
+  color: #222;
+}
+
+.freeEpisodes {
+  color: #27ae60;
+}
+
+.seasonInfo {
+  margin: 10px 0 0 0;
+  font-size: 14px;
+  color: #888;
+  font-weight: 500;
+}
+
+.seasonRow {
+  margin-bottom: 2px;
+}
+
+.tagsSection {
   margin-top: 8px;
 }
 
 .descriptionSection {
-  margin-top: 16px;
+  margin-top: 10px;
+  height: 100px;
+  color: #444;
+  font-size: 15px;
+  line-height: 1.7;
 }
 
-.webtoonTabs {
-  margin-top: 24px;
-}
+/* Remove divider styles if present */
+.divider { display: none !important; }
 
-.header {
-  background: var(--color-surface);
-  border-radius: 16px;
-  padding: 24px;
-  margin-bottom: 24px;
-  border: 1px solid var(--color-border);
-}
-
-.headerContent {
-  display: flex;
-  align-items: flex-start;
-  gap: 24px;
-}
-
-.thumbnailSection {
-  flex-shrink: 0;
-  width: 200px;
-  height: 280px;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: var(--shadow-medium);
-  border: 2px solid var(--color-border);
-}
-
-.thumbnailSection img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.infoSection {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.titleRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 16px;
-}
-
-.title {
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--color-text-primary);
-  margin: 0;
-  line-height: 1.2;
-}
-
-.actionButtons {
-  display: flex;
-  gap: 8px;
-  flex-shrink: 0;
-}
-
-.actionButton {
-  padding: 8px 12px;
-  border: 1px solid var(--color-border);
-  background: var(--color-surface);
-  color: var(--color-text-secondary);
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.actionButton:hover {
-  background: var(--color-primary);
-  color: white;
-  border-color: var(--color-primary);
-  transform: translateY(-1px);
-}
-
-.actionButton.primary {
-  background: var(--color-primary);
-  color: white;
-  border-color: var(--color-primary);
-}
-
-.actionButton.primary:hover {
-  background: var(--color-primary-dark);
-  border-color: var(--color-primary-dark);
-}
-
-.metaInfo {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin-top: 8px;
-}
-
-.metaItem {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 14px;
-  color: var(--color-text-secondary);
-}
-
-.metaLabel {
-  font-weight: 600;
-  color: var(--color-text-tertiary);
-}
-
-.metaValue {
-  color: var(--color-text-secondary);
-}
-
-.statusBadge {
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.statusBadge.ongoing {
-  background: var(--color-success-light);
-  color: var(--color-success);
-  border: 1px solid var(--color-success);
-}
-
-.statusBadge.completed {
-  background: var(--color-info-light);
-  color: var(--color-info);
-  border: 1px solid var(--color-info);
-}
-
-.statusBadge.hiatus {
-  background: var(--color-warning-light);
-  color: var(--color-warning);
-  border: 1px solid var(--color-warning);
-}
-
-.adultBadge {
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-  background: var(--color-error-light);
-  color: var(--color-error);
-  border: 1px solid var(--color-error);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.genreTags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 8px;
-}
-
-.genreTag {
-  padding: 4px 12px;
-  background: var(--color-surface-secondary);
-  color: var(--color-text-secondary);
-  border: 1px solid var(--color-border);
-  border-radius: 16px;
-  font-size: 12px;
-  font-weight: 500;
-  transition: all 0.2s ease;
-}
-
-.genreTag:hover {
-  background: var(--color-primary);
-  color: white;
-  border-color: var(--color-primary);
-}
-
-.description {
-  color: var(--color-text-secondary);
-  line-height: 1.6;
-  font-size: 14px;
-  margin-top: 8px;
-}
-
-.sectionsContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.section {
-  background: var(--color-surface);
-  border-radius: 16px;
-  padding: 24px;
-  border: 1px solid var(--color-border);
-  transition: all 0.3s ease;
-}
-
-.section:hover {
-  transform: translateY(-2px);
-}
-
-.sectionTitle {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--color-text-primary);
-  margin: 0 0 20px 0;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.sectionTitle::before {
-  content: '';
-  width: 4px;
-  height: 24px;
-  background: var(--gradient-primary);
-  border-radius: 2px;
-}
-
-.loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 400px;
-}
-
-/* 반응형 스타일 */
-@media (max-width: 768px) {
-  .container {
-    padding: 16px;
-  }
-
-  .basicInfoSection {
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-
+/* Responsive improvements */
+@media (max-width: 900px) {
   .contentContainer {
     flex-direction: column;
-    gap: 20px;
+    gap: 24px;
   }
-
+  .rightSection {
+    padding: 18px 10px;
+  }
   .leftSection {
     width: 100%;
-    max-width: 200px;
-    height: 280px;
+    max-width: 220px;
     margin: 0 auto;
-  }
-
-  .topRow {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-
-  .title {
-    font-size: 24px;
-  }
-
-  .actionButtons {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .actionButton {
-    flex: 1;
-    justify-content: center;
-  }
-  
-  .header {
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-  
-  .headerContent {
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .thumbnailSection {
-    width: 100%;
-    max-width: 200px;
-    margin: 0 auto;
-  }
-  
-  .titleRow {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  
-  .metaInfo {
-    flex-direction: column;
-    gap: 8px;
-  }
-  
-  .section {
-    padding: 20px;
-  }
-  
-  .sectionTitle {
-    font-size: 18px;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .container {
-    padding: 12px;
+    padding: 8px;
   }
-
   .basicInfoSection {
-    padding: 16px;
-    margin-bottom: 16px;
+    padding: 12px 4px;
   }
-
-  .contentContainer {
-    gap: 16px;
+  .rightSection {
+    padding: 10px 4px;
   }
-
   .leftSection {
-    width: 100%;
-    max-width: 160px;
-    height: 224px;
+    max-width: 140px;
+    height: 180px;
   }
-
   .title {
-    font-size: 20px;
+    font-size: 1.2rem;
   }
-
-  .actionButtons {
-    flex-direction: column;
-    gap: 8px;
-  }
-  
-  .header {
-    padding: 16px;
-  }
-  
-  .section {
-    padding: 16px;
+  .infoRow {
+    font-size: 13px;
+    padding: 7px 8px;
   }
 }

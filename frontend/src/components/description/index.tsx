@@ -23,7 +23,7 @@ const Description: React.FC<DescriptionProps> = ({
     <div className={`${styles.descriptionContainer} ${className || ''}`}>
       <p 
         className={`${styles.descriptionText} ${expanded ? styles.expanded : ''}`}
-        style={{ maxHeight: expanded ? 'none' : maxHeight }}
+        style={{ maxHeight: expanded ? 'none' : maxHeight, overflow: 'hidden' }}
       >
         {text}
       </p>

@@ -1,4 +1,4 @@
-import { Webtoon, Platform, SerializationStatus, Genre, Author } from '@models/webtoon';
+import { Webtoon, Platform, SerializationStatus, Genre, Author, PaidType, SeasonInfo } from '@models/webtoon';
 
 // 단일 웹툰 더미 데이터
 export const dummyWebtoon: Webtoon = {
@@ -13,7 +13,7 @@ export const dummyWebtoon: Webtoon = {
     { id: 1, role: 'Writer', name: '홍길동' },
     { id: 2, role: 'Artist', name: '김작가' }
   ],
-  description: '이것은 더미 웹툰 설명입니다.',
+  description: '이것은 더미 웹툰 설명입니다.\n이것은 더미 웹툰 설명입니다.이것은 더미 웹툰 설명입니다.\n이것은 더미 웹툰 설명입니다.\n이것은 더미 웹툰 설명입니다.이것은 더미 웹툰 설명입니다.\n\n\n\n\n\n이것은 더미 웹툰 설명입니다.이것은 더미 웹툰 설명입니다. ',
   genres: [
     { id: 1, name: '판타지' },
     { id: 2, name: '액션' }
@@ -21,7 +21,21 @@ export const dummyWebtoon: Webtoon = {
   totalRatings: 100,
   averageRating: 4.5,
   similarWebtoons: null,
-  analysisData: null
+  analysisData: null,
+  ageRating: 'TEEN',
+  paidType: PaidType.FREE,
+  totalEpisodes: 50,
+  freeEpisodes: 50,
+  seasons: [
+    {
+      id: 1,
+      name: '시즌1',
+      startDate: '2024-01-01',
+      endDate: null,
+      episodeCount: 50,
+      isActive: true
+    }
+  ]
 };
 
 
@@ -39,7 +53,21 @@ export const dummyWebtoonList: Webtoon[] = [
     platform: Platform.KAKAO,
     publishDay: 'TUESDAY',
     genres: [{ id: 3, name: '로맨스' }],
-    averageRating: 3.8
+    averageRating: 3.8,
+    ageRating: 'ALL',
+    paidType: PaidType.WAIT_FREE,
+    totalEpisodes: 30,
+    freeEpisodes: 20,
+    seasons: [
+      {
+        id: 1,
+        name: '시즌1',
+        startDate: '2024-02-01',
+        endDate: null,
+        episodeCount: 30,
+        isActive: true
+      }
+    ]
   },
   {
     ...dummyWebtoon,
@@ -53,7 +81,29 @@ export const dummyWebtoonList: Webtoon[] = [
     platform: Platform.LEZHIN,
     publishDay: 'WEDNESDAY',
     genres: [{ id: 4, name: '모험' }],
-    averageRating: 4.2
+    averageRating: 4.2,
+    ageRating: 'TEEN',
+    paidType: PaidType.PAID,
+    totalEpisodes: 80,
+    freeEpisodes: 0,
+    seasons: [
+      {
+        id: 1,
+        name: '시즌1',
+        startDate: '2023-06-01',
+        endDate: '2024-01-31',
+        episodeCount: 40,
+        isActive: false
+      },
+      {
+        id: 2,
+        name: '시즌2',
+        startDate: '2024-02-01',
+        endDate: null,
+        episodeCount: 40,
+        isActive: true
+      }
+    ]
   },
   {
     ...dummyWebtoon,
@@ -67,7 +117,21 @@ export const dummyWebtoonList: Webtoon[] = [
     platform: Platform.BOMTOON,
     publishDay: 'THURSDAY',
     genres: [{ id: 5, name: '스릴러' }],
-    averageRating: 4.0
+    averageRating: 4.0,
+    ageRating: 'ADULT',
+    paidType: PaidType.DAILY_FREE,
+    totalEpisodes: 60,
+    freeEpisodes: 60,
+    seasons: [
+      {
+        id: 1,
+        name: '시즌1',
+        startDate: '2024-03-01',
+        endDate: null,
+        episodeCount: 60,
+        isActive: true
+      }
+    ]
   },
   {
     ...dummyWebtoon,
@@ -81,7 +145,21 @@ export const dummyWebtoonList: Webtoon[] = [
     platform: Platform.KAKAOPAGE,
     publishDay: 'FRIDAY',
     genres: [{ id: 6, name: '코미디' }],
-    averageRating: 3.5
+    averageRating: 3.5,
+    ageRating: 'ALL',
+    paidType: PaidType.FREE,
+    totalEpisodes: 25,
+    freeEpisodes: 25,
+    seasons: [
+      {
+        id: 1,
+        name: '시즌1',
+        startDate: '2024-04-01',
+        endDate: null,
+        episodeCount: 25,
+        isActive: true
+      }
+    ]
   },
   {
     ...dummyWebtoon,
@@ -95,7 +173,29 @@ export const dummyWebtoonList: Webtoon[] = [
     platform: Platform.NAVER,
     publishDay: 'SATURDAY',
     genres: [{ id: 3, name: '로맨스' }, { id: 1, name: '판타지' }],
-    averageRating: 4.8
+    averageRating: 4.8,
+    ageRating: 'TEEN',
+    paidType: PaidType.WAIT_FREE,
+    totalEpisodes: 100,
+    freeEpisodes: 80,
+    seasons: [
+      {
+        id: 1,
+        name: '시즌1',
+        startDate: '2023-09-01',
+        endDate: '2024-03-31',
+        episodeCount: 50,
+        isActive: false
+      },
+      {
+        id: 2,
+        name: '시즌2',
+        startDate: '2024-04-01',
+        endDate: null,
+        episodeCount: 50,
+        isActive: true
+      }
+    ]
   },
   {
     ...dummyWebtoon,
@@ -109,7 +209,21 @@ export const dummyWebtoonList: Webtoon[] = [
     platform: Platform.KAKAO,
     publishDay: 'SUNDAY',
     genres: [{ id: 2, name: '액션' }],
-    averageRating: 4.1
+    averageRating: 4.1,
+    ageRating: 'TEEN',
+    paidType: PaidType.PAID,
+    totalEpisodes: 45,
+    freeEpisodes: 10,
+    seasons: [
+      {
+        id: 1,
+        name: '시즌1',
+        startDate: '2024-01-15',
+        endDate: null,
+        episodeCount: 45,
+        isActive: true
+      }
+    ]
   },
   {
     ...dummyWebtoon,
@@ -123,7 +237,21 @@ export const dummyWebtoonList: Webtoon[] = [
     platform: Platform.LEZHIN,
     publishDay: 'MONDAY',
     genres: [{ id: 7, name: '드라마' }],
-    averageRating: 3.9
+    averageRating: 3.9,
+    ageRating: 'TEEN',
+    paidType: PaidType.DAILY_FREE,
+    totalEpisodes: 35,
+    freeEpisodes: 35,
+    seasons: [
+      {
+        id: 1,
+        name: '시즌1',
+        startDate: '2024-02-15',
+        endDate: null,
+        episodeCount: 35,
+        isActive: true
+      }
+    ]
   },
   {
     ...dummyWebtoon,
@@ -137,7 +265,29 @@ export const dummyWebtoonList: Webtoon[] = [
     platform: Platform.BOMTOON,
     publishDay: 'TUESDAY',
     genres: [{ id: 8, name: '미스터리' }],
-    averageRating: 4.3
+    averageRating: 4.3,
+    ageRating: 'ADULT',
+    paidType: PaidType.PAID,
+    totalEpisodes: 70,
+    freeEpisodes: 5,
+    seasons: [
+      {
+        id: 1,
+        name: '시즌1',
+        startDate: '2023-11-01',
+        endDate: '2024-04-30',
+        episodeCount: 40,
+        isActive: false
+      },
+      {
+        id: 2,
+        name: '시즌2',
+        startDate: '2024-05-01',
+        endDate: null,
+        episodeCount: 30,
+        isActive: true
+      }
+    ]
   },
   {
     ...dummyWebtoon,
@@ -151,7 +301,21 @@ export const dummyWebtoonList: Webtoon[] = [
     platform: Platform.KAKAOPAGE,
     publishDay: 'WEDNESDAY',
     genres: [{ id: 9, name: 'SF' }],
-    averageRating: 4.6
+    averageRating: 4.6,
+    ageRating: 'TEEN',
+    paidType: PaidType.WAIT_FREE,
+    totalEpisodes: 55,
+    freeEpisodes: 40,
+    seasons: [
+      {
+        id: 1,
+        name: '시즌1',
+        startDate: '2024-03-15',
+        endDate: null,
+        episodeCount: 55,
+        isActive: true
+      }
+    ]
   },
   {
     ...dummyWebtoon,
@@ -165,7 +329,21 @@ export const dummyWebtoonList: Webtoon[] = [
     platform: Platform.NAVER,
     publishDay: 'THURSDAY',
     genres: [{ id: 10, name: '일상' }],
-    averageRating: 4.9
+    averageRating: 4.9,
+    ageRating: 'ALL',
+    paidType: PaidType.FREE,
+    totalEpisodes: 20,
+    freeEpisodes: 20,
+    seasons: [
+      {
+        id: 1,
+        name: '시즌1',
+        startDate: '2024-05-01',
+        endDate: null,
+        episodeCount: 20,
+        isActive: true
+      }
+    ]
   },
   {
     ...dummyWebtoon,
@@ -179,7 +357,29 @@ export const dummyWebtoonList: Webtoon[] = [
     platform: Platform.KAKAO,
     publishDay: 'FRIDAY',
     genres: [{ id: 11, name: '스포츠' }],
-    averageRating: 4.2
+    averageRating: 4.2,
+    ageRating: 'TEEN',
+    paidType: PaidType.WAIT_FREE,
+    totalEpisodes: 65,
+    freeEpisodes: 50,
+    seasons: [
+      {
+        id: 1,
+        name: '시즌1',
+        startDate: '2023-12-01',
+        endDate: '2024-05-31',
+        episodeCount: 35,
+        isActive: false
+      },
+      {
+        id: 2,
+        name: '시즌2',
+        startDate: '2024-06-01',
+        endDate: null,
+        episodeCount: 30,
+        isActive: true
+      }
+    ]
   },
   {
     ...dummyWebtoon,
@@ -193,7 +393,21 @@ export const dummyWebtoonList: Webtoon[] = [
     platform: Platform.LEZHIN,
     publishDay: 'SATURDAY',
     genres: [{ id: 3, name: '로맨스' }, { id: 12, name: '학원' }],
-    averageRating: 4.7
+    averageRating: 4.7,
+    ageRating: 'TEEN',
+    paidType: PaidType.PAID,
+    totalEpisodes: 40,
+    freeEpisodes: 15,
+    seasons: [
+      {
+        id: 1,
+        name: '시즌1',
+        startDate: '2024-01-01',
+        endDate: null,
+        episodeCount: 40,
+        isActive: true
+      }
+    ]
   },
   {
     ...dummyWebtoon,
@@ -207,7 +421,29 @@ export const dummyWebtoonList: Webtoon[] = [
     platform: Platform.BOMTOON,
     publishDay: 'SUNDAY',
     genres: [{ id: 13, name: '무협' }],
-    averageRating: 4.4
+    averageRating: 4.4,
+    ageRating: 'TEEN',
+    paidType: PaidType.DAILY_FREE,
+    totalEpisodes: 75,
+    freeEpisodes: 75,
+    seasons: [
+      {
+        id: 1,
+        name: '시즌1',
+        startDate: '2023-08-01',
+        endDate: '2024-02-29',
+        episodeCount: 40,
+        isActive: false
+      },
+      {
+        id: 2,
+        name: '시즌2',
+        startDate: '2024-03-01',
+        endDate: null,
+        episodeCount: 35,
+        isActive: true
+      }
+    ]
   },
   {
     ...dummyWebtoon,
@@ -222,7 +458,21 @@ export const dummyWebtoonList: Webtoon[] = [
     publishDay: 'MONDAY',
     genres: [{ id: 14, name: '호러' }],
     averageRating: 4.1,
-    isAdult: true
+    isAdult: true,
+    ageRating: 'ADULT',
+    paidType: PaidType.PAID,
+    totalEpisodes: 30,
+    freeEpisodes: 3,
+    seasons: [
+      {
+        id: 1,
+        name: '시즌1',
+        startDate: '2024-04-01',
+        endDate: null,
+        episodeCount: 30,
+        isActive: true
+      }
+    ]
   },
   {
     ...dummyWebtoon,
@@ -236,7 +486,21 @@ export const dummyWebtoonList: Webtoon[] = [
     platform: Platform.NAVER,
     publishDay: 'TUESDAY',
     genres: [{ id: 15, name: '음악' }],
-    averageRating: 4.3
+    averageRating: 4.3,
+    ageRating: 'ALL',
+    paidType: PaidType.FREE,
+    totalEpisodes: 15,
+    freeEpisodes: 15,
+    seasons: [
+      {
+        id: 1,
+        name: '시즌1',
+        startDate: '2024-06-01',
+        endDate: null,
+        episodeCount: 15,
+        isActive: true
+      }
+    ]
   },
   {
     ...dummyWebtoon,
@@ -250,7 +514,21 @@ export const dummyWebtoonList: Webtoon[] = [
     platform: Platform.KAKAO,
     publishDay: 'WEDNESDAY',
     genres: [{ id: 16, name: '요리' }],
-    averageRating: 4.5
+    averageRating: 4.5,
+    ageRating: 'ALL',
+    paidType: PaidType.WAIT_FREE,
+    totalEpisodes: 28,
+    freeEpisodes: 20,
+    seasons: [
+      {
+        id: 1,
+        name: '시즌1',
+        startDate: '2024-02-01',
+        endDate: null,
+        episodeCount: 28,
+        isActive: true
+      }
+    ]
   },
   {
     ...dummyWebtoon,
@@ -264,7 +542,21 @@ export const dummyWebtoonList: Webtoon[] = [
     platform: Platform.LEZHIN,
     publishDay: 'THURSDAY',
     genres: [{ id: 17, name: '여행' }],
-    averageRating: 4.0
+    averageRating: 4.0,
+    ageRating: 'ALL',
+    paidType: PaidType.DAILY_FREE,
+    totalEpisodes: 12,
+    freeEpisodes: 12,
+    seasons: [
+      {
+        id: 1,
+        name: '시즌1',
+        startDate: '2024-07-01',
+        endDate: null,
+        episodeCount: 12,
+        isActive: true
+      }
+    ]
   },
   {
     ...dummyWebtoon,
@@ -322,7 +614,21 @@ export const dummyWebtoonList: Webtoon[] = [
     publishDay: 'MONDAY',
     genres: [{ id: 1, name: '판타지' }],
     averageRating: 4.0,
-    status: SerializationStatus.HIATUS
+    status: SerializationStatus.HIATUS,
+    ageRating: 'ALL',
+    paidType: PaidType.FREE,
+    totalEpisodes: 50,
+    freeEpisodes: 5,
+    seasons: [
+      {
+        id: 1,
+        name: '시즌1',
+        startDate: '2024-01-01',
+        endDate: null,
+        episodeCount: 50,
+        isActive: true
+      }
+    ]
   },
   {
     ...dummyWebtoon,
@@ -337,7 +643,21 @@ export const dummyWebtoonList: Webtoon[] = [
     publishDay: 'TUESDAY',
     genres: [{ id: 3, name: '로맨스' }, { id: 20, name: '성인' }],
     averageRating: 4.3,
-    isAdult: true
+    isAdult: true,
+    ageRating: 'ADULT',
+    paidType: PaidType.PAID,
+    totalEpisodes: 50,
+    freeEpisodes: 5,
+    seasons: [
+      {
+        id: 1,
+        name: '시즌1',
+        startDate: '2024-01-01',
+        endDate: null,
+        episodeCount: 50,
+        isActive: true
+      }
+    ]
   },
   {
     ...dummyWebtoon,
@@ -352,6 +672,20 @@ export const dummyWebtoonList: Webtoon[] = [
     publishDay: 'WEDNESDAY',
     genres: [{ id: 5, name: '스릴러' }, { id: 20, name: '성인' }],
     averageRating: 4.1,
-    isAdult: true
+    isAdult: true,
+    ageRating: 'ADULT',
+    paidType: PaidType.PAID,
+    totalEpisodes: 50,
+    freeEpisodes: 5,
+    seasons: [
+      {
+        id: 1,
+        name: '시즌1',
+        startDate: '2024-01-01',
+        endDate: null,
+        episodeCount: 50,
+        isActive: true
+      }
+    ]
   }
 ]; 

@@ -16,7 +16,12 @@ const collectionWebtoons: Webtoon[] = [
     genres: [{ id: 1, name: '액션' }, { id: 2, name: '판타지' }],
     totalRatings: 1250,
     averageRating: 4.8,
-    similarWebtoons: null
+    similarWebtoons: null,
+    ageRating: null,
+    paidType: null,
+    totalEpisodes: null,
+    freeEpisodes: null,
+    seasons: null
   },
   {
     id: 102,
@@ -31,7 +36,12 @@ const collectionWebtoons: Webtoon[] = [
     genres: [{ id: 3, name: '로맨스' }, { id: 4, name: '일상' }],
     totalRatings: 980,
     averageRating: 4.6,
-    similarWebtoons: null
+    similarWebtoons: null,
+    ageRating: null,
+    paidType: null,
+    totalEpisodes: null,
+    freeEpisodes: null,
+    seasons: null
   },
   {
     id: 103,
@@ -46,7 +56,12 @@ const collectionWebtoons: Webtoon[] = [
     genres: [{ id: 4, name: '일상' }, { id: 5, name: '에세이' }],
     totalRatings: 2100,
     averageRating: 4.9,
-    similarWebtoons: null
+    similarWebtoons: null,
+    ageRating: null,
+    paidType: null,
+    totalEpisodes: null,
+    freeEpisodes: null,
+    seasons: null
   },
   {
     id: 104,
@@ -61,7 +76,12 @@ const collectionWebtoons: Webtoon[] = [
     genres: [{ id: 1, name: '액션' }, { id: 2, name: '판타지' }],
     totalRatings: 1560,
     averageRating: 4.7,
-    similarWebtoons: null
+    similarWebtoons: null,
+    ageRating: null,
+    paidType: null,
+    totalEpisodes: null,
+    freeEpisodes: null,
+    seasons: null
   },
   {
     id: 105,
@@ -76,7 +96,12 @@ const collectionWebtoons: Webtoon[] = [
     genres: [{ id: 6, name: '스릴러' }, { id: 7, name: '호러' }],
     totalRatings: 890,
     averageRating: 4.5,
-    similarWebtoons: null
+    similarWebtoons: null,
+    ageRating: null,
+    paidType: null,
+    totalEpisodes: null,
+    freeEpisodes: null,
+    seasons: null
   },
   {
     id: 106,
@@ -91,7 +116,12 @@ const collectionWebtoons: Webtoon[] = [
     genres: [{ id: 1, name: '액션' }, { id: 2, name: '판타지' }],
     totalRatings: 1780,
     averageRating: 4.8,
-    similarWebtoons: null
+    similarWebtoons: null,
+    ageRating: null,
+    paidType: null,
+    totalEpisodes: null,
+    freeEpisodes: null,
+    seasons: null
   },
   {
     id: 107,
@@ -106,7 +136,12 @@ const collectionWebtoons: Webtoon[] = [
     genres: [{ id: 1, name: '액션' }, { id: 2, name: '판타지' }],
     totalRatings: 3200,
     averageRating: 4.9,
-    similarWebtoons: null
+    similarWebtoons: null,
+    ageRating: null,
+    paidType: null,
+    totalEpisodes: null,
+    freeEpisodes: null,
+    seasons: null
   },
   {
     id: 108,
@@ -121,7 +156,12 @@ const collectionWebtoons: Webtoon[] = [
     genres: [{ id: 1, name: '액션' }, { id: 2, name: '판타지' }],
     totalRatings: 4500,
     averageRating: 4.9,
-    similarWebtoons: null
+    similarWebtoons: null,
+    ageRating: null,
+    paidType: null,
+    totalEpisodes: null,
+    freeEpisodes: null,
+    seasons: null
   }
 ];
 

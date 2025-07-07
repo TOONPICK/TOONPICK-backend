@@ -42,7 +42,7 @@ const WebtoonCard: React.FC<WebtoonCardProps> = ({
   };
 
   const authors = getAuthors(webtoon.authors);
-  const averageRating = formatAverageRating(webtoon.averageRating);
+  const averageRating = formatAverageRating(webtoon.averageRating ?? 0);
   const truncatedTitle = truncateTitle(webtoon.title);
 
   const cardContent = (

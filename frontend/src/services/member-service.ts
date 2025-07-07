@@ -3,7 +3,6 @@ import { MemberProfile } from '@models/member';
 import { Webtoon } from '@models/webtoon';
 import { 
   dummyMemberProfile, 
-  dummyBookmarkedWebtoons, 
   dummyCollections, 
   Collection,
   dummyWebtoonList,
@@ -53,7 +52,7 @@ class MemberService {
   // 북마크한 웹툰 목록 가져오기
   public async getBookmarkedWebtoons(): Promise<Response<Webtoon[]>> {
     if (isDev) {
-      return { success: true, data: dummyBookmarkedWebtoons };
+      return { success: true, data: dummyWebtoonList.slice(0, 5) };
     }
     try {
       const response = await api.get<Webtoon[]>('/api/secure/member/bookmarks');
