@@ -23,197 +23,420 @@
 
 .similarWebtoonsList {
   display: flex;
-  gap: 0;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 16px 0;
 }
 
 .similarWebtoonItem {
-  background: none;
-  padding: 0;
-  width: 100px;
+  background: var(--card-background);
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color-light);
+  min-width: 120px;
   text-align: center;
+  transition: all 0.3s ease;
+}
+
+.similarWebtoonItem:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
 }
 
 .actionButtons,
 .action-buttons {
   display: flex;
-  gap: 0;
+  gap: 12px;
   margin-top: 0;
 }
 
 .container {
   margin: 0 auto;
-  padding: 32px 16px;
+  padding: 0;
   min-height: 100vh;
+  background: var(--body-background);
 }
 
 .basicInfoSection {
-  background: #fff;
-  padding: 36px 32px;
-  margin-bottom: 32px;
+  background: var(--card-background);
+  padding: 0;
+  margin-bottom: 0;
   border: none;
-  flex-direction: row;
-  align-items: flex-start;
+  position: relative;
+  overflow: hidden;
+}
+
+.basicInfoSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: var(--primary-gradient);
+  opacity: 0.05;
+  z-index: 0;
 }
 
 .contentContainer {
   display: flex;
   align-items: flex-start;
-  gap: 40px;
+  gap: 48px;
+  padding: 48px 32px;
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .leftSection {
   flex-shrink: 0;
-  width: 350px;
-  height: 500px;
-  overflow: hidden;
-  border: none;
+  width: 320px;
+  position: relative;
+}
+
+.leftSection::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  border-radius: 20px;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .rightSection {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 24px 28px;
+  gap: 24px;
+  padding: 0;
 }
 
 .topMetaRow {
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-size: 15px;
-  color: #888;
+  gap: 16px;
+  font-size: 14px;
+  color: var(--text-secondary);
   font-weight: 500;
+  margin-bottom: 8px;
 }
 
 .ageRating {
-  background: #222;
-  color: #fff;
-  border-radius: 8px;
-  padding: 2px 10px;
-  font-size: 13px;
+  background: var(--primary-color);
+  color: white;
+  border-radius: 12px;
+  padding: 4px 12px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
+  box-shadow: var(--shadow-primary);
 }
 
 .platform {
-  color: #4a90e2;
+  color: var(--primary-color);
   font-weight: 600;
-  font-size: 15px;
+  font-size: 14px;
+  padding: 4px 12px;
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: 8px;
 }
 
 .moreMenu {
   margin-left: auto;
-  font-size: 20px;
-  color: #bbb;
+  font-size: 18px;
+  color: var(--text-tertiary);
   cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.moreMenu:hover {
+  color: var(--text-secondary);
 }
 
 .title {
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 800;
-  color: #222;
-  margin: 0 0 4px 0;
+  color: var(--text-primary);
+  margin: 0 0 8px 0;
   line-height: 1.2;
+  letter-spacing: -0.02em;
 }
 
 .authorSection {
-  margin-top: 0;
-  font-size: 1rem;
-  color: #666;
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  font-weight: 500;
 }
 
 .infoRow {
   display: flex;
-  gap: 18px;
+  gap: 20px;
   align-items: center;
-  background: #f3f5f8;
-  border-radius: 10px;
-  padding: 10px 18px;
-  font-size: 15px;
+  background: var(--card-background-secondary);
+  border: 1px solid var(--border-color-light);
+  border-radius: 16px;
+  padding: 16px 24px;
+  font-size: 14px;
   font-weight: 600;
-  color: #3a3a3a;
+  color: var(--text-primary);
   margin: 8px 0 0 0;
+  box-shadow: var(--shadow-sm);
 }
 
 .status {
-  color: #4a90e2;
+  color: var(--success-color);
   font-weight: 700;
+  padding: 4px 12px;
+  background: rgba(72, 187, 120, 0.1);
+  border-radius: 8px;
 }
 
 .paidType {
-  color: #e67e22;
+  color: var(--warning-color);
+  padding: 4px 12px;
+  background: rgba(237, 137, 54, 0.1);
+  border-radius: 8px;
 }
 
 .totalEpisodes {
-  color: #222;
+  color: var(--text-primary);
+  font-weight: 600;
 }
 
 .freeEpisodes {
-  color: #27ae60;
+  color: var(--success-color);
+  font-weight: 600;
+  padding: 4px 12px;
+  background: rgba(72, 187, 120, 0.1);
+  border-radius: 8px;
 }
 
 .seasonInfo {
-  margin: 10px 0 0 0;
+  margin: 12px 0 0 0;
   font-size: 14px;
-  color: #888;
+  color: var(--text-secondary);
   font-weight: 500;
+  background: var(--card-background-secondary);
+  border: 1px solid var(--border-color-light);
+  border-radius: 12px;
+  padding: 16px;
 }
 
 .seasonRow {
-  margin-bottom: 2px;
+  margin-bottom: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-color-light);
+}
+
+.seasonRow:last-child {
+  margin-bottom: 0;
+  border-bottom: none;
 }
 
 .tagsSection {
-  margin-top: 8px;
+  margin-top: 12px;
 }
 
 .descriptionSection {
-  margin-top: 10px;
-  height: 100px;
-  color: #444;
+  margin-top: 16px;
+  color: var(--text-secondary);
   font-size: 15px;
   line-height: 1.7;
+  background: var(--card-background-secondary);
+  border: 1px solid var(--border-color-light);
+  border-radius: 12px;
+  padding: 20px;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.webtoonTabs {
+  background: var(--card-background);
+  margin-top: 32px;
+  border-radius: 20px;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+/* 로딩 및 에러 상태 */
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  font-size: 18px;
+  color: var(--text-secondary);
+  background: var(--card-background);
+  border-radius: 16px;
+  margin: 32px;
+  gap: 16px;
+}
+
+.loading p {
+  margin: 0;
+  font-size: 16px;
+  color: var(--text-secondary);
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  background: var(--card-background);
+  border-radius: 16px;
+  margin: 32px;
+  border: 1px solid var(--border-color);
+}
+
+.errorContent {
+  text-align: center;
+  padding: 32px;
+  max-width: 400px;
+}
+
+.errorContent h3 {
+  margin: 0 0 16px 0;
+  font-size: 20px;
+  color: var(--error-color);
+  font-weight: 600;
+}
+
+.errorContent p {
+  margin: 0 0 24px 0;
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.retryButton {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.retryButton:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-primary);
+}
+
+.webtoonThumbnail {
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
 }
 
 /* Remove divider styles if present */
-.divider { display: none !important; }
+.divider { 
+  display: none !important; 
+}
 
 /* Responsive improvements */
+@media (max-width: 1024px) {
+  .contentContainer {
+    gap: 32px;
+    padding: 32px 24px;
+  }
+  
+  .leftSection {
+    width: 280px;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+}
+
 @media (max-width: 900px) {
   .contentContainer {
     flex-direction: column;
-    gap: 24px;
+    gap: 32px;
+    padding: 24px 20px;
   }
+  
   .rightSection {
-    padding: 18px 10px;
+    padding: 0;
   }
+  
   .leftSection {
     width: 100%;
-    max-width: 220px;
+    max-width: 280px;
     margin: 0 auto;
+  }
+  
+  .title {
+    font-size: 1.8rem;
+  }
+  
+  .infoRow {
+    flex-wrap: wrap;
+    gap: 12px;
   }
 }
 
 @media (max-width: 600px) {
   .container {
-    padding: 8px;
+    padding: 0;
   }
+  
   .basicInfoSection {
-    padding: 12px 4px;
+    padding: 0;
   }
+  
+  .contentContainer {
+    padding: 20px 16px;
+    gap: 24px;
+  }
+  
   .rightSection {
-    padding: 10px 4px;
+    padding: 0;
   }
+  
   .leftSection {
-    max-width: 140px;
-    height: 180px;
+    max-width: 200px;
   }
+  
   .title {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
   }
+  
   .infoRow {
     font-size: 13px;
-    padding: 7px 8px;
+    padding: 12px 16px;
+    gap: 8px;
   }
+  
+  .topMetaRow {
+    gap: 12px;
+    font-size: 13px;
+  }
+  
+  .descriptionSection {
+    font-size: 14px;
+    padding: 16px;
+  }
+}
+
+/* Dark mode enhancements */
+[data-theme='dark'] .basicInfoSection::before {
+  background: linear-gradient(135deg, rgba(139, 147, 255, 0.1) 0%, rgba(159, 122, 234, 0.05) 100%);
+}
+
+[data-theme='dark'] .leftSection::after {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
 }

@@ -1,3 +1,5 @@
+import { Episode } from './episode';
+
 export enum Platform {
   NAVER = 'NAVER',
   KAKAO = 'KAKAO',
@@ -54,6 +56,7 @@ export interface Webtoon {
   totalEpisodes: number | null;
   freeEpisodes: number | null;
   seasons: SeasonInfo[] | null;
+  episodes?: Episode[];
 }
 
 export interface Author {
