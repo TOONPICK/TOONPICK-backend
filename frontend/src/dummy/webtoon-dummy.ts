@@ -1,691 +1,105 @@
-import { Webtoon, Platform, SerializationStatus, Genre, Author, PaidType, SeasonInfo } from '@models/webtoon';
+import { WebtoonSummary, WebtoonDetails, Platform, SerializationStatus, Genre, Author, PaidType, SeasonInfo, DayOfWeek } from '@models/webtoon';
+import { AgeRating } from '@models/enum';
+import { Episode, WebtoonEpisodeLink, EpisodePricingType, EpisodeViewerType } from '@models/episode';
 
 // 단일 웹툰 더미 데이터
-export const dummyWebtoon: Webtoon = {
+export const dummyWebtoon: WebtoonDetails = {
   id: 1,
   title: '더미 웹툰',
   thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
-  platform: Platform.NAVER,
+  platforms: [Platform.NAVER],
   isAdult: false,
   status: SerializationStatus.ONGOING,
-  publishDay: 'MONDAY',
+  dayOfWeek: 'MONDAY',
   authors: [
     { id: 1, role: 'Writer', name: '홍길동' },
     { id: 2, role: 'Artist', name: '김작가' }
   ],
-  description: '이것은 더미 웹툰 설명입니다.\n이것은 더미 웹툰 설명입니다.이것은 더미 웹툰 설명입니다.\n이것은 더미 웹툰 설명입니다.\n이것은 더미 웹툰 설명입니다.이것은 더미 웹툰 설명입니다.\n\n\n\n\n\n이것은 더미 웹툰 설명입니다.이것은 더미 웹툰 설명입니다. ',
+  summary: '이것은 더미 웹툰 설명입니다.\n이것은 더미 웹툰 설명입니다.이것은 더미 웹툰 설명입니다.\n이것은 더미 웹툰 설명입니다.\n이것은 더미 웹툰 설명입니다.이것은 더미 웹툰 설명입니다.\n\n\n\n\n\n이것은 더미 웹툰 설명입니다.이것은 더미 웹툰 설명입니다. ',
   genres: [
     { id: 1, name: '판타지' },
     { id: 2, name: '액션' }
   ],
-  totalRatings: 100,
+  episodeCount: 100,
   averageRating: 4.5,
-  similarWebtoons: null,
-  analysisData: null,
+  publishStartDate: '2024-01-01',
+  lastUpdateDate: '2024-01-01',
   ageRating: 'TEEN',
-  paidType: PaidType.FREE,
-  totalEpisodes: 50,
-  freeEpisodes: 50,
-  seasons: [
-    {
-      id: 1,
-      name: '시즌1',
-      startDate: '2024-01-01',
-      endDate: null,
-      episodeCount: 50,
-      isActive: true
-    }
-  ]
 };
 
+// 랜덤 요소를 위한 샘플 데이터
+const titles = ['판타지 어드벤처', '로맨스의 왕', '액션 히어로', '코믹 라이프', '미스터리 나이트'];
+const genresList = [
+  [{ id: 1, name: '판타지' }, { id: 2, name: '액션' }],
+  [{ id: 3, name: '로맨스' }, { id: 4, name: '드라마' }],
+  [{ id: 5, name: '코미디' }, { id: 6, name: '일상' }],
+];
+const authorsList = [
+  [{ id: 1, role: 'Writer', name: '홍길동' }, { id: 2, role: 'Artist', name: '김작가' }],
+  [{ id: 3, role: 'Writer', name: '이몽룡' }, { id: 4, role: 'Artist', name: '성춘향' }],
+];
+const platformsArr = [[Platform.NAVER], [Platform.KAKAO], [Platform.LEZHIN]];
+const days: DayOfWeek[] = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
+const ratings = [4.2, 4.5, 3.8, 5.0, 4.0];
+const ageRatings: AgeRating[] = ['ALL', 'TEEN', 'ADULT'];
 
-export const dummyWebtoonList: Webtoon[] = [
-  dummyWebtoon,
-  {
-    ...dummyWebtoon,
-    id: 2,
-    title: '더미 웹툰2',
-    thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
-    authors: [
-      { id: 1, role: 'Writer', name: '홍길동' },
-      { id: 2, role: 'Artist', name: '김작가' }
-    ],
-    platform: Platform.KAKAO,
-    publishDay: 'TUESDAY',
-    genres: [{ id: 3, name: '로맨스' }],
-    averageRating: 3.8,
-    ageRating: 'ALL',
-    paidType: PaidType.WAIT_FREE,
-    totalEpisodes: 30,
-    freeEpisodes: 20,
-    seasons: [
-      {
-        id: 1,
-        name: '시즌1',
-        startDate: '2024-02-01',
-        endDate: null,
-        episodeCount: 30,
-        isActive: true
-      }
-    ]
-  },
-  {
-    ...dummyWebtoon,
-    id: 3,
-    title: '모험의 시작',
-    thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
-    authors: [
-      { id: 1, role: 'Writer', name: '홍길동' },
-      { id: 2, role: 'Artist', name: '김작가' }
-    ],
-    platform: Platform.LEZHIN,
-    publishDay: 'WEDNESDAY',
-    genres: [{ id: 4, name: '모험' }],
-    averageRating: 4.2,
-    ageRating: 'TEEN',
-    paidType: PaidType.PAID,
-    totalEpisodes: 80,
-    freeEpisodes: 0,
-    seasons: [
-      {
-        id: 1,
-        name: '시즌1',
-        startDate: '2023-06-01',
-        endDate: '2024-01-31',
-        episodeCount: 40,
-        isActive: false
-      },
-      {
-        id: 2,
-        name: '시즌2',
-        startDate: '2024-02-01',
-        endDate: null,
-        episodeCount: 40,
-        isActive: true
-      }
-    ]
-  },
-  {
-    ...dummyWebtoon,
-    id: 4,
-    title: '스릴러 나이트',
-    thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
-    authors: [
-      { id: 1, role: 'Writer', name: '홍길동' },
-      { id: 2, role: 'Artist', name: '김작가' }
-    ],
-    platform: Platform.BOMTOON,
-    publishDay: 'THURSDAY',
-    genres: [{ id: 5, name: '스릴러' }],
-    averageRating: 4.0,
-    ageRating: 'ADULT',
-    paidType: PaidType.DAILY_FREE,
-    totalEpisodes: 60,
-    freeEpisodes: 60,
-    seasons: [
-      {
-        id: 1,
-        name: '시즌1',
-        startDate: '2024-03-01',
-        endDate: null,
-        episodeCount: 60,
-        isActive: true
-      }
-    ]
-  },
-  {
-    ...dummyWebtoon,
-    id: 5,
-    title: '코믹 대소동',
-    thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
-    authors: [
-      { id: 1, role: 'Writer', name: '홍길동' },
-      { id: 2, role: 'Artist', name: '김작가' }
-    ],
-    platform: Platform.KAKAOPAGE,
-    publishDay: 'FRIDAY',
-    genres: [{ id: 6, name: '코미디' }],
-    averageRating: 3.5,
-    ageRating: 'ALL',
-    paidType: PaidType.FREE,
-    totalEpisodes: 25,
-    freeEpisodes: 25,
-    seasons: [
-      {
-        id: 1,
-        name: '시즌1',
-        startDate: '2024-04-01',
-        endDate: null,
-        episodeCount: 25,
-        isActive: true
-      }
-    ]
-  },
-  {
-    ...dummyWebtoon,
-    id: 6,
-    title: '로맨틱 판타지',
-    thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
-    authors: [
-      { id: 1, role: 'Writer', name: '홍길동' },
-      { id: 2, role: 'Artist', name: '김작가' }
-    ],
-    platform: Platform.NAVER,
-    publishDay: 'SATURDAY',
-    genres: [{ id: 3, name: '로맨스' }, { id: 1, name: '판타지' }],
-    averageRating: 4.8,
-    ageRating: 'TEEN',
-    paidType: PaidType.WAIT_FREE,
-    totalEpisodes: 100,
-    freeEpisodes: 80,
-    seasons: [
-      {
-        id: 1,
-        name: '시즌1',
-        startDate: '2023-09-01',
-        endDate: '2024-03-31',
-        episodeCount: 50,
-        isActive: false
-      },
-      {
-        id: 2,
-        name: '시즌2',
-        startDate: '2024-04-01',
-        endDate: null,
-        episodeCount: 50,
-        isActive: true
-      }
-    ]
-  },
-  {
-    ...dummyWebtoon,
-    id: 7,
-    title: '액션 히어로',
-    thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
-    authors: [
-      { id: 1, role: 'Writer', name: '홍길동' },
-      { id: 2, role: 'Artist', name: '김작가' }
-    ],
-    platform: Platform.KAKAO,
-    publishDay: 'SUNDAY',
-    genres: [{ id: 2, name: '액션' }],
-    averageRating: 4.1,
-    ageRating: 'TEEN',
-    paidType: PaidType.PAID,
-    totalEpisodes: 45,
-    freeEpisodes: 10,
-    seasons: [
-      {
-        id: 1,
-        name: '시즌1',
-        startDate: '2024-01-15',
-        endDate: null,
-        episodeCount: 45,
-        isActive: true
-      }
-    ]
-  },
-  {
-    ...dummyWebtoon,
-    id: 8,
-    title: '드라마틱 라이프',
-    thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
-    authors: [
-      { id: 1, role: 'Writer', name: '홍길동' },
-      { id: 2, role: 'Artist', name: '김작가' }
-    ],
-    platform: Platform.LEZHIN,
-    publishDay: 'MONDAY',
-    genres: [{ id: 7, name: '드라마' }],
-    averageRating: 3.9,
-    ageRating: 'TEEN',
-    paidType: PaidType.DAILY_FREE,
-    totalEpisodes: 35,
-    freeEpisodes: 35,
-    seasons: [
-      {
-        id: 1,
-        name: '시즌1',
-        startDate: '2024-02-15',
-        endDate: null,
-        episodeCount: 35,
-        isActive: true
-      }
-    ]
-  },
-  {
-    ...dummyWebtoon,
-    id: 9,
-    title: '미스터리 사건부',
-    thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
-    authors: [
-      { id: 1, role: 'Writer', name: '홍길동' },
-      { id: 2, role: 'Artist', name: '김작가' }
-    ],
-    platform: Platform.BOMTOON,
-    publishDay: 'TUESDAY',
-    genres: [{ id: 8, name: '미스터리' }],
-    averageRating: 4.3,
-    ageRating: 'ADULT',
-    paidType: PaidType.PAID,
-    totalEpisodes: 70,
-    freeEpisodes: 5,
-    seasons: [
-      {
-        id: 1,
-        name: '시즌1',
-        startDate: '2023-11-01',
-        endDate: '2024-04-30',
-        episodeCount: 40,
-        isActive: false
-      },
-      {
-        id: 2,
-        name: '시즌2',
-        startDate: '2024-05-01',
-        endDate: null,
-        episodeCount: 30,
-        isActive: true
-      }
-    ]
-  },
-  {
-    ...dummyWebtoon,
-    id: 10,
-    title: 'SF 어드벤처',
-    thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
-    authors: [
-      { id: 1, role: 'Writer', name: '홍길동' },
-      { id: 2, role: 'Artist', name: '김작가' }
-    ],
-    platform: Platform.KAKAOPAGE,
-    publishDay: 'WEDNESDAY',
-    genres: [{ id: 9, name: 'SF' }],
-    averageRating: 4.6,
-    ageRating: 'TEEN',
-    paidType: PaidType.WAIT_FREE,
-    totalEpisodes: 55,
-    freeEpisodes: 40,
-    seasons: [
-      {
-        id: 1,
-        name: '시즌1',
-        startDate: '2024-03-15',
-        endDate: null,
-        episodeCount: 55,
-        isActive: true
-      }
-    ]
-  },
-  {
-    ...dummyWebtoon,
-    id: 11,
-    title: '힐링 타임',
-    thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
-    authors: [
-      { id: 1, role: 'Writer', name: '홍길동' },
-      { id: 2, role: 'Artist', name: '김작가' }
-    ],
-    platform: Platform.NAVER,
-    publishDay: 'THURSDAY',
-    genres: [{ id: 10, name: '일상' }],
-    averageRating: 4.9,
-    ageRating: 'ALL',
-    paidType: PaidType.FREE,
-    totalEpisodes: 20,
-    freeEpisodes: 20,
-    seasons: [
-      {
-        id: 1,
-        name: '시즌1',
-        startDate: '2024-05-01',
-        endDate: null,
-        episodeCount: 20,
-        isActive: true
-      }
-    ]
-  },
-  {
-    ...dummyWebtoon,
-    id: 12,
-    title: '스포츠 챔피언',
-    thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
-    authors: [
-      { id: 3, role: 'Writer', name: '박스포츠' },
-      { id: 4, role: 'Artist', name: '이운동' }
-    ],
-    platform: Platform.KAKAO,
-    publishDay: 'FRIDAY',
-    genres: [{ id: 11, name: '스포츠' }],
-    averageRating: 4.2,
-    ageRating: 'TEEN',
-    paidType: PaidType.WAIT_FREE,
-    totalEpisodes: 65,
-    freeEpisodes: 50,
-    seasons: [
-      {
-        id: 1,
-        name: '시즌1',
-        startDate: '2023-12-01',
-        endDate: '2024-05-31',
-        episodeCount: 35,
-        isActive: false
-      },
-      {
-        id: 2,
-        name: '시즌2',
-        startDate: '2024-06-01',
-        endDate: null,
-        episodeCount: 30,
-        isActive: true
-      }
-    ]
-  },
-  {
-    ...dummyWebtoon,
-    id: 13,
-    title: '학원 로맨스',
-    thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
-    authors: [
-      { id: 5, role: 'Writer', name: '최학원' },
-      { id: 6, role: 'Artist', name: '정청춘' }
-    ],
-    platform: Platform.LEZHIN,
-    publishDay: 'SATURDAY',
-    genres: [{ id: 3, name: '로맨스' }, { id: 12, name: '학원' }],
-    averageRating: 4.7,
-    ageRating: 'TEEN',
-    paidType: PaidType.PAID,
-    totalEpisodes: 40,
-    freeEpisodes: 15,
-    seasons: [
-      {
-        id: 1,
-        name: '시즌1',
-        startDate: '2024-01-01',
-        endDate: null,
-        episodeCount: 40,
-        isActive: true
-      }
-    ]
-  },
-  {
-    ...dummyWebtoon,
-    id: 14,
-    title: '무협전설',
-    thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
-    authors: [
-      { id: 7, role: 'Writer', name: '김무협' },
-      { id: 8, role: 'Artist', name: '이검법' }
-    ],
-    platform: Platform.BOMTOON,
-    publishDay: 'SUNDAY',
-    genres: [{ id: 13, name: '무협' }],
-    averageRating: 4.4,
-    ageRating: 'TEEN',
-    paidType: PaidType.DAILY_FREE,
-    totalEpisodes: 75,
-    freeEpisodes: 75,
-    seasons: [
-      {
-        id: 1,
-        name: '시즌1',
-        startDate: '2023-08-01',
-        endDate: '2024-02-29',
-        episodeCount: 40,
-        isActive: false
-      },
-      {
-        id: 2,
-        name: '시즌2',
-        startDate: '2024-03-01',
-        endDate: null,
-        episodeCount: 35,
-        isActive: true
-      }
-    ]
-  },
-  {
-    ...dummyWebtoon,
-    id: 15,
-    title: '호러 나이트',
-    thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
-    authors: [
-      { id: 9, role: 'Writer', name: '박공포' },
-      { id: 10, role: 'Artist', name: '최무서' }
-    ],
-    platform: Platform.KAKAOPAGE,
-    publishDay: 'MONDAY',
-    genres: [{ id: 14, name: '호러' }],
-    averageRating: 4.1,
-    isAdult: true,
-    ageRating: 'ADULT',
-    paidType: PaidType.PAID,
-    totalEpisodes: 30,
-    freeEpisodes: 3,
-    seasons: [
-      {
-        id: 1,
-        name: '시즌1',
-        startDate: '2024-04-01',
-        endDate: null,
-        episodeCount: 30,
-        isActive: true
-      }
-    ]
-  },
-  {
-    ...dummyWebtoon,
-    id: 16,
-    title: '음악의 신',
-    thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
-    authors: [
-      { id: 11, role: 'Writer', name: '김음악' },
-      { id: 12, role: 'Artist', name: '이멜로디' }
-    ],
-    platform: Platform.NAVER,
-    publishDay: 'TUESDAY',
-    genres: [{ id: 15, name: '음악' }],
-    averageRating: 4.3,
-    ageRating: 'ALL',
-    paidType: PaidType.FREE,
-    totalEpisodes: 15,
-    freeEpisodes: 15,
-    seasons: [
-      {
-        id: 1,
-        name: '시즌1',
-        startDate: '2024-06-01',
-        endDate: null,
-        episodeCount: 15,
-        isActive: true
-      }
-    ]
-  },
-  {
-    ...dummyWebtoon,
-    id: 17,
-    title: '요리 마스터',
-    thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
-    authors: [
-      { id: 13, role: 'Writer', name: '박요리' },
-      { id: 14, role: 'Artist', name: '최맛' }
-    ],
-    platform: Platform.KAKAO,
-    publishDay: 'WEDNESDAY',
-    genres: [{ id: 16, name: '요리' }],
-    averageRating: 4.5,
-    ageRating: 'ALL',
-    paidType: PaidType.WAIT_FREE,
-    totalEpisodes: 28,
-    freeEpisodes: 20,
-    seasons: [
-      {
-        id: 1,
-        name: '시즌1',
-        startDate: '2024-02-01',
-        endDate: null,
-        episodeCount: 28,
-        isActive: true
-      }
-    ]
-  },
-  {
-    ...dummyWebtoon,
-    id: 18,
-    title: '여행기',
-    thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
-    authors: [
-      { id: 15, role: 'Writer', name: '김여행' },
-      { id: 16, role: 'Artist', name: '이세계' }
-    ],
-    platform: Platform.LEZHIN,
-    publishDay: 'THURSDAY',
-    genres: [{ id: 17, name: '여행' }],
-    averageRating: 4.0,
-    ageRating: 'ALL',
-    paidType: PaidType.DAILY_FREE,
-    totalEpisodes: 12,
-    freeEpisodes: 12,
-    seasons: [
-      {
-        id: 1,
-        name: '시즌1',
-        startDate: '2024-07-01',
-        endDate: null,
-        episodeCount: 12,
-        isActive: true
-      }
-    ]
-  },
-  {
-    ...dummyWebtoon,
-    id: 19,
-    title: '동물 친구들',
-    thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
-    authors: [
-      { id: 17, role: 'Writer', name: '박동물' },
-      { id: 18, role: 'Artist', name: '최귀여' }
-    ],
-    platform: Platform.BOMTOON,
-    publishDay: 'FRIDAY',
-    genres: [{ id: 18, name: '동물' }],
-    averageRating: 4.6
-  },
-  {
-    ...dummyWebtoon,
-    id: 20,
-    title: '역사 탐험',
-    thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
-    authors: [
-      { id: 19, role: 'Writer', name: '김역사' },
-      { id: 20, role: 'Artist', name: '이과거' }
-    ],
-    platform: Platform.KAKAOPAGE,
-    publishDay: 'SATURDAY',
-    genres: [{ id: 19, name: '역사' }],
-    averageRating: 4.2
-  },
-  {
-    ...dummyWebtoon,
-    id: 21,
-    title: '완결된 이야기',
-    thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
-    authors: [
-      { id: 21, role: 'Writer', name: '박완결' },
-      { id: 22, role: 'Artist', name: '최끝' }
-    ],
-    platform: Platform.NAVER,
-    publishDay: 'SUNDAY',
-    genres: [{ id: 7, name: '드라마' }],
-    averageRating: 4.8,
-    status: SerializationStatus.COMPLETED
-  },
-  {
-    ...dummyWebtoon,
-    id: 22,
-    title: '휴재 중인 웹툰',
-    thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
-    authors: [
-      { id: 23, role: 'Writer', name: '김휴재' },
-      { id: 24, role: 'Artist', name: '이쉬어' }
-    ],
-    platform: Platform.KAKAO,
-    publishDay: 'MONDAY',
-    genres: [{ id: 1, name: '판타지' }],
-    averageRating: 4.0,
-    status: SerializationStatus.HIATUS,
-    ageRating: 'ALL',
-    paidType: PaidType.FREE,
-    totalEpisodes: 50,
-    freeEpisodes: 5,
-    seasons: [
-      {
-        id: 1,
-        name: '시즌1',
-        startDate: '2024-01-01',
-        endDate: null,
-        episodeCount: 50,
-        isActive: true
-      }
-    ]
-  },
-  {
-    ...dummyWebtoon,
-    id: 23,
-    title: '성인 로맨스',
-    thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
-    authors: [
-      { id: 25, role: 'Writer', name: '박성인' },
-      { id: 26, role: 'Artist', name: '최로맨' }
-    ],
-    platform: Platform.LEZHIN,
-    publishDay: 'TUESDAY',
-    genres: [{ id: 3, name: '로맨스' }, { id: 20, name: '성인' }],
-    averageRating: 4.3,
-    isAdult: true,
-    ageRating: 'ADULT',
-    paidType: PaidType.PAID,
-    totalEpisodes: 50,
-    freeEpisodes: 5,
-    seasons: [
-      {
-        id: 1,
-        name: '시즌1',
-        startDate: '2024-01-01',
-        endDate: null,
-        episodeCount: 50,
-        isActive: true
-      }
-    ]
-  },
-  {
-    ...dummyWebtoon,
-    id: 24,
-    title: '성인 스릴러',
-    thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
-    authors: [
-      { id: 27, role: 'Writer', name: '김스릴' },
-      { id: 28, role: 'Artist', name: '이공포' }
-    ],
-    platform: Platform.BOMTOON,
-    publishDay: 'WEDNESDAY',
-    genres: [{ id: 5, name: '스릴러' }, { id: 20, name: '성인' }],
-    averageRating: 4.1,
-    isAdult: true,
-    ageRating: 'ADULT',
-    paidType: PaidType.PAID,
-    totalEpisodes: 50,
-    freeEpisodes: 5,
-    seasons: [
-      {
-        id: 1,
-        name: '시즌1',
-        startDate: '2024-01-01',
-        endDate: null,
-        episodeCount: 50,
-        isActive: true
-      }
-    ]
+export function generateDummyWebtoons(count: number): WebtoonSummary[] {
+  const arr: WebtoonSummary[] = [];
+  for (let i = 1; i <= count; i++) {
+    arr.push({
+      id: i,
+      title: titles[i % titles.length] + ' ' + i,
+      thumbnailUrl: 'https://image-comic.pstatic.net/webtoon/837504/thumbnail/thumbnail_IMAG21_9a94b0bf-f6d4-4434-9cf2-6b690f7be56e.jpg',
+      platforms: platformsArr[i % platformsArr.length],
+      isAdult: ageRatings[i % ageRatings.length] === 'ADULT',
+      status: SerializationStatus.ONGOING,
+      dayOfWeek: days[i % days.length],
+      authors: authorsList[i % authorsList.length],
+      genres: genresList[i % genresList.length],
+      averageRating: ratings[i % ratings.length],
+      ageRating: ageRatings[i % ageRatings.length],
+      lastUpdateDate: `2024-01-${(i % 28 + 1).toString().padStart(2, '0')}`,
+    });
   }
-]; 
+  return arr;
+}
+
+export const dummyWebtoons: WebtoonSummary[] = generateDummyWebtoons(30);
+
+// Dummy episode link generator
+function generateDummyEpisodeLinks(episodeId: number): WebtoonEpisodeLink[] {
+  return [
+    {
+      id: episodeId * 10 + 1,
+      platform: Platform.NAVER,
+      url: `https://comic.naver.com/webtoon/episode/${episodeId}`,
+      viewerType: 'WEB',
+    },
+    {
+      id: episodeId * 10 + 2,
+      platform: Platform.KAKAO,
+      url: `https://page.kakao.com/episode/${episodeId}`,
+      viewerType: 'APP',
+    },
+  ];
+}
+
+// Dummy episode generator
+export function generateDummyEpisodes(count: number, seasonId: number | null = null): Episode[] {
+  const titles = ['프롤로그', '첫 만남', '의문의 사건', '진실의 시작', '반전', '위기', '결말'];
+  const pricingTypes: EpisodePricingType[] = ['FREE', 'PAID', 'WAIT_FREE', 'DAILY_FREE'];
+  const arr: Episode[] = [];
+  for (let i = 1; i <= count; i++) {
+    arr.push({
+      id: i,
+      seasonId: seasonId,
+      episodeNumber: i,
+      title: titles[i % titles.length] + ' ' + i,
+      pricingType: pricingTypes[i % pricingTypes.length],
+      episodeUrls: generateDummyEpisodeLinks(i),
+    });
+  }
+  return arr;
+}
+
+export const dummyEpisodes: Episode[] = generateDummyEpisodes(10);

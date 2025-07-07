@@ -1,4 +1,4 @@
-import { Webtoon } from "./webtoon";
+import { WebtoonSummary } from "./webtoon";
 import { Review } from "./review";
 
 export interface MemberProfile {
@@ -47,10 +47,10 @@ export interface MemberProfile {
     emotionalTags: string[];
     aiTags: string[];
   };
-  favoriteWebtoons: Webtoon[];
-  masterpieceWebtoons: Webtoon[];
+  favoriteWebtoons: WebtoonSummary[];
+  masterpieceWebtoons: WebtoonSummary[];
   readingHistory: {
-    webtoon: Webtoon;
+    webtoon: WebtoonSummary;
     lastReadAt: string;
   }[];
   reviews: Review[];

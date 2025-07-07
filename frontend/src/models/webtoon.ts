@@ -36,27 +36,39 @@ export interface SeasonInfo {
   isActive: boolean | null; 
 }
 
-export interface Webtoon {
+export interface WebtoonSummary {
   id: number;
   title: string;
   thumbnailUrl: string;
-  platform: Platform;
+  platforms: Platform[];
+  dayOfWeek: DayOfWeek;
   isAdult: boolean;
   status: SerializationStatus;
-  publishDay: string;
   authors: Author[];
-  description: string;
   genres: Genre[];
-  totalRatings: number | null;
   averageRating: number | null;
-  similarWebtoons: SimilarWebtoon[] | null;
-  analysisData?: WebtoonAnalysisData | null;
   ageRating: AgeRating | null;
-  paidType: PaidType | null;
-  totalEpisodes: number | null;
-  freeEpisodes: number | null;
-  seasons: SeasonInfo[] | null;
+  lastUpdateDate: string | null;
+}
+
+export interface WebtoonDetails {
+  id: number;
+  title: string;
+  summary: string;
+  status: string;
+  dayOfWeek: string;
+  thumbnailUrl: string;
+  isAdult: boolean;
+  ageRating: AgeRating | null;
+  platforms: Platform[];
+  genres: Genre[];
+  authors: Author[];
+  episodeCount: number;
+  averageRating: number | null;
+  publishStartDate: string | null;
+  lastUpdateDate: string | null;
   episodes?: Episode[];
+  seasons?: SeasonInfo[];
 }
 
 export interface Author {

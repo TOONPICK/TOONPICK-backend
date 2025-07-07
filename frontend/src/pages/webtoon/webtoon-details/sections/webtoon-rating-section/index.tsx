@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Webtoon } from '@models/webtoon';
+import { WebtoonDetails } from '@models/webtoon';
 import { Review, ReviewRequest } from '@models/review';
 import { useAuth } from '@contexts/auth-context';
 import { FiThumbsUp, FiFlag, FiStar, FiMessageCircle, FiClock } from 'react-icons/fi';
@@ -9,7 +9,7 @@ import AverageRatingWithDistribution from '@components/average-rating-with-distr
 import ReviewList from '@components/review-list';
 
 interface WebtoonRatingSectionProps {
-  webtoon: Webtoon;
+  webtoon: WebtoonDetails;
 }
 
 const WebtoonRatingSection: React.FC<WebtoonRatingSectionProps> = ({ webtoon }) => {

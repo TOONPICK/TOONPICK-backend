@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Webtoon, SerializationStatus } from '@models/webtoon';
+import { WebtoonDetails, SerializationStatus } from '@models/webtoon';
 import WebtoonService from '@services/webtoon-service';
 import WebtoonRatingSection from './sections/webtoon-rating-section';
 import WebtoonAnalysisSection from './sections/webtoon-analysis-section';
@@ -18,7 +18,7 @@ import styles from './style.module.css';
 
 const WebtoonDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [webtoon, setWebtoon] = useState<Webtoon | null>(null);
+  const [webtoon, setWebtoon] = useState<WebtoonDetails | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -189,8 +189,8 @@ const WebtoonDetailPage: React.FC = () => {
               <span className={styles.ageRating}>
                 {webtoon.ageRating || (webtoon.isAdult ? '19' : 'ALL')}
               </span>
-              <span className={styles.platform}>{webtoon.platform}</span>
-              <StatusTags status={webtoon.status} isAdult={webtoon.isAdult} />
+              <span className={styles.platform}>{webtoon.platforms.join(', ')}</span>
+              <StatusTags status={webtoon.status as SerializationStatus} isAdult={webtoon.isAdult} />
               <ActionButtons
                 onBookmarkToggle={handleBookmarkToggle}
                 onShare={handleShare}
@@ -206,19 +206,13 @@ const WebtoonDetailPage: React.FC = () => {
             <div className={styles.infoRow}>
               <span 
                 className={styles.status}
-                style={{ color: getStatusColor(webtoon.status) }}
+                style={{ color: getStatusColor(webtoon.status as SerializationStatus) }}
               >
-                {getStatusText(webtoon.status)}
+                {getStatusText(webtoon.status as SerializationStatus)}
               </span>
-              <span className={styles.paidType}>{webtoon.paidType || '-'}</span>
               <span className={styles.totalEpisodes}>
-                총 {webtoon.totalEpisodes ?? '-'}화
+                총 {webtoon.episodeCount ?? '-'}화
               </span>
-              {webtoon.freeEpisodes && (
-                <span className={styles.freeEpisodes}>
-                  {webtoon.freeEpisodes}화 무료
-                </span>
-              )}
             </div>
             {webtoon.seasons && webtoon.seasons.length > 0 && (
               <div className={styles.seasonInfo}>
@@ -235,9 +229,9 @@ const WebtoonDetailPage: React.FC = () => {
             <div className={styles.tagsSection}>
               <GenreTags genres={webtoon.genres} />
             </div>
-            {webtoon.description && (
+            {webtoon.summary && (
               <div className={styles.descriptionSection}>
-                <Description text={webtoon.description} />
+                <Description text={webtoon.summary} />
               </div>
             )}
           </div>

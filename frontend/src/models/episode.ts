@@ -1,29 +1,21 @@
-export interface EpisodeLink {
+// Webtoon episode related types
+import { Platform } from './webtoon';
+
+export type EpisodePricingType = 'FREE' | 'PAID' | 'WAIT_FREE' | 'DAILY_FREE';
+export type EpisodeViewerType = 'WEB' | 'APP' | 'EXTERNAL';
+
+export interface WebtoonEpisodeLink {
   id: number;
-  platform: string;
+  platform: Platform;
   url: string;
-  viewerType: string;
+  viewerType: EpisodeViewerType;
 }
 
 export interface Episode {
   id: number;
-  webtoonId: number;
-  seasonId?: number;
+  seasonId: number | null;
   episodeNumber: number;
-  title?: string;
-  pricingType: string;
-  episodeUrls: EpisodeLink[];
-}
-
-export enum EpisodePricingType {
-  FREE = 'FREE',
-  PAID = 'PAID',
-  COIN = 'COIN',
-  SUBSCRIPTION = 'SUBSCRIPTION'
-}
-
-export enum EpisodeViewerType {
-  WEB = 'WEB',
-  MOBILE = 'MOBILE',
-  APP = 'APP'
+  title: string;
+  pricingType: EpisodePricingType;
+  episodeUrls: WebtoonEpisodeLink[];
 } 

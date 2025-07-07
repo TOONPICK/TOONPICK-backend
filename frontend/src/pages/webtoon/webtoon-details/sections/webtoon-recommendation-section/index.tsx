@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Webtoon } from '@models/webtoon';
+import { WebtoonDetails, WebtoonSummary } from '@models/webtoon';
 import styles from './style.module.css';
 import WebtoonList from '@components/webtoon-list';
 import WebtoonService from '@services/webtoon-service';
 
 interface WebtoonRecommendationSectionProps {
-  webtoon: Webtoon;
+  webtoon: WebtoonDetails;
 }
 
 const WebtoonRecommendationSection: React.FC<WebtoonRecommendationSectionProps> = ({ webtoon }) => {
-  const [similarWebtoons, setSimilarWebtoons] = useState<Webtoon[]>([]);
-  const [userSimilarWebtoons, setUserSimilarWebtoons] = useState<Webtoon[]>([]);
-  const [sameAuthorWebtoons, setSameAuthorWebtoons] = useState<Webtoon[]>([]);
-  const [randomWebtoons, setRandomWebtoons] = useState<Webtoon[]>([]);
+  const [similarWebtoons, setSimilarWebtoons] = useState<WebtoonSummary[]>([]);
+  const [userSimilarWebtoons, setUserSimilarWebtoons] = useState<WebtoonSummary[]>([]);
+  const [sameAuthorWebtoons, setSameAuthorWebtoons] = useState<WebtoonSummary[]>([]);
+  const [randomWebtoons, setRandomWebtoons] = useState<WebtoonSummary[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 

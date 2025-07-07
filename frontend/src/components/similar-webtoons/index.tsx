@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Webtoon } from '@models/webtoon';
+import { WebtoonSummary } from '@models/webtoon';
 import styles from './style.module.css';
 
 interface SimilarWebtoonsProps {
   currentWebtoonId: number;
-  similarWebtoons: Webtoon[];
+  similarWebtoons: WebtoonSummary[];
 }
 
 const SimilarWebtoons: React.FC<SimilarWebtoonsProps> = ({

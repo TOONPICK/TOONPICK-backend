@@ -1,5 +1,5 @@
 import React from 'react';
-import { Webtoon } from '@models/webtoon';
+import { WebtoonSummary } from '@models/webtoon';
 import styles from './style.module.css';
 
 interface CollectionSectionProps {
@@ -7,7 +7,7 @@ interface CollectionSectionProps {
     id: number;
     name: string;
     thumbnail: string;
-    webtoons: Webtoon[];
+    webtoons: WebtoonSummary[];
   }[];
 }
 

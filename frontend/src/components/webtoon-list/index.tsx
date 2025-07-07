@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Webtoon } from '@models/webtoon';
+import { WebtoonSummary } from '@models/webtoon';
 import WebtoonCard from '@components/webtoon-card';
 import styles from './style.module.css';
 
 interface WebtoonListProps {
-  webtoons: Webtoon[];
+  webtoons: WebtoonSummary[];
   size?: number;
   showTags?: boolean;
 }

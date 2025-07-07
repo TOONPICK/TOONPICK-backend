@@ -1,12 +1,12 @@
 import React from 'react';
-import { Webtoon } from '@models/webtoon';
+import { WebtoonSummary } from '@models/webtoon';
 import WebtoonCard from '@components/webtoon-card';
 import styles from './style.module.css';
 
 const isApp = process.env.REACT_APP_PLATFORM === 'app';
 
 interface WebtoonGridProps {
-  webtoons: Webtoon[];
+  webtoons: WebtoonSummary[];
   lastWebtoonRef?: React.RefObject<HTMLDivElement>;
   rowLimit?: number;
 }

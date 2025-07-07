@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Webtoon } from '@models/webtoon';
+import { WebtoonSummary } from '@models/webtoon';
 import styles from './style.module.css';
 import PlatformIcon from '@components/platform-icon';
 
 const isApp = process.env.REACT_APP_PLATFORM === 'app';
 
 interface WebtoonCardProps {
-  webtoon: Webtoon;
+  webtoon: WebtoonSummary;
   showTags?: boolean;
   isClickable?: boolean;
   onRemove?: (webtoonId: number) => void;
@@ -92,7 +92,9 @@ const WebtoonCard: React.FC<WebtoonCardProps> = ({
         )}
         {showTags && (
           <div className={styles.tagsContainer}>
-            <PlatformIcon platform={webtoon.platform} size={24} />
+            {webtoon.platforms.map((platform) => (
+              <PlatformIcon platform={platform} size={24} key={platform} />
+            ))}
           </div>
         )}
         {showRemoveButton && onRemove && (

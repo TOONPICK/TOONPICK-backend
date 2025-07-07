@@ -1,7 +1,7 @@
 import { api , Response, PagedResponse } from '@api';
-import { Webtoon, Platform, SerializationStatus } from '@models/webtoon';
+import { WebtoonSummary, WebtoonDetails, Platform, SerializationStatus } from '@models/webtoon';
 import { DayOfWeek, AgeRating } from '@models/enum';
-import { dummyWebtoon, dummyWebtoonList } from '@dummy';
+import { dummyWebtoon, generateDummyWebtoons } from '@dummy';
 
 const PAGE_SIZE = 60;
 
@@ -20,26 +20,13 @@ class WebtoonService {
     return this.instance;
   }
 
-  // 웹툰 간단 정보 조회
-  public async getWebtoonById(id: number): Promise<Response<Webtoon>> {
-    if (isDev) {
-      return { success: true, data: dummyWebtoon };
-    }
-    try {
-      const response = await api.get<Webtoon>(`/api/v1/webtoons/${id}`);
-      return { success: true, data: response.data };
-    } catch (error) {
-      return this.handleError(error);
-    }
-  }
-
   // 웹툰 상제 정보 조회
-  public async getWebtoonDetails(id: number): Promise<Response<Webtoon>> {
+  public async getWebtoonDetails(id: number): Promise<Response<WebtoonDetails>> {
     if (isDev) {
       return { success: true, data: dummyWebtoon };
     }
     try {
-      const response = await api.get<Webtoon>(`/api/v1/webtoons/${id}`);
+      const response = await api.get<WebtoonDetails>(`/api/v1/webtoons/${id}`);
       return { success: true, data: response.data };
     } catch (error) {
       return this.handleError(error);
@@ -61,30 +48,26 @@ class WebtoonService {
       serializationStatuses?: SerializationStatus[];
       ageRatings?: AgeRating[];
     }
-  ): Promise<PagedResponse<Webtoon[]>> {
+  ): Promise<PagedResponse<WebtoonSummary[]>> {
     if (isDev) {
       // 개발 환경에서는 더미 데이터에서 필터링 시뮬레이션
-      let filteredData = [...dummyWebtoonList];
+      let filteredData = generateDummyWebtoons(30);
       
       // 검색 필터링
       if (options.search) {
         const searchLower = options.search.toLowerCase();
-        filteredData = filteredData.filter((webtoon: Webtoon) => 
+        filteredData = filteredData.filter((webtoon: WebtoonSummary) => 
           webtoon.title.toLowerCase().includes(searchLower) ||
           webtoon.authors?.some(author => 
             author.name.toLowerCase().includes(searchLower)
-          ) ||
-          webtoon.description?.toLowerCase().includes(searchLower) ||
-          webtoon.genres?.some(genre => 
-            genre.name.toLowerCase().includes(searchLower)
           )
         );
       }
       
       // 플랫폼 필터링
       if (options.platforms && options.platforms.length > 0) {
-        filteredData = filteredData.filter((webtoon: Webtoon) => 
-          options.platforms!.includes(webtoon.platform)
+        filteredData = filteredData.filter((webtoon: WebtoonSummary) => 
+          options.platforms!.some(platform => webtoon.platforms.includes(platform))
         );
       }
       
@@ -92,7 +75,7 @@ class WebtoonService {
       if (options.genres && options.genres.length > 0) {
         const nonAdultGenres = options.genres.filter(genre => genre !== '성인');
         if (nonAdultGenres.length > 0) {
-          filteredData = filteredData.filter((webtoon: Webtoon) => 
+          filteredData = filteredData.filter((webtoon: WebtoonSummary) => 
             webtoon.genres?.some(genre => 
               nonAdultGenres.includes(genre.name)
             )
@@ -102,15 +85,15 @@ class WebtoonService {
       
       // 연재 상태 필터링
       if (options.serializationStatuses && options.serializationStatuses.length > 0) {
-        filteredData = filteredData.filter((webtoon: Webtoon) => 
+        filteredData = filteredData.filter((webtoon: WebtoonSummary) => 
           options.serializationStatuses!.includes(webtoon.status)
         );
       }
       
       // 요일 필터링
       if (options.publishDays && options.publishDays.length > 0) {
-        filteredData = filteredData.filter((webtoon: Webtoon) => 
-          options.publishDays!.includes(webtoon.publishDay as DayOfWeek)
+        filteredData = filteredData.filter((webtoon: WebtoonSummary) => 
+          options.publishDays!.includes(webtoon.dayOfWeek as DayOfWeek)
         );
       }
       
@@ -119,7 +102,7 @@ class WebtoonService {
         const hasAdultGenre = options.genres.includes('성인');
         const otherGenres = options.genres.filter(genre => genre !== '성인');
         
-        filteredData = filteredData.filter((webtoon: Webtoon) => {
+        filteredData = filteredData.filter((webtoon: WebtoonSummary) => {
           const matchesAdultFilter = hasAdultGenre ? webtoon.isAdult : true;
           const matchesOtherGenres = otherGenres.length === 0 || 
             webtoon.genres?.some(genre => otherGenres.includes(genre.name));
@@ -144,7 +127,7 @@ class WebtoonService {
       };
     }
     try {
-      const response = await api.post<PagedResponse<Webtoon[]>>('/api/v1/webtoons/filter', 
+      const response = await api.post<PagedResponse<WebtoonSummary[]>>('/api/v1/webtoons/filter', 
         {
           search: options.search,
           platforms: options.platforms,
@@ -180,12 +163,12 @@ class WebtoonService {
   }
 
   // 인기 웹툰 조회
-  public async getPopularWebtoons(size: number = 10): Promise<Response<Webtoon[]>> {
+  public async getPopularWebtoons(size: number = 10): Promise<Response<WebtoonSummary[]>> {
     if (isDev) {
-      return { success: true, data: dummyWebtoonList.slice(0, size) };
+      return { success: true, data: generateDummyWebtoons(size) };
     }
     try {
-      const response = await api.get<Webtoon[]>(`/api/v1/webtoons/popular`, { params: { size } });
+      const response = await api.get<WebtoonSummary[]>(`/api/v1/webtoons/popular`, { params: { size } });
       return { success: true, data: response.data };
     } catch (error) {
       return this.handleError(error);
@@ -193,12 +176,12 @@ class WebtoonService {
   }
 
   // 최신 웹툰 조회
-  public async getRecentWebtoons(size: number = 10): Promise<Response<Webtoon[]>> {
+  public async getRecentWebtoons(size: number = 10): Promise<Response<WebtoonSummary[]>> {
     if (isDev) {
-      return { success: true, data: dummyWebtoonList.slice(0, size) };
+      return { success: true, data: generateDummyWebtoons(size) };
     }
     try {
-      const response = await api.get<Webtoon[]>(`/api/v1/webtoons/recent`, { params: { size } });
+      const response = await api.get<WebtoonSummary[]>(`/api/v1/webtoons/recent`, { params: { size } });
       return { success: true, data: response.data };
     } catch (error) {
       return this.handleError(error);
@@ -206,15 +189,14 @@ class WebtoonService {
   }
 
   // 웹툰 검색
-  public async searchWebtoons(query: string, size: number = 20): Promise<Response<Webtoon[]>> {
+  public async searchWebtoons(query: string, size: number = 20): Promise<Response<WebtoonSummary[]>> {
     if (isDev) {
       // 개발 환경에서는 더미 데이터에서 검색 시뮬레이션
-      const searchResults = dummyWebtoonList.filter((webtoon: Webtoon) => 
+      const searchResults = generateDummyWebtoons(size).filter((webtoon: WebtoonSummary) => 
         webtoon.title.toLowerCase().includes(query.toLowerCase()) ||
         webtoon.authors?.some(author => 
           author.name.toLowerCase().includes(query.toLowerCase())
-        ) ||
-        webtoon.description?.toLowerCase().includes(query.toLowerCase())
+        )
       );
       
       return { 
@@ -224,7 +206,7 @@ class WebtoonService {
       };
     }
     try {
-      const response = await api.get<Webtoon[]>(`/api/v1/webtoons/search`, { 
+      const response = await api.get<WebtoonSummary[]>(`/api/v1/webtoons/search`, { 
         params: { 
           q: query,
           size 
@@ -241,13 +223,13 @@ class WebtoonService {
   }
 
   // 유사 웹툰 추천
-  public async getSimilarWebtoons(webtoonId: number): Promise<Response<Webtoon[]>> {
+  public async getSimilarWebtoons(webtoonId: number): Promise<Response<WebtoonSummary[]>> {
     if (isDev) {
       // 더미 데이터에서 일부 랜덤 웹툰 반환
-      return { success: true, data: dummyWebtoonList.slice(0, 4) };
+      return { success: true, data: generateDummyWebtoons(4) };
     }
     try {
-      const response = await api.get<Webtoon[]>(`/api/v1/webtoons/${webtoonId}/similar`);
+      const response = await api.get<WebtoonSummary[]>(`/api/v1/webtoons/${webtoonId}/similar`);
       return { success: true, data: response.data };
     } catch (error) {
       return this.handleError(error);
@@ -255,13 +237,13 @@ class WebtoonService {
   }
 
   // 유저 기반 유사 웹툰 추천
-  public async getUserSimilarWebtoons(webtoonId: number): Promise<Response<Webtoon[]>> {
+  public async getUserSimilarWebtoons(webtoonId: number): Promise<Response<WebtoonSummary[]>> {
     if (isDev) {
       // 더미 데이터에서 일부 랜덤 웹툰 반환
-      return { success: true, data: dummyWebtoonList.slice(0, 4) };
+      return { success: true, data: generateDummyWebtoons(4) };
     }
     try {
-      const response = await api.get<Webtoon[]>(`/api/v1/webtoons/${webtoonId}/user-similar`);
+      const response = await api.get<WebtoonSummary[]>(`/api/v1/webtoons/${webtoonId}/user-similar`);
       return { success: true, data: response.data };
     } catch (error) {
       return this.handleError(error);
@@ -269,17 +251,13 @@ class WebtoonService {
   }
 
   // 같은 작가의 웹툰 추천
-  public async getSameAuthorWebtoons(webtoonId: number): Promise<Response<Webtoon[]>> {
+  public async getSameAuthorWebtoons(webtoonId: number): Promise<Response<WebtoonSummary[]>> {
     if (isDev) {
       // 더미 데이터에서 같은 작가의 웹툰 반환 (id 1번 작가 기준)
-      const main = dummyWebtoonList.find(w => w.id === webtoonId);
-      if (!main) return { success: true, data: [] };
-      const authorNames = main.authors.map(a => a.name);
-      const sameAuthor = dummyWebtoonList.filter(w => w.id !== webtoonId && w.authors.some(a => authorNames.includes(a.name)));
-      return { success: true, data: sameAuthor.slice(0, 4) };
+      return { success: true, data: generateDummyWebtoons(4) };
     }
     try {
-      const response = await api.get<Webtoon[]>(`/api/v1/webtoons/${webtoonId}/same-author`);
+      const response = await api.get<WebtoonSummary[]>(`/api/v1/webtoons/${webtoonId}/same-author`);
       return { success: true, data: response.data };
     } catch (error) {
       return this.handleError(error);
@@ -287,14 +265,14 @@ class WebtoonService {
   }
 
   // 랜덤 추천 웹툰
-  public async getRandomWebtoons(size: number = 4): Promise<Response<Webtoon[]>> {
+  public async getRandomWebtoons(size: number = 4): Promise<Response<WebtoonSummary[]>> {
     if (isDev) {
       // 더미 데이터에서 랜덤 추출
-      const shuffled = [...dummyWebtoonList].sort(() => Math.random() - 0.5);
+      const shuffled = [...generateDummyWebtoons(size)].sort(() => Math.random() - 0.5);
       return { success: true, data: shuffled.slice(0, size) };
     }
     try {
-      const response = await api.get<Webtoon[]>(`/api/v1/webtoons/random`, { params: { size } });
+      const response = await api.get<WebtoonSummary[]>(`/api/v1/webtoons/random`, { params: { size } });
       return { success: true, data: response.data };
     } catch (error) {
       return this.handleError(error);

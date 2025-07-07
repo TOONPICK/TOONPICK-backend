@@ -1,11 +1,11 @@
 import { api, Response } from '@api';
 import { MemberProfile } from '@models/member';
-import { Webtoon } from '@models/webtoon';
+import { WebtoonSummary } from '@models/webtoon';
 import { 
   dummyMemberProfile, 
   dummyCollections, 
   Collection,
-  dummyWebtoonList,
+  generateDummyWebtoons,
   dummyReviewList
 } from '@dummy';
 
@@ -29,9 +29,9 @@ class MemberService {
       // 더미 데이터 조합
       const enrichedProfile = {
         ...dummyMemberProfile,
-        favoriteWebtoons: dummyWebtoonList.slice(0, 5),
-        masterpieceWebtoons: dummyWebtoonList.slice(0, 3),
-        readingHistory: dummyWebtoonList.slice(0, 8).map((webtoon: any, index: number) => ({
+        favoriteWebtoons: generateDummyWebtoons(5),
+        masterpieceWebtoons: generateDummyWebtoons(3),
+        readingHistory: generateDummyWebtoons(8).map((webtoon: any, index: number) => ({
           webtoon,
           lastReadAt: new Date(Date.now() - index * 24 * 60 * 60 * 1000).toISOString()
         })),
@@ -50,12 +50,12 @@ class MemberService {
   }
 
   // 북마크한 웹툰 목록 가져오기
-  public async getBookmarkedWebtoons(): Promise<Response<Webtoon[]>> {
+  public async getBookmarkedWebtoons(): Promise<Response<WebtoonSummary[]>> {
     if (isDev) {
-      return { success: true, data: dummyWebtoonList.slice(0, 5) };
+      return { success: true, data: generateDummyWebtoons(5) };
     }
     try {
-      const response = await api.get<Webtoon[]>('/api/secure/member/bookmarks');
+      const response = await api.get<WebtoonSummary[]>('/api/secure/member/bookmarks');
       return { success: true, data: response.data };
     } catch (error) {
       console.error('Error fetching bookmarked webtoons:', error);
@@ -78,12 +78,12 @@ class MemberService {
   }
 
   // 명작 웹툰 목록 가져오기
-  public async getMasterpieceWebtoons(): Promise<Response<Webtoon[]>> {
+  public async getMasterpieceWebtoons(): Promise<Response<WebtoonSummary[]>> {
     if (isDev) {
       return { success: true, data: dummyMemberProfile.masterpieceWebtoons || [] };
     }
     try {
-      const response = await api.get<Webtoon[]>('/api/secure/member/masterpieces');
+      const response = await api.get<WebtoonSummary[]>('/api/secure/member/masterpieces');
       return { success: true, data: response.data };
     } catch (error) {
       console.error('Error fetching masterpiece webtoons:', error);
@@ -160,9 +160,9 @@ class MemberService {
   }
 
   // 관심 웹툰 목록 가져오기
-  public async getFavorites(): Promise<Response<Webtoon[]>> {
+  public async getFavorites(): Promise<Response<WebtoonSummary[]>> {
     try {
-      const response = await api.get<Webtoon[]>(`/api/secure/member/favorites`);
+      const response = await api.get<WebtoonSummary[]>(`/api/secure/member/favorites`);
       return { success: true, data: response.data };
     } catch (error) {
       console.error('Error fetching favorites:', error);

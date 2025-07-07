@@ -1,4 +1,4 @@
-import { Webtoon } from './webtoon';
+import { WebtoonSummary } from './webtoon';
 
 export interface Collection {
   id: number;
@@ -10,7 +10,7 @@ export interface Collection {
   updatedAt: string;
   isPublic: boolean;
   tags: string[];
-  webtoons: Webtoon[];
+  webtoons: WebtoonSummary[];
 }
 
 export interface CollectionCreateRequest {

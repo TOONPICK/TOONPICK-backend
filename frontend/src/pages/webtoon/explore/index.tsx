@@ -4,7 +4,7 @@ import styles from './style.module.css';
 import WebtoonService from '@services/webtoon-service';
 import WebtoonGrid from '@components/webtoon-grid';
 import Spinner from '@components/spinner';
-import { Webtoon, Platform, SerializationStatus } from '@models/webtoon';
+import { WebtoonSummary, Platform, SerializationStatus } from '@models/webtoon';
 import { DayOfWeek } from '@models/enum';
 import SortOptions from '@components/sort-options/SortOptions';
 import ExploreFilters from '@pages/webtoon/explore/ExploreFilters';
@@ -13,7 +13,7 @@ const ExplorePage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   
-  const [webtoons, setWebtoons] = useState<Webtoon[]>([]);
+  const [webtoons, setWebtoons] = useState<WebtoonSummary[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [isLastPage, setIsLastPage] = useState(false);  
   const [isLoading, setIsLoading] = useState(false);

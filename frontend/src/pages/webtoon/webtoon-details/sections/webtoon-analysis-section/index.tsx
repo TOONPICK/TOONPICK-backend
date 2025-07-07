@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Webtoon, WebtoonAnalysisData } from '@models/webtoon';
+import {WebtoonAnalysisData, WebtoonDetails } from '@models/webtoon';
 import styles from './style.module.css';
 import {
   BarChart,
@@ -19,7 +19,7 @@ import {
 } from 'recharts';
 
 interface WebtoonAnalysisSectionProps {
-  webtoon: Webtoon;
+  webtoon: WebtoonDetails;
 }
 
 // 새로운 분석 데이터 인터페이스 정의

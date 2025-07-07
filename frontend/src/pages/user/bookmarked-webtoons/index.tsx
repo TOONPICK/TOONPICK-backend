@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@contexts/auth-context';
 import { Routes } from '@constants/routes';
-import { Webtoon, SerializationStatus } from '@models/webtoon';
+import { WebtoonSummary, SerializationStatus } from '@models/webtoon';
 import memberService from '@services/member-service';
 import WebtoonGrid from '@components/webtoon-grid';
 import Spinner from '@components/spinner';
@@ -13,7 +13,7 @@ const BookmarkedWebtoonsPage: React.FC = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [bookmarkedWebtoons, setBookmarkedWebtoons] = useState<Webtoon[]>([]);
+  const [bookmarkedWebtoons, setBookmarkedWebtoons] = useState<WebtoonSummary[]>([]);
 
   useEffect(() => {
     if (!state.isAuthenticated) {

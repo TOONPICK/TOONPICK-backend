@@ -1,96 +1,44 @@
 import React, { useState } from 'react';
 import { Episode, EpisodePricingType } from '@models/episode';
-import { Webtoon } from '@models/webtoon';
+import { WebtoonDetails } from '@models/webtoon';
 import styles from './style.module.css';
+import { dummyEpisodes } from '@dummy/webtoon-dummy';
 
 interface WebtoonEpisodeSectionProps {
-  webtoon: Webtoon;
+  webtoon: WebtoonDetails;
 }
 
 const WebtoonEpisodeSection: React.FC<WebtoonEpisodeSectionProps> = ({ webtoon }) => {
   const [selectedSeason, setSelectedSeason] = useState<number | null>(null);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
 
-  // 더미 에피소드 데이터 (실제로는 API에서 가져올 예정)
-  const dummyEpisodes: Episode[] = [
-    {
-      id: 1,
-      webtoonId: webtoon.id,
-      episodeNumber: 1,
-      title: '프롤로그',
-      pricingType: EpisodePricingType.FREE,
-      episodeUrls: [
-        { id: 1, platform: 'NAVER', url: '#', viewerType: 'WEB' }
-      ]
-    },
-    {
-      id: 2,
-      webtoonId: webtoon.id,
-      episodeNumber: 2,
-      title: '첫 번째 만남',
-      pricingType: EpisodePricingType.FREE,
-      episodeUrls: [
-        { id: 2, platform: 'NAVER', url: '#', viewerType: 'WEB' }
-      ]
-    },
-    {
-      id: 3,
-      webtoonId: webtoon.id,
-      episodeNumber: 3,
-      title: '의문의 사건',
-      pricingType: EpisodePricingType.PAID,
-      episodeUrls: [
-        { id: 3, platform: 'NAVER', url: '#', viewerType: 'WEB' }
-      ]
-    },
-    {
-      id: 4,
-      webtoonId: webtoon.id,
-      episodeNumber: 4,
-      title: '진실의 시작',
-      pricingType: EpisodePricingType.PAID,
-      episodeUrls: [
-        { id: 4, platform: 'NAVER', url: '#', viewerType: 'WEB' }
-      ]
-    },
-    {
-      id: 5,
-      webtoonId: webtoon.id,
-      episodeNumber: 5,
-      title: '반전',
-      pricingType: EpisodePricingType.COIN,
-      episodeUrls: [
-        { id: 5, platform: 'NAVER', url: '#', viewerType: 'WEB' }
-      ]
-    }
-  ];
-
+  // 실제로는 API에서 가져올 예정, 더미 데이터 사용
   const episodes = webtoon.episodes || dummyEpisodes;
 
-  const getPricingTypeText = (pricingType: string): string => {
+  const getPricingTypeText = (pricingType: EpisodePricingType): string => {
     switch (pricingType) {
-      case EpisodePricingType.FREE:
+      case 'FREE':
         return '무료';
-      case EpisodePricingType.PAID:
+      case 'PAID':
         return '유료';
-      case EpisodePricingType.COIN:
-        return '코인';
-      case EpisodePricingType.SUBSCRIPTION:
-        return '구독';
+      case 'WAIT_FREE':
+        return '기다리면무료';
+      case 'DAILY_FREE':
+        return '매일무료';
       default:
         return '무료';
     }
   };
 
-  const getPricingTypeColor = (pricingType: string): string => {
+  const getPricingTypeColor = (pricingType: EpisodePricingType): string => {
     switch (pricingType) {
-      case EpisodePricingType.FREE:
+      case 'FREE':
         return 'var(--success-color)';
-      case EpisodePricingType.PAID:
+      case 'PAID':
         return 'var(--warning-color)';
-      case EpisodePricingType.COIN:
+      case 'WAIT_FREE':
         return 'var(--primary-color)';
-      case EpisodePricingType.SUBSCRIPTION:
+      case 'DAILY_FREE':
         return 'var(--info-color)';
       default:
         return 'var(--success-color)';
@@ -112,8 +60,8 @@ const WebtoonEpisodeSection: React.FC<WebtoonEpisodeSectionProps> = ({ webtoon }
     }
   });
 
-  const freeEpisodeCount = episodes.filter(ep => ep.pricingType === EpisodePricingType.FREE).length;
-  const paidEpisodeCount = episodes.filter(ep => ep.pricingType !== EpisodePricingType.FREE).length;
+  const freeEpisodeCount = episodes.filter(ep => ep.pricingType === 'FREE').length;
+  const paidEpisodeCount = episodes.filter(ep => ep.pricingType !== 'FREE').length;
 
   return (
     <div className={styles.episodeSection}>
@@ -141,7 +89,7 @@ const WebtoonEpisodeSection: React.FC<WebtoonEpisodeSectionProps> = ({ webtoon }
               onChange={(e) => setSelectedSeason(e.target.value ? Number(e.target.value) : null)}
             >
               <option value="">전체 시즌</option>
-              {webtoon.seasons.map((season, index) => (
+              {webtoon.seasons?.map((season: any, index: number) => (
                 <option key={season.id || index} value={season.id || index}>
                   시즌 {season.name || index + 1}
                 </option>
@@ -195,7 +143,7 @@ const WebtoonEpisodeSection: React.FC<WebtoonEpisodeSectionProps> = ({ webtoon }
                         className={styles.platformLink}
                         onClick={(e) => e.stopPropagation()}
                       >
-                        {link.platform}
+                        {typeof link.platform === 'string' ? link.platform : link.platform}
                       </a>
                     ))}
                   </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Webtoon } from '@models/webtoon';
+import { WebtoonSummary } from '@models/webtoon';
 import webtoonService from '@services/webtoon-service';
 import WebtoonGrid from '@components/webtoon-grid';
 import Spinner from '@components/spinner';
@@ -19,7 +19,7 @@ const WebtoonSearchModal: React.FC<WebtoonSearchModalProps> = ({
   existingWebtoonIds
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState<Webtoon[]>([]);
+  const [searchResults, setSearchResults] = useState<WebtoonSummary[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const [isAdding, setIsAdding] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -50,7 +50,7 @@ const WebtoonSearchModal: React.FC<WebtoonSearchModalProps> = ({
       if (response.success && response.data) {
         // 이미 추가된 웹툰은 제외
         const filteredResults = response.data.filter(
-          (webtoon: Webtoon) => !existingWebtoonIds.includes(webtoon.id)
+          (webtoon: WebtoonSummary) => !existingWebtoonIds.includes(webtoon.id)
         );
         setSearchResults(filteredResults);
       } else {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './style.module.css';
-import { Webtoon } from '@models/webtoon';  
+import { WebtoonSummary } from '@models/webtoon';  
 import WebtoonGrid from '@components/webtoon-grid';
 import Carousel from '@components/carousel';
 import WebtoonService from '@services/webtoon-service';
@@ -9,8 +9,8 @@ import CarouselAdService from '@services/carousel-ad-service';
 import { CarouselAd } from '@models/carousel-ad';
 
 export interface HomePageState {
-  popularWebtoons: Webtoon[];
-  recentWebtoons: Webtoon[];
+  popularWebtoons: WebtoonSummary[];
+  recentWebtoons: WebtoonSummary[];
   isLoading: boolean;
   error: string | null;
 }
