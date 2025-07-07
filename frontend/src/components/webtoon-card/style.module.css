@@ -1,116 +1,248 @@
 .webtoonCard {
   position: relative;
-  background: white;
-  border-radius: 12px;
+  background: var(--card-background);
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   text-decoration: none;
+  color: inherit;
+  display: block;
+  border: 1px solid var(--border-color-light);
+}
+
+.web {
+  width: 220px;
+  min-height: 320px;
+}
+
+.app {
+  width: 160px;
+  min-height: 200px;
+  margin: 0 4px;
+}
+
+.webtoonCard:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--primary-color);
+}
+
+.webtoonCard:active {
+  transform: translateY(-4px) scale(1.01);
+}
+
+.webtoonCard:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.webtoonCard:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.webtoonCard a,
+.webtoonCard a:link,
+.webtoonCard a:visited,
+.webtoonCard a:hover,
+.webtoonCard a:active,
+.webtoonCard a:focus,
+.webtoonCard a:focus-visible {
+  text-decoration: none !important;
+  outline: none;
+}
+
+.webtoonCard a:focus,
+.webtoonCard a:focus-visible {
+  outline: 2px solid var(--primary-color) !important;
+  outline-offset: 2px !important;
+  text-decoration: none !important;
+}
+
+.webtoonCard a:focus:not(:focus-visible) {
+  outline: none !important;
+  text-decoration: none !important;
+}
+
+/* React Router Link 컴포넌트에 대한 추가 스타일 */
+.webtoonCard a[href] {
+  text-decoration: none !important;
+}
+
+/* Link 컴포넌트 전용 스타일 */
+.webtoonLink {
+  text-decoration: none !important;
   color: inherit;
   display: block;
 }
 
-.web {
-  width: 200px;
-  min-height: 300px;
+.webtoonLink:focus,
+.webtoonLink:focus-visible {
+  outline: 2px solid var(--primary-color) !important;
+  outline-offset: 2px !important;
+  text-decoration: none !important;
 }
 
-.app {
-  width: 150px;
-  min-height: 180px;
-  margin: 0 2px;
-}
-
-.webtoonCard:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+.webtoonLink:focus:not(:focus-visible) {
+  outline: none !important;
+  text-decoration: none !important;
 }
 
 .removeButton {
   position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 24px;
-  height: 24px;
+  top: 12px;
+  right: 12px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  background: rgba(255, 107, 107, 0.9);
+  background: rgba(244, 67, 54, 0.9);
   color: white;
   border: none;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 10;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
 }
 
 .removeButton:hover {
-  background: rgba(255, 107, 107, 1);
+  background: rgba(244, 67, 54, 1);
   transform: scale(1.1);
+  box-shadow: var(--shadow-error);
 }
 
 .thumbnailContainer {
   position: relative;
   width: 100%;
-  height: 200px;
+  height: 240px;
   overflow: hidden;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
 .thumbnailImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: brightness(0.95);
 }
 
 .webtoonCard:hover .thumbnailImage {
-  transform: scale(1.05);
+  transform: scale(1.08);
+  filter: brightness(1.05);
+}
+
+.error {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.errorPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--text-tertiary);
+  font-size: 14px;
+  font-weight: 500;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.loadingPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.loadingSpinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(102, 126, 234, 0.2);
+  border-top: 3px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .tagsContainer {
   position: absolute;
-  top: 8px;
-  left: 8px;
+  top: 12px;
+  left: 12px;
   display: flex;
-  gap: 4px;
+  gap: 6px;
+  z-index: 5;
 }
 
 .webtoonInfo {
-  padding: 12px;
+  padding: 16px;
+  background: var(--card-background);
+  position: relative;
+}
+
+.webtoonInfo::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--border-color) 50%, transparent 100%);
 }
 
 .webtoonTitle {
   display: block;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text-color);
-  margin-bottom: 8px;
-  line-height: 1.3;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+  line-height: 1.4;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  letter-spacing: -0.01em;
 }
 
 .webtoonMeta {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 12px;
-  color: var(--text-secondary-color);
+  font-size: 13px;
+  color: var(--text-secondary);
+  gap: 8px;
 }
 
 .webtoonAuthor {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  max-width: 60%;
+  max-width: 65%;
+  font-weight: 500;
 }
 
 .webtoonRating {
-  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 700;
   color: #ffa726;
+  background: rgba(255, 167, 38, 0.1);
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.webtoonRating::before {
+  content: '★';
+  font-size: 11px;
 }
 
 .nonClickable {
@@ -119,25 +251,75 @@
 
 .nonClickable:hover {
   transform: none;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
+  border-color: var(--border-color-light);
 }
 
 .nonClickable:hover .thumbnailImage {
   transform: none;
+  filter: brightness(0.95);
 }
 
 /* App vs Web styles */
-.app {
-  border-radius: 8px;
+.app .thumbnailContainer {
+  height: 180px;
 }
 
-.web {
-  border-radius: 12px;
+.app .webtoonInfo {
+  padding: 12px;
 }
 
+.app .webtoonTitle {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.app .webtoonMeta {
+  font-size: 12px;
+}
+
+.app .webtoonRating {
+  padding: 3px 6px;
+  font-size: 11px;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
   .webtoonCard {
-    border-radius: 8px;
+    border-radius: 12px;
+  }
+  
+  .web {
+    width: 180px;
+    min-height: 280px;
+  }
+  
+  .thumbnailContainer {
+    height: 200px;
+  }
+  
+  .webtoonInfo {
+    padding: 14px;
+  }
+  
+  .webtoonTitle {
+    font-size: 14px;
+  }
+  
+  .webtoonMeta {
+    font-size: 12px;
+  }
+  
+  .webtoonRating {
+    padding: 3px 6px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .web {
+    width: 160px;
+    min-height: 240px;
   }
   
   .thumbnailContainer {
@@ -145,14 +327,48 @@
   }
   
   .webtoonInfo {
-    padding: 10px;
+    padding: 12px;
   }
   
   .webtoonTitle {
     font-size: 13px;
+    margin-bottom: 8px;
   }
   
   .webtoonMeta {
     font-size: 11px;
   }
+}
+
+/* Dark mode enhancements */
+[data-theme='dark'] .webtoonCard {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme='dark'] .webtoonCard:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 12px 48px rgba(139, 147, 255, 0.2);
+}
+
+[data-theme='dark'] .thumbnailContainer {
+  background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+}
+
+[data-theme='dark'] .errorPlaceholder {
+  background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+  color: var(--text-secondary);
+}
+
+[data-theme='dark'] .webtoonRating {
+  background: rgba(255, 167, 38, 0.15);
+  color: #ffb74d;
+}
+
+[data-theme='dark'] .loadingPlaceholder {
+  background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+}
+
+[data-theme='dark'] .loadingSpinner {
+  border-color: rgba(139, 147, 255, 0.2);
+  border-top-color: var(--primary-color);
 }
