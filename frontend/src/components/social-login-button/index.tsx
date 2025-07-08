@@ -7,7 +7,7 @@ import { RiKakaoTalkFill } from 'react-icons/ri';
 interface SocialLoginButtonProps {
   provider: 'google' | 'kakao' | 'naver';
   onClick: () => void;
-  type?: 'button' | 'submit';
+  type?: 'icon' | 'button' | 'submit';
 }
 
 const SocialLoginButton: React.FC<SocialLoginButtonProps> = ({ provider, onClick, type = 'button' }) => {
@@ -25,11 +25,15 @@ const SocialLoginButton: React.FC<SocialLoginButtonProps> = ({ provider, onClick
   };
 
   return (
-    <button className={styles.socialButton} onClick={onClick} type={type}>
+    <button className={styles.socialButton} onClick={onClick} type={type === 'icon' ? 'button' : type}>
       {getIcon()}
-      {provider === 'google' && ' Google로 로그인'}
-      {provider === 'kakao' && ' 카카오로 로그인'}
-      {provider === 'naver' && ' 네이버로 로그인'}
+      {type !== 'icon' && (
+        <>
+          {provider === 'google' && ' Google로 로그인'}
+          {provider === 'kakao' && ' 카카오로 로그인'}
+          {provider === 'naver' && ' 네이버로 로그인'}
+        </>
+      )}
     </button>
   );
 };

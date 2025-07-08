@@ -4,16 +4,18 @@ import styles from './style.module.css';
 import WebtoonService from '@services/webtoon-service';
 import WebtoonGrid from '@components/webtoon-grid';
 import Spinner from '@components/spinner';
-import { Webtoon, Platform } from '@models/webtoon';
+import { WebtoonSummary, Platform } from '@models/webtoon';
 import { DayOfWeek } from '@models/enum';
+import SortOptions from '@components/sort-options/SortOptions';
+import FilterOptions from './FilterOptions';
 
 const OngoingWebtoonsPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   
-  const [webtoons, setWebtoons] = useState<Webtoon[]>([]);
+  const [webtoons, setWebtoons] = useState<WebtoonSummary[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const [isLastPage, setIsLastPage] = useState(false);
+  const [isLastPage, setIsLastPage] = useState(false);  
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   
@@ -69,13 +71,6 @@ const OngoingWebtoonsPage: React.FC = () => {
     [Platform.BOMTOON]: '봄툰',
   };
 
-  const SORT_OPTIONS = [
-    { value: 'POPULARITY', label: '인기순' },
-    { value: 'RATING', label: '별점순' },
-    { value: 'LATEST', label: '최신순' },
-    { value: 'UPDATE', label: '업데이트순' }
-  ];
-
   // URL 파라미터 업데이트 함수
   const updateUrlParams = () => {
     const params = new URLSearchParams();
@@ -116,9 +111,15 @@ const OngoingWebtoonsPage: React.FC = () => {
     setSelectedDay(day === selectedDay ? null : day);
   };
 
+  const handleFilterPlatformsChange = (platforms: Platform[]) => {
+    setSelectedPlatforms(platforms);
+  };
+  const handleFilterDayChange = (day: DayOfWeek | null) => {
+    setSelectedDay(day);
+  };
+
   const fetchOngoingWebtoons = async (page: number) => {
     setIsLoading(true);
-    console.log("데이터 가져오기!")
     try {
       const response = await WebtoonService.getWebtoons({
         page,
@@ -181,72 +182,63 @@ const OngoingWebtoonsPage: React.FC = () => {
     }
   }, [currentPage, isLastPage]);
 
+  const handleWebtoonClick = (webtoonId: number) => {
+    navigate(`/webtoon/${webtoonId}`);
+  };
+
   return (
-    <div className={styles.ongoingWebtoonsPage}>
-
-      <div className={styles.filters}>
-        <div className={styles.filterGroup}>
-          <div className={styles.platformButtons}>
-            <button
-              className={`${styles.filterButton} ${selectedPlatforms.length === Object.values(Platform).length ? styles.active : ''}`}
-              onClick={handleSelectAllPlatforms}
-            >
-              전체
-            </button>
-            {Object.values(Platform).map((platform) => (
-              <button
-                key={platform}
-                className={`${styles.filterButton} ${selectedPlatforms.includes(platform) ? styles.active : ''}`}
-                onClick={() => handlePlatformChange(platform)}
-              >
-                {PLATFORM_LABELS[platform]}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className={styles.filterGroup}>
-          <div className={styles.dayButtons}>
-            {DAYS.map((day) => (
-              <button
-                key={day}
-                className={`${styles.filterButton} ${selectedDay === day ? styles.active : ''}`}
-                onClick={() => handleDayChange(day)}
-              >
-                {DAY_LABELS[day]}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className={styles.sortOptions}>
-          {SORT_OPTIONS.map((option) => (
-            <button
-              key={option.value}
-              className={`${styles.sortButton} ${sortBy === option.value ? styles.active : ''}`}
-              onClick={() => setSortBy(option.value as typeof sortBy)}
-            >
-              {option.label}
-            </button>
-          ))}
-        </div>
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <h1 className={styles.title}>연재 웹툰</h1>
+        <p className={styles.subtitle}>현재 연재 중인 웹툰들을 확인해보세요</p>
       </div>
 
-      {error ? (
-        <div className={styles.error}>
-          <p>{error}</p>
-          <button onClick={() => fetchOngoingWebtoons(currentPage)}>재시도</button>
-        </div>
-      ) : (
-        <>
-          <WebtoonGrid
-            webtoons={webtoons}
-            lastWebtoonRef={lastWebtoonRef}
-          />
-          {isLoading && <Spinner />}
-          {isLastPage && <p className={styles.endMessage}>모든 웹툰을 불러왔습니다.</p>}
-        </>
-      )}
+      <FilterOptions 
+        PLATFORM_LABELS={PLATFORM_LABELS}
+        DAYS={DAYS}
+        DAY_LABELS={DAY_LABELS}
+        onChangeSelectedPlatforms={handleFilterPlatformsChange}
+        onChangeSelectedDay={handleFilterDayChange}
+      />
+
+      <div className={styles.sortOptionsWrapper}>
+        <SortOptions sortBy={sortBy} setSortBy={setSortBy} />
+      </div>
+
+      <div className={styles.content}>
+        {isLoading ? (
+          <div className={styles.loadingContainer}>
+            <div className={styles.spinner}></div>
+            <p>웹툰을 불러오는 중...</p>
+          </div>
+        ) : error ? (
+          <div className={styles.errorContainer}>
+            <p>웹툰을 불러오는데 실패했습니다.</p>
+            <button onClick={() => fetchOngoingWebtoons(currentPage)} className={styles.retryButton}>
+              다시 시도
+            </button>
+          </div>
+        ) : webtoons.length === 0 ? (
+          <div className={styles.emptyContainer}>
+            <p>조건에 맞는 웹툰이 없습니다.</p>
+          </div>
+        ) : (
+          <>
+            <WebtoonGrid
+              webtoons={webtoons}
+              lastWebtoonRef={lastWebtoonRef}
+            />
+            {isLoading && (
+              <div className={styles.loadingContainer}>
+                <Spinner />
+              </div>
+            )}
+            {isLastPage && webtoons.length > 0 && (
+              <div className={styles.endMessage}>모든 웹툰을 불러왔습니다.</div>
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 };

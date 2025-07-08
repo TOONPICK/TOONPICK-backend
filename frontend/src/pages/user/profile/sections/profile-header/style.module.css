@@ -1,0 +1,188 @@
+.profileHeader {
+  position: relative;
+  background: var(--primary-gradient);
+  border-radius: 20px;
+  margin-bottom: 24px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.backgroundGradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 100%);
+  z-index: 1;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  padding: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.profileSection {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.avatarContainer {
+  position: relative;
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--glass-background);
+  box-shadow: var(--shadow-avatar);
+}
+
+.levelIndicator {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: var(--level-gradient);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--text-inverse);
+  box-shadow: var(--shadow-level);
+}
+
+.levelNumber {
+  color: var(--text-inverse);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.username {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-inverse);
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.userBio {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  font-weight: 400;
+}
+
+.badgePreview {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.badge {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--glass-background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+}
+
+.badge img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.badgeMore {
+  background: var(--glass-background);
+  color: var(--text-inverse);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.actionButtons {
+  display: flex;
+  gap: 12px;
+}
+
+.editButton,
+.shareButton {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+}
+
+.editButton {
+  background: var(--glass-background);
+  color: var(--text-inverse);
+  border: 1px solid var(--glass-background);
+}
+
+.editButton:hover {
+  background: var(--glass-background);
+  transform: translateY(-2px);
+}
+
+.shareButton {
+  background: var(--glass-background-light);
+  color: var(--text-inverse);
+  border: 1px solid var(--glass-background-light);
+}
+
+.shareButton:hover {
+  background: var(--glass-background);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px;
+  }
+
+  .profileSection {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .avatar {
+    width: 100px;
+    height: 100px;
+  }
+
+  .username {
+    font-size: 28px;
+  }
+
+  .actionButtons {
+    width: 100%;
+    justify-content: center;
+  }
+} 

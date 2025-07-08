@@ -1,0 +1,24 @@
+.sortOptions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1.2rem;
+  margin: 1.5rem 0;
+  padding-right: 1.5rem;
+}
+
+.option {
+  cursor: pointer;
+  font-size: 1rem;
+  color: inherit;
+  background: none;
+  padding: 0;
+  border: none;
+  user-select: none;
+  font-weight: normal;
+  transition: font-weight 0.2s;
+}
+
+.active {
+  font-weight: bold;
+} 

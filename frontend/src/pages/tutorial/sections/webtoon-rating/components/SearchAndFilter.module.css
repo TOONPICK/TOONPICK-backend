@@ -1,92 +1,88 @@
 .container {
   width: 100%;
   max-width: 1000px;
-  padding: var(--spacing-md);
-  background-color: var(--background-color);
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--card-shadow);
-  margin-bottom: var(--spacing-xl);
+  padding: 16px;
+  background-color: #f8f9fa;
+  border: 1px solid #e5e5e5;
+  margin-bottom: 32px;
 }
 
 .searchContainer {
-  margin-bottom: var(--spacing-md);
+  margin-bottom: 16px;
 }
 
 .searchInput {
   width: 100%;
-  padding: var(--spacing-md);
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-md);
-  font-size: 1rem;
-  background-color: var(--background-secondary-color);
-  color: var(--text-color);
-  transition: all 0.2s;
+  padding: 12px;
+  border: 1px solid #e5e5e5;
+  font-size: 14px;
+  background-color: #fff;
+  color: #1a1a1a;
+  transition: border-color 0.2s;
 }
 
 .searchInput:focus {
   outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.1);
+  border-color: #1a1a1a;
 }
 
 .filterContainer {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm);
+  gap: 8px;
 }
 
 .filterSection {
   display: flex;
-  align-items: center; /* 수직 중앙 정렬 */
-  gap: var(--spacing-md); /* 타이틀과 필터 태그 간의 간격 */
+  align-items: center;
+  gap: 16px;
 }
 
 .filterTitle {
-  font-size: 1rem;
+  font-size: 14px;
   font-weight: 600;
-  color: var(--text-color);
+  color: #1a1a1a;
   margin: 0;
 }
 
 .filterTags {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing-xs);
+  gap: 8px;
 }
 
 .filterTag {
-  padding: var(--spacing-xs) var(--spacing-sm);
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-md);
-  background-color: var(--background-secondary-color);
-  color: var(--text-color);
-  font-size: 0.9rem;
+  padding: 6px 12px;
+  border: 1px solid #e5e5e5;
+  background-color: #fff;
+  color: #1a1a1a;
+  font-size: 12px;
   cursor: pointer;
   transition: all 0.2s;
-  min-width: 80px;
+  min-width: 60px;
 }
 
 .filterTag:hover {
-  background-color: var(--hover-color);
+  background-color: #f8f9fa;
 }
 
 .filterTag.selected {
-  background-color: var(--primary-color);
+  background-color: #1a1a1a;
   color: white;
-  border-color: var(--primary-color);
+  border-color: #1a1a1a;
 }
 
 @media (max-width: 768px) {
   .container {
-    padding: var(--spacing-md);
+    padding: 12px;
   }
 
   .filterTags {
-    gap: var(--spacing-xs);
+    gap: 6px;
   }
 
   .filterTag {
-    padding: var(--spacing-xs) var(--spacing-sm);
-    font-size: 0.8rem;
+    padding: 4px 8px;
+    font-size: 11px;
   }
 } 

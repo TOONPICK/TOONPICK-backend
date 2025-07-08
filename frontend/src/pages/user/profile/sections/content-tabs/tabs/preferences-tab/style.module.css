@@ -1,0 +1,137 @@
+.preferencesTab {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.chartSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sectionTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0;
+}
+
+.chartContainer {
+  background: #f7fafc;
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid #e2e8f0;
+}
+
+.tagsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.tagGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tagTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0;
+}
+
+.tagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.emotionTag {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.aiTag {
+  background: #f7fafc;
+  color: #4a5568;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.insightsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.insightsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.insightCard {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.insightCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+.insightIcon {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.insightCard h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0 0 8px 0;
+}
+
+.insightCard p {
+  font-size: 14px;
+  color: #718096;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .chartContainer {
+    padding: 16px;
+  }
+
+  .insightsGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .insightCard {
+    padding: 16px;
+  }
+
+  .emotionTag,
+  .aiTag {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+} 

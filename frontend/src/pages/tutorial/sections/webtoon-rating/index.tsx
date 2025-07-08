@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useInView } from 'react-intersection-observer';
-import SearchAndFilter from './components/SearchAndFilter';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import WebtoonService from 'src/services/webtoon-service';
+import WebtoonReviewService from 'src/services/webtoon-review-service';
 import WebtoonRatingList from './components/WebtoonRatingList';
 import styles from './style.module.css';
 
@@ -17,41 +17,41 @@ interface WebtoonRatingFormProps {
   onComplete: () => void;
 }
 
+const PAGE_SIZE = 10;
+
 const WebtoonRatingPage: React.FC<WebtoonRatingFormProps> = ({ onComplete }) => {
   const [webtoons, setWebtoons] = useState<Webtoon[]>([]);
-  const [filteredWebtoons, setFilteredWebtoons] = useState<Webtoon[]>([]);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
-  const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [currentIdx, setCurrentIdx] = useState(0);
+  const [submitting, setSubmitting] = useState(false);
 
-  const { ref, inView } = useInView({
-    threshold: 0,
-  });
+  const observerRef = useRef<HTMLDivElement | null>(null);
 
+  // Fetch webtoons
   const fetchWebtoons = useCallback(async (pageNum: number) => {
     setLoading(true);
+    setError(null);
     try {
-      // TODO: 실제 API 호출로 대체
-      const mockWebtoons: Webtoon[] = Array.from({ length: 10 }, (_, i) => ({
-        id: (pageNum - 1) * 10 + i + 1,
-        title: `웹툰 제목 ${(pageNum - 1) * 10 + i + 1}`,
-        author: `작가 ${(pageNum - 1) * 10 + i + 1}`,
-        thumbnail: `https://via.placeholder.com/100?text=Webtoon+${(pageNum - 1) * 10 + i + 1}`,
-        genres: ['로맨스', '판타지'],
-        platform: '네이버',
-      }));
-
-      if (pageNum === 1) {
-        setWebtoons(mockWebtoons);
+      const res = await WebtoonService.getWebtoons({ page: pageNum, size: PAGE_SIZE });
+      if (res.success && res.data) {
+        const mapped = (res.data ?? []).map((w: any) => ({
+          id: w.id,
+          title: w.title,
+          author: w.author || (w.authors ? w.authors.map((a: any) => a.name).join(', ') : ''),
+          thumbnail: w.thumbnail || w.thumbnailUrl || '',
+          genres: w.genres ? w.genres.map((g: any) => (typeof g === 'string' ? g : g.name)) : [],
+          platform: w.platform || '',
+        }));
+        setWebtoons(prev => [...prev, ...mapped]);
+        setHasMore(!res.last);
       } else {
-        setWebtoons(prev => [...prev, ...mockWebtoons]);
+        setError(res.message || '웹툰을 불러오지 못했습니다.');
       }
-      setHasMore(mockWebtoons.length === 10);
-    } catch (error) {
-      console.error('웹툰 목록을 불러오는데 실패했습니다:', error);
+    } catch (e) {
+      setError('웹툰을 불러오지 못했습니다.');
     } finally {
       setLoading(false);
     }
@@ -61,56 +61,57 @@ const WebtoonRatingPage: React.FC<WebtoonRatingFormProps> = ({ onComplete }) => 
     fetchWebtoons(page);
   }, [page, fetchWebtoons]);
 
-  useEffect(() => {
-    if (inView && !loading && hasMore) {
-      setPage(prev => prev + 1);
+  // Infinite scroll: when last webtoon is rated/skipped, fetch next page
+  const handleNext = () => {
+    if (currentIdx + 1 < webtoons.length) {
+      setCurrentIdx(idx => idx + 1);
+    } else if (hasMore && !loading) {
+      setPage(p => p + 1);
+    } else {
+      onComplete();
     }
-  }, [inView, loading, hasMore]);
-
-  useEffect(() => {
-    const filtered = webtoons.filter(webtoon => {
-      const matchesSearch = webtoon.title.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesGenres = selectedGenres.length === 0 || 
-        webtoon.genres.some(genre => selectedGenres.includes(genre));
-      const matchesPlatforms = selectedPlatforms.length === 0 || 
-        selectedPlatforms.includes(webtoon.platform);
-      return matchesSearch && matchesGenres && matchesPlatforms;
-    });
-    setFilteredWebtoons(filtered);
-  }, [webtoons, searchQuery, selectedGenres, selectedPlatforms]);
-
-  const handleSearch = (query: string) => {
-    setSearchQuery(query);
-    setPage(1);
   };
 
-  const handleFilterChange = (filters: { genres: string[]; platforms: string[] }) => {
-    setSelectedGenres(filters.genres);
-    setSelectedPlatforms(filters.platforms);
-    setPage(1);
+  // 평가 제출
+  const handleRate = async (webtoonId: number, rating: number) => {
+    setSubmitting(true);
+    try {
+      await WebtoonReviewService.createWebtoonReview(webtoonId, { webtoonId, rating, comment: '' });
+    } catch (e) {
+      // TODO: 에러 처리
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  // 건너뛰기
+  const handleSkip = () => {
+    handleNext();
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <h1 className={styles.title}>웹툰 평가</h1>
-        
-        <div className={styles.fixedSection}>
-          <SearchAndFilter
-            onSearch={handleSearch}
-            onFilterChange={handleFilterChange}
-          />
-        </div>
-
         <div className={styles.scrollableSection}>
           <WebtoonRatingList
-            webtoons={filteredWebtoons}
-            onRatingComplete={onComplete}
+            key={webtoons[currentIdx]?.id}
+            webtoons={webtoons.slice(currentIdx, currentIdx + 1)}
+            onNext={handleNext}
+            onSkip={handleSkip}
+            onRate={handleRate}
+            loading={loading || submitting}
           />
-
           {loading && <div className={styles.loading}>로딩 중...</div>}
-          {!loading && hasMore && <div ref={ref} className={styles.loadMoreTrigger} />}
+          {error && <div className={styles.loading}>{error}</div>}
+          {/* 무한 스크롤 트리거 */}
+          <div ref={observerRef} className={styles.loadMoreTrigger} />
         </div>
+        <button 
+          className={styles.completeButton}
+          onClick={onComplete}
+        >
+          평가 완료
+        </button>
       </div>
     </div>
   );

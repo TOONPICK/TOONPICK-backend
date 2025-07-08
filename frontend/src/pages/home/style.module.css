@@ -1,9 +1,61 @@
-.homePage{
-  height: 1000px;
+.homePage {
+  min-height: 100vh;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.section {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 32px auto;
+  padding: 0 16px;
 }
 
 .carousel img {
   width: 100%;
-  height: 1000px;
+  height: 400px;
   object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+h2 {
+  font-size: 2rem;
+  margin: 24px 0 16px 0;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .section {
+    max-width: 100%;
+    padding: 0 8px;
+  }
+  .carousel img {
+    height: 220px;
+    border-radius: 10px;
+  }
+  h2 {
+    font-size: 1.3rem;
+    margin: 18px 0 12px 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .homePage {
+    padding-top: 0;
+  }
+  .section {
+    padding: 0 4px;
+    margin-bottom: 18px;
+  }
+  .carousel img {
+    height: 140px;
+    border-radius: 6px;
+  }
+  h2 {
+    font-size: 1.1rem;
+    margin: 12px 0 8px 0;
+  }
 }

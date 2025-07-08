@@ -1,4 +1,4 @@
-import { Webtoon } from "./webtoon";
+import { WebtoonSummary } from "./webtoon";
 import { Review } from "./review";
 
 export interface MemberProfile {
@@ -14,6 +14,29 @@ export interface MemberProfile {
   points: number;
   bookmarkedWebtoons: number;
   watchedWebtoons: number;
+  tutorial: boolean;
+  bio?: string;
+  birthDate?: string;
+  gender?: 'male' | 'female' | 'other' | 'prefer_not_to_say';
+  location?: string;
+  website?: string;
+  socialLinks?: {
+    twitter?: string;
+    instagram?: string;
+    youtube?: string;
+  };
+  privacySettings?: {
+    profileVisibility: 'public' | 'friends' | 'private';
+    showReadingHistory: boolean;
+    showReviews: boolean;
+    showCollections: boolean;
+    allowMessages: boolean;
+  };
+  notificationPreferences?: {
+    email: boolean;
+    push: boolean;
+    sms: boolean;
+  };
   badges: {
     id: number;
     name: string;
@@ -24,10 +47,10 @@ export interface MemberProfile {
     emotionalTags: string[];
     aiTags: string[];
   };
-  favoriteWebtoons: Webtoon[];
-  masterpieceWebtoons: Webtoon[];
+  favoriteWebtoons: WebtoonSummary[];
+  masterpieceWebtoons: WebtoonSummary[];
   readingHistory: {
-    webtoon: Webtoon;
+    webtoon: WebtoonSummary;
     lastReadAt: string;
   }[];
   reviews: Review[];

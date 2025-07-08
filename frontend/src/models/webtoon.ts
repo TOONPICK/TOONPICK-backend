@@ -1,3 +1,5 @@
+import { Episode } from './episode';
+
 export enum Platform {
   NAVER = 'NAVER',
   KAKAO = 'KAKAO',
@@ -18,21 +20,55 @@ export enum SerializationStatus {
   UNKNOWN = 'UNKNOWN',
 }
 
-export interface Webtoon {
+export enum PaidType {
+  FREE = 'FREE',   
+  PAID = 'PAID',  
+  WAIT_FREE = 'WAIT_FREE',
+  DAILY_FREE = 'DAILY_FREE'
+}
+
+export interface SeasonInfo {
+  id: number | null;
+  name: string | null;
+  startDate: string | null;
+  endDate: string | null;
+  episodeCount: number | null;
+  isActive: boolean | null; 
+}
+
+export interface WebtoonSummary {
   id: number;
   title: string;
   thumbnailUrl: string;
-  platform: Platform;
+  platforms: Platform[];
+  dayOfWeek: DayOfWeek;
   isAdult: boolean;
   status: SerializationStatus;
-  publishDay: string;
   authors: Author[];
-  description: string;
   genres: Genre[];
-  totalRatings: number;
-  averageRating: number;
-  similarWebtoons: SimilarWebtoon[] | null;
-  analysisData?: WebtoonAnalysisData | null;
+  averageRating: number | null;
+  ageRating: AgeRating | null;
+  lastUpdateDate: string | null;
+}
+
+export interface WebtoonDetails {
+  id: number;
+  title: string;
+  summary: string;
+  status: string;
+  dayOfWeek: string;
+  thumbnailUrl: string;
+  isAdult: boolean;
+  ageRating: AgeRating | null;
+  platforms: Platform[];
+  genres: Genre[];
+  authors: Author[];
+  episodeCount: number;
+  averageRating: number | null;
+  publishStartDate: string | null;
+  lastUpdateDate: string | null;
+  episodes?: Episode[];
+  seasons?: SeasonInfo[];
 }
 
 export interface Author {

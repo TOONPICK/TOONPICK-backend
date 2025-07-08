@@ -1,0 +1,311 @@
+.episodeSection {
+  padding: 32px;
+  background: var(--card-background);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  gap: 20px;
+}
+
+.titleSection {
+  flex: 1;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 12px 0;
+}
+
+.episodeStats {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.statItem {
+  font-size: 14px;
+  color: var(--text-secondary);
+  padding: 4px 12px;
+  background: var(--card-background-secondary);
+  border-radius: 8px;
+  border: 1px solid var(--border-color-light);
+}
+
+.controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.seasonSelect {
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--card-background);
+  color: var(--text-primary);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.seasonSelect:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+}
+
+.sortButton {
+  padding: 8px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--card-background);
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sortButton:hover {
+  background: var(--hover-bg);
+  border-color: var(--primary-color);
+}
+
+.sortButton:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+}
+
+.episodeList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.episodeItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: var(--card-background-secondary);
+  border: 1px solid var(--border-color-light);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.episodeItem::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--primary-color);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.episodeItem:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-color);
+}
+
+.episodeItem:hover::before {
+  opacity: 1;
+}
+
+.episodeInfo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+}
+
+.episodeNumber {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary-color);
+  min-width: 60px;
+  text-align: center;
+  padding: 6px 12px;
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: 8px;
+}
+
+.episodeTitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.episodeMeta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.pricingType {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(72, 187, 120, 0.1);
+  border: 1px solid rgba(72, 187, 120, 0.2);
+}
+
+.platformLinks {
+  display: flex;
+  gap: 8px;
+}
+
+.platformLink {
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--primary-color);
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(102, 126, 234, 0.2);
+}
+
+.platformLink:hover {
+  background: var(--primary-color);
+  color: white;
+  transform: translateY(-1px);
+}
+
+.emptyState {
+  text-align: center;
+  padding: 48px 20px;
+  color: var(--text-secondary);
+  font-size: 16px;
+}
+
+.emptyState p {
+  margin: 0;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .episodeSection {
+    padding: 20px;
+  }
+  
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+  
+  .controls {
+    justify-content: space-between;
+  }
+  
+  .episodeItem {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  
+  .episodeInfo {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .episodeNumber {
+    align-self: flex-start;
+  }
+  
+  .episodeMeta {
+    justify-content: space-between;
+  }
+  
+  .episodeStats {
+    gap: 8px;
+  }
+  
+  .statItem {
+    font-size: 13px;
+    padding: 3px 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .episodeSection {
+    padding: 16px;
+  }
+  
+  .sectionTitle {
+    font-size: 1.3rem;
+  }
+  
+  .episodeItem {
+    padding: 12px 16px;
+  }
+  
+  .episodeNumber {
+    font-size: 14px;
+    min-width: 50px;
+    padding: 4px 8px;
+  }
+  
+  .episodeTitle {
+    font-size: 14px;
+  }
+  
+  .pricingType {
+    font-size: 12px;
+    padding: 3px 8px;
+  }
+  
+  .platformLink {
+    font-size: 11px;
+    padding: 3px 6px;
+  }
+}
+
+/* 다크 모드 지원 */
+[data-theme='dark'] .episodeItem {
+  background: var(--card-background-secondary);
+  border-color: var(--border-color);
+}
+
+[data-theme='dark'] .episodeItem:hover {
+  border-color: var(--primary-color);
+  background: rgba(139, 147, 255, 0.05);
+}
+
+[data-theme='dark'] .pricingType {
+  background: rgba(72, 187, 120, 0.15);
+  border-color: rgba(72, 187, 120, 0.3);
+}
+
+[data-theme='dark'] .platformLink {
+  background: rgba(139, 147, 255, 0.15);
+  border-color: rgba(139, 147, 255, 0.3);
+}
+
+[data-theme='dark'] .platformLink:hover {
+  background: var(--primary-color);
+  color: white;
+} 

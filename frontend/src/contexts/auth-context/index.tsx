@@ -60,17 +60,33 @@ interface AuthProviderProps {
 const authReducer = (state: AuthState, action: AuthAction): AuthState => {
   switch (action.type) {
     case 'LOGIN_SUCCESS':
-      return { ...state, isAuthenticated: true, memberProfile: action.payload, error: null };
+      return { 
+        ...state, 
+        isAuthenticated: true, 
+        memberProfile: action.payload, 
+        error: null
+      };
     case 'LOGIN_FAILURE':
       return { ...state, isAuthenticated: false, memberProfile: null, error: action.payload };
     case 'LOGOUT':
       return { ...state, isAuthenticated: false, memberProfile: null, error: null };
     case 'SET_MEMBER_PROFILE':
-      return { ...state, memberProfile: action.payload };
+      return { 
+        ...state, 
+        memberProfile: action.payload
+      };
     case 'SOCIAL_LOGIN_SUCCESS':
-      return { ...state, isAuthenticated: true, memberProfile: action.payload, error: null };
+      return { 
+        ...state, 
+        isAuthenticated: true, 
+        memberProfile: action.payload, 
+        error: null
+      };
     case 'UPDATE_PROFILE':
-      return { ...state, memberProfile: action.payload };
+      return { 
+        ...state, 
+        memberProfile: action.payload
+      };
     default:
       return state; // 기본 상태 반환
   }
@@ -85,7 +101,25 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   // 컴포넌트가 마운트될 때 실행되는 효과
   useEffect(() => {
     const accessToken = TokenManager.getAccessToken(); // 저장된 액세스 토큰 가져오기
-    if (accessToken && !TokenManager.isAccessTokenExpired(accessToken)) { // 토큰이 유효한 경우
+    const isDev = process.env.NODE_ENV === 'development';
+    
+    // 토큰이 유효한 경우에만 프로필 가져오기 (로그인된 상태)
+    if (accessToken && !TokenManager.isAccessTokenExpired(accessToken)) {
+      const fetchMemberProfile = async () => {
+        try {
+          const profile = await MemberService.getMemberProfile(); // 회원 프로필 가져오기
+          if (profile.data) {
+            dispatch({ type: 'LOGIN_SUCCESS', payload: profile.data }); // 로그인 성공
+          } else {
+            dispatch({ type: 'LOGIN_FAILURE', payload: 'Failed to fetch member profile' }); // 프로필 가져오기 실패
+          }
+        } catch (error) {
+          console.error('Error fetching member profile:', error); // 에러 로그
+        }
+      };
+      fetchMemberProfile(); // 프로필 가져오기 함수 호출
+    } else if (isDev) {
+      // 개발 환경에서 토큰이 없으면 자동으로 로그인 상태 시뮬레이션
       const fetchMemberProfile = async () => {
         try {
           const profile = await MemberService.getMemberProfile(); // 회원 프로필 가져오기

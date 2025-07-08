@@ -6,7 +6,6 @@ import styles from './style.module.css';
 import AuthService from '@services/auth-service';
 import SocialLoginButton from '@components/social-login-button';
 
-
 const SignInPage: React.FC = () => {
   const navigate = useNavigate();
   const { state, login } = useAuth();
@@ -14,12 +13,16 @@ const SignInPage: React.FC = () => {
   const [error, setError] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
 
-  // 로그인 상태에 따라 홈으로 리다이렉트
+  // 로그인 상태에 따라 튜토리얼 또는 홈으로 리다이렉트
   useEffect(() => {
-    if (state.isAuthenticated) {
-      navigate(Routes.HOME);
+    if (state.isAuthenticated && state.memberProfile) {
+      if (!state.memberProfile.tutorial) {
+        navigate(Routes.TUTORIAL);
+      } else {
+        navigate(Routes.HOME);
+      }
     }
-  }, [state.isAuthenticated, navigate]);
+  }, [state.isAuthenticated, state.memberProfile, navigate]);
 
   // 입력 필드 변경 처리
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,9 +44,7 @@ const SignInPage: React.FC = () => {
 
     try {
       await login(formData.username, formData.password); // 로그인 요청
-      if (state.isAuthenticated) {
-        navigate(Routes.TUTORIAL); // 로그인 성공 시 튜토리얼 페이지로 이동
-      }
+      // 리다이렉트는 useEffect에서 처리
     } catch (err: any) {
       setError(err.message || '로그인에 실패했습니다. 다시 시도해주세요.');
     } finally {
@@ -105,14 +106,10 @@ const SignInPage: React.FC = () => {
           {isLoading ? '로딩 중...' : '로그인'}
         </button>
 
-        <div className={styles.divider}>
-          <span>또는</span>
-        </div>
-
         <div className={styles.socialLogin}>
-          <SocialLoginButton provider="google" onClick={() => handleSocialLogin('google')} type="button" />
-          <SocialLoginButton provider="kakao" onClick={() => handleSocialLogin('kakao')} type="button" />
-          <SocialLoginButton provider="naver" onClick={() => handleSocialLogin('naver')} type="button" />
+          <SocialLoginButton provider="google" onClick={() => handleSocialLogin('google')} type="icon" />
+          <SocialLoginButton provider="kakao" onClick={() => handleSocialLogin('kakao')} type="icon" />
+          <SocialLoginButton provider="naver" onClick={() => handleSocialLogin('naver')} type="icon" />
         </div>
 
         <div className={styles.links}>

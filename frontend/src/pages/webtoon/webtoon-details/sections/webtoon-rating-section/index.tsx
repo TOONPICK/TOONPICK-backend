@@ -1,84 +1,153 @@
-import React, { useState } from 'react';
-import { Webtoon } from '@models/webtoon';
-import { Review } from '@models/review';
+import React, { useState, useEffect } from 'react';
+import { WebtoonDetails } from '@models/webtoon';
+import { Review, ReviewRequest } from '@models/review';
 import { useAuth } from '@contexts/auth-context';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
-import { FiMoreVertical, FiThumbsUp, FiFlag } from 'react-icons/fi';
+import { FiThumbsUp, FiFlag, FiStar, FiMessageCircle, FiClock } from 'react-icons/fi';
+import webtoonReviewService from '@services/webtoon-review-service';
 import styles from './style.module.css';
+import AverageRatingWithDistribution from '@components/average-rating-with-distribution';
+import ReviewList from '@components/review-list';
 
 interface WebtoonRatingSectionProps {
-  webtoon: Webtoon;
+  webtoon: WebtoonDetails;
 }
 
 const WebtoonRatingSection: React.FC<WebtoonRatingSectionProps> = ({ webtoon }) => {
   const { state } = useAuth();
   const [userRating, setUserRating] = useState<number>(0);
-  const [showCommentForm, setShowCommentForm] = useState<boolean>(false);
   const [userComment, setUserComment] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const [sortBy, setSortBy] = useState<'popular' | 'recent'>('popular');
+  const [sortBy, setSortBy] = useState<'latest' | 'popular'>('latest');
   const [showMoreMenu, setShowMoreMenu] = useState<number | null>(null);
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [userReview, setUserReview] = useState<Review | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [showCommentForm, setShowCommentForm] = useState<boolean>(false);
 
-  // 더미 데이터
-  const hasUserRated = state && userRating > 0;
-  
-  // 더미 평가 데이터
-  const dummyReviews: Review[] = [
-    {
-      id: 1,
-      webtoonId: 1,
-      userId: '웹툰팬1',
-      userName: '팬1',
-      profilePicture: 'https://via.placeholder.com/40',
-      rating: 5,
-      comment: '정말 재미있는 웹툰입니다. 작화도 좋고 스토리도 흥미롭습니다.',
-      createdAt: '2023-05-15T14:30:00Z',
-      modifiedAt: '2023-05-15T14:30:00Z',
-      likes: 24
-    },
-  ];
-  
-  // 더미 평점 분포 데이터 (0.5점 단위)
-  const ratingDistribution = [
-    { rating: 1, count: 5, percentage: 1.7 },
-    { rating: 1.5, count: 8, percentage: 2.7 },
-    { rating: 2, count: 12, percentage: 4 },
-    { rating: 2.5, count: 18, percentage: 6 },
-    { rating: 3, count: 30, percentage: 10 },
-    { rating: 3.5, count: 45, percentage: 15 },
-    { rating: 4, count: 75, percentage: 25 },
-    { rating: 4.5, count: 60, percentage: 20 },
-    { rating: 5, count: 47, percentage: 15.6 }
-  ];
-  
-  const handleRatingChange = (rating: number) => {
-    setUserRating(rating);
-    setShowCommentForm(false);
+  // 리뷰 데이터 로드
+  useEffect(() => {
+    loadReviews();
+    if (state) {
+      loadUserReview();
+    }
+  }, [webtoon.id, sortBy, state]);
+
+  const loadReviews = async () => {
+    setIsLoading(true);
+    try {
+      const response = await webtoonReviewService.getReviewsByWebtoon(
+        webtoon.id, 
+        sortBy, 
+        0, 
+        20
+      );
+      if (response.success && response.data) {
+        setReviews(response.data);
+      }
+    } catch (error) {
+      console.error('리뷰 로드 실패:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
-  
+
+  const loadUserReview = async () => {
+    try {
+      const response = await webtoonReviewService.getUserReviewForWebtoon(webtoon.id);
+      if (response.success && response.data) {
+        setUserReview(response.data);
+        setUserRating(response.data.rating);
+        setUserComment(response.data.comment);
+      }
+    } catch (error) {
+      console.error('사용자 리뷰 로드 실패:', error);
+    }
+  };
+
+  const handleRatingChange = async (rating: number) => {
+    setUserRating(rating);
+    // 별점만 바꿔도 서버에 바로 반영
+    setIsSubmitting(true);
+    try {
+      const reviewData: ReviewRequest = {
+        webtoonId: webtoon.id,
+        rating,
+        comment: userComment || ''
+      };
+      let response;
+      if (userReview) {
+        response = await webtoonReviewService.updateWebtoonReview(userReview.id, reviewData);
+      } else {
+        response = await webtoonReviewService.createWebtoonReview(webtoon.id, reviewData);
+      }
+      if (response.success && response.data) {
+        setUserReview(response.data);
+        setUserRating(response.data.rating);
+        setUserComment(response.data.comment);
+        await loadReviews();
+        await loadUserReview();
+      }
+    } catch (error) {
+      alert('별점 등록에 실패했습니다.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setUserComment(e.target.value);
   };
-  
-  const handleSubmitReview = () => {
+
+  const handleSubmitReview = async () => {
     if (userRating === 0) {
       alert('평점을 선택해주세요.');
       return;
     }
-    
     setIsSubmitting(true);
-    
-    // API 호출 대신 setTimeout으로 시뮬레이션
-    setTimeout(() => {
-      console.log('평가 제출:', { rating: userRating, comment: userComment });
+    try {
+      const reviewData: ReviewRequest = {
+        webtoonId: webtoon.id,
+        rating: userRating,
+        comment: userComment
+      };
+      let response;
+      if (userReview) {
+        response = await webtoonReviewService.updateWebtoonReview(userReview.id, reviewData);
+      } else {
+        response = await webtoonReviewService.createWebtoonReview(webtoon.id, reviewData);
+      }
+      if (response.success && response.data) {
+        setUserReview(response.data);
+        setUserComment(response.data.comment);
+        await loadReviews();
+        await loadUserReview();
+        alert(userReview && userReview.comment ? '코멘트가 수정되었습니다.' : '코멘트가 등록되었습니다.');
+      }
+    } catch (error) {
+      alert('코멘트 등록에 실패했습니다.');
+    } finally {
       setIsSubmitting(false);
-      setShowCommentForm(false);
-      alert('평가가 등록되었습니다.');
-    }, 1000);
+    }
+  };
+
+  const handleLikeToggle = async (reviewId: number) => {
+    try {
+      await webtoonReviewService.toggleLikeForReview(reviewId);
+      loadReviews(); // 리뷰 목록 새로고침
+    } catch (error) {
+      console.error('좋아요 토글 실패:', error);
+    }
   };
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
+    const now = new Date();
+    const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
+    
+    if (diffInHours < 1) return '방금 전';
+    if (diffInHours < 24) return `${diffInHours}시간 전`;
+    if (diffInHours < 168) return `${Math.floor(diffInHours / 24)}일 전`;
+    
     return date.toLocaleDateString('ko-KR', {
       year: 'numeric',
       month: 'long',
@@ -87,193 +156,77 @@ const WebtoonRatingSection: React.FC<WebtoonRatingSectionProps> = ({ webtoon }) 
   };
 
   const handleReport = (reviewId: number) => {
-    // 신고 기능 구현
     console.log('신고:', reviewId);
     setShowMoreMenu(null);
   };
 
+  // 평점 분포 계산
+  const ratingDistribution = reviews.reduce((acc, review) => {
+    const rating = Math.floor(review.rating);
+    acc[rating] = (acc[rating] || 0) + 1;
+    return acc;
+  }, {} as Record<number, number>);
+
+  // 진단용 콘솔
+  console.log('reviews:', reviews);
+  console.log('ratingDistribution:', ratingDistribution);
+
+  const totalReviews = reviews.length;
+  const averageRating = totalReviews > 0 
+    ? reviews.reduce((sum, review) => sum + review.rating, 0) / totalReviews 
+    : 0;
+
   return (
     <section className={styles.section}>
-      <h2 className={styles.sectionTitle}>웹툰 평가</h2>
-      
-      <div className={styles.ratingSummary}>
-        <div className={styles.averageRating}>
-          <div className={styles.ratingValue}>
-            {webtoon.averageRating ? webtoon.averageRating?.toFixed(1) : '0.0'}
-          </div>
-          <div className={styles.ratingStars}>
-            {[1, 2, 3, 4, 5].map(star => (
-              <span 
-                key={star} 
-                className={`${styles.star} ${star <= Math.round(webtoon.averageRating) ? styles.filled : ''}`}
-              >
-                ★
-              </span>
-            ))}
-          </div>
-          <div className={styles.totalRatings}>
-            총 {webtoon.totalRatings}명 평가
+      {/* 평점 요약 섹션 */}
+      <div className={styles.ratingOverview}>
+        <div className={styles.ratingHeader}>
+          <h2 className={styles.sectionTitle}>평점 및 리뷰</h2>
+          <div className={styles.ratingStats}>
+            <span className={styles.ratingCount}>{totalReviews}개의 리뷰</span>
           </div>
         </div>
-
-        <div className={styles.ratingDistribution}>
-          <ResponsiveContainer width="100%" height={200}>
-            <BarChart data={ratingDistribution}>
-              <XAxis 
-                dataKey="rating" 
-                tickFormatter={(value) => `${value}점`}
-                tick={{ fontSize: 12 }}
-              />
-              <YAxis hide />
-              <Tooltip 
-                formatter={(value: number) => [`${value}명`, '평가 수']}
-                labelFormatter={(label) => `${label}점`}
-              />
-              <Bar 
-                dataKey="count" 
-                fill="#ffd700" 
-                radius={[4, 4, 0, 0]}
-              />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-      </div>
-
-      <div className={styles.userRating}>
-        <h3 className={styles.userRatingTitle}>내 평가</h3>
-        {state ? (
-          <>
-            <div className={styles.userRatingValue}>
-              <div className={styles.ratingValue}>
-                {userRating ? userRating.toFixed(1) : '0.0'}
-              </div>
-              <div className={styles.ratingStars}>
-                {[1, 2, 3, 4, 5].map(star => (
-                  <button
-                    key={star}
-                    className={`${styles.starButton} ${star <= userRating ? styles.selected : ''}`}
-                    onClick={() => handleRatingChange(star)}
-                    type="button"
-                  >
-                    ★
-                  </button>
-                ))}
-              </div>
-            </div>
-            {userRating > 0 && !showCommentForm && (
-              <button 
-                className={styles.commentButton}
-                onClick={() => setShowCommentForm(true)}
-              >
-                코멘트 남기기
-              </button>
-            )}
-            {showCommentForm && (
-              <div className={styles.commentForm}>
-                <textarea
-                  className={styles.commentTextarea}
-                  value={userComment}
-                  onChange={handleCommentChange}
-                  placeholder="이 웹툰에 대한 의견을 남겨주세요."
-                  rows={4}
-                />
+        <div className={styles.ratingContent3col}>
+          {/* 내 별점 카드 */}
+          <div className={styles.myRatingCard}>
+            <div className={styles.ratingLabel}>내 별점</div>
+            <div className={styles.myRatingScore}>{userRating > 0 ? userRating.toFixed(1) : '-'}</div>
+            <div className={styles.myRatingStars}>
+              {[1,2,3,4,5].map(star => (
                 <button
-                  className={styles.submitButton}
-                  onClick={handleSubmitReview}
-                  disabled={isSubmitting}
+                  key={star}
+                  className={`${styles.starButton} ${star <= userRating ? styles.selected : ''}`}
+                  onClick={() => handleRatingChange(star)}
+                  type="button"
+                  aria-label={`${star}점`}
                 >
-                  {isSubmitting ? '제출 중...' : '제출하기'}
+                  <FiStar />
                 </button>
-              </div>
-            )}
-          </>
-        ) : (
-          <div className={styles.loginPrompt}>
-            로그인하여 평가를 남겨주세요.
+              ))}
+            </div>
+            <div className={styles.myRatingText}>{userRating > 0 ? '별점이 등록되었습니다.' : '아직 평가하지 않았어요'}</div>
           </div>
-        )}
-      </div>
-      
-      <div className={styles.reviewsSection}>
-        <div className={styles.reviewsHeader}>
-          <h3 className={styles.reviewsTitle}>사용자 평가</h3>
-          <div className={styles.sortButtons}>
-            <button 
-              className={`${styles.sortButton} ${sortBy === 'popular' ? styles.active : ''}`}
-              onClick={() => setSortBy('popular')}
-            >
-              인기순
-            </button>
-            <button 
-              className={`${styles.sortButton} ${sortBy === 'recent' ? styles.active : ''}`}
-              onClick={() => setSortBy('recent')}
-            >
-              최신순
-            </button>
-          </div>
+          {/* 평균 별점 + 분포 카드 */}
+          <AverageRatingWithDistribution
+            average={averageRating}
+            total={totalReviews}
+            distribution={ratingDistribution}
+          />
         </div>
-        
-        {dummyReviews.length > 0 ? (
-          <div className={styles.reviewsList}>
-            {dummyReviews.map(review => (
-              <div key={review.id} className={styles.reviewItem}>
-                <div className={styles.reviewHeader}>
-                  <div className={styles.reviewerInfo}>
-                    <img 
-                      src={review.profilePicture} 
-                      alt={review.userName} 
-                      className={styles.reviewerAvatar}
-                    />
-                    <div className={styles.reviewerDetails}>
-                      <div className={styles.reviewerName}>{review.userName}</div>
-                      <div className={styles.reviewDate}>{formatDate(review.createdAt)}</div>
-                    </div>
-                    <div className={styles.reviewRating}>
-                      {[1, 2, 3, 4, 5].map(star => (
-                        <span 
-                          key={star} 
-                          className={`${styles.reviewStar} ${star <= review.rating ? styles.filled : ''}`}
-                        >
-                          ★
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  <div className={styles.reviewActions}>
-                    <button className={styles.likeButton}>
-                      <FiThumbsUp />
-                      <span className={styles.likeCount}>{review.likes}</span>
-                    </button>
-                    <div className={styles.moreButtonContainer}>
-                      <button 
-                        className={styles.moreButton}
-                        onClick={() => setShowMoreMenu(review.id)}
-                      >
-                        <FiMoreVertical />
-                      </button>
-                      {showMoreMenu === review.id && (
-                        <div className={styles.moreMenu}>
-                          <button 
-                            className={styles.menuItem}
-                            onClick={() => handleReport(review.id)}
-                          >
-                            <FiFlag />
-                            신고하기
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-                
-                <div className={styles.reviewComment}>{review.comment}</div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className={styles.noReviews}>아직 평가가 없습니다.</div>
-        )}
       </div>
+
+      {/* 리뷰 목록 섹션 */}
+      <ReviewList
+        reviews={reviews}
+        isLoading={isLoading}
+        sortBy={sortBy}
+        onSortChange={setSortBy}
+        onLikeToggle={handleLikeToggle}
+        showMoreMenu={showMoreMenu}
+        setShowMoreMenu={setShowMoreMenu}
+        handleReport={handleReport}
+        formatDate={formatDate}
+      />
     </section>
   );
 };

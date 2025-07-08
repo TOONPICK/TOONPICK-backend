@@ -1,8 +1,14 @@
 .grid {
   display: grid;
+  gap: 0.5rem;
+}
+
+.web {
   grid-template-columns: repeat(5, 1fr);
-  gap: 1rem;
-  padding: 0.5rem;
+}
+
+.app {
+  grid-template-columns: 1fr;
 }
 
 .gridItem {
@@ -11,4 +17,5 @@
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s;
   align-items: center;
+  margin-bottom: 0.25rem;
 }

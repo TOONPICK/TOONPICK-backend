@@ -1,33 +1,59 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@contexts/auth-context';
+import MemberService from '@services/member-service';
 import styles from './style.module.css';
 import { Routes } from '@constants/routes';
 import BasicInfoForm from './sections/basic-info'
 import GenrePreferenceForm from './sections/genre-preference';
 import WebtoonRatingForm from './sections/webtoon-rating';
 
-interface WebtoonRatingFormProps {
-  onComplete: () => void;
-}
-
 const TutorialPage: React.FC = () => {
   const navigate = useNavigate();
+  const { updateProfile } = useAuth();
   const [currentStep, setCurrentStep] = useState<number>(1);
-  const [basicInfo, setBasicInfo] = useState<{ gender: string; birthYear: number } | null>(null);
-  const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+  const [basicInfo, setBasicInfo] = useState<{ 
+    gender: string; 
+    ageGroup: string; 
+    ageDigit: number 
+  } | null>(null);
 
-  const handleBasicInfoComplete = (data: { gender: string; birthYear: number }) => {
+  const handleBasicInfoComplete = async (data: { 
+    gender: string; 
+    ageGroup: string; 
+    ageDigit: number 
+  }) => {
     setBasicInfo(data);
-    setCurrentStep(2);
+    try {
+      const response = await MemberService.updateBasicInfo({
+        ...data,
+        gender: data.gender as 'male' | 'female' | 'other' | 'prefer_not_to_say'
+      });
+      if (response.success && response.data) {
+        updateProfile(response.data);
+      }
+      setCurrentStep(2);
+    } catch (error) {
+      setCurrentStep(2); 
+    }
   };
 
   const handleGenrePreferenceComplete = (genres: string[]) => {
-    setSelectedGenres(genres);
     setCurrentStep(3);
   };
 
-  const handleWebtoonRatingComplete = () => {
-    navigate(Routes.HOME);
+  const handleWebtoonRatingComplete = async () => {
+    try {
+      // 튜토리얼 완료 처리
+      const response = await MemberService.completeTutorial();
+      if (response.success && response.data) {
+        updateProfile(response.data);
+      }
+      navigate(Routes.HOME);
+    } catch (error) {
+      console.error('튜토리얼 완료 처리 중 오류:', error);
+      navigate(Routes.HOME);
+    }
   };
 
   return (
@@ -35,21 +61,18 @@ const TutorialPage: React.FC = () => {
       <div className={styles.content}>
         {currentStep === 1 && (
           <div className={styles.step}>
-            <h2 className={styles.title}>기본 정보 수집</h2>
             <BasicInfoForm onComplete={handleBasicInfoComplete} />
           </div>
         )}
         
         {currentStep === 2 && (
           <div className={styles.step}>
-            <h2 className={styles.title}>웹툰 성향 선택</h2>
             <GenrePreferenceForm onComplete={handleGenrePreferenceComplete} onSkip={() => setCurrentStep(3)} />
           </div>
         )}
         
         {currentStep === 3 && (
           <div className={styles.step}>
-            <h2 className={styles.title}>웹툰 평가</h2>
             <WebtoonRatingForm onComplete={handleWebtoonRatingComplete} />
           </div>
         )}

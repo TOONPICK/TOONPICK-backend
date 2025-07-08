@@ -1,0 +1,87 @@
+.actionButtons {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.bookmarkButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 7px 18px;
+  border: 1px solid #eee;
+  border-radius: 0;
+  font-weight: 600;
+  cursor: pointer;
+  background: none;
+  color: #222;
+  transition: color 0.2s, border 0.2s;
+}
+
+.bookmarkButton.bookmarked {
+  border-color: #ffd600;
+  color: #bfa100;
+}
+
+.moreButtonContainer {
+  position: relative;
+}
+
+.moreButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #eee;
+  background: none;
+  cursor: pointer;
+  color: #666;
+  border-radius: 0;
+  transition: color 0.2s, border 0.2s;
+}
+
+.moreButton:hover {
+  color: #222;
+  border-color: #bbb;
+}
+
+.moreMenu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 0;
+  min-width: 180px;
+  z-index: 10;
+  margin-top: 0.5rem;
+  padding: 0.5rem 0;
+  box-shadow: none;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 8px 16px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  color: #222;
+  font-size: 0.95rem;
+  border-radius: 0;
+  transition: color 0.2s, background 0.2s;
+}
+
+.menuItem:hover {
+  color: #111;
+  background: #f7f7f7;
+}
+
+.menuItem svg {
+  font-size: 1.1rem;
+  color: #888;
+} 

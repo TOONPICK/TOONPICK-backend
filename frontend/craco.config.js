@@ -15,6 +15,7 @@ module.exports = {
       '@hooks': path.resolve(__dirname, 'src/hooks'),
       '@utils': path.resolve(__dirname, 'src/utils'),
       '@models': path.resolve(__dirname, 'src/models'),
+      '@dummy': path.resolve(__dirname, 'src/dummy'),
       '@': path.resolve(__dirname, 'src')
     }
   }

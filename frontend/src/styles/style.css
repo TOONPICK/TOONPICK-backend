@@ -1,0 +1,78 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', Arial, sans-serif;
+  background: #fff;
+  color: #222;
+  min-height: 100vh;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+/* 포커스 스타일 개선 */
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+  text-decoration: none;
+}
+
+/* 포커스가 보이지 않을 때는 아웃라인 제거 */
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible),
+input:focus:not(:focus-visible),
+textarea:focus:not(:focus-visible),
+select:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* 키보드 포커스일 때만 아웃라인 표시 */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1200px;
+  min-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.web .container {
+  max-width: 1200px;
+  min-width: 1200px;
+  padding: 0 16px;
+}
+
+.app .container {
+  max-width: 100%;
+  min-width: 0;
+  padding: 0 8px;
+} 

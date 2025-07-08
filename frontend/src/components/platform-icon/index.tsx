@@ -7,7 +7,7 @@ interface PlatformIconProps {
   size?: 'small' | 'medium' | 'large' | number;
 }
 
-const PlatformIcon: React.FC<PlatformIconProps> = ({ platform, size = 'medium' }) => {
+const PlatformIcon: React.FC<PlatformIconProps> = ({ platform, size = 24 }) => {
   const getSizeStyle = () => {
     if (typeof size === 'number') {
       return {
@@ -21,15 +21,13 @@ const PlatformIcon: React.FC<PlatformIconProps> = ({ platform, size = 'medium' }
   const getPlatformIcon = () => {
     switch (platform) {
       case Platform.NAVER:
-        return '/images/platforms/btn_naver.svg';
+        return '/images/platforms/naverwebtoon.svg';
       case Platform.KAKAO:
-        return '/images/platforms/btn_kakao.svg';
+        return '/images/platforms/kakaowebtoon.svg';
       case Platform.KAKAOPAGE:
-        return '/images/platforms/btn_kakaopage.svg';
-      case Platform.BOMTOON:
-        return '/images/platforms/btn_bomtoon.svg';
+        return '/images/platforms/kakaopage.svg';
       case Platform.LEZHIN:
-        return '/images/platforms/btn_lezhin.svg';
+        return '/images/platforms/lezhincomics.svg';
       default:
         return '/images/platforms/btn_other.svg';
     }

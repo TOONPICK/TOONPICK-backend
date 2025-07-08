@@ -1,7 +1,9 @@
 import { api, Response, PagedResponse } from '@api';
 import { Review, ReviewRequest } from '@models/review';
+import { dummyReview, dummyReviewList } from '@dummy';
 
 const PAGE_SIZE = 10;
+const isDev = process.env.NODE_ENV === 'development';
 
 class WebtoonReviewService {
   private static instance: WebtoonReviewService;
@@ -20,6 +22,9 @@ class WebtoonReviewService {
     webtoonId: number, 
     reviewCreateDTO: ReviewRequest
   ): Promise<Response<Review>> {
+    if (isDev) {
+      return { success: true, data: dummyReview };
+    }
     try {
       const response = await api.post<Review>(
         `/api/secure/reviews/${webtoonId}`, 
@@ -36,6 +41,9 @@ class WebtoonReviewService {
   public async getWebtoonReviewById(
     reviewId: number
   ): Promise<Response<Review>> {
+    if (isDev) {
+      return { success: true, data: dummyReview };
+    }
     try {
       const response = await api.get<Review>(`/api/public/reviews/${reviewId}`);
       return { success: true, data: response.data };
@@ -90,6 +98,9 @@ class WebtoonReviewService {
 
   // 사용자가 특정 웹툰에 작성한 리뷰 조회
   public async getUserReviewForWebtoon(webtoonId: number): Promise<Response<Review>> {
+    if (isDev) {
+      return { success: true, data: dummyReview };
+    }
     try {
       const response = await api.get<Review>(`/api/secure/reviews/${webtoonId}/member`);
       return { success: true, data: response.data };
@@ -106,6 +117,16 @@ class WebtoonReviewService {
     page: number = 0, 
     size: number = 20
   ): Promise<PagedResponse<Review[]>> {
+    if (isDev) {
+      return {
+        success: true,
+        data: dummyReviewList,
+        total: dummyReviewList.length,
+        page: 0,
+        size: dummyReviewList.length,
+        last: true,
+      };
+    }
     try {
       const response = await api.get<PagedResponse<Review[]>>(
         `/api/public/reviews/webtoon/${webtoonId}?sortBy=${sortBy}&page=${page}&size=${size}`

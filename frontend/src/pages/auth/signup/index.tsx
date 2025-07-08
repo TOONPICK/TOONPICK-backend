@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@contexts/auth-context';
-import { Routes } from '@constants/routes';
+import { Routes as RoutePaths } from '@constants/routes';
 import styles from './style.module.css';
 import AuthService from '@services/auth-service';
 
@@ -58,7 +58,7 @@ const SignUpPage: React.FC = () => {
       );
 
       if (response.success) {
-        navigate(Routes.LOGIN);
+        navigate(RoutePaths.LOGIN);
       } else {
         setError(response.message || '회원가입에 실패했습니다.');
       }
@@ -146,7 +146,7 @@ const SignUpPage: React.FC = () => {
         </button>
 
         <div className={styles.links}>
-          <Link to="/signin">이미 계정이 있으신가요? 로그인</Link>
+          <Link to={RoutePaths.LOGIN}>이미 계정이 있으신가요? 로그인</Link>
         </div>
       </form>
     </div>

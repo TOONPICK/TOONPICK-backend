@@ -1,11 +1,11 @@
 import React from 'react';
-import { Webtoon } from '@models/webtoon';
+import { WebtoonSummary } from '@models/webtoon';
 import WebtoonList from '@components/webtoon-list';
 import styles from './style.module.css';
 
 interface WebtoonListSectionProps {
   title: string;
-  webtoons: Webtoon[];
+  webtoons: WebtoonSummary[];
   showMoreLink?: string;
 }
 

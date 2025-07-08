@@ -17,41 +17,47 @@
 }
 
 .profilePage {
+  min-height: 100vh;
+  background: var(--body-background);
+  padding: 24px;
+}
+
+.container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: var(--spacing-xl);
-  background: var(--body-background-color);
-  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .mainContent {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xl);
+  gap: 32px;
 }
 
 .gridLayout {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-lg);
+  gap: 24px;
 }
 
 .leftColumn,
 .rightColumn {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg);
+  gap: 24px;
 }
 
 .error {
-  color: var(--error-color);
+  background: var(--card-background);
+  border-radius: 16px;
+  padding: 32px;
   text-align: center;
-  padding: var(--spacing-lg);
-  font-size: 16px;
-  background: var(--card-gradient);
-  border-radius: var(--border-radius-md);
-  box-shadow: var(--card-shadow);
-  backdrop-filter: blur(10px);
+  color: var(--error-color);
+  font-size: 18px;
+  font-weight: 500;
+  box-shadow: var(--shadow-md);
 }
 
 @media (max-width: 1024px) {
@@ -62,19 +68,28 @@
 
 @media (max-width: 768px) {
   .profilePage {
-    padding: var(--spacing-md);
+    padding: 16px;
+  }
+
+  .container {
+    gap: 16px;
+  }
+
+  .error {
+    padding: 24px;
+    font-size: 16px;
   }
 
   .mainContent {
-    gap: var(--spacing-lg);
+    gap: 24px;
   }
 
   .gridLayout {
-    gap: var(--spacing-md);
+    gap: 16px;
   }
 
   .leftColumn,
   .rightColumn {
-    gap: var(--spacing-md);
+    gap: 16px;
   }
 }

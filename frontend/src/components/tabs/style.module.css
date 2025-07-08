@@ -1,0 +1,76 @@
+.tabsContainer {
+  background: var(--color-surface);
+  border-radius: 16px;
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.tabList {
+  display: flex;
+  background: var(--color-surface-secondary);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.tabButton {
+  flex: 1;
+  padding: 16px 24px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.tabButton:hover {
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+}
+
+.tabButton.active {
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+}
+
+.tabButton.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--color-primary);
+}
+
+.tabContent {
+  padding: 24px;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+  .tabList {
+    flex-direction: column;
+  }
+  
+  .tabButton {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+  
+  .tabContent {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tabButton {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+  
+  .tabContent {
+    padding: 12px;
+  }
+} 

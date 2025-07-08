@@ -1,14 +1,14 @@
 .preferenceCard {
-  background-color: var(--background-color);
+  background-color: var(--card-background);
   border-radius: 12px;
   padding: 24px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
 }
 
 .cardTitle {
   font-size: 20px;
   font-weight: 600;
-  color: var(--text-color);
+  color: var(--text-primary);
   margin: 0 0 24px 0;
 }
 
@@ -17,7 +17,7 @@
   justify-content: center;
   margin-bottom: 32px;
   padding: 16px;
-  background-color: var(--background-secondary-color);
+  background-color: var(--card-background-secondary);
   border-radius: 8px;
 }
 
@@ -36,7 +36,7 @@
 .tagSection h3 {
   font-size: 16px;
   font-weight: 600;
-  color: var(--text-color);
+  color: var(--text-primary);
   margin: 0;
 }
 
@@ -48,7 +48,7 @@
 
 .emotionTag {
   background-color: var(--primary-color);
-  color: white;
+  color: var(--text-inverse);
   padding: 6px 12px;
   border-radius: 16px;
   font-size: 14px;
@@ -56,8 +56,8 @@
 }
 
 .aiTag {
-  background-color: var(--background-secondary-color);
-  color: var(--text-color);
+  background-color: var(--card-background-secondary);
+  color: var(--text-primary);
   padding: 6px 12px;
   border-radius: 16px;
   font-size: 14px;

@@ -1,10 +1,10 @@
 import React from 'react';
-import { Webtoon } from '@models/webtoon';
+import { WebtoonSummary } from '@models/webtoon';
 import styles from './style.module.css';
 
 interface ReadingHistorySectionProps {
   readingHistory: {
-    webtoon: Webtoon;
+    webtoon: WebtoonSummary;
     lastReadAt: string;
   }[];
 }

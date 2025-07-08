@@ -1,73 +1,178 @@
 .container {
   max-width: 800px;
   margin: 0 auto;
-  padding: var(--spacing-xl);
+  padding: 32px;
   min-height: 100vh;
-  background: var(--body-background-color);
+  background: var(--body-background);
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: var(--body-background);
+}
+
+.loadingSpinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border-color);
+  border-top: 3px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .header {
   display: flex;
   align-items: center;
-  margin-bottom: var(--spacing-xl);
-  position: relative;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .backButton {
-  position: absolute;
-  left: 0;
-  background: none;
-  border: none;
-  color: var(--text-color);
-  font-size: 24px;
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
   cursor: pointer;
-  padding: var(--spacing-xs);
-  border-radius: 50%;
-  transition: background-color var(--transition-fast);
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .backButton:hover {
-  background-color: var(--hover-color);
+  background: var(--hover-bg);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
 
 .title {
-  width: 100%;
-  text-align: center;
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 700;
-  color: var(--text-color);
+  color: var(--text-primary);
   margin: 0;
-}
-
-.content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xl);
-}
-
-.section {
-  background: var(--card-gradient);
-  border-radius: var(--border-radius-lg);
-  padding: var(--spacing-xl);
-  box-shadow: var(--card-shadow);
-  backdrop-filter: blur(10px);
-}
-
-.sectionTitle {
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--text-color);
-  margin: 0 0 var(--spacing-lg) 0;
   background: var(--primary-gradient);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
+.saveButton {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 24px;
+  background: var(--text-secondary);
+  border: none;
+  border-radius: 12px;
+  color: var(--text-inverse);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: not-allowed;
+  transition: all 0.2s ease;
+  opacity: 0.6;
+}
+
+.saveButton.active {
+  background: var(--primary-gradient);
+  color: var(--text-inverse);
+  cursor: pointer;
+  opacity: 1;
+  box-shadow: var(--shadow-primary);
+}
+
+.saveButton.active:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-primary-hover);
+}
+
+.tabNavigation {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 32px;
+  background: var(--card-background);
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
+}
+
+.tabButton {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  padding: 16px 24px;
+  background: none;
+  border: none;
+  border-radius: 12px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tabButton:hover {
+  background: var(--hover-bg);
+  color: var(--text-primary);
+}
+
+.tabButton.active {
+  background: var(--primary-gradient);
+  color: var(--text-inverse);
+  box-shadow: var(--shadow-primary);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.tabContent {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.section {
+  background: var(--card-background);
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
+}
+
+.sectionTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 24px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .profileImageContainer {
   display: flex;
   justify-content: center;
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: 24px;
 }
 
 .profileImageWrapper {
@@ -81,15 +186,20 @@
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--border-color);
+  border: 3px solid var(--border-color);
+  transition: all 0.2s ease;
+}
+
+.profileImageWrapper:hover .profileImage {
+  border-color: var(--primary-color);
 }
 
 .imageUploadButton {
   position: absolute;
   bottom: 0;
   right: 0;
-  background: var(--primary-color);
-  color: white;
+  background: var(--primary-gradient);
+  color: var(--text-inverse);
   width: 36px;
   height: 36px;
   border-radius: 50%;
@@ -97,201 +207,250 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: transform var(--transition-fast);
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-primary);
 }
 
 .imageUploadButton:hover {
   transform: scale(1.1);
+  box-shadow: var(--shadow-primary-hover);
 }
 
 .imageInput {
   display: none;
 }
 
-.labelRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: var(--spacing-md);
+.formGroup {
+  margin-bottom: 24px;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
 }
 
 .label {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: 12px;
   font-size: 14px;
   font-weight: 600;
-  color: var(--text-color);
+  color: var(--text-primary);
+  margin-bottom: 12px;
 }
 
-.valueRow {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-}
-
-.value {
-  font-size: 14px;
-  color: var(--text-color);
-}
-
-.editButton {
-  background: none;
-  border: none;
-  color: var(--text-secondary-color);
-  cursor: pointer;
-  padding: var(--spacing-xs);
-  border-radius: 50%;
-  transition: background-color var(--transition-fast);
-}
-
-.editButton:hover {
-  background-color: var(--hover-color);
-}
-
-.editControls {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-}
-
-.editInput {
-  padding: var(--spacing-sm);
+.input,
+.textarea,
+.select {
+  width: 100%;
+  padding: 16px;
   border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-sm);
-  background: var(--background-color);
-  color: var(--text-color);
+  border-radius: 12px;
+  background: var(--input-background);
+  color: var(--text-primary);
   font-size: 14px;
-  width: 200px;
+  transition: all 0.2s ease;
 }
 
-.saveButton,
-.cancelButton {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: var(--spacing-xs);
-  border-radius: 50%;
-  transition: background-color var(--transition-fast);
+.input:focus,
+.textarea:focus,
+.select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  background: var(--card-background);
 }
 
-.saveButton {
-  color: var(--success-color);
+.textarea {
+  resize: vertical;
+  min-height: 80px;
 }
 
-.cancelButton {
-  color: var(--error-color);
-}
-
-.saveButton:hover,
-.cancelButton:hover {
-  background-color: var(--hover-color);
+.charCount {
+  display: block;
+  text-align: right;
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 8px;
 }
 
 .connectedAccounts {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
+  gap: 16px;
 }
 
 .accountItem {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--spacing-md);
-  background: var(--background-color);
-  border-radius: var(--border-radius-md);
+  padding: 16px;
+  background: var(--card-background-secondary);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  transition: all 0.2s ease;
+}
+
+.accountItem:hover {
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.accountInfo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.accountIcon {
+  width: 24px;
+  height: 24px;
 }
 
 .accountName {
   font-size: 14px;
   font-weight: 600;
-  color: var(--text-color);
+  color: var(--text-primary);
 }
 
 .connectButton {
-  padding: var(--spacing-xs) var(--spacing-md);
+  padding: 12px 16px;
   border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-sm);
-  background: none;
-  color: var(--text-color);
+  border-radius: 8px;
+  background: var(--card-background);
+  color: var(--text-primary);
   font-size: 12px;
+  font-weight: 600;
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: all 0.2s ease;
 }
 
 .connectButton.connected {
-  background: var(--primary-color);
-  color: white;
-  border-color: var(--primary-color);
+  background: var(--success-gradient);
+  color: var(--text-inverse);
+  border-color: var(--success-color);
 }
 
-.securityGroup {
+.connectButton:hover {
+  transform: translateY(-1px);
+}
+
+.privacyOptions,
+.notificationOptions {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
+  gap: 16px;
 }
 
-.securityItem {
+.privacyItem,
+.notificationItem {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--spacing-md);
-  background: var(--background-color);
-  border-radius: var(--border-radius-md);
+  padding: 16px;
+  background: var(--card-background-secondary);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
 }
 
-.securityLabel {
+.privacyInfo,
+.notificationInfo {
+  flex: 1;
+}
+
+.privacyLabel,
+.notificationLabel {
+  display: block;
   font-size: 14px;
   font-weight: 600;
-  color: var(--text-color);
+  color: var(--text-primary);
+  margin-bottom: 8px;
 }
 
-.securityButton {
-  padding: var(--spacing-xs) var(--spacing-md);
-  background: var(--primary-color);
-  border: none;
-  border-radius: var(--border-radius-sm);
-  color: white;
+.privacyDescription,
+.notificationDescription {
+  display: block;
   font-size: 12px;
-  cursor: pointer;
-  transition: transform var(--transition-fast);
+  color: var(--text-secondary);
 }
 
-.securityButton:hover {
-  transform: translateY(-2px);
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--border-color);
+  transition: .4s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: var(--card-background);
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background: var(--primary-gradient);
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
 }
 
 .adultVerification {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg);
+  gap: 24px;
 }
 
 .adultStatus {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--spacing-md);
-  background: var(--background-color);
-  border-radius: var(--border-radius-md);
+  padding: 16px;
+  background: var(--card-background-secondary);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
 }
 
 .adultLabel {
   font-size: 14px;
   font-weight: 600;
-  color: var(--text-color);
+  color: var(--text-primary);
 }
 
 .toggleContainer {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: 12px;
 }
 
 .toggleLabel {
   font-size: 12px;
-  color: var(--text-secondary-color);
+  color: var(--text-secondary);
 }
 
 .toggleSwitch {
@@ -326,34 +485,35 @@
   width: 16px;
   left: 4px;
   bottom: 4px;
-  background-color: white;
+  background-color: var(--card-background);
   transition: .4s;
   border-radius: 50%;
 }
 
-input:checked + .toggleSlider {
-  background-color: var(--primary-color);
+.toggleSwitch input:checked + .toggleSlider {
+  background: var(--primary-gradient);
 }
 
-input:checked + .toggleSlider:before {
+.toggleSwitch input:checked + .toggleSlider:before {
   transform: translateX(26px);
 }
 
 .adultSettings {
-  padding: var(--spacing-md);
-  background: var(--background-color);
-  border-radius: var(--border-radius-md);
+  padding: 16px;
+  background: var(--card-background-secondary);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
 }
 
 .settingsTitle {
   font-size: 16px;
   font-weight: 600;
-  color: var(--text-color);
-  margin: 0 0 var(--spacing-md) 0;
+  color: var(--text-primary);
+  margin: 0 0 16px 0;
 }
 
 .settingItem {
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: 12px;
 }
 
 .settingLabel {
@@ -361,42 +521,152 @@ input:checked + .toggleSlider:before {
   justify-content: space-between;
   align-items: center;
   font-size: 14px;
-  color: var(--text-color);
+  color: var(--text-primary);
   cursor: pointer;
 }
 
-.buttonGroup {
+.securityGroup {
   display: flex;
-  justify-content: flex-end;
-  margin-top: var(--spacing-xl);
+  flex-direction: column;
+  gap: 16px;
+}
+
+.securityItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background: var(--card-background-secondary);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+.securityInfo {
+  flex: 1;
+}
+
+.securityLabel {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.securityDescription {
+  display: block;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.securityButton {
+  padding: 12px 16px;
+  background: var(--primary-gradient);
+  border: none;
+  border-radius: 8px;
+  color: var(--text-inverse);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.securityButton:hover {
+  background: var(--primary-gradient);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-primary-hover);
+}
+
+.notificationLink {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  background: var(--card-background-secondary);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  transition: all 0.2s ease;
+}
+
+.notificationLink:hover {
+  background: var(--hover-bg);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.notificationInfo {
+  flex: 1;
+}
+
+.notificationLabel {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.notificationDescription {
+  display: block;
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.4;
 }
 
 .notificationButton {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-md) var(--spacing-lg);
-  background: var(--card-gradient);
+  gap: 8px;
+  padding: 12px 20px;
+  background: var(--primary-gradient);
   border: none;
-  border-radius: var(--border-radius-md);
-  color: var(--text-color);
+  border-radius: 8px;
+  color: var(--text-inverse);
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: transform var(--transition-fast);
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-primary);
 }
 
 .notificationButton:hover {
   transform: translateY(-2px);
+  box-shadow: var(--shadow-primary-hover);
 }
 
 @media (max-width: 768px) {
   .container {
-    padding: var(--spacing-lg);
+    padding: 24px;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .saveButton {
+    align-self: stretch;
+  }
+
+  .tabNavigation {
+    flex-direction: column;
+  }
+
+  .tabButton {
+    justify-content: center;
   }
 
   .section {
-    padding: var(--spacing-lg);
+    padding: 24px;
+  }
+
+  .formRow {
+    flex-direction: column;
   }
 
   .profileImageWrapper {
@@ -404,16 +674,30 @@ input:checked + .toggleSlider:before {
     height: 100px;
   }
 
-  .editInput {
-    width: 150px;
+  .imageUploadButton {
+    padding: 8px;
+    font-size: 14px;
   }
 
-  .buttonGroup {
-    justify-content: center;
+  .privacyItem,
+  .securityItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .switch {
+    align-self: flex-end;
+  }
+
+  .notificationLink {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
   }
 
   .notificationButton {
-    width: 100%;
+    align-self: stretch;
     justify-content: center;
   }
 } 
