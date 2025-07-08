@@ -74,7 +74,7 @@ TOONPICK/
 ## 🖼️ 서비스 아키텍처
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/ImGdevel/TOONPICK/main/docs/toonpick-service-architecture.png" alt="ToonPick 서비스 아키텍처" width="900">
+  <img src="https://github.com/TOONPICK/TOONPICK-backend/blob/main/docs/images/toonpick-service-architecture.png" alt="ToonPick 서비스 아키텍처" width="900">
 </div>
 
 ---
